@@ -1,0 +1,97 @@
+ 
+Atanas Golev
+Lexington, KY
+abgolev@gmail.com
+github.com/abgolev
+linkedin.com/in/abgolev
+
+Experienced in:
+C
+C++
+Java
+JavaScript
+Python
+Familiar with:
+CSS
+HTML
+Jupyter Notebook
+MATLAB
+MySQL
+PHP
+Scheme
+TensorFlow
+Verilog
+
+
+Projects
+Meowtzee
+Web app for single player Yahtzee
+JavaScript, HTML
+	•	Computer opponent averages an expected score of 241.82 compared to 254.59 possible using optimum strategy 
+	•	Includes testing mode for evaluating and refining AI performance 
+
+Fantasy Cruncher
+Tool for statistical analyses on Fantasy Football data
+Python
+	•	Runs linear regressions on imported raw data from 1970-2019 as well as on categores derived from that data 
+	•	Includes 33 customizable parameters including minimum metric scores, player attributes, and personalized league rules 
+
+Pipelined Floating-Point Processor
+Five-stage processor for a 16-bit instruction set similar to MIPS
+Verilog
+	•	Processes conditional statements, dependencies, jumps, loops, and floating point arithmetic 
+	•	Includes a pipelined architecture that processes each instruction in a single cycle as well as an assembler for the instruction set 
+
+TensorFlow for OCR
+Deep learning classifier for optical character recognition
+C, Python
+	•	Integrates a TensorFlow model written in Python into an existing OCR program in C 
+	•	Achieves 70-85% accuracy on documents with 100,000+ characters 
+
+Megaminx Solver
+Solves a Megaminx (12-face version of the Rubik's Cube) using the A* algorithm
+C++
+	•	Creates and randomizes a virtual 2D version of the Megaminx 
+	•	Finds the solution using A* algorithm and a distance matrix based on Floyd-Warshall Algorithm 
+Education
+University of Kentucky
+Aug 2016 - Dec 2018
+B.S. in Computer Science / 3.9 GPA / Summa Cum Laude
+
+University of Kentucky
+Aug 2010 - May 2014
+B.A. in Psychology / 3.9 GPA / Summa Cum Laude
+
+Work and Internship Experience
+Math, Science, and Technology Tutor
+Jan 2014 - Current
+Customize lessons for each student, teaching new material, reviewing material for assignments, and creating custom problems as needed
+Have worked with students of all levels from college to elementary school on the advanced to the remedial level
+Currently tutoring high school and college level computer science (C++, Java), math (algebra through calculus), statistics, physics, chemistry, ACT and GRE prep, and chess
+
+Bioinformatics Intern / Vanderbilt University / Nashville TN
+June 2018 - Aug 2018
+Worked in Professor Bradley Malin's lab within GetPreCise (the Center for Genetic Privacy and Identity in a Community Setting)
+Collected data on MTurk to replicate an in-person study on evaluating individuals' attitudes on genomic data privacy
+Processed, cleaned, analyzed, and created data visualization for the raw data for 340 participants using Python and Jupyter Notebook
+Gave two talks on the project, as well as a poster presentation at the Vanderbilt Summer Science Conference
+
+Lead Tutor / Tutoring Club / Lexington KY
+July 2016 - May 2018
+Worked with two to three students at a time, teaching K-12 level math, science, English, and writing
+Helped the director with day-to-day operations including scheduling, pairing students with tutors, and opening and closing
+
+Editor's Assistant / Ace Weekly / Lexington KY
+Dec 2014 - Jun 2016
+Copy edited content for AP style and grammar for all printed issues of Ace Weekly and The Hamburg Journal
+Wrote and edited content for feature articles, interviews, newsletters, and event news
+Managed the content for the WordPress for Ace Weekly and The Hamburg Journal
+
+Tutor / Tutoring Club / Lexington KY
+Jan 2015 - July 2016
+Tutored students in K-12 level math, science, English, writing, Spanish, ESL, and ACT/SAT prep
+
+Editorial Intern / Ace Weekly / Lexington KY
+Jan 2014 - Dec 2014
+Helped write, edit, and produce the print and digital issues and WordPress for Ace Weekly.
+Powered by w3.css

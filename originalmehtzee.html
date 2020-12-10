@@ -1,0 +1,486 @@
+<!DOCTYPE>
+<!--
+	Author:    Atanas Golev
+	File:    mehtzee.html
+	Class:	 CS316
+	Instructor: Paul Linton
+	Date:    2017-Feb-21
+	Purpose: Use JavaScript and HTML to create an online  game of meh-tzee, 
+		a variation of Yahtzee.
+	URL: http://www.cs.uky.edu/~abgo222/CS316/Project2/mehtzee.html
+-->
+<HTML>
+<TITLE>Meh-tzee</TITLE>
+<HEAD>
+<STYLE>
+table#Dice {
+	width: 60%;
+    border: 3px solid black;
+}
+table#Dice th, td {
+    border: 3px solid black;
+}
+table#ScoreCard {
+	width: 60%;
+    border: 1px solid black;
+	}
+table#ScoreCard th {
+	text-align: center;
+    border: 1px solid black;
+}
+<!--
+table#ScoreCard tr td {
+    border: 1px solid black;
+}
+-->
+table#ScoreCard tr td {
+	width: 43%;
+	text-align: center;
+    border: 1px solid black;
+}
+table#ScoreCard tr td:nth-child(1) {
+	width: 14%;
+    border: 3px solid black;
+}
+
+table#Dice td {
+	image-align: center;
+}
+
+table#WinLoss td {
+	text-align: center;
+}
+
+#Roll, #NewGame{
+	width: 60%;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+h1 {
+	font-size: 2em;
+	width: 60%;
+	text-align: center;
+}
+</STYLE>
+
+<SCRIPT>
+var defaultPath = "Images/";
+var totalGames = 0; 		//total games played
+var cWins = 0;								// computer win total
+var pWins = 0;								// player win total
+var diceValues = [0, 0, 0, 0, 0, 0];		// values of dice
+var heldValues = [false, false, false, false, false, false]; // is a die held?
+											// the different scoring slots
+//1s 2s 3s 4s 5s 6s bonus mehtzee total
+var compScore  =   [0, 0, 0, 0, 0, 0,   0,     0,     0];
+var playerScore  = [0, 0, 0, 0, 0, 0,   0,     0,     0];
+					
+var currentTurn = 0;				// current turn, duh
+var maxTurns = 7;	
+var currentRoll = 0;			
+var MAXROLLS = 4;
+var totalScore = 0;				//total user score
+
+
+//Loads back to the start of a new game, once the previous game has been completed
+function load() {
+	document.getElementById("Roll").onclick=noClick;	//disable dice roll after previous game ends
+	document.getElementById("Roll").innerHTML="Roll";
+	document.getElementById("Roll").style.color = "black";
+
+	if(totalGames==0){	//asks user for name just the very first game
+		var playerName = prompt("Please enter your name!", "Player 1");
+		if(playerName!=null){ //set player name
+			document.getElementById("thePlayer").innerHTML = playerName.substring(0,20);
+		}
+	}
+	newgame = document.getElementById("NewGame");
+	newgame.style.color="blue";
+	if(totalGames!=0){	//after the first game, prompt changes
+		document.getElementById("NewGame").innerHTML = "Meh I interest you in more meh-tzee?";
+	}
+	newgame.addEventListener("click", ModNewGame);
+}	// Make NewGame clickable.....
+
+//Starts up a new game of meh-tzee when the New Game button is clicked
+function ModNewGame() {
+	newgame = document.getElementById("NewGame");
+	newgame.onclick = StartGame(newgame);
+	newgame.style.color="black";
+}
+
+//Resets all the values neccessary to start a new game
+function StartGame(newgame) {
+	newgame.removeEventListener("click",ModNewGame);	//does not allow midgame restart
+	newgame.innerHTML = "A game of meh-tzee has started. Mehhh.";
+	ResetScores();
+	updateWins();
+	ResetButtons();
+	currentTurn = 0;
+	currentRoll = 0;
+	totalScore = 0;
+}
+
+//Resets player scores
+function ResetScores() {
+	var slot = "";
+	var maxSlots = playerScore.length;
+	for(i = 0 ; i < (playerScore.length-1) ; i++) {
+		playerScore[i] = 0;
+		compScore[i] = 0;
+	}
+}
+
+//Resets all the values so none are held and all are zero
+function resetDice() {
+	for (i = 0 ; i < diceValues.length; i++) {	//for all dice
+		diceValues[i] = 0;			//sets their values to 0
+		heldValues[i] = false;			//sets them to not held
+		whichDie = document.getElementById("d"+i);
+		whichDie.src = defaultPath+"0.png";	//sets them to default blank dice
+		whichDie.onclick = toggleHold;		//enables toggles
+	}
+}
+
+//Once a new game starts, we reset the Player scoreboards and make it clickable again
+function ResetButtons() {
+	resetRoll();	//resets the Roll button
+	resetDice();	//resets the Dice
+	
+	for(i = 0 ; i < 9; i++){	//blanks all scorecard entries and sets boundaries to black
+		document.getElementById("P"+i).innerHTML="";
+		document.getElementById("P"+i).style.borderColor = "black";	
+	}
+
+	for(i = 0 ; i < 6; i++){	//enables clicks
+		whichScore = document.getElementById("P"+i);
+		whichScore.addEventListener("click", setScore);
+	}
+
+	P7.addEventListener("click", setScore); //enables Meh-tzee button
+	
+	newMessage("Your Turn!");
+}
+
+//Resets the Roll Button
+function resetRoll() {
+	newturn = document.getElementById("Roll");
+	newturn.style.color = "blue";			//changes color to blue
+	newturn.onclick = Roll;				//click causes to Roll
+	newturn.innerHTML = "Roll";
+	currentRoll = 0;				//sets back to 0 rolls total this round
+}
+
+//Sets the user Scoreboard
+function setScore() {
+	if(currentRoll!=0){		//makes sure that the dice have been rolled before selection
+		currentTurn+=1;		//counts number of boxes selected
+		document.getElementById(this.id).removeEventListener("click",setScore);	//disables click for that box	
+		document.getElementById(this.id).style.borderColor = "green";	//changes boundary to green
+		var slot = this.id.charAt(1); //which dice slot
+		var aScore = 0;	//the score for this slot
+		var who = "p";	//it's the player. could also be implemented for pc
+		aScore = computeScore(who, slot, this.id); //compute score
+		document.getElementById(this.id).innerHTML = aScore; //changes HTML to reflect score
+		totalScore+=aScore;	//appends the total user score
+
+		if(currentTurn!=maxTurns){	//no need to reset if it's the last turn
+			resetDice();
+			resetRoll();
+		}
+
+		document.getElementById("P8").innerHTML = totalScore;	//updates total score
+
+		if(currentTurn==maxTurns){	//once all 7 boxes are checked, ends game
+			computeBonus();		//computes bonus
+			endGame();		//end game calculations
+			currentRoll=4;
+		}
+	}
+}
+
+//This could be implemented so that computes plays against you
+function doComputer(whichTurn) {
+	console.log("In doComputer()!"+whichTurn);	
+}
+
+//Computes bonus box
+function computeBonus() {
+	if(totalScore>=84){ //adds 35 point bonus if score is equal to or over 84
+		totalScore+=35;
+		document.getElementById("P6").innerHTML=35;
+		document.getElementById("P8").innerHTML=totalScore;	
+	}
+	else{
+		document.getElementById("P6").innerHTML=0;
+	}
+}
+
+//End of game calculations
+function endGame() {
+	totalGames += 1;	//Updates number of games played
+	if (playerScore[playerScore.length-1] >= compScore[playerScore.length-1]) {//figures out who won
+		newMessage("You won!")
+		pWins += 1;
+	} else {
+		newMessage("You lost!")
+		cWins += 1;
+	}
+	updateWins();
+	alert("Game over!");
+	load(); //loads new game
+}
+
+//Computes the score after a box is clicked by user
+function computeScore(player, slot, element) {
+	var singlesTotal = 0;	//total score
+	var numSuccess = 0;	//number of matches between slot and current dice
+	var dieValue = parseInt(slot)+1;	//converts string to int and adds 1 to change from 0-5 to 1-6
+
+	if (slot < 6) {								// add like dice
+		for(i=0; i<diceValues.length; i++){
+			if(diceValues[i] == dieValue)
+				numSuccess+=1;
+		}
+		singlesTotal = numSuccess * dieValue;
+	}
+
+	if (slot == 7) {
+		singlesTotal=50;							// mehtzee slot
+		for(i=0; i<(diceValues.length-1); i++){		//mehtzee is 50 by default
+			if(diceValues[i]!=diceValues[i+1]){
+				singlesTotal=0;			//changes to 0 if two unlike values found
+			}
+		}
+
+		if(singlesTotal==50){				//congrats!
+			alert("Meh. You meh-tzee'd. Congrats, I guess.");
+		}
+	}
+
+	return singlesTotal;	//returns score
+}
+
+//used to toggle the dice hold on and off
+function toggleHold() {
+	if(currentRoll!=0){//disables toggle if no dice have been rolled
+		var toggle = doToggle(this.id, this.src);
+		this.src = toggle;
+	}
+}
+
+
+// pre-condition:	path is in the form of:
+//					http://www.cs.uky.edu/~paul/CS316/P2/X.png
+//			-or-
+//					http://www.cs.uky.edu/~paul/CS316/P2/Xgreen.png
+// 
+// where X is a number from 1-6.
+//
+// post-condition:	If ...X.png then return ...Xgreen.png, 
+//					otherwise return ...X.png.
+//
+function doToggle(id,path) {
+	var newPath = path;
+	var pathArray = path.split("/");	//used to figure out if held or not currently
+	var pathSize = pathArray.length;
+	var currFile = pathArray[pathSize-1];
+
+	// currFile will be in two forms:  "X.png" or "Xgreen.png"
+	var fileName = currFile.split(".");
+
+	// fileName will be an array (size 2) either "X" or "Xgreen" and "png".
+	var res = fileName[0].match(/red/);
+
+	if (res == null) {     						// currently not on HOLD
+		heldValues[id[1]] = true;		
+		newPath = defaultPath+fileName[0]+"red."+fileName[1];
+	} else {
+		heldValues[id[1]] = false;		
+		newPath = defaultPath + "die"+fileName[0][3] +"."+fileName[1];
+	}
+	return newPath;
+}
+
+//used to message the user if they are trying to hold all six dice
+function debugHeld() {
+	var i = 0;
+	var holdCount=0;	//counts how many dice are held
+
+	for (i = 0 ; i < heldValues.length; i++) {
+		if(heldValues[i]==true){
+			holdCount+=1;
+		}
+	}
+
+	return holdCount;
+}
+
+//rolling the dice
+function Roll() {
+	if(debugHeld()==6){	//if all six dice are held
+		alert("Meh. You meh-by need to reconsider that next time. You're holding all six of your dice. Perhaps this is not the best strategy. But then again, what do I know. I guess I'll stop meh-ddling.");
+	}
+	else{
+		var rollB = document.getElementById("Roll");
+		// roll dice, update images, modify Roll button;
+		currentRoll += 1; //TOOK OUT A VAR OUTTA HEREE
+		rollDice(currentRoll);
+		rollB.innerHTML = "Roll("+currentRoll+")";
+		rollB.nodeValue = currentRoll;
+		if (currentRoll >= MAXROLLS) {
+			rollB.style.color = "black";
+			rollB.onclick = noClick;
+			newMessage("Out of Rolls, choose a scoring option.");
+			return;
+		} 
+		newMessage((MAXROLLS-currentRoll)+" roll(s) remaining.");
+	}
+}
+
+//sends helpful messages to the users
+function newMessage(aMessage) {
+	document.getElementById("gameMessage").innerHTML = aMessage;
+}
+
+//used to disable rolling if max rolls was reached
+function noClick() {
+//	console.log("No more rolls!");
+}
+
+function rollDice() {
+	var p = 0;
+	var rolly = 0;		//random dice roll
+	var imagePath="";	//new dice image to update
+
+	for (p = 0 ; p < diceValues.length; p++) {	//goes through all dice
+		if(heldValues[p]==false){		//rolls all not held dice
+			rolly = getRandomInt(1,6);	//random number from 1-6
+			diceValues[p]=rolly;		//sets value to 
+			imagePath=defaultPath + rolly + ".png";		//updates dice on screen
+			document.getElementById("d"+p).src = imagePath;
+		}
+	}
+}
+
+//returns a random integer from 1-6
+function getRandomInt(min, max) {
+	var randNum = 0;
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	randNum = Math.floor(Math.random()*(max-min+1))+min;
+	return randNum;
+}
+
+//updates user vs computer wins; would be more useful if computer play were implemented :)
+function updateWins() {
+
+	var cPercent = 0;
+	var pPercent = 0;
+
+	if (totalGames > 0) {
+		cPercent = cWins/totalGames*100;
+		pPercent = pWins/totalGames*100;
+	}
+
+	document.getElementById("cWins").innerHTML = cWins;
+	document.getElementById("cPercent").innerHTML = cPercent + "%";
+	document.getElementById("pWins").innerHTML = pWins;
+	document.getElementById("pPercent").innerHTML = pPercent + "%";
+	document.getElementById("totalGames").innerHTML = totalGames;
+}
+
+</SCRIPT>
+</HEAD>
+<BODY ONLOAD="load()">
+<h1>Welcome to Meh-tzee. It's aight.</h1>
+
+<P ID="NewGame">Meh I interest you in a New Game ?</P>
+
+<TABLE ID="Dice">
+<TR>
+	<TD><img id="d0" SRC="Images/die0.png"></TD>
+	<TD><img id="d1" SRC="Images/die0.png"></TD>
+	<TD><img id="d2" SRC="Images/die0.png"></TD>
+	<TD><img id="d3" SRC="Images/die0.png"></TD>
+	<TD><img id="d4" SRC="Images/die0.png"></TD>
+	<TD><img id="d5" SRC="Images/die0.png"></TD>
+</TR>
+</TABLE>
+
+<P ID="Roll">Roll</P>
+
+<TABLE ID="ScoreCard">
+<TR>     
+	<TH></TH><TH>Computer</TH>		<!-- Computer -->
+	<TH ID="thePlayer">Player</TH>     <!-- Player -->
+</TR>
+<TR>     
+	<TD>Ones</TD>
+	<TD ID="C0"></TD>		<!-- Computer -->
+	<TD ID="P0"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Twos</TD>
+	<TD ID="C1"></TD>		<!-- Computer -->
+	<TD ID="P1"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Threes</TD>
+	<TD ID="C2"></TD>		<!-- Computer -->
+	<TD ID="P2"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Fours</TD>
+	<TD ID="C3"></TD>		<!-- Computer -->
+	<TD ID="P3"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Fives</TD>
+	<TD ID="C4"></TD>		<!-- Computer -->
+	<TD ID="P4"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Sixes</TD>
+	<TD ID="C5"></TD>		<!-- Computer -->
+	<TD ID="P5"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Bonus</TD>
+	<TD ID="C6"></TD>		<!-- Computer -->
+	<TD ID="P6"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Meh-tzee</TD>
+	<TD ID="C7"></TD>		<!-- Computer -->
+	<TD ID="P7"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD>Total</TD>
+	<TD ID="C8"></TD>		<!-- Computer -->
+	<TD ID="P8"></TD>			<!-- Player -->
+</TR>
+</TABLE>
+
+<BR></BR>
+<P ID="gameMessage">Click "New Game?????" above.</P>
+<BR></BR>
+
+<TABLE ID="WinLoss" width=60%>
+<TR>     
+	<TH>Computer Wins</TH><TH>Computer %win</TH>
+	<TH>Player Wins</TH><TH>Player %win</TH>
+	<TH>Total Games Played</TH>
+</TR>
+<TR>     
+	<TD ID="cWins"></TD>
+	<TD ID="cPercent"></TD>
+	<TD ID="pWins"></TD>			<!-- Player -->
+	<TD ID="pPercent"></TD>
+	<TD ID="totalGames"></TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>
+

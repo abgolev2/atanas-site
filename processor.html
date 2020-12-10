@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>16-Bit Pipelined Floating Point Processor Project Page</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<nav id="nav">
+                                                <a href="index.html">Home</a>
+                                                <a href="cv.html" target="_blank">CV</a>
+                                                <a href="projects.html">Projects</a>
+                                                <a href="tutoring.html">Tutoring</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- One -->
+			<section id="one" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Pipelined Floating-Point Processor</h2>
+						<p>Virtual five-stage processor for a 16-bit instruction set.</p>
+					</header>
+					<p>This virtual processor was written in Verilog throughout the course of a semester of the University of Kentucky's EE-480 Computer Architecture course.
+					<p>The 16-bit instruction set can be assembled using <a href="http://aggregate.org/AIK/"> AIK</a>.</p>
+					<p>The processor is pipelined into 5 stages so each instruction begins processing as soon as the previous one moves on from its previous stage, unless a dependency halt is neeeded.</p>
+					<p>Runs on a shell or on Icarus Verilog or through the <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/iver.cgi">Icarus Verilog Simulator CGI Interface</a>.</p>
+					<p>The floating-point arithmetic logic unit can process the basic mathematical operations and float to int conversions</p>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style1 special">
+				<div class="inner">
+					<div class="flex flex-2">
+						<article>
+							<header>
+								<h3><a href = "processorreadme.html">Project Description</a></h3>
+							</header>
+							<a href = "processorreadme.html">
+								<div class="image fit">
+									<img src="images/procreadme.jpg" alt="16 Bit Processor Readme">
+								</div>
+							</a>
+							<p align="center"> A description of the project as a whole, including details on the implementation of the instruction set, assembler, design, and test cases.</p>
+						</article>
+						<article>
+							<header>
+								<h3>Demo</h3>
+							</header>
+							<a>
+								<video width="400" height="200" controls>
+									<source src="images/proc.mov">
+								</video>
+							</a>
+						</article>
+					</div>
+				</div>
+			</section>
+		
+		<!-- Three -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<div class="flex flex-3">
+						<article>
+							<header>
+								<h3>Features</h3>
+							</header>
+							<ul>
+								<li>
+									<p> Assembler written for the instruction set
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Pipelined processing so that previous instruction doesn't have to wait for previous one to reach end of cycle unless there are dependencies involved
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Can process conditional statements, jumps, loops, and floating point arithmetic operations
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Each stage can be processed within one clock cycle
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Can run on <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/iver.cgi">Icarus Verilog</a> or on a shell using the iverilog command
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Tests include a FizzBuzz sample
+								</li>
+							</ul>
+						</article>
+						<article>
+							<header>
+								<h3>Skills Learned</h3>
+							</header>
+							<ul>
+								<li>
+									<p> Creating an assembler</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Translating instructions into bits</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Designing a pipelined processor structure</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Handling dependencies within a pipelined architecture</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Using Verilog to implement a processor design</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Using a 2-bit conditional code to implement if/else statements</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Debugging using register output</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Using a shell to create a test bench</p>
+								</li>
+							</ul>
+
+						</article>
+						<article>
+							<header>
+								<h3>Acknowledgments</h3>
+							</header>
+							<ul>
+								<li>
+									<p> Professor Hank Dietz was incredible at explaining the concepts required for this project, as well as providing us with the tools required to implement it, including <a href = "http://aggregate.org/AIK/">AIK</a>, <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/iver.cgi">the Icarus Verilog CGI Interface</a>, the idea for the <a href="http://aggregate.org/EE480/pinky.html">Instruction Set</a>, and a sample architecture for the <a href="http://aggregate.org/EE480/f18a3.html">MultiCycle design</a>. 
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Thomas Barber helped with the Single Cycle Processor Stage. He helped refine the assembly code and create the structure for the single cycle design. He also wrote the code for half of the instruction codes.
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Josh Carroll and Lukas Dziatkowski helped work on the Multicycle Stage. Josh was instrumental in developing the test cases and Lukas did an awesome job designing and writing the Developers' Notes.
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
+						</div>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/agolev" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                                        <li><a href="https://www.linkedin.com/in/abgolev" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+                                                        <li><a href="https://github.com/abgolev" class="icon fa-github"><span class="label">gitHub</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

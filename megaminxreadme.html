@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Megaminx Readme</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<nav id="nav">
+                                                <a href="index.html">Home</a>
+                                                <a href="cv.html" target="_blank">CV</a>
+                                                <a href="projects.html">Projects</a>
+                                                <a href="tutoring.html">Tutoring</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- One -->
+			<section id="one" class="wrapper">
+				<div class="inner">
+					<h2>Virtual Megaminx Solver Using A*</h2>
+						<h3> Purpose </h3>
+							<p> Create, randomize, and solve a virtual Megaminx puzzle.</p>
+						<h3> Description </h3>
+							<p> A Megaminx is a dodecahedron puzzle similar to a Rubik's Cube. It has 12 pentagonal faces, each a different color (Figure 1). Each face can be turned clockwise or counterclockwise. The 3D Megaminx is decomposed into a 2D model (Figure 2) and then randomized based on the number of moves that the user input. Subsequently, the solved Megmainx is rotated in random directions, an example of which is shown in Figure 3. The initial randomization is shown in standard output as shown in Figure 4. The steps taken to solve the initial randomized Megaminx are also printed.</p>
+						<h3> Functionality </h3>
+							<ul>
+								<li>
+									<p> Compile with <b>g++ megaminx.cpp</b></p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Run with <b>./a.out</b> (Mac) or <b>./a.exe</b> (PC) </p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Input the number of moves you'd like to randomize the Megaminx when prompted. Solution is then printed to stdout.</p>
+								</li>
+							</ul>
+							<p></p>
+
+					<br>					
+					<br>					
+					<br>					
+
+					<div class="flex flex-2">
+						<article>
+							<a href = "images/megaminx1.jpg">
+								<div class = "image fit">
+									<img src="images/megaminx1.jpg">
+								</div>
+							</a>
+							<h3> Figure 1: </h3>
+							<p> Each color face is given a number value. For instance, the White face is Face #3. Each of the nodes is also given a number. The faces and nodes are stored in a 2D int array..</p>
+						</article>
+						<article>
+							<a href = "images/megaminx3.jpg">
+								<div class = "image fit">
+									<img src="images/megaminx3.jpg">
+								</div>
+							</a>
+							<h3> Figure 2: </h3>
+							<p> The representation of the faces and nodes of the Megaminx in relation to each other in the virtual model. Each face interacts with the faces adjacent to it, represented by the connecting lines.</p>
+						</article>
+					</div>
+					<br>
+					<br>
+					<br>
+					<div class = "flex flex-2">
+						<article>
+							<a href = "images/megaminx4.jpg">
+								<div class = "image fit">
+									<img src="images/megaminx4.jpg">
+								</div>
+							</a>
+							<h3> Figure 3: </h3>
+							<p> Figure 3: Shows what a turn for Face 3 looks like. The Faces and Nodes which move around for that turn are circled in red. All other Faces and Nodes remain the same for that turn. These cycles were encoded for each face.</p>
+						</article>
+						<article>
+							<a href = "images/megaminx5.jpg">
+								<div class = "image fit">
+									<img src="images/megaminx5.jpg">
+								</div>
+							</a>
+							<h3> Figure 4: </h3>
+							<p> Figure 4: Shows the standard output representing the Faces and Nodes, matching the ones shown in Figure 3.</p>
+						</article>
+					</div>
+				</div>			
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
+						</div>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/agolev" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                                        <li><a href="https://www.linkedin.com/in/abgolev" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+                                                        <li><a href="https://github.com/abgolev" class="icon fa-github"><span class="label">gitHub</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

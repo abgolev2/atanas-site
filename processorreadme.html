@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>16-Bit Pipelined Floating Point Processor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<nav id="nav">
+                                                <a href="index.html">Home</a>
+                                                <a href="cv.html" target="_blank">CV</a>
+                                                <a href="projects.html">Projects</a>
+                                                <a href="tutoring.html">Tutoring</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- One -->
+			<section id="one" class="wrapper">
+				<div class="inner">
+					<h2> Description </h2>
+						<p>Virtual 16-bit processor built and tested in Verilog.</p>
+					<h2> To Run: </h2>
+						<h4> <b>On a shell:</b></h4>
+							<ul>
+								<li>
+									<p> Add instruction to run in vmem0.vmem file <pre> > iverilog procshell.v </pre><pre> > ./a.out </pre> </p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Testing mode with prebuilt instructions available using <pre>> ./test.sh </pre></p> 
+								</li>
+							</ul>
+						<h4> <b>On the Icarus Verilog Web App:</b></h4>
+							<ul>
+								<li>
+									<p> Open <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/iver.cgi">Icarus Verilog</a> and copy <a href="https://github.com/abgolev/pipelined-floating-point-processor/blob/master/processor.v">processor.v</a> file into Verilog source code box
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Copy contents of <a href="https://github.com/abgolev/pipelined-floating-point-processor/blob/master/vmem1.vmem">vmem1</a>, <a href="https://github.com/abgolev/pipelined-floating-point-processor/blob/master/vmem2.vmem">vmem2</a>, and <a href="https://github.com/abgolev/pipelined-floating-point-processor/blob/master/vmem3.vmem">vmem3</a> into VMEM file contents
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> Add instruction to run in VMEM0 box. Prebuilt instructions can be found <a href="https://github.com/abgolev/pipelined-floating-point-processor/blob/master/InstructionTests.pdf">here</a>. The instruction codes are in the code column. These are assembled using the <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/aik.cgi">AIK Assembler</a></p>
+								</li>
+							</ul>
+					<h2> Instruction Set </h2>
+						<p> The <a href = "http://aggregate.org/EE480/pinky.html">PinKY Instruction Set</a> was designed by Professor Hank Dietz for use by EE480 courses at the University of Kentucky. PinKY is a simple architecture based on the ARM instruction set.</p>
+							<img src="images/procreadme.jpg" width="400" height="100">
+							<br>
+							<br>
+						<h4> Bits 0-4 </h4> 
+							<p>     &emsp;&emsp;<b>Instruction Code</b>. There are 21 different instruction codes, so these are stored in 5 bits. A full list of the codes and their functionality can be found <a href = "http://aggregate.org/EE480/pinky.html"> here</a>.</p>
+						<h4> Bits 5-6 </h4>
+							<p>     &emsp;&emsp;<b>Conditional Code</b>. This can allow the Zero Flag to be set. The Zero Flag is a one-bit flag used to make conditional statements possible in this instruction set. The Zero Flag is set to 1 (True) if the result of the previous instruction is 0, and to False (0) otherwise. </p>
+							<ul>
+								<li>
+									<p> &emsp;&emsp;00: <b>AL</b> (Always): Always executes and does not set the Zero Flag.</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> &emsp;&emsp;01: <b>S</b> (Set): Always executes and also sets the Zero Flag to 1 or 0 subsequently based on if the output of the previous instruction was 0.</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> &emsp;&emsp;10: <b>EQ</b> (Equal): Only executes if the Zero Flag is set to 1. It does not re-set the Zero Flag.</p>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<p> &emsp;&emsp;11: <b>NE</b> (Not Equal): Only executes if the Zero Flag is set to 0. It does not re-set the Zero Flag.</p>
+								</li>
+							</ul>
+						<h4> Bit 7 </h4>
+							<p>    &emsp;&emsp;<b>Register Flag</b>: 1 if the last 4 bits are a register; 0 if they are a constant value.</p> 
+						<h4> Bits 8-11 </h4>							
+							<p>    &emsp;&emsp;<b>Destination Register</b>: There are 16 different registers and this one is used for the computation of the instruction. The result of the instruction is then copied into this register.</p>
+						<h4> Bits 12-15 </h4>							
+							<p>    &emsp;&emsp;<b>Second Argument</b>: This is either the code for one of the 16 registers or a constant value. Constant values greater than 8 or less than -7 are handled in the assembler phase and given the PRE instruction code and moved to a different instruction. This process is outlined in the subsection below.</p>
+					<h2> Assembler </h2>
+						<p> Statements can be translated into the instruction set outlined above using the <a href = "http://super.ece.engr.uky.edu:8088/cgi-bin/aik.cgi">AIK Assembler</a>. AIK is a tool which makes it easy to build assemblers from specifications, built by Professor Dietz. More information on AIK and its functionality can be found here: <a href="http://aggregate.org/AIK/">AIK Assembler Interpreter from Kentucky</a>.</p>
+						<p> Example: the instruction <b>MOV AL r0, #6</b> is translated as a base-2 <b>0100 0000 0000 0110</b>, or a base-16 4006.</p>
+							<ul>
+								<li>
+									<p> Bits 0-4 are set to 01000 because that's the instructional code for <b>MOV</b>, the move instruction:</p>
+								</li>
+							</ul>
+							<p> &emsp;&emsp;<b>0100 0</b>000 0000 0110</p>
+							<ul>
+								<li>
+									<p> Bits 5-6 are set to 00 because that's the conditional code designated for <b>AL</b> (Always):</p>
+								</li>
+							</ul>
+							<p> &emsp;&emsp;0100 0<b>00</b>0 0000 0110</p>
+							<ul>
+								<li>
+									<p> Bit 7 is set to 0 because the second argument is a constant instead of a register. The syntax requires that all constants need to be preceded by the <b>#</b> sign.</p>
+								</li>
+							</ul>
+							<p> &emsp;&emsp;0100 000<b>0</b> 0000 0110</p>
+							<ul>
+								<li>
+									<p> Bits 8-11 are set to 0000 because that corresponds to the register's number 0 for <b>r0</b> (Register 0):</p>
+								</li>
+							</ul>
+							<p> &emsp;&emsp;0100 0000 <b>0000</b> 0110</p>
+							<ul>
+								<li>
+									<p> Bits 12-15 are set to 0110 because that's the binary value for the constant 6:</p> 
+								</li>
+							</ul>
+							<p> &emsp;&emsp;0100 0000 0000 <b>0110</b></p>
+							<h4> PRE Values: </h4>
+								<p> The second argument is only 4 bits long so constants are limited to values between -7 and 8. However, if constant values outside this range are required by the instruction, the assembler separates the instruction into two different ones. The first instruction is called a <b>PRE</b>, which keeps two bits for the <b>PRE</b> instruction code (11) and two bits for the conditional code. The other 12 bits represent the top 12 bits of the constant, which are then appended to the bottom 4 bits of the constant which are kept in the subsequent instruction. Therefore, it's still possible to have constant values that fit within 16 bits (between -32767 and 32768).</p>
+					<h2> Multi-Stage Processing </h2>
+						<p>The processor is divided into 5 stages so that instructions can be processed concurrently.</p>
+							<img src="images/processor.jpg" width="900" height="500">
+							<br>
+							<br>
+							<br>
+							<h4> Stage 0</h4>
+								<ul>
+									<li>
+										<p>Fetches next instruction</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Increments instruction counter</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Writes to register from previous instruction</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Sets value for instruction number (Register 15); used for jumps</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Determines values for the ZeroFlag if conditional code is S (Set).</p>
+									</li>
+								</ul>
+							<h4> Stage 1</h4>
+								<ul>
+									<li>
+										<p>Handles dependencies by freezing instruction if it's dependent on result of previous instruction</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Sets PRE values for constants that don't fit in 4 bits</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Checks conditional codes to see if instruction should be processed</p>
+									</li>
+								</ul>
+							<h4> Stage 2</h4>
+								<ul>
+									<li>
+										<p>Decodes next instruciton</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Sign extension</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Reads from register (if necessary)</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Stores negation for float conversion</p>
+									</li>
+								</ul>
+							<h4> Stage F</h4>
+								<ul>
+									<li>
+										<p>Proprocesses floating instructions</p>
+									</li>
+								</ul>
+							<h4> Stage 3</h4>
+								<ul>
+									<li>
+										<p>Arithmetic logic unit for both ints and floats</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Computes return value</p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<p>Stores or fetches from memory</p>
+									</li>
+								</ul>
+					<h2> Functionality </h2>
+						<p>Conditional instructions are possible because of the two bit conditional code.</p>		
+						<p>Jumps are made possible by the storing of the program counter in Register 15.</p>		
+						<p>Floating point arithmetic is done within 2 clocks of the processor instead of 1 clock for the regular ALU.</p>
+						<p>Dependencies upon previous instructions are handled using a bubble method which pauses previous instructions whenever their result is required by the following instruction.</p>		
+					<h2> Testing </h2>		
+						<p>The processor can be tested through the <a href="http://super.ece.engr.uky.edu:8088/cgi-bin/iver.cgi">Icarus Verilog CGI Interface</a> or through a terminal and shell using Icarus Verilog.</p>
+						<p> A variety of sample tests are provided below. A csv of these tests can be downloaded <a href="procTestsFinal.csv">here</a></p>
+							<div class = "image fit">
+								<img src="images/procTests.jpg">
+							</div>
+							<div class = "image fit">
+								<img src="images/procTests2.jpg">
+							</div>
+							<div class = "image fit">
+								<img src="images/procTests3.jpg">
+							</div>
+							<div class = "image fit">
+								<img src="images/procTests4.jpg">
+							</div>
+							<div class = "image fit">
+								<img src="images/procTests5.jpg">
+							</div>
+				</div>			
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
+						</div>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/agolev" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                                        <li><a href="https://www.linkedin.com/in/abgolev" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+                                                        <li><a href="https://github.com/abgolev" class="icon fa-github"><span class="label">gitHub</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>TensorFlow Model for OCR Description</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<nav id="nav">
+                                                <a href="index.html">Home</a>
+                                                <a href="cv.html" target="_blank">CV</a>
+                                                <a href="projects.html">Projects</a>
+                                                <a href="tutoring.html">Tutoring</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Three -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<h2>TensorFlow Model for OCR Project Description</h2>
+					<ul>
+						<li>
+							<p> The first step in the existing project compiling a testbench by selecting letters in the GUI in English (this wasn't previously included as one of the languages) and identifying each letter in the test file. Each letter was stored as an array of 27 floats representing the amount of blackspace in each subsection of the character.
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<p> The next step was sending this data to the Python TensorFlow model file and then parsing the training data. The communication between C and Python was done through a command line argument which sent the data for each identified character to stdout and then imported it into the Python file.
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<p> The TensorFlow file then divided the data into test data and solutions. The 27 floats representing the character were the test data and the matching correct characters that had been found through the GUI were the solutions. The program also tested files which Professdor Finkel had manually trained using his nearest neighbor search algorithm on texts in a variety of different languages. These all already had a 95%-99% level of accuracy and were used to gauge the comparative success of the TensorFlow model
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<p> The next step was to train and test the neural network model. The final model contained one sequential layer with 256 weights and 55 epochs of training. The reason for only including one layer was that adding more layers caused issues with overfitting </p>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<p> Finally, the Python program printed its output back to stdout, and then this was sent back into the original C file. This output was then connected both to the original OCR program's translation of the text to stdout, or to GUI mode, depending on the user input</p> 
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<p> The Makefile was edited so that using the TensorFlow algorithm instead of the original nearest neighbor search would only be a matter of including the <b>-t</b> flag in the command instead of the default <b>-b</b>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
+						</div>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/agolev" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                                        <li><a href="https://www.linkedin.com/in/abgolev" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+                                                        <li><a href="https://github.com/abgolev" class="icon fa-github"><span class="label">gitHub</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

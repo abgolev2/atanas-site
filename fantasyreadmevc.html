@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Fantasy Cruncher Description</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<nav id="nav">
+                                                <a href="index.html">Home</a>
+                                                <a href="cv.html" target="_blank">CV</a>
+                                                <a href="projects.html">Projects</a>
+                                                <a href="tutoring.html">Tutoring</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- One -->
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Fantasy Cruncher Readme</h2>
+					</header>
+					<p>Fantasy Cruncher takes custom input and runs it on data from 1970-2019 imported directly from Fantasy Football Data Pros. Output is printed to the terminal as well as saved as a new .csv file in the working directory. Below are a screenshot of the GUI and explanations of the different customizable options:
+					<div class="image fit">
+						<img src="images/fantasyreadme.jpg" alt="Fantasy Cruncher GUI" />
+					</div>
+
+					<div class="flex flex-3">
+						<article>
+							<header>
+								<h3>Customizable Values:</h3>
+							</header>
+							<h4>Min metric score:</h4>
+							<p>The minimum cutoff for the metric selected in "Choose Metric" in the second column. For linear regressions, this minimum cutoff is limited to first season of the regression.
+							<h4>Min games played:</h4>
+							<p>Cutoff for minimum games the player took part in for the given season. For linear regressions, this is only limited the first season.  
+							<h4>Max players included:</h4>
+							<p>After sorting the players based on the metric, only includes the top number of players specified.</p> 
+							<h4>Min attemps/receptions:</h4>
+							<p>Only includes players meeting this threshold.</p>
+							<h3>Customizable league rules:</h3>
+							<p>If the metric selected is Fantasy Points or Avg Fantasy Points, recomputes the players' points based on the values selected in this section.</h4>
+						</article>
+						<article>
+							<header>
+								<h3>Choose Metric:</h3>
+							</header>
+							<p>Selects the category on which to base the linear regression or sort.</p>
+							<h3> Choose Function:</h3>
+							<p>Linear regression runs on the metric selected for every pair of subsequent year in the range provided in the below categories. Sort function gives the top players in the given metric during each year.</p>
+							<h3> Min and Max Year:</h3>
+							<p>The metrics Targets and Catch Rates are available in the original data only for years 1992 and later.</p>
+							<h3> Player Position and Team:</h3>
+							<p>Positions limited to QB, RB, WR, TE, and FLEX. Flex includes the RB, WR, and TE categories.
+						</article>
+						<article>
+							<header>
+								<h3>Additional output columns:</h3>
+							</header>
+							<p>Default columns included in the output are the player name and metric. Any additional columns to be included have to be selected here.</p>
+							<p>"All Stats" overrides all other checkmarks and prints all columns included in the raw data, as well as additional columns derived by the raw data.</p>
+							<p>All Passing, Rushing, and Receiving Stats output a number of different categories related to that query.</p>
+							<p>Fantasy Points and Average Fantasy Points are recomputed using the input into the Customizable League Rules boxes in the first column.</p>
+						</article>
+					</div>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
+						</div>
+						<ul class="icons">
+							<li><a href="https://www.facebook.com/agolev" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                                        <li><a href="https://www.linkedin.com/in/abgolev" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+                                                        <li><a href="https://github.com/abgolev" class="icon fa-github"><span class="label">gitHub</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,2157 @@
+<!DOCTYPE>
+<!--
+	Created by Atanas Golev.
+	Inspired by the Mehtzee project in Professor Paul Linton's Spring 2017 CS316 Web Development course at the University of Kentucky.
+        Original HTML code and skeleton structure of neccessary JavaScript functions were provided by Professor Linton.
+        The logic behind the Optimal Yahtzee Strategy used for the decision tree was first developed by Tom Verhoeff at the Eidenhoven University of Technology.	
+-->
+
+
+<HTML>
+<TITLE>Meowtzee</TITLE>
+<HEAD>
+<STYLE>
+
+table#Dice {
+    width: 50%;
+    border: 3px solid black;
+}
+
+table#Dice th, td {
+    border: 3px solid black;
+}
+
+table#Dice td {
+    image-align: center;
+}
+
+table#ScoreCard {
+    width: 50%;
+    border: 1px solid black;
+}
+
+table#ScoreCard th {
+    text-align: center;
+    border: 1px solid black;
+}
+
+table#ScoreCard tr td {
+    width: 43%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+table#ScoreCard tr td:nth-child(1) {
+    width: 17%;
+    border: 3px solid black;
+}
+
+table#WinLoss td {
+    width:70%
+    text-align: center;
+}
+
+#Roll{
+	width: 50%;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+h1 {
+	font-size: 2em;
+	width: 50%;
+	text-align: center;
+}
+</STYLE>
+
+<SCRIPT>
+
+var defaultPath = "images/";
+var totalGames = 0; 
+var whichTurn = 0;		
+var cWins = 0;								// computer win total
+var pWins = 0;								// player win total
+var diceValues = [0, 0, 0, 0, 0];					// values of dice
+var heldValues = [false, false, false, false, false]; 			// is a die held?
+var counter = [0, 0, 0, 0, 0, 0];					// number of each die face on board
+
+//16 categories total
+//1s 2s 3s 4s 5s 6s sum bonus 3kind 4kind fullhouse lilstr8 bigstr8 chance meowtzee total
+var cScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//computer score
+var pScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//player score
+var cIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
+var pIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
+var computerTurn = false;
+var computerTotalScore = 0;
+var playerTotalScore = 0;
+var cHighScore = 0;
+var pHighScore = 0;
+var cChoice = -1; //which choice computer makes
+var cGoodNumber = -1; //which number a computer has for purposes of four of a kind or three of a kind
+
+//Global counters		
+var currentTurn = 0;					
+var maxTurns = 13;	
+var currentRoll = 0;			
+var MAXROLLS = 3;
+
+//Used for Testing AI
+var compTesterScores = [];
+var compTesterAverage = 0;
+var TESTERGAMES = 250;	
+var hitSumCounter = 0;		//used for testing mode
+var meowtzeeCounter = 0;	//used for testing mode
+var cTotalScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//used for testing mode
+
+//Used for inverted dice selection
+var papaGolevStyle = false;
+
+//Loads back to the start of a new game, once the previous game has been completed
+function load(testOrPlay) {
+	if(testOrPlay=="test"){
+		StartGameTester();	
+	}
+	else{
+		document.getElementById("Roll").onclick=noClick;	//disable dice roll after previous game ends
+		document.getElementById("Roll").innerHTML="Roll";
+		document.getElementById("Roll").style.color = "black";
+
+		if(totalGames==0){	//asks user for name just the very first game
+			var playerName = prompt("Enter player name:", "Player 1");
+			if(playerName!=null){ //set player name
+				document.getElementById("thePlayer").innerHTML = playerName.substring(0,20);
+			}
+			alert("Click Roll to start new game. \n\nAfter that, select any dice you wish to hold and click Roll again to reroll or click on any of the scoreboard boxes on the right hand side at any time to enter a score. \n\nYou can also click on the box names on the left hand side or on Professor Meowsky for hints.")
+		}
+
+		document.getElementById("prof").addEventListener("click", ShowMessage);
+		document.getElementById("prof").style.color = "SteelBlue";
+	
+		var i;
+		for(i=0; i<16; i++){
+			document.getElementById("b"+i).addEventListener("click", ShowMessage);
+			document.getElementById("b"+i).style.color = "SteelBlue";
+		}
+		StartGame(); //If there is just one dice clicking mode instead of two
+	}
+}
+
+//Starts up a new game of meowtzee when the New Game button is clicked
+function ModNewGame() {
+	newgame = document.getElementById("NewGame");
+	newgame.onclick = StartGame(newgame);
+	newgame.style.color="black";
+}
+
+function ModNewGame2(){
+	newgame2 = document.getElementById("NewGamePapaG");
+	newgame2.onclick = StartGame2(newgame2);
+	newgame2.style.color="black";
+}
+
+//Resets all the values neccessary to start a new game... 
+function StartGame() {
+	updateWins();
+	ResetScores();
+	ResetButtons();
+	resetDiceStartGame();
+	currentTurn = 0;
+	currentRoll = 0;
+	computerTurn = false;
+}
+
+//Used for inverted dice selection
+function StartGame2() {
+	newgame.removeEventListener("click",ModNewGame);	//does not allow to start again midgame
+	newgame2.removeEventListener("click",ModNewGame);	//does not allow to start again midgame
+	newgame.innerHTML = "";
+	newgame2.innerHTML = "";
+	papaGolevStyle = true;
+	updateWins();
+	ResetScores();
+	ResetButtons();
+	resetDiceStartGame();
+	currentTurn = 0;
+	currentRoll = 0;
+	computerTurn = false;
+}
+
+function StartGameTester() {
+	computerTurn=true;	
+	while(totalGames<TESTERGAMES){
+		ResetScores();
+		ResetButtonsTester();
+		currentTurn = 0;
+		currentRoll = 0;
+		RollTester();
+		setScoreTester();		//Sets all scores
+		compTesterScores[compTesterScores.length] = cScore[cScore.length-1]; //adds new scores to array
+		totalGames += 1;	//Updates number of games played
+	}
+	document.getElementById("Roll").onclick=noClick;	//disable dice roll after previous game ends
+	document.getElementById("Roll").innerHTML="Roll";
+	document.getElementById("Roll").style.color = "black";
+	endTest();	//prints output
+}
+
+//Resets player scores
+function ResetScores() {
+	var slot = "";
+	var maxSlots = pScore.length;
+	var i;
+	for(i=0; i<pScore.length; i++) {
+		pScore[i] = 0;
+		cScore[i] = 0;
+	}
+	//cIsAvailable = [false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false];
+	cIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
+	pIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
+
+}
+
+//Resets all the values so none are held and all are zero
+function resetDice() {
+	var i;
+	for (i=0 ; i<diceValues.length; i++) {	//for all dice
+		diceValues[i] = 0;			//sets their values to 0
+		if(papaGolevStyle)
+			heldValues[i]=true;
+		else
+			heldValues[i]=false;			//sets them to not held
+		whichDie = document.getElementById("d"+i);
+		//whichDie.src = defaultPath+"die0.png";	//sets them to default blank dice
+		whichDie.onclick = toggleHold;		//enables toggles
+	}
+	for (i=0; i<6; i++){
+		counter[i]=0;
+	}	
+}
+
+//Resets all the values so none are held and all are zero
+function resetDiceTester() {
+	var i;
+	for (i=0 ; i<diceValues.length; i++) {	//for all dice
+		diceValues[i] = 0;			//sets their values to 0
+		heldValues[i] = false;			//sets them to not held
+	}
+	for (i=0; i<6; i++){
+		counter[i]=0;
+	}	
+}
+
+function resetDiceStartGame() {
+	var i;
+	for (i = 0 ; i < diceValues.length; i++) {	//for all dice
+		whichDie = document.getElementById("d"+i);
+		whichDie.src = defaultPath+"die0.png";	//sets them to default blank dice
+	}
+}
+
+//Once a new game starts, we reset the Player scoreboards and make it clickable again
+function ResetButtons() {
+	resetRoll();	//resets the Roll button
+	resetDice();	//resets the Dice
+	
+	var i;
+	for(i = 0 ; i < 16; i++){	//blanks all scorecard entries and sets boundaries to black
+		document.getElementById("p"+i).innerHTML="";
+		document.getElementById("p"+i).style.borderColor = "black";	
+		document.getElementById("c"+i).innerHTML="";
+		document.getElementById("c"+i).style.borderColor = "black";	
+	}
+
+	for(i = 0 ; i < 6; i++){	//enables clicks
+		whichScore = document.getElementById("p"+i);
+		whichScore.addEventListener("click", setScore);
+	}
+
+	for(i = 8; i < 15; i++){
+		whichScore = document.getElementById("p"+i);
+		whichScore.addEventListener("click", setScore);		
+	}
+
+	//Reset score boxies
+	var j;
+	for(j=0; j<16; j++){
+		document.getElementById("c"+j).style.backgroundColor = "FFFFFF";
+		document.getElementById("p"+j).style.backgroundColor = "FFFFFF";
+	}
+}
+
+//used in testing mode
+function ResetButtonsTester() {
+	resetRoll();	//resets the Roll button
+	resetDice();	//resets the Dice
+}
+
+//Resets the Roll Button
+function resetRoll() {
+	newturn = document.getElementById("Roll");
+	newturn.style.color = "blue";			//changes color to blue
+	newturn.onclick = Roll;				//click causes to Roll
+	newturn.innerHTML = "Roll";
+	currentRoll = 0;				//sets back to 0 rolls total this round
+	cGoodNumber = -1;
+	cChoice = -1;
+}
+
+//Resets the Roll Button
+function resetRollTester() {
+	currentRoll = 0;				//sets back to 0 rolls total this round
+	cGoodNumber = -1;
+	cChoice = -1;
+}
+
+//Messages pop up when you click on each box name
+function ShowMessage(){
+	if(this.id=="b0")
+		alert("ONES: You get 1 point for each 1 die you have.");
+	else if(this.id=="b1")
+		alert("TWOS: You get 2 points for each 2 die you have.");
+	else if(this.id=="b2")
+		alert("THREES: You get 3 points for each 3 die you have.");
+	else if(this.id=="b3")
+		alert("FOURS: You get 4 points for each 4 die you have.");
+	else if(this.id=="b4")
+		alert("FIVES: You get 5 points for each 5 die you have.");
+	else if(this.id=="b5")
+		alert("SIXES: You get 6 points for each 6 die you have.");
+	else if(this.id=="b6")
+		alert("SUM: The sum of your 6 Upper Section boxes. It gets calculated after your final roll. If the sum is 63 points or over, you get 35 bonus points.");
+	else if(this.id=="b7")
+		alert("BONUS: If the sum of your upper 6 Upper Section boxes is 63 points or over, you get 35 bonus points.");
+	else if(this.id=="b8")
+		alert("3 OF A KIND: You must have at least three dice of the same kind. The point total you get is the sum of all five dice.");
+	else if(this.id=="b9")
+		alert("4 OF A KIND: You must have at least four dice of the same kind. The point total you get is the sum of all five dice.");
+	else if(this.id=="b10")
+		alert("FULL HOUSE: You must have three dice of one kind and two dice of another kind. You get 25 points.");
+	else if(this.id=="b11")
+		alert("LITTLE STRAIGHT: You must have a straight of four or more values in a row (for example, 1 2 3 4). They don't have to be in order. You get 30 points.");
+	else if(this.id=="b12")
+		alert("BIG STRAIGHT: You must have a straight of five values in a row (for example, 2 3 4 5 6). They don't have to be in order. You get 40 points.");
+	else if(this.id=="b13")
+		alert("CHANCE: You can pick this at any time to get as many points as the sum of all the dice.")
+	else if(this.id=="b14")
+		alert("MEOWTZEE: You must have five dice of the same kind. If this is your first Meowtzee of the game, you get 50 points. However, if you already filled in the Meowtzee box or this is your second Meowtzee, there are two variations: \n \n 1. If you have a 0 score in Meowtzee: you get to use this Meowtzee as a Joker. This means that you can pick any of the Lower Section categories (3 of a Kind, 4 of a Kind, Full House, Little Straight, Big Straight) for their full point total. You get no additional Meowtzee Bonus. \n \n 2. If you have 50 or more in your Meotwzee box: You get an automatic 100 point Meowtzee bonus. However, if your upper box with the Meowtzee dice number is not currently filled, you must choose that category (no worries, Prof. Meowsky takes care of that for you). But if that particular Upper Section box is already filled, you can use the Meowtzee as a Joker, clicking any Lower Section category for the full point total. ");
+	else if(this.id=="b15")
+		alert("TOTAL: Your total points for the game.");
+	//Helpful hints
+	else if(this.id=="prof"){
+		hint = getRandomInt(1,7);
+
+		if(hint==1)
+			alert("It's a good idea to go for the Upper Section Bonus. You have to have a Sum of 63 from the Upper Section to achieve this. This means, on average, 3 dice in each of the ONES through SIXES categories.")
+		else if(hint==2)
+			alert("If you end up with bad dice, sometimes it's a good idea to take a 0 in an unimportant box like Ones or a difficult box such as Four of a Kind or Large Straight.");
+		else if(hint==3)
+			alert("You can select a category even after your first roll; you don't have to wait until the last roll.");
+		else if(hint==4)
+			alert("If you get a bad dice roll, you can choose to reroll all five dice instead of holding anything.");
+		else if(hint==5)
+			alert("Four of a Kind is statistically the category with one of the lowest expected values because of the difficulty of achieving it as well as a max 30 point total.");
+		else if(hint==6)
+			alert("The probability of getting a Meowtzee on any given roll is 0.077%.");
+		else if(hint==7)
+			alert("Upper Section refers to the categories of Ones through Sixes. Lower Section refers to the categories from 3 of a Kind through Meowtzee.");
+
+	}
+}
+
+function sleep(ms){
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//used in testing mode
+function RollTester(){
+	currentRoll += 1;
+	rollDiceTester(currentRoll);
+	if (currentRoll >= MAXROLLS) {
+		return;
+	} 
+}
+
+//rolling the dice
+function Roll() {
+	if(debugHeld()==5 && !papaGolevStyle){	//if all six dice are held
+		alert("Meow you holding all 5 dice? U meowght want to reconsider?");
+	}
+	else{
+		var rollB = document.getElementById("Roll");
+		// roll dice, update images, modify Roll button;
+		currentRoll += 1;
+		rollDice();
+		rollB.innerHTML = "Roll("+currentRoll+")";
+		rollB.nodeValue = currentRoll;
+		if (currentRoll >= MAXROLLS) {
+			rollB.style.color = "black";
+			rollB.onclick = noClick;
+			return;
+		} 
+	}
+}
+
+//sends helpful messages to the users
+function newMessage(aMessage) {
+	document.getElementById("gameMessage").innerHTML = aMessage;
+}
+
+//used to disable rolling if max rolls was reached
+function noClick() {
+//	console.log("No more rolls!");
+}
+
+async function rollDice() {
+	var rolly = 0;		//random dice roll
+	var imagePath="";	//new dice image to update
+
+	var v;
+	for (v=0; v<5; v++){
+		if(heldValues[v]==false){
+			document.getElementById("d"+v).src = defaultPath+"die0.png";
+		}	
+	}
+
+	await sleep (500);	
+
+	var i;
+	for (i=0 ; i<5; i++) {	//goes through all dice
+		if(heldValues[i]==false || (currentRoll==1 && papaGolevStyle)){		//rolls all not held dice
+			rolly = getRandomInt(1,6);	//random number from 1-6
+			diceValues[i]=rolly;		//sets value to 
+			//imagePath=defaultPath + rolly + ".png";		//updates dice on screen
+			imagePath=defaultPath + "die"+ rolly+ ".png";		//updates dice on screen
+			document.getElementById("d"+i).src = imagePath;
+			if(papaGolevStyle)
+				heldValues[i]=true;
+		}
+	}
+	
+	//console.log("meow");
+	var potentialScore=0;
+	var j;
+	for(j=0; j<15; j++){
+		potentialScore = "" + computeScore(j);
+		var output = potentialScore.fontcolor("SteelBlue");
+		if(pIsAvailable[j] && computerTurn==false)
+			document.getElementById("p"+j).innerHTML = output; //changes HTML to reflect potential score
+		else if(cIsAvailable[j] && computerTurn==true)
+			document.getElementById("c"+j).innerHTML = output; //changes HTML to reflect potential score
+	}
+		
+	if(isSecondPlayerYahtzee() && computerTurn==false){
+		alert("Second Meowtzee, congrats! If your Meowtzee score is not 0 and the upper level box with the Meowtzee dice number you got is still available, that will be filled in automatically, no matter what you selected. Otherwise, you can select any of the Lower Section categories, for full points.")
+	}
+
+
+}
+
+//used in testing mode
+function rollDiceTester() {
+	var rolly = 0;		//random dice roll
+
+	var i;
+	for (i=0 ; i<5; i++) {	//goes through all dice
+		if(heldValues[i]==false){		//rolls all not held dice
+			rolly = getRandomInt(1,6);	//random number from 1-6
+			diceValues[i]=rolly;		//sets value to 
+			imagePath=defaultPath + "die"+ rolly+ ".png";		//updates dice on screen
+			document.getElementById("d"+i).src = imagePath;
+		}
+	}
+
+}
+
+function getRandomInt(min, max) {
+	var randNum = 0;
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	randNum = Math.floor(Math.random()*(max-min+1))+min;
+	return randNum;
+}
+
+//returns the sum of the dice in each hand
+function sumDice(){
+	var sum=0;
+	var s;
+	for(s=0; s<5; s++){
+		sum+=diceValues[s];
+	}
+	return sum;
+}
+
+//displays the proper scores in each box and sets score whenever user clicks
+async function setScore() {
+	if(currentRoll!=0){		//makes sure that the dice have been rolled before selection
+		currentTurn+=1;		//counts number of boxes selected
+		document.getElementById(this.id).removeEventListener("click",setScore);	//disables click for that box
+		document.getElementById(this.id).style.borderColor = "green";	//changes boundary to green
+	
+		var slot = this.id.substring(1,3);
+
+		if(isSecondPlayerYahtzee()){		//if second yahtzee, special process
+			if(pScore[14]>0){		//has to fill out the upper level box no matter what is clicked
+				pScore[14]+=100;
+				document.getElementById("p14").innerHTML = pScore[14]; //changes HTML to reflect score
+				pScore[15]+=100;
+				if(pIsAvailable[diceValues[0]-1])
+					slot = diceValues[0]-1;
+			}
+		}
+
+		pIsAvailable[slot]=false;
+		var score = computeScore(slot); //compute score
+		pScore[slot]=score;
+		document.getElementById("p"+slot).innerHTML = score; //changes HTML to reflect score
+		document.getElementById("p"+slot).style.backgroundColor = "#7FFFD4";
+		pScore[15]+=score;
+		document.getElementById("p15").innerHTML = pScore[15];
+		if(slot<6)
+			pScore[6]+=score;
+
+		//Reset score boxies
+		var j;
+		for(j=0; j<15; j++){
+			if(pIsAvailable[j]){
+				document.getElementById("p"+j).innerHTML = ""; //changes HTML to reflect potential score
+			}
+		}
+
+		resetDice();
+		resetRoll();
+		doComputer(currentTurn);
+		await sleep(10500);
+
+		if(currentTurn==maxTurns){	//once all 7 boxes are checked, ends game
+			computeBonus();		//computes bonus
+			endGame();		//end game calculations
+			currentRoll=4;
+		}
+	}
+}
+
+//used in testing mode
+function setScoreTester() {
+	if(currentRoll!=0){		//makes sure that the dice have been rolled before selection
+		currentTurn+=1;		//counts number of boxes selected
+		if(currentTurn<=maxTurns)
+			doComputerTester(currentTurn);
+		else{	//once all 7 boxes are checked, ends game
+			//console.log("here");
+			resetDiceTester();
+			resetRollTester();
+			computeBonus();		//computes bonus
+			currentRoll=4;
+		}
+
+	}
+}
+
+//Computes the score after player or computer is ready to play
+function computeScore(slot) {
+	var score = 0;	//total score
+	var successes = 0;	//number of matches between slot and current dice
+	var dieValue = parseInt(slot)+1;	//converts string to int and adds 1 to change from 0-5 to 1-6
+
+	diceCounter();	//calculate number of 1s 2s 3s etc; useful for determining if staight
+
+	//console.log("Slot: " + slot);
+	
+	if (slot < 6) {								// add like dice
+		var i;
+		for(i=0; i<diceValues.length; i++){
+			if(diceValues[i] == dieValue)
+				successes+=1;
+		}
+		score = successes * dieValue;
+	}
+
+	//6 is Sum, 7 is Bonus
+
+	//3 of a Kind
+	else if(slot==8){
+		var i;
+		if(isThreeOfAKind()==true)
+			for(i=0; i<diceValues.length; i++)
+				score+=diceValues[i];
+		else
+			return 0;		
+	}
+
+	//4 of a Kind
+	else if(slot==9){
+		var i;
+		if(isFourOfAKind()==true)
+			for(i=0; i<diceValues.length; i++)
+				score+=diceValues[i];
+		else
+			return 0;	
+	}
+
+	//Full House
+	else if(slot==10){
+		if(isFullHouse()==true || isSecondPlayerYahtzee()==true || isSecondComputerYahtzee()==true)
+			return 25;
+		else
+			return 0;
+	}
+	
+	//Little Straight: 30 points
+	else if(slot==11){
+		if(isLittleStraight()==true || isSecondPlayerYahtzee()==true || isSecondComputerYahtzee()==true)
+			return 30;
+		else
+			return 0;		
+	}
+
+	//Big Straight
+	else if(slot==12){
+		if(isBigStraight()==true || isSecondPlayerYahtzee()==true || isSecondComputerYahtzee()==true)
+			return 40;
+		else
+			return 0;
+	}
+
+	//Chance
+	else if(slot == 13){
+		var i;
+		for(i=0; i<diceValues.length; i++)
+			score+=diceValues[i];
+	}
+
+	//Meowtzee
+	else if (slot == 14) {
+		if(isYahtzee()){
+			return 50;
+		}
+		else
+			return 0;
+	}
+
+	return score;
+}
+
+//AI for computer turn
+async function doComputer(whichTurn) {
+	computerTurn=true;
+	var rollButton = document.getElementById("Roll");
+	currentRoll = 0;
+	rollButton.style.color = "black";
+
+	//Disable Player Clicks
+	rollButton.onclick=noClick;
+
+	var w;
+	for(w = 0 ; w < 6; w++){	//disables clicks
+		whichScore = document.getElementById("p"+w);
+		whichScore.removeEventListener("click", setScore);
+	}
+	for(w = 8; w < 15; w++){
+		whichScore = document.getElementById("p"+w);
+		whichScore.removeEventListener("click", setScore);		
+	}
+
+	var holdDecision;
+	await sleep(1000);
+	while(currentRoll < MAXROLLS && cChoice==-1){
+		currentRoll += 1;
+		rollDice();
+		rollButton.innerHTML = "Roll("+currentRoll+")";
+		rollButton.nodeValue = currentRoll;
+		console.log("PC Roll: "+currentRoll);
+		await sleep(2000);
+		console.log("Dice: "+diceValues);	
+		diceCounter();
+		holdDecision = makeHoldDecision(currentRoll);
+		if(currentRoll<MAXROLLS)
+			doComputerToggles(holdDecision);
+		await sleep(1000);
+	} 
+
+	if(cChoice==-1){
+		damageControlChoice();
+	}
+
+	console.log("PC Choice: " + cChoice);
+
+	if(!cIsAvailable[cChoice]){
+		console.log("Bad thing. Choice alreeady selected: "+cChoice);
+	}
+
+	cIsAvailable[cChoice]=false;
+	var whichPlace = "c"+cChoice;
+	var score = computeScore(cChoice);
+	cScore[cChoice]=score;
+	document.getElementById(whichPlace).innerHTML = score; //changes HTML to reflect score
+	document.getElementById(whichPlace).style.backgroundColor = "#7FFFD4";
+	cScore[15]+=score;
+	document.getElementById("c15").innerHTML = cScore[15];
+	if(cChoice<6)
+		cScore[6]+=score;
+	
+	computerTurn=false;
+
+	//Reenable Player Clicks
+	if(whichTurn!=maxTurns){
+		var j;
+		for(j=0; j<15; j++){
+			if(cIsAvailable[j]){
+				document.getElementById("c"+j).innerHTML = ""; //changes HTML to reflect potential score
+			}
+		}
+		resetDice();
+		resetRoll();
+		var p
+		for(p = 0 ; p < 15; p++){	//enables clicks
+			if(pIsAvailable[p]){
+				whichScore = document.getElementById("p"+p);
+				whichScore.addEventListener("click", setScore);
+			}
+		}
+	}
+}
+
+//AI for computer turn in testing mode
+function doComputerTester(whichTurn) {
+	computerTurn=true;
+	currentRoll = 0;
+	
+	//console.log("Availablility:"+cIsAvailable);
+	var holdDecision;
+	while(currentRoll < MAXROLLS && cChoice==-1){
+		rollDiceTester(currentRoll);
+		currentRoll += 1;
+		//console.log("PC Roll: "+currentRoll);
+		//console.log("Dice: "+diceValues);	
+		diceCounter();
+		holdDecision = makeHoldDecision();
+		doComputerToggles(holdDecision);
+	} 
+
+	if(cChoice==-1){
+		damageControlChoice();
+	}
+
+	//console.log("PC Choice: " + cChoice);
+
+	if(!cIsAvailable[cChoice]){
+		console.log("Bad thing. Choice alreeady selected: "+cChoice);
+	}
+
+	cIsAvailable[cChoice]=false;
+	var whichPlace = "c"+cChoice;
+	var score = computeScore(cChoice);
+	//console.log("cChoice: " + cChoice);
+	//console.log("score: " + score);
+	cScore[cChoice]=score;
+	cTotalScore[cChoice]+=score;
+	cScore[15]+=score;
+	if(cChoice<6){
+		cScore[6]+=score;
+		cTotalScore[6]+=score;	
+	}
+
+	computerTurn=false;
+
+	resetDiceTester();
+	resetRollTester();
+	RollTester();
+	setScoreTester();
+}
+
+//toggles dice hold for the computer
+function doComputerToggles(decisionArray){
+	d0.src = doToggle("d0", d0.src, decisionArray[0]);
+	d1.src = doToggle("d1", d1.src, decisionArray[1]);
+	d2.src = doToggle("d2", d2.src, decisionArray[2]);
+	d3.src = doToggle("d3", d3.src, decisionArray[3]);
+	d4.src = doToggle("d4", d4.src, decisionArray[4]);
+}
+
+//computer decides which dice to hold
+function makeHoldDecision(){
+	var decision = [false, false, false, false, false];
+	var lastBox=-1;
+
+	if(howManyUpperBoxesUnfilled()==1){
+		lastBox = whichUpperBoxUnfilled();
+	}
+	
+	if(isYahtzee() && !cIsAvailable[14]){
+		meowtzeeCounter++;
+		//console.log("second yahtzee");
+		decision = [true, true, true, true, true];
+		if(cScore[14]>0){
+			cScore[14]+=100;
+			cScore[15]+=100;
+			document.getElementById("c14").innerHTML = cScore[14];
+			//Set the scoreboard also
+			if(cIsAvailable[diceValues[0]-1])
+				cChoice = diceValues[0]-1;
+			else
+				makeSecondYahtzeeChoice();
+		}
+		else{
+			makeSecondYahtzeeChoice();
+		}
+	}
+
+	else if(currentTurn==maxTurns && currentRoll!=MAXROLLS){
+		//console.log("last turn");
+		decision = makeLastTurnHoldDecision();
+	}
+
+	else if(isYahtzee()){
+		meowtzeeCounter++;
+		//console.log("yahtzee");
+		decision = [true, true, true, true, true];
+		if(cIsAvailable[14])
+			cChoice = 14;
+	}
+
+	else if(isFourOfAKind()){
+		//console.log("Four of a Kind");
+		decision = findHoldPlaces("fourofakind");
+		if(currentRoll==MAXROLLS){
+			if(cIsAvailable[cGoodNumber-1])
+				cChoice=cGoodNumber-1;
+			else if(cIsAvailable[9])
+				cChoice=9;
+			else if(cIsAvailable[8])
+				cChoice=8;
+		}
+
+		//Does not hold four of a kind in a very special case where no good things are available
+		else if(!cIsAvailable[9] && !cIsAvailable[8] && !cIsAvailable[14] && cScore[14]==0){
+			if(cIsAvailable[10]){	//for full house, unholds one of the four
+				if(diceValues[0]==cGoodNumber)
+					decision[0]=false;
+				else
+					decision[1]=false;
+			}
+			else if(counter[5]==1)
+				if(cIsAvailable[5])
+					decision = holdThe(6);
+			else if(counter[4]==1)
+				if(cIsAvailable[4])
+					decision = holdThe(5);
+			else if(counter[3]==1)
+				if(cIsAvailable[3])
+					decision = holdThe(4);
+			else if(counter[2]==1)
+				if(cIsAvailable[2])
+					decision = holdThe(3);
+		}
+	}
+
+	else if(isBigStraight() && cIsAvailable[12]){
+		//console.log("big straight");
+		decision = [true, true, true, true, true];
+		cChoice = 12;
+	}
+
+//	else if(lastBox>=0 && completesBonusWithThisBox(lastBox)){
+//		decision = holdThe(lastBox+1);
+//		if(currentRoll==MAXROLLS)
+//			cChoice = lastBox;	
+//	}
+
+	//Hold 2345 hand if Big Straight is open.
+	else if(cIsAvailable[12] && counter[1]>0 && counter[2]>0 && counter[3]>0 && counter[4]>0 && currentRoll==1){
+		decision = findHoldPlaces("littlestraight");
+	}
+
+	else if(isFullHouse() && cIsAvailable[10] && (currentRoll==MAXROLLS || counter[0]==3 || counter[1]==3)){
+		decision = [true, true, true, true, true];
+		cChoice=10;
+	}
+
+	else if(isThreeOfAKind() && (currentRoll==MAXROLLS || friendlyThreeOfAKindOpenBoxies())){
+		//console.log("Three of a Kind");
+
+		decision = findHoldPlaces("threeofakind");
+
+		if(isFullHouse() && cIsAvailable[10] && currentRoll==MAXROLLS){
+			decision = [true, true, true, true, true];
+			cChoice=10;
+		}
+
+		else if(isFullHouse() && cIsAvailable[10] && !cIsAvailable[cGoodNumber-1]){
+			decision = [true, true, true, true, true];
+			cChoice=10;
+		}
+
+		else if(currentRoll==MAXROLLS){
+			if(cIsAvailable[cGoodNumber-1])
+				cChoice=cGoodNumber-1;
+			else if(cIsAvailable[8])
+				cChoice=8;
+		}
+	}
+
+	else if(isLateGame() && isLittleStraight() && cIsAvailable[11]){
+		decision = findHoldPlaces("littlestraight");
+		if(currentRoll==MAXROLLS)
+			cChoice=11;		
+	}
+
+	//Otherwise hold two of a kind of 44 55 66 before going for little straights
+	else if(isTwoOfAKind() && currentRoll==1 && ((counter[3]==2 && cIsAvailable[3]) || (counter[4]==2 && cIsAvailable[4]) || (counter[5]==2 && cIsAvailable[5]))){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+        //Special case for 3456 with a high pair on first roll
+        else if(counter[3]>0 && counter[4]>0 && counter[5]>0 && counter[6]>0 && currentRoll==1 && isTwoOfAKind()){
+                decision = findHoldPlaces("twoofakind");
+        }
+
+        //Special case: If 12344 on first roll, hold 44
+        else if(counter[0]==1 && counter[1]==1 && counter[2]==1 && counter[3]==2 && currentRoll==1){
+                decision = holdThe(4);
+        }
+
+	else if(isLittleStraight() && (cIsAvailable[11] || (currentRoll!=MAXROLLS && cIsAvailable[12]))){
+		//console.log("little straight");
+		if(!cIsAvailable[12] || (currentRoll==MAXROLLS && cIsAvailable[11]))
+			cChoice=11;
+		decision = findHoldPlaces("littlestraight");
+	}
+
+	else if(isThreeOfAKind() && cIsAvailable[8]){
+		decision = findHoldPlaces("threeofakind");
+	}
+
+	else if(isThreeOfAKind() && isLateGame() && cIsAvailable[9]){
+		decision = findHoldPlaces("threeofakind");
+	}
+
+	else if(isTwoOfAKind() && currentRoll==1 && (counter[4]==2 || counter[5]==2) && cIsAvailable[8]){
+		decision = findHoldPlaces("twoofakind");
+        }
+
+	else if(isTwoOfAKind() && currentRoll==1 && ((counter[0]==2 && cIsAvailable[0]) || (counter[1]==2 && cIsAvailable[1] || counter[2]==2 && cIsAvailable[2]))){
+		decision = findHoldPlaces("twoofakind");
+	}
+	
+	//General holding patterns
+	else if(cIsAvailable[4] && counter[4]>0 && cIsAvailable[11] && currentRoll==1){
+		decision = holdThe(5);
+	}
+
+	else if(cIsAvailable[4] && counter[4]>0 && currentRoll==1){
+		decision = holdThe(5);
+	}
+
+	else if(cIsAvailable[5] && counter[5]>0 && currentRoll==1){
+		decision = holdThe(6);
+	}
+
+	else if(cIsAvailable[3] && counter[3]>0 && currentRoll==1){
+		decision = holdThe(4);
+	}
+
+	//Late game options
+        else if(cIsAvailable[11] && isMiniStraightInMiddle() && isLateGame()){
+                decision = findHoldPlaces("ministraightinmiddle");
+        }
+
+	else if(isTwoOfAKind() && isLateGame() && cIsAvailable[8]){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+        else if(cIsAvailable[12] && isAlmostBigStraight() && isLateGame()){
+                decision = findHoldPlaces("almostbigstraight");
+        }
+
+        else if(cIsAvailable[11] && isAlmostLittleStraight() && isLateGame()){
+                decision = findHoldPlaces("almostlittlestraight");
+        }
+
+        else if(cIsAvailable[12] && isMiniStraightInMiddle() && isLateGame()){
+                decision = findHoldPlaces("ministraightinmiddle");
+        }
+
+	else if(isThreeOfAKind() && (cIsAvailable[9] || cIsAvailable[10]) && currentRoll==1 && isLateGame()){
+		decision = findHoldPlaces("threeofakind");
+	}
+
+	//This is only on the second roll
+	else if(isTwoOfAKind() && ((counter[0]==2 && cIsAvailable[0]) || (counter[1]==2 && cIsAvailable[1]) || (counter[2]==2 && cIsAvailable[2]) || (counter[3]==2 && cIsAvailable[3]) || (counter[4]==2 && cIsAvailable[4]) || (counter[5]==2 && cIsAvailable[5]))){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+	//This is only on the second Roll
+	else if(isTwoOfAKind() && (counter[4]==2 || counter[5]==2) && cIsAvailable[8]){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+	else if(isTwoOfAKind() && (counter[3]==2 || counter[4]==2 || counter[5]==2) && cIsAvailable[8]){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+	else if(isThreeOfAKind() && (cIsAvailable[9] || cIsAvailable[10])){
+		decision = findHoldPlaces("threeofakind");
+	}
+
+	//Late game desperation
+	else if(cIsAvailable[2] && counter[2]>0 && isLateGame()){
+		decision = holdThe(3);
+	}
+
+	else if(cIsAvailable[1] && counter[1]>0 && isLateGame()){
+		decision = holdThe(2);
+	}
+
+	else if(cIsAvailable[0] && counter[0]>0 && isLateGame()){
+		decision = holdThe(1);
+	}
+
+        else if(cIsAvailable[10] && isLateGame() && isTwoPair()){
+                decision = findHoldPlaces("twopair");
+        }
+
+        else if(cIsAvailable[11] && cIsAvailable[12] && isMicroStraight() && currentRoll==1 && isLateGame()){
+                decision = findHoldPlaces("microstraight");
+        }
+
+	else if(isTwoOfAKind() && isLateGame() && cIsAvailable[8]){
+		decision = findHoldPlaces("twoofakind");
+	}
+
+	//General holding patterns
+//      else if(cIsAvailable[12] && isAlmostBigStraight()){
+//              decision = findHoldPlaces("almostbigstraight");
+//      }
+
+//      else if(cIsAvailable[11] && isMiniStraightInMiddle()){
+//              decision = findHoldPlaces("ministraightinmiddle");
+//      }
+
+//      else if(cIsAvailable[11] && isAlmostLittleStraight()){
+//              decision = findHoldPlaces("almostlittlestraight");
+//      }
+
+	else if(cIsAvailable[4] && counter[4]>0 && cIsAvailable[11]){
+		decision = holdThe(5);
+	}
+
+	else if(cIsAvailable[5] && counter[5]>0){
+		decision = holdThe(6);
+	}
+
+	else if(cIsAvailable[4] && counter[4]>0){
+		decision = holdThe(5);
+	}
+
+	else if(cIsAvailable[3] && counter[3]>0){
+		decision = holdThe(4);
+	}
+
+        else if(cIsAvailable[11] && isMiniStraightInMiddle()){
+                decision = findHoldPlaces("ministraightinmiddle");
+        }
+
+//	else if(isTwoOfAKind() && cIsAvailable[8] && (counter[3]>1 || counter[4]>1 || counter[5]>1)){
+//		decision = findHoldPlaces("twoofakind");
+//	}
+
+//      else if(cIsAvailable[10] && isTwoPair()){
+//              decision = findHoldPlaces("twopair");
+//      }
+
+	return decision;
+}
+
+//Used to optimize computer decision in the last 4 turns
+function isLateGame(){
+	if(maxTurns-currentTurn<5)
+		return true;
+	else
+		return false;
+}
+
+//checks how many of boxes in upper section haven't been selected
+function howManyUpperBoxesUnfilled(){
+	var count=0;
+	var i;
+	for(i=0; i<6; i++){
+		if(cIsAvailable[i])
+			count+=1;
+	}
+	return count;
+}
+
+//checks which upper section box is empty
+function whichUpperBoxUnfilled(){
+	var box=-1;
+	var i;
+	for(i=0; i<6; i++)
+		if(cIsAvailable[i])
+			box=i;
+	return box;
+}
+
+//unused currently but could be used to optimize computer hitting the bonus
+function completesBonusWithThisBox(whichNum){
+	if(cScore[6]>=63)
+		return false;
+	var pointsNeeded = 63 - cScore[6];
+	var sum=0;
+	var i;
+	for(i=0; i<5; i++){
+		if((diceValues[i]-1)==whichNum)
+			sum+=diceValues[i];
+	}
+	if(sum>pointsNeeded)
+		return true;
+	else
+		return false;
+}
+
+function friendlyThreeOfAKindOpenBoxies(){
+	var whichNum=-1;
+	var i;
+	for(i=0; i<6; i++){
+		if(counter[i]==3)
+			whichNum=i;
+	}
+
+	//console.log("whichNum: "+i);
+
+	if(cIsAvailable[whichNum])
+		return true;
+	else if(currentRoll==1 && (cIsAvailable[14] || cScore[14]>0))
+		return true;
+	else if(whichNum>=3 && cIsAvailable[8])
+		return true;
+	else if(whichNum>=3 && cIsAvailable[9] && currentTurn==1)
+		return true;
+	else 
+		return false;
+
+}
+
+//computer decides which dice to hold on the very last turn of the game
+function makeLastTurnHoldDecision(){
+	hold = [false, false, false, false, false];
+	var emptySlot=-1;
+	var secondYahtzee=false;
+
+	var x;
+	for(x=0; x<15; x++){
+		if(cIsAvailable[x])
+			emptySlot=x;
+	}
+
+	if(emptySlot==-1){
+		console.log("BAD THING. Couldnt find last turn empty slot.");
+	}
+
+	else if(!cIsAvailable[14] && isYahtzee() && cScore[14]>0){
+		meowtzeeCounter++;
+		hold = [true, true, true, true, true];
+		cChoice = makeSecondYahtzeeChoice();
+		secondYahtzee=true;
+	}
+
+	else if(isFourOfAKind() && cScore[14]>0){
+		hold = findHoldPlaces("fourofakind");
+	}
+
+	else if(emptySlot<6){
+		hold = holdThe(1+emptySlot);
+	}
+
+	//Three of a Kind
+	else if(emptySlot==8){
+		if(isYahtzee()){
+			hold[0]=true;
+			hold[1]=true;
+			hold[2]=true;
+			if(hold[3]>3)
+				hold[3]=true;
+			if(hold[4]>3)
+				hold[4]=true;
+		}
+		else if(isFourOfAKind()){
+			hold = findHoldPlaces("fourofakind");
+			var i;
+			for(i=0; i<5; i++)
+				if(hold[i]==false && diceValues[i]>3)
+					hold[i]=true;
+		}
+		else if(isThreeOfAKind()){
+			hold = findHoldPlaces("threeofakind");
+			var i;
+			for(i=0; i<5; i++)
+				if(hold[i]==false && diceValues[i]>3)
+					hold[i]=true;
+
+		}
+		else if(isTwoOfAKind())
+			hold = findHoldPlaces("twoofakind");
+		else if(counter[5]==1){
+			hold = holdThe(6);
+		}
+		else if(counter[4]==1){
+			hold = holdThe(5);
+		}
+
+	}
+
+	//Four of a Kind
+	else if(emptySlot==9){
+		if(isYahtzee()){
+			hold[0]=true;
+			hold[1]=true;
+			hold[2]=true;
+			hold[3]=true;
+			if(diceValues[4]>3)
+				hold[4]=true;
+		}
+		else if(isFourOfAKind()){
+			hold = findHoldPlaces("fourofakind");
+				var i;
+				for(i=0; i<5; i++){
+					if(hold[i]==false && diceValues[i]>3)
+						hold[i]=true;
+				}
+			}
+		else if(isThreeOfAKind())
+			hold = findHoldPlaces("threeofakind");
+		else if(isTwoOfAKind())
+			hold = findHoldPlaces("twoofakind");
+	}
+	
+	//Full House
+	else if(emptySlot==10){
+		if(isFullHouse())
+			hold = [true, true, true, true, true];
+		else if(isYahtzee())
+			hold = [true, true, true, false, false];
+		else if(isFourOfAKind()){
+			hold = findHoldPlaces("fourofakind");
+			var madeChange=false;
+			var i;
+			for(i=0; i<5; i++){
+				if(hold[i]==false)	//holding random number increases chances from 5/36 to 1/6
+					hold[i]=true;
+				else if(hold[i]==true && !madeChange){
+					hold[i]=false;
+					madeChange=true;
+				}
+			}
+		}
+		else if(isThreeOfAKind()){
+			hold = findHoldPlaces("threeofakind");
+			var madeChange = false;
+			var i;
+			for(i=0; i<5; i++){
+				if(hold[i]=false && !madeChange){
+					hold[i]=true;
+					madeChange=true;
+				}
+			}
+		}
+		//make this function
+		else if(isTwoPair()){
+			hold = findHoldPlaces("twopair");
+			
+		}
+		else if(isTwoOfAKind()){
+			hold = findHoldPlaces("twoofakind");
+		}
+	}
+
+	//Little Straight
+	else if(emptySlot==11){
+		if(isBigStraight())
+			hold = [true, true, true, true, true];
+		else if(isLittleStraight())
+			hold = [true, true, true, true, true];
+		else if(isMiniStraightInMiddle())
+			hold = findHoldPlaces("ministraightinmiddle");
+		else if(isAlmostLittleStraight())
+			hold = findHoldPlaces("almostlittlestraight");
+		else if(isMicroStraight())
+			hold = findHoldPlaces("microstraight");
+		else{
+			if(counter[1]>0)
+				holdA(2, hold);
+			if(counter[2]>0)
+				holdA(3, hold);
+			if(counter[3]>0)
+				holdA(4, hold);
+			if(counter[4]>0)
+				holdA(5, hold);
+		}
+	}
+
+	//Big Straight
+	else if(emptySlot==12){
+		if(isBigStraight())
+			hold = [true, true, true, true, true];
+		else if(isLittleStraight())
+			hold = findHoldPlaces("littlestraight");
+		else if(isAlmostBigStraight())
+			hold = findHoldPlaces("almostbigstraight");
+		else if(isMiniStraightInMiddle())
+			hold = findHoldPlaces("ministraightinmiddle");
+		else if(isAlmostLittleStraight())
+			hold = findHoldPlaces("almostlittlestraight");
+		else if(isMicroStraight())
+			hold = findHoldPlaces("microstraight");
+		else{
+			if(counter[1]>0)
+				holdA(2, hold);
+			if(counter[2]>0)
+				holdA(3, hold);
+			if(counter[3]>0)
+				holdA(4, hold);
+			if(counter[4]>0)
+				holdA(5, hold);
+		}
+	}
+
+	//Chance
+	else if(emptySlot==13){
+		var i;
+		for(i=0; i<5; i++){
+			if(diceValues[i]>3)
+				hold[i]=true;
+		}
+	}
+	
+	//Yahtzee
+	else if(emptySlot==14){
+		if(isYahtzee()){
+			hold = [true, true, true, true, true];
+			meowtzeeCounter++;
+		}
+		else if(isFourOfAKind())
+			hold = findHoldPlaces("fourofakind");
+		else if(isThreeOfAKind())
+			hold = findHoldPlaces("threeofakind");
+		else if(isTwoOfAKind())
+			hold = findHoldPlaces("twoofakind");
+	}
+
+	if(hold[0]==true && hold[1]==true && hold[2]==true && hold[3]==true && hold[4]==true && !secondYahtzee){
+		//console.log("meow");
+		cChoice = emptySlot;
+	}
+
+	return hold;
+}
+
+//holds just all instances of a certain number
+function holdThe(num){
+	var holdNum = [false, false, false, false, false];
+	var t;
+	for(t=0; t<6; t++)
+		if(diceValues[t]==num)
+			holdNum[t]=true;
+	return holdNum;
+}
+
+//holds just one instance of a certain number
+function holdA(num, holdValues){
+	var foundOne=false;
+	var a;
+	for(a=0; a<5; a++){
+		if(diceValues[a]==num && !foundOne){
+			holdValues[a]=true;
+			foundOne=true;
+		}
+	}
+	return holdValues;
+}
+
+//computer makes decision if it hits a second yahtzee in the same game
+function makeSecondYahtzeeChoice(){
+	//4 of a Kind
+	if(cIsAvailable[9]&&diceValues[0]>3)
+		cChoice = 9;	
+	//Big Straight
+	else if(cIsAvailable[12])
+		cChoice = 12;
+	//Full House
+	else if(cIsAvailable[10])
+		cChoice = 10;
+	//Little Straight
+	else if(cIsAvailable[11])
+		cChoice = 11;
+	//3 of a Kind
+	else if(cIsAvailable[8]&&diceValues[0]>3)
+		cChoice = 8;	
+	//Chance
+	else if(cIsAvailable[13]&&diceValues[0]>4)
+		cChoice = 13;
+	//4 of a Kind
+	else if(cIsAvailable[9])
+		cChoice = 9;
+	//3 of a Kind
+	else if(cIsAvailable[8])
+		cChoice = 8;
+	//Chance
+	else if(cIsAvailable[13])
+		cChoice = 13;
+}
+
+//finds the positions of dice to hold for computer
+function findHoldPlaces(type){
+	var holdPlaces = [false, false, false, false, false];
+	if(type=="fourofakind"){
+		var h;
+		for(h=0; h<6; h++){
+			if(counter[h]==4){
+				cGoodNumber = h+1;
+			}
+		}
+		holdPlaces = holdThe(cGoodNumber);
+	}
+
+	else if(type=="threeofakind"){
+		var h;
+		for(var h=0; h<6; h++){
+			if(counter[h]==3){
+				cGoodNumber = h+1;
+			}
+		}
+		holdPlaces = holdThe(cGoodNumber);
+	}
+
+	else if(type=="littlestraight"){
+		//Sets all numbers belonging in the straight to true
+		if(counter[0]>0 && counter[1]>0 && counter[2]>0 && counter[3]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+		}
+		else if(counter[1]>0 && counter[2]>0 && counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);			
+		}
+		else if(counter[2]>0 && counter[3]>0 && counter[4]>0 && counter[5]>0){
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+
+		}
+		else
+			console.log("Bad thing. Didn't find little straight.")		
+	}
+
+	else if(type=="twopair"){
+		var h;
+		for(var h=0; h<6; h++)
+			if(counter[diceValues[h]-1]==2)
+				holdPlaces[h]=true;
+	}
+
+	else if(type=="twoofakind"){
+		var smallNumber=-1;
+		var bigNumber=-1;
+		var goodNumber=-1;
+
+		var h;
+		for(h=0; h<6; h++){
+			if(counter[h]==2 && smallNumber==-1)
+				smallNumber = h+1;
+			else if(counter[h]==2)
+				bigNumber = h+1;
+		}
+
+		if(bigNumber!=-1){
+			if(cIsAvailable[bigNumber-1])
+				goodNumber=bigNumber;
+			else if(cIsAvailable[smallNumber-1])
+				goodNumber=smallNumber;
+			else
+				goodNumber=bigNumber;
+		}
+		else
+			goodNumber=smallNumber;
+
+		cGoodNumber = goodNumber;
+		holdPlaces = holdThe(goodNumber);
+	}
+
+	else if(type=="ministraightinmiddle"){
+		if(counter[1]>0 && counter[2]>0 && counter[3]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+		}      
+        	else if(counter[2]>0 && counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+		else
+			console.log("BAD THING. Didnt find mini straight in middle.")
+	}
+
+	//Arranged in order of goodness 
+	else if(type=="almostlittlestraight"){
+        	if(counter[1]>0 && counter[2]>0 && counter[4]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+        	else if(counter[1]>0 && counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+        	else if(counter[2]>0 && counter[3]>0 && counter[5]>0){
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+       		else if(counter[0]>0 && counter[2]>0 && counter[3]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+		}
+   		else if(counter[0]>0 && counter[1]>0 && counter[3]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+		}
+        	else if(counter[2]>0 && counter[4]>0 && counter[5]>0){
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+		else if(counter[0]>0 && counter[1]>0 && counter[2]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+		}
+        	else if(counter[3]>0 && counter[4]>0 && counter[5]>0){
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+		else
+			console.log("BAD THING. Didnt find almost little straight.")
+	}
+
+	else if(type=="almostbigstraight"){
+       	 	if(counter[0]>0 && counter[1]>0 && counter[2]>0 && counter[4]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+        	else if(counter[0]>0 && counter[1]>0 && counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+        	else if(counter[0]>0 && counter[2]>0 && counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(1, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+        	else if(counter[1]>0 && counter[2]>0 && counter[3]>0 && counter[5]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+        	else if(counter[1]>0 && counter[2]>0 && counter[4]>0 && counter[5]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+        	else if(counter[1]>0 && counter[3]>0 && counter[4]>0 && counter[5]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+			holdPlaces = holdA(6, holdPlaces);
+		}
+		else
+			console.log("BAD THING. Didnt find almost big straight.")
+	}
+
+	else if(type=="microstraight"){
+       	 	if(counter[1]>0 && counter[2]>0){
+			holdPlaces = holdA(2, holdPlaces);
+			holdPlaces = holdA(3, holdPlaces);
+		}
+        	else if(counter[2]>0 && counter[3]>0){
+			holdPlaces = holdA(3, holdPlaces);
+			holdPlaces = holdA(4, holdPlaces);
+		}
+        	else if(counter[3]>0 && counter[4]>0){
+			holdPlaces = holdA(4, holdPlaces);
+			holdPlaces = holdA(5, holdPlaces);
+		}
+		else
+			console.log("BAD THING. Didn't find microstraight.");		
+		
+	}
+
+	return holdPlaces;
+}
+
+//if the computer doesn't have a good move to make after the third roll
+function damageControlChoice(){
+	var sum=0;
+	var i;
+	for(i = 0; i<5; i++){
+		sum += diceValues[i];
+	}
+
+	if(sum>=22 && cIsAvailable[13])
+		cChoice=13;
+	
+	else if(counter[0]==2 && cIsAvailable[0])
+		cChoice=0;
+	
+	else if(counter[1]==2 && cIsAvailable[1])
+		cChoice=1;
+	
+	else if(counter[2]==2 && cIsAvailable[2])
+		cChoice=2;
+
+	else if(counter[0]==1 && cIsAvailable[0])
+		cChoice=0;
+
+	else if(sum>=19 && cIsAvailable[13])
+		cChoice=13;
+
+	else if(cIsAvailable[0])
+		cChoice=0;
+
+	else if(cIsAvailable[1])
+		cChoice=1;
+
+	//Choice
+	else if(cIsAvailable[13] && sum>=17)
+		cChoice=13;
+
+	//4 of a kind
+	else if(cIsAvailable[9])
+		cChoice=9;
+
+	//Yahtzee
+	else if(cIsAvailable[14])
+		cChoice=14;
+
+	//Full House
+	else if(cIsAvailable[10])
+		cChoice=10;
+
+	//Large Straight
+	else if(cIsAvailable[12])
+		cChoice=12;
+
+	//Little Straight
+	else if(cIsAvailable[11])
+		cChoice=11;
+
+	//Three of a Kind
+	else if(cIsAvailable[8])
+		cChoice=8;
+
+	//Choice
+	else if(cIsAvailable[13])
+		cChoice=13;
+
+	else if(cIsAvailable[2])
+		cChoice=2;
+
+	else if(cIsAvailable[3])
+		cChoice=3;
+
+	else if(cIsAvailable[4])
+		cChoice=4;
+
+	else if(cIsAvailable[5])
+		cChoice=5;
+
+	else
+		console.log("BAD THING. No options for computer available?");
+	
+}
+
+//used to toggle the dice hold on and off
+function toggleHold() {
+	if(currentRoll!=0 && !computerTurn){//disables toggle if no dice have been rolled
+		var toggle = doToggle(this.id, this.src, "player");
+		this.src = toggle;
+	}
+}
+
+//switches from red to black dice or vice versa if held
+function doToggle(id, path, choice) {
+	
+	var newPath = path;
+	var pathArray = path.split("/");	//used to figure out if held or not currently
+	var pathSize = pathArray.length;
+	var currFile = pathArray[pathSize-1];
+
+	// currFile will be in two forms:  "X.png" or "Xred.png"
+	var fileName = currFile.split(".");
+
+	// fileName will be an array (size 2) either "X" or "Xred" and "png".
+	var res = fileName[0].match(/red/);
+	var res2 = fileName[0].match(/redpg/);
+
+	if(currentRoll<MAXROLLS){
+		if( res2==null && papaGolevStyle && (choice=="player" || choice==false)){
+			heldValues[id[1]] = false;
+			newPath = defaultPath+fileName[0]+"redpg."+fileName[1];		
+		}
+		else if(papaGolevStyle && choice=="player"){
+			heldValues[id[1]] = true;
+			newPath = defaultPath + "die"+ fileName[0][3] +"."+fileName[1];
+		}
+		else if (res == null && choice=="player") {     						// currently not on HOLD
+			heldValues[id[1]] = true;		
+			newPath = defaultPath+fileName[0]+"red."+fileName[1];
+		} 
+		else if(choice=="player"){
+			heldValues[id[1]] = false;		
+			newPath = defaultPath + "die"+ fileName[0][3] +"."+fileName[1];
+		}
+		else if(res == null && heldValues[id[1]]==false && choice==true){	//this is computer changing values
+			heldValues[id[1]] = true;
+			newPath = defaultPath+fileName[0]+"red."+fileName[1];
+		}
+		else if(res != null && heldValues[id[1]]==true && choice==false){	//this is computer changing values
+			heldValues[id[1]] = false;		
+			newPath = defaultPath + "die"+ fileName[0][3] +"."+fileName[1];
+		}
+	}
+	return newPath;
+}
+
+
+//used to message the user if they are trying to hold all six dice
+function debugHeld() {
+	var holdCount=0;	//counts how many dice are held
+
+	var i;
+	for (i=0; i<heldValues.length; i++) {
+		if(heldValues[i]==true){
+			holdCount+=1;
+		}
+	}
+
+	return holdCount;
+}
+
+//Computes bonus box
+function computeBonus() {
+	document.getElementById("p6").innerHTML = pScore[6];
+	if(pScore[6]>=63){ //adds 35 point bonus if score of Ones thru Sixes slots is equal to or over 63
+		pScore[15]+=35;
+		document.getElementById("p7").innerHTML=35;
+		document.getElementById("p15").innerHTML=pScore[15];	
+	}
+	else{
+		document.getElementById("p7").innerHTML=0;
+	}
+
+	document.getElementById("c6").innerHTML = cScore[6];
+	if(cScore[6]>=63){ //adds 35 point bonus if score of Ones thru Sixes slots is equal to or over 63
+		cScore[15]+=35;
+		document.getElementById("c7").innerHTML=35;
+		document.getElementById("c15").innerHTML=cScore[15];	
+		hitSumCounter+=1;
+	}
+	else{
+		document.getElementById("c7").innerHTML=0;
+	}
+
+}
+
+//End of game calculations
+async function endGame() {
+	totalGames += 1;	//Updates number of games played
+	computerTotalScore+=cScore[15];
+	playerTotalScore+=pScore[15];
+
+	if(cScore[15]>cHighScore)
+		cHighScore = cScore[15];
+	if(pScore[15]>pHighScore)
+		pHighScore = pScore[15];
+
+	await sleep(2000);
+
+	if(pScore[pScore.length-1] > cScore[cScore.length-1]) {//figures out who won
+		alert("You win!");
+		pWins += 1;
+	} 
+	else if(pScore[pScore.length-1] < cScore[cScore.length-1]){
+		alert("Prof. Meowsky wins!");
+		cWins += 1;
+	}
+	else{
+		alert("Tie Game!");
+		pWins += 0.5;
+		cWins += 0.5;
+	}
+
+	updateWins();
+	load("play"); //loads new game
+}
+
+function endTest(){
+		var sum=0;
+		var avg;
+		var std;
+		var stdsum=0;
+		var z;
+		var avgComputerScore = [];
+		for(z=0; z<compTesterScores.length; z++){
+			console.log(compTesterScores[z]);
+			sum+=compTesterScores[z];
+		}
+		avg = sum / totalGames;
+		for(z=0; z<compTesterScores.length; z++){
+			stdsum += Math.pow((compTesterScores[z]-avg),2); 	
+		}
+		std = Math.sqrt(stdsum/totalGames);
+		var j;
+		for(j=0; j<15; j++){
+			avgComputerScore[j]= cTotalScore[j]/totalGames;
+		}
+		console.log("Average Scores for Each Category:");
+		console.log(avgComputerScore);
+		console.log("Total Games: " + totalGames);
+		console.log("Average: " + avg);
+		console.log("Standard Deviation: " +std);
+		console.log("Hit Sum Counter: " + hitSumCounter);
+		console.log("Meowtzee Counter: " + meowtzeeCounter);
+
+}
+
+//used for computer making decision
+function isTwoOfAKind(){
+	var q;
+	for(q=0; q<6; q++){
+		if(counter[q]==2)
+			return true;
+	}
+	return false;
+}
+
+function isTwoPair(){
+	var firstPair=false;
+	var q;
+	for(q=0; q<6; q++){
+		if(counter[q]==2 && firstPair==false)
+			firstPair=true;
+		else if(counter[q]==2 && firstPair==true)
+			return true;
+	}
+	return false;
+}
+
+function isThreeOfAKind(){
+	var q;
+	for(q=0; q<6; q++)
+		if(counter[q]>=3)
+			return true;
+	return false;
+}
+
+function isFourOfAKind(){
+	var q;
+	for(var q=0; q<6; q++)
+		if(counter[q]>=4)
+			return true;
+	return false;
+}
+
+function isFullHouse(){
+	var foundTwo=false;
+	var foundThree=false;
+	var q;
+	for(q=0; q<6; q++){
+		if(counter[q]==2)
+			foundTwo=true;
+		else if(counter[q]==3)
+			foundThree=true;
+	}	
+	if(foundTwo && foundThree)
+		return true;
+	else
+		return false;
+}
+
+function isMiniStraightInMiddle(){
+	if(counter[1]>0 && counter[2]>0 && counter[3]>0)
+		return true;
+	else if(counter[2]>0 && counter[3]>0 && counter[4]>0)
+		return true;
+	else 
+		return false;
+}
+
+function isAlmostLittleStraight(){
+	if(counter[0]>0 && counter[1]>0 && counter[2]>0)
+		return true;
+	else if(counter[0]>0 && counter[1]>0 && counter[3]>0)
+		return true;
+	else if(counter[0]>0 && counter[2]>0 && counter[3]>0)
+		return true;
+	else if(counter[1]>0 && counter[2]>0 && counter[4]>0)
+		return true;
+	else if(counter[1]>0 && counter[3]>0 && counter[4]>0)
+		return true;
+	else if(counter[2]>0 && counter[3]>0 && counter[5]>0)
+		return true;
+	else if(counter[2]>0 && counter[4]>0 && counter[5]>0)
+		return true;
+	else if(counter[3]>0 && counter[4]>0 && counter[5]>0)
+		return true;
+	else 
+		return false;
+}
+
+function isAlmostBigStraight(){
+	if(counter[0]>0 && counter[1]>0 && counter[2]>0 && counter[4]>0)
+		return true;
+	else if(counter[0]>0 && counter[1]>0 && counter[3]>0 && counter[4]>0)
+		return true;
+	else if(counter[0]>0 && counter[2]>0 && counter[3]>0 && counter[4]>0)
+		return true;
+	else if(counter[1]>0 && counter[2]>0 && counter[3]>0 && counter[5]>0)
+		return true;
+	else if(counter[1]>0 && counter[2]>0 && counter[4]>0 && counter[5]>0)
+		return true;
+	else if(counter[1]>0 && counter[3]>0 && counter[4]>0 && counter[5]>0)
+		return true;
+	else
+		return false;
+}
+
+function isMicroStraight(){
+	if(counter[1]>0 && counter[2]>0)
+		return true;
+	else if(counter[2]>0 && counter[3]>0)
+		return true;
+	else if(counter[3]>0 && counter[4]>0)
+		return true;
+	else
+		return false;
+}
+
+function isLittleStraight(){
+	if(counter[0]>0 && counter[1]>0 && counter[2]>0 && counter[3]>0)
+		return true;
+	else if(counter[1]>0 && counter[2]>0 && counter[3]>0 && counter[4]>0)
+		return true;
+	else if(counter[2]>0 && counter[3]>0 && counter[4]>0 && counter[5]>0)
+		return true;
+	else
+		return false;
+}
+
+function isBigStraight(){
+	if(counter[0]==1 && counter[1]==1 && counter[2]==1 && counter[3]==1 && counter[4]==1)
+		return true;
+	else if(counter[1]==1 && counter[2]==1 && counter[3]==1 && counter[4]==1 && counter[5]==1)
+		return true;
+	else
+		return false;
+
+}
+
+function isYahtzee(){
+	var q;
+	for(q=0; q<6; q++)
+		if(counter[q]==5)
+			return true;
+	return false;
+}
+
+function isSecondPlayerYahtzee(){
+	if(isYahtzee() && !pIsAvailable[14])
+		return true;
+	else
+		return false;
+}
+
+function isSecondComputerYahtzee(){
+	if(isYahtzee() && !cIsAvailable[14])
+		return true;
+	else
+		return false;
+}
+
+function diceCounter(){
+	counter = [0, 0, 0, 0, 0, 0];
+	var c;
+	for(c=0; c<diceValues.length; c++){
+		counter[diceValues[c]-1]++;
+	}
+}
+
+function updateWins() {
+
+	var cAvg = 0;
+	var pAvg = 0;
+	var cPercent = 0;
+	var pPercent = 0;
+
+	if (totalGames > 0) {
+		cPercent = cWins/totalGames*100;
+		pPercent = pWins/totalGames*100;
+		cAvg = computerTotalScore/totalGames;
+		pAvg = playerTotalScore/totalGames;
+	}
+
+	document.getElementById("cWins").innerHTML = cWins;
+	document.getElementById("pWins").innerHTML = pWins;
+	document.getElementById("cAvg").innerHTML = cAvg;
+	document.getElementById("pAvg").innerHTML = pAvg;
+	document.getElementById("cHigh").innerHTML = cHighScore;
+	document.getElementById("pHigh").innerHTML = pHighScore;
+}
+//<BODY ONLOAD="load()">
+//<BODY ONLOAD="StartGameTester()">
+
+</SCRIPT>
+</HEAD>
+<h1>Meowtzee</h1>
+<BODY ONLOAD="load('play')">
+
+<TABLE ID="Dice">
+<TR>
+	<TD align="center"><img id="d0" SRC="Images/die0.png"></TD>
+	<TD align="center"><img id="d1" SRC="Images/die0.png"></TD>
+	<TD align="center"><img id="d2" SRC="Images/die0.png"></TD>
+	<TD align="center"><img id="d3" SRC="Images/die0.png"></TD>
+	<TD align="center"><img id="d4" SRC="Images/die0.png"></TD>
+</TR>
+</TABLE>
+
+<P ID="Roll">Roll</P>
+
+<TABLE ID="ScoreCard">
+<TR>     
+	<TH></TH>
+	<TH ID="prof">Prof. Meowsky</TH>		<!-- Computer -->
+	<TH ID="thePlayer">Player</TH>     <!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b0">Ones</TD>
+	<TD ID="c0"></TD>		<!-- Computer -->
+	<TD ID="p0"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b1">Twos</TD>
+	<TD ID="c1"></TD>		<!-- Computer -->
+	<TD ID="p1"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b2">Threes</TD>
+	<TD ID="c2"></TD>		<!-- Computer -->
+	<TD ID="p2"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b3">Fours</TD>
+	<TD ID="c3"></TD>		<!-- Computer -->
+	<TD ID="p3"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b4">Fives</TD>
+	<TD ID="c4"></TD>		<!-- Computer -->
+	<TD ID="p4"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b5">Sixes</TD>
+	<TD ID="c5"></TD>		<!-- Computer -->
+	<TD ID="p5"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b6">Sum</TD>
+	<TD ID="c6"></TD>		<!-- Computer -->
+	<TD ID="p6"></TD>			<!-- Player -->
+</TR>
+<TR>
+        <TD ID="b7">Bonus</TD>
+        <TD ID="c7"></TD>               <!-- Computer -->
+        <TD ID="p7"></TD>                       <!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b8">3 of a Kind</TD>
+	<TD ID="c8"></TD>		<!-- Computer -->
+	<TD ID="p8"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b9">4 of a Kind</TD>
+	<TD ID="c9"></TD>		<!-- Computer -->
+	<TD ID="p9"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b10">Full House</TD>
+	<TD ID="c10"></TD>		<!-- Computer -->
+	<TD ID="p10"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b11">Little Straight</TD>
+	<TD ID="c11"></TD>		<!-- Computer -->
+	<TD ID="p11"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b12">Big Straight</TD>
+	<TD ID="c12"></TD>		<!-- Computer -->
+	<TD ID="p12"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b13">Chance</TD>
+	<TD ID="c13"></TD>		<!-- Computer -->
+	<TD ID="p13"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b14">Meowtzee</TD>
+	<TD ID="c14"></TD>		<!-- Computer -->
+	<TD ID="p14"></TD>			<!-- Player -->
+</TR>
+<TR>     
+	<TD ID="b15">Total</TD>
+	<TD ID="c15"></TD>		<!-- Computer -->
+	<TD ID="p15"></TD>			<!-- Player -->
+</TR>
+
+</TABLE>
+
+<BR></BR>
+<!-- <P ID="gameMessage">Prof. Meowsky says GLHF</P> -->
+<BR></BR>
+
+<TABLE ID="WinLoss" width=50%>
+<TR>     
+	<TH>Prof Wins</TH>
+	<TH>Your Wins</TH>
+	<TH>Prof Average</TH>
+	<TH>Your Average</TH>
+	<TH>Prof High Score</TH>
+	<TH>Your High Score</TH>
+</TR>
+<TR>     
+	<TD ID="cWins"></TD>
+	<TD ID="pWins"></TD>		
+	<TD ID="cAvg"></TD>
+	<TD ID="pAvg"></TD>		
+	<TD ID="cHigh"></TD>
+	<TD ID="pHigh"></TD>		
+</TR>
+</TABLE>
+</BODY>
+</HTML>

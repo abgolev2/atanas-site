@@ -17,7 +17,7 @@ table#Words {
 table#Words th, td {
 	border: 0.5px solid black;
 	border-radius: 20px;
-	background-color: #EOEOEO;
+	background-color: #E7E8DA;
 }
 
 table#Words td {
@@ -28,7 +28,7 @@ table#Words td {
 	font-weight: bold;
 	width: 24%;
 	display: inline-block;
-	background-color: #E0E0E0;
+	background-color: #E7E8DA;
 }
 
 table#Words .content {
@@ -152,7 +152,7 @@ function wordClick(){
 		canSubmit = false;
 	}
 	else{
-		document.getElementById(cellId).style.backgroundColor = "#E0E0E0";
+		document.getElementById(cellId).style.backgroundColor = "#E7E8DA";
 		document.getElementById(cellId).style.color = "#000000";
 		selectionMatrix[cellRow][cellCol] = false;
 		wordsSelected--;
@@ -200,7 +200,7 @@ function clearAll(){
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
-			whichWord.style.backgroundColor = "#E0E0E0";
+			whichWord.style.backgroundColor = "#E7E8DA";
 			whichWord.style.color = "#000000";
 		}
 	}

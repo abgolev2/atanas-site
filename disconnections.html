@@ -17,6 +17,7 @@ table#Words {
 table#Words th, td {
 	border: 0.5px solid black;
 	border-radius: 20px;
+	background-color: #EOEOEO;
 }
 
 table#Words td {
@@ -135,7 +136,8 @@ function wordClick(){
 	if(selectionMatrix[cellRow][cellCol]==false){
 		if(wordsSelected == 4)
 			return;
-		document.getElementById(cellId).style.backgroundColor = "#98DEE6";
+		document.getElementById(cellId).style.backgroundColor = "#606060";
+		document.getElementById(cellId).style.color = "#FFFFFF";
 		selectionMatrix[cellRow][cellCol] = true;
 		wordsSelected++;
 		console.log("Words selected: " + wordsSelected);
@@ -144,7 +146,8 @@ function wordClick(){
 		canSubmit = false;
 	}
 	else{
-		document.getElementById(cellId).style.backgroundColor = "#FFFFFF";
+		document.getElementById(cellId).style.backgroundColor = "#E0E0E0";
+		document.getElementById(cellId).style.color = "#000000";
 		selectionMatrix[cellRow][cellCol] = false;
 		wordsSelected--;
 		console.log("Words selected: " + wordsSelected);
@@ -191,7 +194,8 @@ function clearAll(){
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
-			whichWord.style.backgroundColor = "#FFFFFF";
+			whichWord.style.backgroundColor = "#E0E0E0";
+			whichWord.style.color = "#000000";
 		}
 	}
 	setClearAllEnabled($false);

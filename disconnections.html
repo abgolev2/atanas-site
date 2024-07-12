@@ -48,11 +48,6 @@ table#Mistakes center {
 	margin-left: auto;
 	margin-right: auto;
 }
-	
-.wrapper {
-	text-align: center;
-	display: inline-block;
-}
 
 h1 {
 	font-size: 2em;
@@ -60,6 +55,11 @@ h1 {
 	text-align: center;
 }
 
+#wrapper {
+	width:100%;
+	text-align: center;
+}
+	
 .button {
 	border: none;
 	color: white;
@@ -72,6 +72,7 @@ h1 {
 	cursor: pointer;
 	background-color: #04AA6D;
 	position: absolute;
+	display: inline-block;
 }
 .button:disabled {
 	opacity: 0.33;
@@ -720,10 +721,10 @@ function updateWins() {
 </TABLE>
 
 <br>
-<div class="wrapper">
-	<button class="button button" id="Submit">Submit</button>
-	<button class="button button" id="ClearAll">Deselect all</button>
-	<button class="button button" id="Shuffle">Shuffle</button>
+<div id="wrapper">
+	<div class="button"><button class="button button" id="Submit">Submit</button></div>
+	<div class="button"><button class="button button" id="ClearAll">Deselect all</button></div>
+	<div class="button"><button class="button button" id="Shuffle">Shuffle</button></div>
 </div>
 	
 </BODY>

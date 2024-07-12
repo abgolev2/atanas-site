@@ -42,6 +42,11 @@ table#Words center {
 	margin-right: auto;
 }
 
+table#Words .content {
+	aspect-ratio: 1/1;
+	top: -50%;
+}
+
 table#Mistakes{
 	width: 70%;
 	cursor: default;
@@ -185,11 +190,22 @@ function wordClick(){
 
 function rowCleared(){
 	console.log("row cleared woots");
+	alert("Correct");
+	//shuffle row up
+	//change color appropriately
 }
 
 function submitWords(){
 	console.log("we submitted woots");
 	//we can now go through the boolean matrix looking for num true / false
+	var isCorrect = false;
+	if(isCorrect){
+		rowCleared();
+	}
+	else{
+		guessesLeft--;
+		document.getElementById("mistake"+guessesLeft).src = "";
+	}
 }
 
 function clickShuffle(){

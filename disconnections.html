@@ -75,12 +75,7 @@ h1 {
 	cursor: pointer;
 	background-color: #04AA6D;
 }
-.button1 {
-	disabled: true;
-}
-.button2 {
-	disabled: false;
-}
+
 </STYLE>
 
 <SCRIPT>
@@ -124,8 +119,10 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
-	document.getElementById("Submit").addEventListener("click", submitWords);
-	document.getElementById("ClearAll").addEventListener("click", clearAll);
+	//document.getElementById("Submit").addEventListener("click", submitWords);
+	document.getElementById("Submit").disabled = true;
+	//document.getElementById("ClearAll").addEventListener("click", clearAll);
+	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 	
 }
@@ -153,9 +150,7 @@ function wordClick(){
 		canSubmit = false;
 	}
 
-	enableButtons();
-	//set submit button to enabled if 4 words have been selected
-	
+	//set submit button to enabled if 4 words have been selected	
 	if(wordsSelected > 0){
 		document.getElementById("Submit").disabled = false;
 		//document.getElementById("ClearAll").addEventListener("click", clearAll);
@@ -699,16 +694,16 @@ function updateWins() {
 <TABLE ID="Mistakes">
 <TR>
 	<TH>Mistakes remaining: </TH>
-	<TD ID="mistake0">x </TD>
-	<TD ID="mistake1">x </TD>
-	<TD ID="mistake2">x </TD>
-	<TD ID="mistake3">x </TD>
+	<TD ID="mistake0">1 </TD>
+	<TD ID="mistake1">2 </TD>
+	<TD ID="mistake2">3 </TD>
+	<TD ID="mistake3">4 </TD>
 </TR>
 </TABLE>
 
-<button class="button button1" id="Submit">Submit</button>
-<button class="button button1" id="ClearAll">Deselect all</button>
-<button class="button button2" id="Shuffle">Shuffle</button>
+<button class="button button" id="Submit">Submit</button>
+<button class="button button" id="ClearAll">Deselect all</button>
+<button class="button button" id="Shuffle">Shuffle</button>
 	
 </BODY>
 </HTML>

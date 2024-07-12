@@ -11,7 +11,7 @@
 table#Words {
 	width: 100%;
 	cursor: default;
-	table-layout: fixed;
+	border-spacing: 20px 20px;
 }
 
 table#Words th, td {
@@ -20,8 +20,6 @@ table#Words th, td {
 }
 
 table#Words tr {
-	#position: absolute;
-	#top: 50%;
 	vertical-align: middle;
 }
 
@@ -32,9 +30,8 @@ table#Words td {
 	font-size: 36px;
 	font-weight: 1000;
 	width: 24.5%;
-	display: inline-block;
+	display: table-cell;
 	background-color: #E7E8DA;
-	top: -50%;
 }
 
 table#Words center {
@@ -42,9 +39,16 @@ table#Words center {
 	margin-right: auto;
 }
 
+td:after {
+	content:'';
+	display:block;
+	margin-top:100%;
+}
+
 table#Words .content {
 	aspect-ratio: 1/1;
-	top: -50%;
+	vertical-align:bottom;
+	position:absolute;
 }
 
 table#Mistakes{
@@ -288,10 +292,10 @@ function getRandomInt(min, max) {
 <TABLE ID="Mistakes">
 <TR>
 	<TH>Guesses left: </TH>
-	<TD align="center"><img id="mistake0" SRC="images/jp2.jpg"></TD>
-	<TD align="center"><img id="mistake1" SRC="images/jp2.jpg"></TD>
-	<TD align="center"><img id="mistake2" SRC="images/jp2.jpg"></TD>
-	<TD align="center"><img id="mistake3" SRC="images/jp2.jpg"></TD>
+	<TH align="center"><img id="mistake0" SRC="images/jp2.jpg"></TH>
+	<TH align="center"><img id="mistake1" SRC="images/jp2.jpg"></TH>
+	<TH align="center"><img id="mistake2" SRC="images/jp2.jpg"></TH>
+	<TH align="center"><img id="mistake3" SRC="images/jp2.jpg"></TH>
 </TR>
 </TABLE>
 </div>

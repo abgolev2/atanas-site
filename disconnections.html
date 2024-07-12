@@ -83,6 +83,10 @@ h1 {
 	pointer-events: none;
 }
 
+td {
+  vertical-align: middle;
+}
+
 </STYLE>
 
 <SCRIPT>
@@ -190,6 +194,15 @@ function clickShuffle(){
 }
 
 function clearAll(){
+	wordsSelected=0;
+	for(i = 0 ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			document.getElementById(cellId).style.backgroundColor = "#FFFFFF";
+			whichWord = document.getElementById("word"+i+j);
+			whichWord.innerHTML = wordMatrix[i][j];
+			whichWord.addEventListener("click", wordClick);
+		}
+	}
 	console.log("we cleared everything woots");
 }
 

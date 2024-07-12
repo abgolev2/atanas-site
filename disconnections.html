@@ -150,23 +150,23 @@ function wordClick(){
 		canSubmit = false;
 	}
 
-	//set submit button to enabled if 4 words have been selected	
+	//set buttons to enabled/disabled
 	if(wordsSelected > 0){
 		document.getElementById("Submit").disabled = false;
-		//document.getElementById("ClearAll").addEventListener("click", clearAll);
+		document.getElementById("ClearAll").addEventListener("click", clearAll);
 	}
 	else{
 		document.getElementById("Submit").disabled = true;
-		//document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	}
 	
 	if(wordsSelected == 4){
 		document.getElementById("Submit").disabled = false;
-		//document.getElementById("Submit").addEventListener("click", submitWords);
+		document.getElementById("Submit").addEventListener("click", submitWords);
 	}
 	else{
 		document.getElementById("Submit").disabled = true;
-		//document.getElementById("Submit").removeEventListener("click", submitWords);
+		document.getElementById("Submit").removeEventListener("click", submitWords);
 	}
 		
 }

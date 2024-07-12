@@ -158,20 +158,20 @@ function wordClick(){
 	
 	if(wordsSelected > 0){
 		document.getElementById("Submit").disabled = false;
-		#document.getElementById("ClearAll").addEventListener("click", clearAll);
+		//document.getElementById("ClearAll").addEventListener("click", clearAll);
 	}
 	else{
 		document.getElementById("Submit").disabled = true;
-		#document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		//document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	}
 	
 	if(wordsSelected == 4){
 		document.getElementById("Submit").disabled = false;
-		#document.getElementById("Submit").addEventListener("click", submitWords);
+		//document.getElementById("Submit").addEventListener("click", submitWords);
 	}
 	else{
 		document.getElementById("Submit").disabled = true;
-		#document.getElementById("Submit").removeEventListener("click", submitWords);
+		//document.getElementById("Submit").removeEventListener("click", submitWords);
 	}
 		
 }
@@ -698,7 +698,7 @@ function updateWins() {
 
 <TABLE ID="Mistakes">
 <TR>
-	<TD>Mistakes remaining: </TD>
+	<TH>Mistakes remaining: </TH>
 	<TD ID="mistake0">x </TD>
 	<TD ID="mistake1">x </TD>
 	<TD ID="mistake2">x </TD>

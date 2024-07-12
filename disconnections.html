@@ -115,9 +115,9 @@ function load() {
 	//enables clicks and sets words
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
-			whichScore = document.getElementById("word"+i+j);
-			whichScore.innerHTML = wordMatrix[i][j];
-			whichScore.addEventListener("click", wordClick);
+			whichWord = document.getElementById("word"+i+j);
+			whichWord.innerHTML = wordMatrix[i][j];
+			whichWord.addEventListener("click", wordClick);
 		}
 	}
 	//document.getElementById("Submit").addEventListener("click", ShowMessage);
@@ -678,15 +678,8 @@ function updateWins() {
 </TR>
 </TABLE>
 
-<button class="button submit">Submit</button>
-<button class="button shuffle">Shuffle</button>
-	
-<TABLE ID="Buttons">
-<TR>
-	<TD ID="Submit">Submit</TD>
-	<TD ID="Shuffle">Shuffle</TD>
-</TR>
-</TABLE>
+<button class="button submit" id="Submit">Submit</button>
+<button class="button shuffle" id="Shuffle">Shuffle</button>
 	
 </BODY>
 </HTML>

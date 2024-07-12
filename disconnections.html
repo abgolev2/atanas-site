@@ -41,29 +41,19 @@ h1 {
 </STYLE>
 
 <SCRIPT>
-var day;
-var defaultPath = "images/";
+var day = 0;
+var guessesLeft = 4;
+var wordsSelected = 0;
+var isSelected = false;
+var defaultImagePath = "images/";
 var totalGames = 0; 
-var whichTurn = 0;		
-var cWins = 0;								// computer win total
-var pWins = 0;								// player win total
-var diceValues = [0, 0, 0, 0, 0];					// values of dice
-var heldValues = [false, false, false, false, false]; 			// is a die held?
-var counter = [0, 0, 0, 0, 0, 0];					// number of each die face on board
-
-//16 categories total
-//1s 2s 3s 4s 5s 6s sum bonus 3kind 4kind fullhouse lilstr8 bigstr8 chance meowtzee total
-var cScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//computer score
-var pScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//player score
-var cIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
-var pIsAvailable = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, false];
-var computerTurn = false;
-var computerTotalScore = 0;
-var playerTotalScore = 0;
-var cHighScore = 0;
-var pHighScore = 0;
-var cChoice = -1; //which choice computer makes
-var cGoodNumber = -1; //which number a computer has for purposes of four of a kind or three of a kind
+var canSubmit = false;
+var wordMatrix = [
+	["ONE", "TWO, "THREE", "FOUR"],
+	["FIVE", "SIX", "SEVEN", "EIGHT"],
+	["NINE", "TEN, "ELEVEN", "TWELVE"],
+	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN"]
+]
 
 //Global counters		
 var currentTurn = 0;					
@@ -89,6 +79,15 @@ function load() {
 	document.getElementById("word31").innerHTML = "FOURTEEN";
 	document.getElementById("word32").innerHTML = "FIFTEEN";
 	document.getElementById("word33").innerHTML = "SIXTEEN";
+	for(i = 0 ; i < 4; i++){	//enables clicks
+		for(j = 0; j < 4; j++){
+			whichScore = document.getElementById("word"+i+j);
+			whichScore.addEventListener("click", wordClick);
+		}
+	}
+}
+
+function wordClick(){
 }
 
 //Starts up a new game of meowtzee when the New Game button is clicked

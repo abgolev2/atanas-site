@@ -102,7 +102,7 @@ function load() {
 			whichScore.addEventListener("click", wordClick);
 		}
 	}
-	document.getElementById("Submit").addEventListener("click", ShowMessage);
+	//document.getElementById("Submit").addEventListener("click", ShowMessage);
 	document.getElementById("Shuffle").addEventListener("click", ShowMessage);
 	//document.getElementById("Clear all").addEventListener("click", ShowMessage);
 	
@@ -129,7 +129,7 @@ function wordClick(){
 		canSubmit = false;
 	}
 
-	#set submit button to enabled if 4 words have been selected
+	//set submit button to enabled if 4 words have been selected
 	if(wordsSelected == 4){
 		document.getElementById("Submit").addEventListener("click", submitWords);
 	}

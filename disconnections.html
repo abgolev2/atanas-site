@@ -75,8 +75,12 @@ h1 {
 	cursor: pointer;
 	background-color: #04AA6D;
 }
-.submit
-.shuffle
+.button1 {
+	disabled: true;
+}
+.button2 {
+	disabled: false;
+}
 </STYLE>
 
 <SCRIPT>
@@ -120,9 +124,9 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
-	//document.getElementById("Submit").addEventListener("click", ShowMessage);
-	document.getElementById("Shuffle").addEventListener("click", ShowMessage);
-	//document.getElementById("Clear all").addEventListener("click", ShowMessage);
+	document.getElementById("Submit").addEventListener("click", submitWords);
+	document.getElementById("ClearAll").addEventListener("click", clearAll);
+	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 	
 }
 
@@ -149,9 +153,25 @@ function wordClick(){
 		canSubmit = false;
 	}
 
+	enableButtons();
 	//set submit button to enabled if 4 words have been selected
+	
+	if(wordsSelected > 0){
+		document.getElementById("Submit").disabled = false;
+		#document.getElementById("ClearAll").addEventListener("click", clearAll);
+	}
+	else{
+		document.getElementById("Submit").disabled = true;
+		#document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	}
+	
 	if(wordsSelected == 4){
-		document.getElementById("Submit").addEventListener("click", submitWords);
+		document.getElementById("Submit").disabled = false;
+		#document.getElementById("Submit").addEventListener("click", submitWords);
+	}
+	else{
+		document.getElementById("Submit").disabled = true;
+		#document.getElementById("Submit").removeEventListener("click", submitWords);
 	}
 		
 }
@@ -163,6 +183,14 @@ function rowCleared(){
 function submitWords(){
 	console.log("we submitted woots");
 	//we can now go through the boolean matrix looking for num true / false
+}
+
+function clickShuffle(){
+	console.log("we shuffled woots");
+}
+
+function clearAll(){
+	console.log("we cleared everything woots");
 }
 
 //Starts up a new game of meowtzee when the New Game button is clicked
@@ -678,8 +706,9 @@ function updateWins() {
 </TR>
 </TABLE>
 
-<button class="button submit" id="Submit">Submit</button>
-<button class="button shuffle" id="Shuffle">Shuffle</button>
+<button class="button button1" id="Submit">Submit</button>
+<button class="button button1" id="ClearAll">Deselect all</button>
+<button class="button button2" id="Shuffle">Shuffle</button>
 	
 </BODY>
 </HTML>

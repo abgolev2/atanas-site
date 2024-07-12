@@ -69,25 +69,29 @@ var isSelected = false;
 var defaultImagePath = "images/";
 var totalGames = 0; 
 var canSubmit = false;
+var rowsCleared = 0;
+
 var wordMatrix = [
 	["ONE", "TWO", "THREE", "FOUR"],
 	["FIVE", "SIX", "SEVEN", "EIGHT"],
 	["NINE", "TEN", "ELEVEN", "TWELVE"],
 	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN"]
 ]
-var selectMatrix = [
+	
+var selectionMatrix = [
 	[false, false, false, false],
 	[false, false, false, false],
 	[false, false, false, false],
 	[false, false, false, false]
 ]
-
-//Global counters		
-var currentTurn = 0;					
-var maxTurns = 13;	
-var currentRoll = 0;			
-var MAXROLLS = 3;
-
+	
+var associations = [
+	"Drugs",
+	"Palindromes",
+	"Mother",
+	"Cheetah"
+]
+	
 function load() {
 	alert("Welcome to Disconnections");
 	//enables clicks and sets words
@@ -99,14 +103,44 @@ function load() {
 		}
 	}
 	document.getElementById("Submit").addEventListener("click", ShowMessage);
-	document.getElementById("Reshuffle").addEventListener("click", ShowMessage);
-	//document.getElementById("Reshuffle").addEventListener("click", ShowMessage);
+	document.getElementById("Shuffle").addEventListener("click", ShowMessage);
+	//document.getElementById("Clear all").addEventListener("click", ShowMessage);
 	
 }
 
 function wordClick(){
-	var cellClicked = this.id.substring(4,6);
-	document.getElementById("word"+slot).style.backgroundColor = "#7FFFD4";
+	var cellRow = this.id.substring(4,5);
+	var cellCol = this.id.substring(5,6);
+	var cellId = "word" + cellRow + cellCol;
+	if(selectionMatrix[cellRow][cellCol]==false){
+		if(wordsSelected == 4)
+			return;
+		document.getElementById(cellId).style.backgroundColor = "#7FFFD4";
+		selectionMatrix[cellRow][cellCol] = true;
+		wordsSelected++;
+		if(wordsSelected == 4)
+			canSubmit = true;
+		canSubmit = false;
+	}
+	else{
+		document.getElementById(cellId).style.backgroundColor = "#FFFFFF";
+		selectionMatrix[cellRow][cellCol] = false;
+		wordsSelected--;
+		canSubmit = false;
+	}
+
+	#set submit button to enabled if 4 words have been selected
+	if(wordsSelected == 4){
+		document.getElementById("Submit").addEventListener("click", submitWords);
+	}
+		
+}
+
+function rowCleared(){
+}
+
+function submitWords(){
+	//we can now go through the boolean matrix looking for num true / false
 }
 
 //Starts up a new game of meowtzee when the New Game button is clicked

@@ -1,14 +1,10 @@
 <!DOCTYPE>
 <!--
 	Created by Atanas Golev.
-	Inspired by the Mehtzee project in Professor Paul Linton's Spring 2017 CS316 Web Development course at the University of Kentucky.
-        Original HTML code and skeleton structure of neccessary JavaScript functions were provided by Professor Linton.
-        The logic behind the Optimal Yahtzee Strategy used for the decision tree was first developed by Tom Verhoeff at the Eidenhoven University of Technology.	
 -->
 
-
 <HTML>
-<TITLE>Meowtzee</TITLE>
+<TITLE>Disconnections</TITLE>
 <HEAD>
 <STYLE>
 
@@ -65,7 +61,7 @@ h1 {
 </STYLE>
 
 <SCRIPT>
-
+var day;
 var defaultPath = "images/";
 var totalGames = 0; 
 var whichTurn = 0;		
@@ -95,45 +91,24 @@ var maxTurns = 13;
 var currentRoll = 0;			
 var MAXROLLS = 3;
 
-//Used for Testing AI
-var compTesterScores = [];
-var compTesterAverage = 0;
-var TESTERGAMES = 250;	
-var hitSumCounter = 0;		//used for testing mode
-var meowtzeeCounter = 0;	//used for testing mode
-var cTotalScore  = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];	//used for testing mode
-
-//Used for inverted dice selection
-var papaGolevStyle = false;
-
-//Loads back to the start of a new game, once the previous game has been completed
-function load(testOrPlay) {
-	if(testOrPlay=="test"){
-		StartGameTester();	
-	}
-	else{
-		document.getElementById("Roll").onclick=noClick;	//disable dice roll after previous game ends
-		document.getElementById("Roll").innerHTML="Roll";
-		document.getElementById("Roll").style.color = "black";
-
-		if(totalGames==0){	//asks user for name just the very first game
-			var playerName = prompt("Enter player name:", "Player 1");
-			if(playerName!=null){ //set player name
-				document.getElementById("thePlayer").innerHTML = playerName.substring(0,20);
-			}
-			alert("Click Roll to start new game. \n\nAfter that, select any dice you wish to hold and click Roll again to reroll or click on any of the scoreboard boxes on the right hand side at any time to enter a score. \n\nYou can also click on the box names on the left hand side or on Professor Meowsky for hints.")
-		}
-
-		document.getElementById("prof").addEventListener("click", ShowMessage);
-		document.getElementById("prof").style.color = "SteelBlue";
-	
-		var i;
-		for(i=0; i<16; i++){
-			document.getElementById("b"+i).addEventListener("click", ShowMessage);
-			document.getElementById("b"+i).style.color = "SteelBlue";
-		}
-		StartGame(); //If there is just one dice clicking mode instead of two
-	}
+function load() {
+	alert("Welcome to Disconnections")
+	document.getElementById("word00").innerHTML = "ONE";
+	document.getElementById("word01").innerHTML = "TWO";
+	document.getElementById("word02").innerHTML = "THREE";
+	document.getElementById("word03").innerHTML = "FOUR";
+	document.getElementById("word10").innerHTML = "FIVE";
+	document.getElementById("word11").innerHTML = "SIX";
+	document.getElementById("word12").innerHTML = "SEVEN";
+	document.getElementById("word13").innerHTML = "EIGHT";
+	document.getElementById("word20").innerHTML = "NINE";
+	document.getElementById("word21").innerHTML = "TEN";
+	document.getElementById("word22").innerHTML = "ELEVEN";
+	document.getElementById("word23").innerHTML = "TWELVE";
+	document.getElementById("word30").innerHTML = "THIRTEEN";
+	document.getElementById("word31").innerHTML = "FOURTEEN";
+	document.getElementById("word32").innerHTML = "FIFTEEN";
+	document.getElementById("word33").innerHTML = "SIXTEEN";
 }
 
 //Starts up a new game of meowtzee when the New Game button is clicked
@@ -2026,132 +2001,37 @@ function updateWins() {
 //<BODY ONLOAD="StartGameTester()">
 
 </SCRIPT>
+	
 </HEAD>
-<h1>Meowtzee</h1>
-<BODY ONLOAD="load('play')">
+<h1>DISCONNECTIONS</h1>
+<BODY ONLOAD="load()">
 
 <TABLE ID="Dice">
 <TR>
-	<TD align="center"><img id="d0" SRC="Images/die0.png"></TD>
-	<TD align="center"><img id="d1" SRC="Images/die0.png"></TD>
-	<TD align="center"><img id="d2" SRC="Images/die0.png"></TD>
-	<TD align="center"><img id="d3" SRC="Images/die0.png"></TD>
-	<TD align="center"><img id="d4" SRC="Images/die0.png"></TD>
+	<TD ID="word00"></TD>
+	<TD ID="word01"></TD>
+	<TD ID="word02"></TD>
+	<TD ID="word03"></TD>
+</TR>
+	<TD ID="word10"></TD>
+	<TD ID="word11"></TD>
+	<TD ID="word12"></TD>
+	<TD ID="word13"></TD>
+</TR>
+	<TD ID="word20"></TD>
+	<TD ID="word21"></TD>
+	<TD ID="word22"></TD>
+	<TD ID="word23"></TD>
+</TR>
+	<TD ID="word30"></TD>
+	<TD ID="word31"></TD>
+	<TD ID="word32"></TD>
+	<TD ID="word33"></TD>
 </TR>
 </TABLE>
 
-<P ID="Roll">Roll</P>
+<P ID="Submit">Submit</P>
+<P ID="Reshuffle">Reshuffle</P>
 
-<TABLE ID="ScoreCard">
-<TR>     
-	<TH></TH>
-	<TH ID="prof">Prof. Meowsky</TH>		<!-- Computer -->
-	<TH ID="thePlayer">Player</TH>     <!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b0">Ones</TD>
-	<TD ID="c0"></TD>		<!-- Computer -->
-	<TD ID="p0"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b1">Twos</TD>
-	<TD ID="c1"></TD>		<!-- Computer -->
-	<TD ID="p1"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b2">Threes</TD>
-	<TD ID="c2"></TD>		<!-- Computer -->
-	<TD ID="p2"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b3">Fours</TD>
-	<TD ID="c3"></TD>		<!-- Computer -->
-	<TD ID="p3"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b4">Fives</TD>
-	<TD ID="c4"></TD>		<!-- Computer -->
-	<TD ID="p4"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b5">Sixes</TD>
-	<TD ID="c5"></TD>		<!-- Computer -->
-	<TD ID="p5"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b6">Sum</TD>
-	<TD ID="c6"></TD>		<!-- Computer -->
-	<TD ID="p6"></TD>			<!-- Player -->
-</TR>
-<TR>
-        <TD ID="b7">Bonus</TD>
-        <TD ID="c7"></TD>               <!-- Computer -->
-        <TD ID="p7"></TD>                       <!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b8">3 of a Kind</TD>
-	<TD ID="c8"></TD>		<!-- Computer -->
-	<TD ID="p8"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b9">4 of a Kind</TD>
-	<TD ID="c9"></TD>		<!-- Computer -->
-	<TD ID="p9"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b10">Full House</TD>
-	<TD ID="c10"></TD>		<!-- Computer -->
-	<TD ID="p10"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b11">Little Straight</TD>
-	<TD ID="c11"></TD>		<!-- Computer -->
-	<TD ID="p11"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b12">Big Straight</TD>
-	<TD ID="c12"></TD>		<!-- Computer -->
-	<TD ID="p12"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b13">Chance</TD>
-	<TD ID="c13"></TD>		<!-- Computer -->
-	<TD ID="p13"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b14">Meowtzee</TD>
-	<TD ID="c14"></TD>		<!-- Computer -->
-	<TD ID="p14"></TD>			<!-- Player -->
-</TR>
-<TR>     
-	<TD ID="b15">Total</TD>
-	<TD ID="c15"></TD>		<!-- Computer -->
-	<TD ID="p15"></TD>			<!-- Player -->
-</TR>
-
-</TABLE>
-
-<BR></BR>
-<!-- <P ID="gameMessage">Prof. Meowsky says GLHF</P> -->
-<BR></BR>
-
-<TABLE ID="WinLoss" width=50%>
-<TR>     
-	<TH>Prof Wins</TH>
-	<TH>Your Wins</TH>
-	<TH>Prof Average</TH>
-	<TH>Your Average</TH>
-	<TH>Prof High Score</TH>
-	<TH>Your High Score</TH>
-</TR>
-<TR>     
-	<TD ID="cWins"></TD>
-	<TD ID="pWins"></TD>		
-	<TD ID="cAvg"></TD>
-	<TD ID="pAvg"></TD>		
-	<TD ID="cHigh"></TD>
-	<TD ID="pHigh"></TD>		
-</TR>
-</TABLE>
 </BODY>
 </HTML>

@@ -27,14 +27,21 @@ table#Dice center {
 	margin-right: auto;
 }
 
+table#Mistakes{
+	width: 70%
+	cursor: default;
+	text-align: center;
+	font-size: 1.5em;
+}
+	
 table#Buttons{
-	width:70%
-	cursor:default;
+	width: 70%
+	cursor: default;
 }
 	
 table#Buttons td {
 	text-align: center;
-	font-size:1.5em;
+	font-size: 1.5em;
 }
 
 h1 {
@@ -73,13 +80,18 @@ var MAXROLLS = 3;
 
 function load() {
 	alert("Welcome to Disconnections");
-	for(i = 0 ; i < 4; i++){	//enables clicks and sets words
+	//enables clicks and sets words
+	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichScore = document.getElementById("word"+i+j);
 			whichScore.innerHTML = wordMatrix[i][j];
 			whichScore.addEventListener("click", wordClick);
 		}
 	}
+	document.getElementById("Submit").addEventListener("click", ShowMessage);
+	document.getElementById("Reshuffle").addEventListener("click", ShowMessage);
+	//document.getElementById("Reshuffle").addEventListener("click", ShowMessage);
+	
 }
 
 function wordClick(){
@@ -559,8 +571,6 @@ function updateWins() {
 	document.getElementById("cHigh").innerHTML = cHighScore;
 	document.getElementById("pHigh").innerHTML = pHighScore;
 }
-//<BODY ONLOAD="load()">
-//<BODY ONLOAD="StartGameTester()">
 
 </SCRIPT>
 	
@@ -592,10 +602,19 @@ function updateWins() {
 </TR>
 </TABLE>
 
+<TABLE ID="Mistakes">
+<TR>
+	<TD>Mistakes remaining: </TD>
+	<TD ID="mistake0">x </TD>
+	<TD ID="mistake1">x </TD>
+	<TD ID="mistake2">x </TD>
+	<TD ID="mistake3">x </TD>
+</TR>
+	
 <TABLE ID="Buttons">
 <TR>
-	<P ID="Submit">Submit</P>
-	<P ID="Reshuffle">Reshuffle</P>
+	<TD ID="Submit">Submit</TD>
+	<TD ID="Shuffle">Shuffle</TD>
 </TR>
 </BODY>
 </HTML>

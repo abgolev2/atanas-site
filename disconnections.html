@@ -20,6 +20,11 @@ table#Words th, td {
 table#Words td {
 	text-align: center;
 	font-size: 1.25em;
+	width: 25%;
+}
+
+table#Words .content {
+	aspect-ratio: 1/1;
 }
 
 table#Words center {
@@ -113,7 +118,7 @@ function wordClick(){
 		document.getElementById(cellId).style.backgroundColor = "#98DEE6";
 		selectionMatrix[cellRow][cellCol] = true;
 		wordsSelected++;
-		document.write("Words selected: " + wordsSelected);
+		console.log("Words selected: " + wordsSelected);
 		if(wordsSelected == 4)
 			canSubmit = true;
 		canSubmit = false;
@@ -122,7 +127,7 @@ function wordClick(){
 		document.getElementById(cellId).style.backgroundColor = "#FFFFFF";
 		selectionMatrix[cellRow][cellCol] = false;
 		wordsSelected--;
-		document.write("Words selected: " + wordsSelected);
+		console.log("Words selected: " + wordsSelected);
 		canSubmit = false;
 	}
 

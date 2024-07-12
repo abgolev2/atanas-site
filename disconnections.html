@@ -49,9 +49,9 @@ var defaultImagePath = "images/";
 var totalGames = 0; 
 var canSubmit = false;
 var wordMatrix = [
-	["ONE", "TWO, "THREE", "FOUR"],
+	["ONE", "TWO", "THREE", "FOUR"],
 	["FIVE", "SIX", "SEVEN", "EIGHT"],
-	["NINE", "TEN, "ELEVEN", "TWELVE"],
+	["NINE", "TEN", "ELEVEN", "TWELVE"],
 	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN"]
 ]
 
@@ -62,26 +62,28 @@ var currentRoll = 0;
 var MAXROLLS = 3;
 
 function load() {
-	alert("Welcome to Disconnections")
-	document.getElementById("word00").innerHTML = "ONE";
-	document.getElementById("word01").innerHTML = "TWO";
-	document.getElementById("word02").innerHTML = "THREE";
-	document.getElementById("word03").innerHTML = "FOUR";
-	document.getElementById("word10").innerHTML = "FIVE";
-	document.getElementById("word11").innerHTML = "SIX";
-	document.getElementById("word12").innerHTML = "SEVEN";
-	document.getElementById("word13").innerHTML = "EIGHT";
-	document.getElementById("word20").innerHTML = "NINE";
-	document.getElementById("word21").innerHTML = "TEN";
-	document.getElementById("word22").innerHTML = "ELEVEN";
-	document.getElementById("word23").innerHTML = "TWELVE";
-	document.getElementById("word30").innerHTML = "THIRTEEN";
-	document.getElementById("word31").innerHTML = "FOURTEEN";
-	document.getElementById("word32").innerHTML = "FIFTEEN";
-	document.getElementById("word33").innerHTML = "SIXTEEN";
-	for(i = 0 ; i < 4; i++){	//enables clicks
+	alert("Welcome to Disconnections");
+	
+	//document.getElementById("word00").innerHTML = "ONE";
+	//document.getElementById("word01").innerHTML = "TWO";
+	//document.getElementById("word02").innerHTML = "THREE";
+	//document.getElementById("word03").innerHTML = "FOUR";
+	//document.getElementById("word10").innerHTML = "FIVE";
+	//document.getElementById("word11").innerHTML = "SIX";
+	//document.getElementById("word12").innerHTML = "SEVEN";
+	//document.getElementById("word13").innerHTML = "EIGHT";
+	//document.getElementById("word20").innerHTML = "NINE";
+	//document.getElementById("word21").innerHTML = "TEN";
+	//document.getElementById("word22").innerHTML = "ELEVEN";
+	//document.getElementById("word23").innerHTML = "TWELVE";
+	//document.getElementById("word30").innerHTML = "THIRTEEN";
+	//document.getElementById("word31").innerHTML = "FOURTEEN";
+	//document.getElementById("word32").innerHTML = "FIFTEEN";
+	//document.getElementById("word33").innerHTML = "SIXTEEN";
+	for(i = 0 ; i < 4; i++){	//enables clicks and sets words
 		for(j = 0; j < 4; j++){
 			whichScore = document.getElementById("word"+i+j);
+			whichScore.innerHTML = wordMatrix[i][j];
 			whichScore.addEventListener("click", wordClick);
 		}
 	}

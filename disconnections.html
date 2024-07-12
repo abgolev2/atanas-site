@@ -27,8 +27,12 @@ table#Dice center {
 	margin-right: auto;
 }
 
-table#Buttons td {
+table#Buttons{
 	width:70%
+	cursor:default;
+}
+	
+table#Buttons td {
 	text-align: center;
 	font-size:1.5em;
 }
@@ -54,6 +58,12 @@ var wordMatrix = [
 	["NINE", "TEN", "ELEVEN", "TWELVE"],
 	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN"]
 ]
+var selectMatrix = [
+	[false, false, false, false],
+	[false, false, false, false],
+	[false, false, false, false],
+	[false, false, false, false]
+]
 
 //Global counters		
 var currentTurn = 0;					
@@ -63,23 +73,6 @@ var MAXROLLS = 3;
 
 function load() {
 	alert("Welcome to Disconnections");
-	
-	//document.getElementById("word00").innerHTML = "ONE";
-	//document.getElementById("word01").innerHTML = "TWO";
-	//document.getElementById("word02").innerHTML = "THREE";
-	//document.getElementById("word03").innerHTML = "FOUR";
-	//document.getElementById("word10").innerHTML = "FIVE";
-	//document.getElementById("word11").innerHTML = "SIX";
-	//document.getElementById("word12").innerHTML = "SEVEN";
-	//document.getElementById("word13").innerHTML = "EIGHT";
-	//document.getElementById("word20").innerHTML = "NINE";
-	//document.getElementById("word21").innerHTML = "TEN";
-	//document.getElementById("word22").innerHTML = "ELEVEN";
-	//document.getElementById("word23").innerHTML = "TWELVE";
-	//document.getElementById("word30").innerHTML = "THIRTEEN";
-	//document.getElementById("word31").innerHTML = "FOURTEEN";
-	//document.getElementById("word32").innerHTML = "FIFTEEN";
-	//document.getElementById("word33").innerHTML = "SIXTEEN";
 	for(i = 0 ; i < 4; i++){	//enables clicks and sets words
 		for(j = 0; j < 4; j++){
 			whichScore = document.getElementById("word"+i+j);
@@ -90,6 +83,8 @@ function load() {
 }
 
 function wordClick(){
+	var cellClicked = this.id.substring(4,6);
+	document.getElementById("word"+slot).style.backgroundColor = "#7FFFD4";
 }
 
 //Starts up a new game of meowtzee when the New Game button is clicked

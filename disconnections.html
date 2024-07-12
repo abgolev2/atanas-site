@@ -8,21 +8,21 @@
 <HEAD>
 <STYLE>
 
-table#Dice {
+table#Words {
 	width: 100%;
-	border: 3px solid black;
 	cursor: default;
 }
 
-table#Dice th, td {
+table#Words th, td {
 	border: 1px solid black;
 }
 
-table#Dice td {
+table#Words td {
 	text-align: center;
+	font-size: 1.25em;
 }
 
-table#Dice center {
+table#Words center {
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -31,7 +31,12 @@ table#Mistakes{
 	width: 70%
 	cursor: default;
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 1em;
+}
+
+table#Mistakes center {
+	margin-left: auto;
+	margin-right: auto;
 }
 	
 table#Buttons{
@@ -41,7 +46,12 @@ table#Buttons{
 	
 table#Buttons td {
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 1.25em;
+}
+
+table#Buttons center {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 h1 {
@@ -578,7 +588,7 @@ function updateWins() {
 <h1>DISCONNECTIONS</h1>
 <BODY ONLOAD="load()">
 
-<TABLE ID="Dice">
+<TABLE ID="Words">
 <TR>
 	<TD ID="word00"></TD>
 	<TD ID="word01"></TD>

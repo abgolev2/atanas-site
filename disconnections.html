@@ -123,9 +123,7 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
-	//document.getElementById("Submit").addEventListener("click", submitWords);
 	document.getElementById("Submit").disabled = true;
-	//document.getElementById("ClearAll").addEventListener("click", clearAll);
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 	
@@ -156,11 +154,11 @@ function wordClick(){
 
 	//set buttons to enabled/disabled
 	if(wordsSelected > 0){
-		document.getElementById("Submit").disabled = false;
+		document.getElementById("ClearAll").disabled = false;
 		document.getElementById("ClearAll").addEventListener("click", clearAll);
 	}
 	else{
-		document.getElementById("Submit").disabled = true;
+		document.getElementById("ClearAll").disabled = true;
 		document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	}
 	

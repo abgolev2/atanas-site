@@ -129,7 +129,7 @@ var defaultImagePath = "images/";
 var totalGames = 0; 
 var canSubmit = false;
 var rowsCleared = 0;
-var pisstakeShuffleCount = 0;
+var shuffleCount = 0;
 
 var wordMatrix = [
 	["ONE", "TWO", "THREE", "FOUR", "#F6F65D", "in common"],
@@ -268,6 +268,7 @@ function countSuccesses() {
 		//animate away and switch with top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
+		return true;
 	}	
 	if(countSuccesses==3){
 		//vibrating signal
@@ -280,6 +281,7 @@ function countSuccesses() {
 		//sleep
 		//lose guess
 	}
+	return false;
 }
 
 function changeColor(){
@@ -296,11 +298,9 @@ function submitWords(){
 	console.log("we submitted woots");
 	document.getElementById('Shuffle').classList.toggle("shake");
 	//we can now go through the boolean matrix looking for num true / false
-	var isCorrect = false;
-	if(isCorrect){
-		rowCleared();
-	}
-	else{
+	var isCorrect = countSuccesses();
+	if(!countSuccesses){
+		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){

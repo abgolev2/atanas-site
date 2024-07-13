@@ -465,14 +465,15 @@ function resetSelectionMatrix(){
 			selectionMatrix[i][j] = false;
 }
 
-function switchWords(correctRow){
+function switchWords(correctColorRow){
 	//let's build an array of all entries on the top row that should be switched with correct answers
+	console.log("correct color row: " + correctColorRow) 
 	let colsThatNeedSwitching = [];
 	let topRowWord = "";
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML
 		for(j = 0; j < 4; j++){
-			if(topRowWord == wordMatrix[correctRow][j]){
+			if(topRowWord == wordMatrix[correctColorRow][j]){
 				colsThatNeedSwitching.push(i);
 				console.log("cols to switch: " + colsThatNeedSwitching);
 			}

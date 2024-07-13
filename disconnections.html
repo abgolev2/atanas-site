@@ -341,7 +341,7 @@ function clickShuffle(){
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
-			document.getElementById("word"+i+j).value = varArray(length-1);
+			document.getElementById("word"+i+j).value = varArray[length-1];
 			varArray.splice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}

@@ -242,7 +242,7 @@ function rowCleared(){
 
 function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
-	var myWord
+	let myWord = "";
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
@@ -293,12 +293,14 @@ function countSuccesses() {
 		//sleep
 		//lose guess
 	}
+	console.log("we return false now");
 	return false;
 }
 
 function changeColor(colorRow){
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
+			console.log("made it woots"):
 			if(selectionMatrix[i][j]){
 				console.log("made it woots");
 				whichWord = document.getElementById("word"+i+j);

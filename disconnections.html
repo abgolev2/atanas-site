@@ -410,7 +410,7 @@ function switchWords(correctRow){
 	let topRowWord = "";
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML
-		for(int j = 0; j < 4; j++){
+		for(j = 0; j < 4; j++){
 			if(topRowWord == wordMatrix[correctRow][j]){
 				colsThatNeedSwitching.push(i);
 				console.log("cols to switch: " + colsThatNeedSwitching);
@@ -419,11 +419,11 @@ function switchWords(correctRow){
 	}
 	let wordFound = "";
 	for(i = rowsCleared+1; i < 4; i++){
-		for(int j = 0; j < 4; j++){
+		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				wordFound = document.getElementById("word"+i+j);
 				//we check if the top row contains one of the correct words and switchy if nah
-				for(int k = 0; k < 4; k++){
+				for(k = 0; k < 4; k++){
 					//the logic for this is pretty gross actually
 				}
 			}

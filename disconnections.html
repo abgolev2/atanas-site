@@ -234,29 +234,37 @@ function rowCleared(){
 
 function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
-
 	var myWord
 	for(i = 0; i < 3; i++){
 		for(j = 0; j < 3; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("words"+i+j).value
 				console.log("myWord" + myWord);
-				for(k = 0; k < 3; k++)
-					for(m = 0; m < 3; m++)
-						if(wordMatrix[k][m] == myWord)
+				for(k = 0; k < 3; k++){
+					for(m = 0; m < 3; m++){
+						if(wordMatrix[k][m] == myWord){
 							successCountPerAssociation[k]++;
+						}
+					}
+				}
 			}
 		}
 	}
 	console.log("successes: " + successCountPerAssociation);
 
 	let maxSuccesses = 0;
+	let colorCorrect = -1;
 	for(i = 0; i < 3; i++){
-		if(successCountPerAssociation[i]>maxSuccesses)
-			maxSuccesses = successCountPerAssociation[i];
+		if(successCountPerAssociation[i]>maxSuccesses){
+			maxSuccesses = successCountPerAssociation[i]
+			if(maxSuccesses == 4)
+				colorCorrect = i;
+		}
+	}
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(countSuccesses==4){
+		changeColor(colorCorrect);
 		//find which color had been found
 		//change color to that
 		//animate away and switch with top row
@@ -273,6 +281,16 @@ function countSuccesses() {
 		//vibrating signal
 		//sleep
 		//lose guess
+	}
+}
+
+function changeColor(){
+	for(i = 0; i < 3; i++){
+		for(j = 0; j < 3; j++){
+			if(selectionMatrix[i][j]){
+				console.log("made it woots");
+			}
+		}
 	}
 }
 

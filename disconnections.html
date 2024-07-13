@@ -33,6 +33,7 @@ table#Words td {
 	width: 24.5%;
 	display: table-cell;
 	background-color: #E7E8DA;
+	line-height: 200px;
 }
 
 table#Words center {
@@ -43,7 +44,7 @@ table#Words center {
 td:after {
 	content:'';
 	display:block;
-	margin-top:85%;
+	margin-top:5%;
 }
 
 .content {
@@ -112,10 +113,10 @@ var canSubmit = false;
 var rowsCleared = 0;
 
 var wordMatrix = [
-	["ONE", "TWO", "THREE", "FOUR"],
-	["FIVE", "SIX", "SEVEN", "EIGHT"],
-	["NINE", "TEN", "ELEVEN", "TWELVE"],
-	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN"]
+	["ONE", "TWO", "THREE", "FOUR", "#123456", "in common"],
+	["FIVE", "SIX", "SEVEN", "EIGHT", "#123456", "in common"],
+	["NINE", "TEN", "ELEVEN", "TWELVE", "#123456", "in common"],
+	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "#123456", "in common"]
 ]
 	
 var selectionMatrix = [
@@ -133,7 +134,8 @@ var associations = [
 ]
 	
 function load() {
-	alert("Welcome to Disconnections");
+	//alert("Welcome to Disconnections");
+	
 	//enables clicks and sets words
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
@@ -236,6 +238,10 @@ function clearAll(){
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 }
 
+function switchWords(correctWord, otherWord){
+
+}
+
 function getRandomInt(min, max) {
 	var randNum = 0;
 	min = Math.ceil(min);
@@ -243,6 +249,8 @@ function getRandomInt(min, max) {
 	randNum = Math.floor(Math.random()*(max-min+1))+min;
 	return randNum;
 }
+
+
 
 </SCRIPT>
 	

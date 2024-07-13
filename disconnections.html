@@ -318,8 +318,8 @@ function submitWords(){
 function clickShuffle(){
 	let varArray = [];
 	document.getElementById('words11').classList.toggle("shake");
-	for(i=rowsCleared; i<3; i++){
-		for(j=0; j<3; j++){
+	for(i=rowsCleared; i<4; i++){
+		for(j=0; j<4; j++){
 			var val = document.getElementById("words"+i+j).value;
 			console.log("val: " + val);
 			varArray.push(val);
@@ -330,8 +330,8 @@ function clickShuffle(){
 	//for(i=varArray.length;) 
 	//varArray.splice(0, varArray.length-1)
 	
-	for(i=rowsCleared; i<3; i++){
-		for(j=0; j<3; j++){
+	for(i=rowsCleared; i<4; i++){
+		for(j=0; j<4; j++){
 			document.getElementById("words"+i+j).value = varArray(length-1);
 			varArray.splice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);

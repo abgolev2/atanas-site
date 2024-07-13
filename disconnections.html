@@ -344,7 +344,7 @@ function submitWords(){
 function shakeSelectedWords(){
 	for(i=0; i<4; i++){
 		for(j=0; j<4; j++){
-			if(selectedMatrix[i][j]==true)
+			if(selectionMatrix[i][j]==true)
 				shakeWord("word"+i+j);
 		}
 	}
@@ -366,7 +366,7 @@ function clickShuffle(){
 			var val = document.getElementById("word"+i+j).innerHTML;
 			console.log("val: " + val);
 			varArray.push(val);
-			selectedArray.push(selectedMatrix[i][j]);
+			selectedArray.push(selectionMatrix[i][j]);
 		}
 	}
 	console.log("varArray:" + varArray)

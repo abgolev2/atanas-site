@@ -129,6 +129,7 @@ var defaultImagePath = "images/";
 var totalGames = 0; 
 var canSubmit = false;
 var rowsCleared = 0;
+var pisstakeShuffleCount = 0;
 
 var wordMatrix = [
 	["ONE", "TWO", "THREE", "FOUR", "#F6F65D", "in common"],
@@ -316,6 +317,8 @@ function submitWords(){
 }
 
 function clickShuffle(){
+	console.log("we shuffled woots");
+	shuffleCount++;
 	let varArray = [];
 	document.getElementById('words11').classList.toggle("shake");
 	for(i=rowsCleared; i<4; i++){
@@ -337,7 +340,10 @@ function clickShuffle(){
 			console.log("varArray size: " + varArray.length);
 		}
 	}
-	console.log("we shuffled woots");
+
+	if(shuffleCount>20){
+		alert("Aight slow down with the shuffling captain I'm getting tired");
+	}
 }
 
 function shuffle(array) {

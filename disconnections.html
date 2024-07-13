@@ -236,13 +236,13 @@ function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 
 	var myWord
-	for(int i = 0; i < 3; i++){
-		for(int j = 0; j < 3; j++){
+	for(i = 0; i < 3; i++){
+		for(j = 0; j < 3; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("words"+i+j).value
 				console.log("myWord" + myWord);
-				for(int k = 0; k < 3; k++)
-					for(int m = 0; m < 3; m++)
+				for(k = 0; k < 3; k++)
+					for(m = 0; m < 3; m++)
 						if(wordMatrix[k][m] == myWord)
 							successCountPerAssociation[k]++;
 			}
@@ -251,7 +251,7 @@ function countSuccesses() {
 	console.log("successes: " + successCountPerAssociation);
 
 	let maxSuccesses = 0;
-	for(int i = 0; i < 3; i++){
+	for(i = 0; i < 3; i++){
 		if(successCountPerAssociation[i]>maxSuccesses)
 			maxSuccesses = successCountPerAssociation[i];
 	console.log("maxSuccesses: " + maxSuccesses);

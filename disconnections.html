@@ -160,13 +160,6 @@ var selectionMatrix = [
 	[false, false, false, false],
 	[false, false, false, false]
 ]
-
-var correctWordMatrix = [
-	[false, false, false, false],
-	[false, false, false, false],
-	[false, false, false, false],
-	[false, false, false, false]
-]
 	
 var associations = [
 	"Drugs",
@@ -217,6 +210,7 @@ function wordClick(){
 		console.log("Words selected: " + wordsSelected);
 		canSubmit = false;
 	}
+	console.log("selection Matrix: " + selectionMatrix);
 
 	//set buttons to enabled/disabled
 	if(wordsSelected > 0){

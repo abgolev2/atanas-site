@@ -317,7 +317,7 @@ function submitWords(){
 	//document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
 	var isCorrect = countSuccesses();
-	if(!countSuccesses){
+	if(countSuccesses == false){
 		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";

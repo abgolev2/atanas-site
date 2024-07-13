@@ -370,7 +370,7 @@ function clickShuffle(){
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
-			varArray.slice(0, varArray.length-1);
+			varArray = varArray.slice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}
 	}

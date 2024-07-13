@@ -300,8 +300,8 @@ function changeColor(colorRow){
 
 function submitWords(){
 	console.log("we submitted woots");
-	document.getElementById('Shuffle').classList.toggle("shake");
-	document.getElementById('Shuffle').classList.removeAttribute("shake");
+	//document.getElementById('Shuffle').classList.toggle("shake");
+	//document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
 	var isCorrect = countSuccesses();
 	if(!countSuccesses){
@@ -326,6 +326,7 @@ function clickShuffle(){
 	shuffleCount++;
 	let varArray = [];
 	document.getElementById('word11').classList.toggle("shake");
+	document.getElementById('word11').classList.removeAttribute("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).value;

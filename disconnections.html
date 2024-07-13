@@ -283,20 +283,18 @@ function countSuccesses() {
 		return true;
 	}	
 	else if(countSuccesses==3){
+		shakeWord("word10");
 		shakeWord("word11");
 		shakeWord("word12");
 		shakeWord("word13");
-		shakeWord("word14");
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
 		//lose guess
 	}
 	else{
-		shakeWord("word11");
-		shakeWord("word12");
-		shakeWord("word13");
-		shakeWord("word14");
+		shakeSelectedWords();
+		console.log("meow4");
 		//vibrating signal
 		//sleep
 		//lose guess
@@ -343,6 +341,15 @@ function submitWords(){
 	}
 }
 
+function shakeSelectedWords(){
+	for(i=0; i<4; i++){
+		for(j=0; j<4; j++){
+			if(selectedMatrix[i][j]==true)
+				shakeWord("word"+i+j);
+		}
+	}
+}
+	
 async function shakeWord(id){
 	document.getElementById(id).classList.add("shake");
 	await sleep(2000);

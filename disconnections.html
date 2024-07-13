@@ -282,7 +282,7 @@ function countSuccesses() {
 		changeColor(colorCorrect); //make this an animation
 		//find which color had been found
 		//change color to that
-		switchWords(colorCorrect)
+		switchWords(colorCorrect);
 		//animate away and switch with top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
@@ -353,14 +353,16 @@ async function clickShuffle(){
 			varArray.push(val);
 		}
 	}
+	console.log("varArray:" + varArray)
 	shuffle(varArray)
-
+	console.log("shuffled varArray:" + varArray)
+	
 	//for(i=varArray.length;) 
 	//varArray.splice(0, varArray.length-1)
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
-			document.getElementById("word"+i+j).innerHTML = varArray[length-1];
+			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
 			varArray.splice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}

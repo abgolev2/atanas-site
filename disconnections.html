@@ -360,16 +360,19 @@ function clickShuffle(){
 	console.log("we shuffled woots");
 	shuffleCount++;
 	let varArray = [];
+	let selectedArray = [];
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).innerHTML;
 			console.log("val: " + val);
 			varArray.push(val);
+			selectedArray.push(selectedMatrix[i][j]);
 		}
 	}
 	console.log("varArray:" + varArray)
-	shuffle(varArray)
+	shuffle(varArray, selectedArray)
 	console.log("shuffled varArray:" + varArray)
+	resetSelectionMatrix();
 	
 	//for(i=varArray.length;) 
 	//varArray.slice(0, varArray.length-1)
@@ -377,7 +380,17 @@ function clickShuffle(){
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
+			if(selectedArray){
+				whichWord.style.backgroundColor = "#606060";
+				whichWord.style.color = "#FFFFFF";
+				selectionMatrix[i][j]=true;
+			}
+			else{
+				whichWord.style.backgroundColor = "E9E9E4";
+				whichWord.style.color = "#000000";
+			}
 			varArray = varArray.slice(0, varArray.length-1);
+			selectedArray = selectedArray.slice(0, selectedArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}
 	}
@@ -387,37 +400,41 @@ function clickShuffle(){
 	}
 }
 
-function shuffle(array) {
-  let currentIndex = array.length;
+function shuffle(array, array2) {
+	let currentIndex = array.length;
 
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+  	// While there remain elements to shuffle...
+  	while (currentIndex != 0) {
 
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+		// Pick a remaining element...
+		let randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
 
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  }
+	    	// And swap it with the current element.
+	    	[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+	    	[array2[currentIndex], array2[randomIndex]] = [array2[randomIndex], array2[currentIndex]];
+	}
 }
 
 function clearAll(){
 	console.log("we clear now");
 	wordsSelected=0;
+	resetSelectionMatrix();
+	document.getElementById("ClearAll").disabled = true;
+	document.getElementById("Submit").disabled = true;
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+}
+
+function resetSelectionMatrix(){
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
 			whichWord.style.backgroundColor = "#E9E9E4";
 			whichWord.style.color = "#000000";
 			selectionMatrix[i][j] = false;
-
 		}
 	}
-	document.getElementById("ClearAll").disabled = true;
-	document.getElementById("Submit").disabled = true;
-	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	document.getElementById("Submit").removeEventListener("click", submitWords);
 }
 
 function switchWords(correctRow){

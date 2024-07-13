@@ -278,10 +278,12 @@ function countSuccesses() {
 		//find which color had been found
 		//change color to that
 		switchWords(colorCorrect);
+		resetSelectionMatrix();
 		//animate away and switch with top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
 		rowsCleared++;
+		wordsSelected=0;
 		return true;
 	}	
 	else if(maxSuccesses==3){

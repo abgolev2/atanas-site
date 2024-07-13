@@ -271,7 +271,8 @@ function countSuccesses() {
 	}
 	console.log("maxSuccesses: " + maxSuccesses);
 
-	if(countSuccesses==4){
+	if(maxSuccesses==4){
+		//NEED TO SET THE selectedWords BACK TO 0
 		//vibrate
 		changeColor(colorCorrect); //make this an animation
 		//find which color had been found
@@ -280,16 +281,15 @@ function countSuccesses() {
 		//animate away and switch with top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
+		rowsCleared++;
 		return true;
 	}	
-	else if(countSuccesses==3){
-		shakeWord("word10");
-		shakeWord("word11");
-		shakeWord("word12");
-		shakeWord("word13");
+	else if(maxSuccesses==3){
+		shakeSelectedWords();
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
+		alert("One away boss")
 		//lose guess
 	}
 	else{
@@ -440,7 +440,7 @@ function clearAll(){
 
 function resetSelectionMatrix(){
 	let thisWord = "";
-	for(i = 0 ; i < 4; i++){	
+	for(i = rowsCleared ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			thisWord = document.getElementById("word"+i+j);
 			thisWord.style.backgroundColor = "#E9E9E4";

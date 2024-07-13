@@ -170,7 +170,7 @@ var associations = [
 	
 function load() {
 	//alert("Welcome to Disconnections");
-	
+	let whichWord = "";
 	//enables clicks and sets words
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
@@ -307,11 +307,12 @@ function changeColor(colorRow){
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			console.log("made it woots");
+			let myWord = "";
 			if(selectionMatrix[i][j]){
 				console.log("made it woots");
-				whichWord = document.getElementById("word"+i+j);
-				whichWord.style.backgroundColor = wordMatrix[colorRow][4];
-				whichWord.style.color = "#000000";
+				myWord = document.getElementById("word"+i+j);
+				myWord.style.backgroundColor = wordMatrix[colorRow][4];
+				myWord.style.color = "#000000";
 			}
 		}
 	}
@@ -336,7 +337,14 @@ function submitWords(){
 			document.getElementById("ClearAll").addEventListener("click", clearAll);
 			document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 			document.getElementById("Submit").removeEventListener("click", submitWords);
-			
+			let submitWord = "";
+			for(i = 0 ; i < 4; i++){	
+				for(j = 0; j < 4; j++){
+					submitWord = document.getElementById("word"+i+j);
+					submitWord.innerHTML = wordMatrix[i][j];
+					submitWord.removeEventListener("click", wordClick);
+				}
+			}
 		}
 	}
 }
@@ -382,14 +390,16 @@ function clickShuffle(){
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
+			let selectedWord = "";
 			if(selectedArray[i][j]){
-				whichWord.style.backgroundColor = "#606060";
-				whichWord.style.color = "#FFFFFF";
+				selectedWord = document.getElementById("word"+i+j);
+				selectedWord.style.backgroundColor = "#606060";
+				selectedWord.style.color = "#FFFFFF";
 				selectionMatrix[i][j]=true;
 			}
 			else{
-				whichWord.style.backgroundColor = "E9E9E4";
-				whichWord.style.color = "#000000";
+				selectedWord.style.backgroundColor = "E9E9E4";
+				selectedWord.style.color = "#000000";
 			}
 			varArray = varArray.slice(0, varArray.length-1);
 			selectedArray = selectedArray.slice(0, selectedArray.length-1);
@@ -429,11 +439,12 @@ function clearAll(){
 }
 
 function resetSelectionMatrix(){
+	let thisWord = "";
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
-			whichWord = document.getElementById("word"+i+j);
-			whichWord.style.backgroundColor = "#E9E9E4";
-			whichWord.style.color = "#000000";
+			thisWord = document.getElementById("word"+i+j);
+			thisWord.style.backgroundColor = "#E9E9E4";
+			thisWord.style.color = "#000000";
 			selectionMatrix[i][j] = false;
 		}
 	}

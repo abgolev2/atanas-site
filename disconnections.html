@@ -282,6 +282,7 @@ function countSuccesses() {
 		changeColor(colorCorrect); //make this an animation
 		//find which color had been found
 		//change color to that
+		switchWords(colorCorrect)
 		//animate away and switch with top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
@@ -337,7 +338,7 @@ function submitWords(){
 	}
 }
 
-function clickShuffle(){
+async function clickShuffle(){
 	console.log("we shuffled woots");
 	shuffleCount++;
 	let varArray = [];
@@ -403,8 +404,19 @@ function clearAll(){
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 }
 
-function switchWords(correctWord, otherWord){
-
+function switchWords(correctRow){
+	let wordFound = "";
+	for(i = rowsCleared+1; i < 4; i++){
+		for(int j = 0; j < 4; j++){
+			if(selectionMatrix[i][j]){
+				wordFound = document.getElementById("word"+i+j);
+				//we check if the top row contains one of the correct words and switchy if nah
+				for(int k = 0; k < 4; k++){
+					//the logic for this is pretty gross actually
+				}
+			}
+		}
+	}
 }
 
 function getRandomInt(min, max) {

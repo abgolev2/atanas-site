@@ -405,6 +405,18 @@ function clearAll(){
 }
 
 function switchWords(correctRow){
+	//let's build an array of all entries on the top row that should be switched with correct answers
+	let colsThatNeedSwitching = [];
+	let topRowWord = "";
+	for(i = 0; i < 4; i++){
+		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML
+		for(int j = 0; j < 4; j++){
+			if(topRowWord == wordMatrix[correctRow][j]){
+				colsThatNeedSwitching.push(i);
+				console.log("cols to switch: " + colsThatNeedSwitching);
+			}
+		}
+	}
 	let wordFound = "";
 	for(i = rowsCleared+1; i < 4; i++){
 		for(int j = 0; j < 4; j++){

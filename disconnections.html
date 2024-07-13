@@ -400,7 +400,7 @@ function clickShuffle(){
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
 			selectedWord.innerHTML = varArray[varArray.length-1];
-			if(selectedArray[i][j]){
+			if(selectedArray[varArray.length-1]){
 				selectedWord.style.backgroundColor = "#606060";
 				selectedWord.style.color = "#FFFFFF";
 				selectionMatrix[i][j]=true;

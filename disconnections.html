@@ -382,7 +382,7 @@ function clickShuffle(){
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
-			if(selectedArray){
+			if(selectedArray[i][j]){
 				whichWord.style.backgroundColor = "#606060";
 				whichWord.style.color = "#FFFFFF";
 				selectionMatrix[i][j]=true;

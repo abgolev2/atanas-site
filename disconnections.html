@@ -282,13 +282,21 @@ function countSuccesses() {
 		//alert with message for correct thing (in wordMatrix[i][5])
 		return true;
 	}	
-	if(countSuccesses==3){
+	else if(countSuccesses==3){
+		shakeWord("word11");
+		shakeWord("word12");
+		shakeWord("word13");
+		shakeWord("word14");
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
 		//lose guess
 	}
 	else{
+		shakeWord("word11");
+		shakeWord("word12");
+		shakeWord("word13");
+		shakeWord("word14");
 		//vibrating signal
 		//sleep
 		//lose guess
@@ -334,14 +342,16 @@ function submitWords(){
 	}
 }
 
-async function clickShuffle(){
+async function shakeWord(id){
+	document.getElementById(id).classList.add("shake");
+	await sleep(2000);
+	document.getElementById(id).classList.remove("shake");
+}
+	
+function clickShuffle(){
 	console.log("we shuffled woots");
 	shuffleCount++;
 	let varArray = [];
-	//document.getElementById('word11').classList.toggle("shake");
-	document.getElementById('word11').classList.add("shake");
-	await sleep(2000);
-	document.getElementById('word11').classList.remove("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).innerHTML;

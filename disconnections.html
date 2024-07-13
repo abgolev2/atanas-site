@@ -431,14 +431,6 @@ function switchWords(correctRow){
 	}
 }
 
-function getRandomInt(min, max) {
-	var randNum = 0;
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	randNum = Math.floor(Math.random()*(max-min+1))+min;
-	return randNum;
-}
-
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }

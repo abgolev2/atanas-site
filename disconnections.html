@@ -382,7 +382,7 @@ function clickShuffle(){
 	shuffle(varArray, selectedArray)
 	console.log("shuffled varArray:" + varArray)
 	console.log("shuffled selectedArray:" + selectedArray)
-	resetSelectionMatrix();
+	resetSelectionMatrixAndAllColor(rowsCleared);
 	
 	//for(i=varArray.length;) 
 	//varArray.slice(0, varArray.length-1)
@@ -430,7 +430,7 @@ function shuffle(array, array2) {
 
 function clearAll(){
 	console.log("we clear now");
-	resetSelectionMatrix();
+	resetSelectionMatrixAndAllColor(rowsCleared);
 	wordsSelected=0;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Submit").disabled = true;
@@ -438,9 +438,9 @@ function clearAll(){
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 }
 
-function resetSelectionMatrix(){
+function resetSelectionMatrixAndAllColor(startingRow)[
 	let thisWord = "";
-	for(i = rowsCleared ; i < 4; i++){	
+	for(i = startingRow; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			thisWord = document.getElementById("word"+i+j);
 			thisWord.style.backgroundColor = "#E9E9E4";
@@ -448,6 +448,12 @@ function resetSelectionMatrix(){
 			selectionMatrix[i][j] = false;
 		}
 	}
+}
+
+function resetSelectionMatrix(){
+	for(i = 0 ; i < 4; i++)	
+		for(j = 0; j < 4; j++)
+			selectionMatrix[i][j] = false;
 }
 
 function switchWords(correctRow){

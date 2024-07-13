@@ -375,6 +375,8 @@ function clearAll(){
 			whichWord = document.getElementById("word"+i+j);
 			whichWord.style.backgroundColor = "#E9E9E4";
 			whichWord.style.color = "#000000";
+			selectionMatrix[i][j] = false;
+
 		}
 	}
 	document.getElementById("ClearAll").disabled = true;

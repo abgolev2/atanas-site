@@ -284,10 +284,11 @@ function countSuccesses() {
 		//alert with message for correct thing (in wordMatrix[i][5])
 		rowsCleared++;
 		wordsSelected=0;
+		shakeSelectedWords(true)
 		return true;
 	}	
 	else if(maxSuccesses==3){
-		shakeSelectedWords();
+		shakeSelectedWords(false);
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
@@ -295,7 +296,7 @@ function countSuccesses() {
 		//lose guess
 	}
 	else{
-		shakeSelectedWords();
+		shakeSelectedWords(false);
 		console.log("meow4");
 		//vibrating signal
 		//sleep
@@ -351,7 +352,7 @@ function submitWords(){
 	}
 }
 
-function shakeSelectedWords(){
+function shakeSelectedWords(softShake){
 	for(i=0; i<4; i++){
 		for(j=0; j<4; j++){
 			if(selectionMatrix[i][j]==true)
@@ -360,10 +361,16 @@ function shakeSelectedWords(){
 	}
 }
 	
-async function shakeWord(id){
-	document.getElementById(id).classList.add("shake");
+async function shakeWord(softShake, id){
+	if(softShake)
+		document.getElementById(id).classList.add("softshake");
+	else
+		document.getElementById(id).classList.add("shake");
 	await sleep(2000);
-	document.getElementById(id).classList.remove("shake");
+	if(softShake)
+		document.getElementById(id).classList.remove("softshake");
+	else
+		document.getElementById(id).classList.remove("shake");
 }
 	
 function clickShuffle(){

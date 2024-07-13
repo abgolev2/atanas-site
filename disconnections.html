@@ -249,13 +249,13 @@ function rowCleared(){
 function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 	var myWord
-	for(i = 0; i < 3; i++){
-		for(j = 0; j < 3; j++){
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("word"+i+j).innerHTML
 				console.log("myWord" + myWord);
-				for(k = 0; k < 3; k++){
-					for(m = 0; m < 3; m++){
+				for(k = 0; k < 4; k++){
+					for(m = 0; m < 4; m++){
 						if(wordMatrix[k][m] == myWord){
 							successCountPerAssociation[k]++;
 						}
@@ -268,7 +268,7 @@ function countSuccesses() {
 
 	let maxSuccesses = 0;
 	let colorCorrect = -1;
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 4; i++){
 		if(successCountPerAssociation[i]>maxSuccesses){
 			maxSuccesses = successCountPerAssociation[i]
 			if(maxSuccesses == 4)
@@ -303,8 +303,8 @@ function countSuccesses() {
 }
 
 function changeColor(colorRow){
-	for(i = 0; i < 3; i++){
-		for(j = 0; j < 3; j++){
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				console.log("made it woots");
 				whichWord = document.getElementById("word"+i+j);

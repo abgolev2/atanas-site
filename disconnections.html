@@ -326,7 +326,7 @@ function clickShuffle(){
 	shuffleCount++;
 	let varArray = [];
 	document.getElementById('word11').classList.toggle("shake");
-	document.getElementById('word11').classList.removeAttribute("shake");
+	//document.getElementById('word11').classList.removeAttribute("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).value;
@@ -373,7 +373,7 @@ function clearAll(){
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
-			whichWord.style.backgroundColor = "#E7E8DA";
+			whichWord.style.backgroundColor = "#E9E9E4";
 			whichWord.style.color = "#000000";
 		}
 	}

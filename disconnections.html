@@ -345,7 +345,7 @@ async function clickShuffle(){
 	//document.getElementById('word11').classList.toggle("shake");
 	document.getElementById('word11').classList.add("shake");
 	await sleep(2000);
-	document.getElementById('word11').classList.removeAttribute("shake");
+	document.getElementById('word11').classList.remove("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).innerHTML;
@@ -418,13 +418,17 @@ function switchWords(correctRow){
 		}
 	}
 	let wordFound = "";
+	let boxFound = "";
 	for(i = rowsCleared+1; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
-				wordFound = document.getElementById("word"+i+j);
-				//we check if the top row contains one of the correct words and switchy if nah
-				for(k = 0; k < 4; k++){
-					//the logic for this is pretty gross actually
+				boxFound = document.getElementById("word"+i+j);
+				wordFound = boxFound.innerHTML
+				if(colsThatNeedSwitching.length>0){
+					wordSwitched = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
+					boxFound.innerHTML = wordSwitched.innerHTML;
+					wordSwitched.innerHTML = wordFound;
+					colsThatNeedSwitching.splice(1, colsThatNeedSwitching.length);
 				}
 			}
 		}

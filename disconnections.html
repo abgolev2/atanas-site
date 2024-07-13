@@ -343,7 +343,7 @@ function clickShuffle(){
 	let varArray = [];
 	//document.getElementById('word11').classList.toggle("shake");
 	document.getElementById('word11').classList.add("shake");
-	sleep(2000);
+	await sleep(2000);
 	document.getElementById('word11').classList.removeAttribute("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
@@ -415,7 +415,7 @@ function getRandomInt(min, max) {
 	return randNum;
 }
 
-function sleep(ms)
+function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 

@@ -370,8 +370,10 @@ function clickShuffle(){
 		}
 	}
 	console.log("varArray:" + varArray)
+	console.log("selectedArray:" + selectedArray)
 	shuffle(varArray, selectedArray)
 	console.log("shuffled varArray:" + varArray)
+	console.log("shuffled selectedArray:" + selectedArray)
 	resetSelectionMatrix();
 	
 	//for(i=varArray.length;) 
@@ -418,8 +420,8 @@ function shuffle(array, array2) {
 
 function clearAll(){
 	console.log("we clear now");
-	wordsSelected=0;
 	resetSelectionMatrix();
+	wordsSelected=0;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);

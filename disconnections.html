@@ -352,12 +352,12 @@ async function clickShuffle(){
 	console.log("shuffled varArray:" + varArray)
 	
 	//for(i=varArray.length;) 
-	//varArray.splice(0, varArray.length-1)
+	//varArray.slice(0, varArray.length-1)
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
-			varArray.splice(0, varArray.length-1);
+			varArray.slice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}
 	}
@@ -424,7 +424,7 @@ function switchWords(correctRow){
 					wordSwitched = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
 					boxFound.innerHTML = wordSwitched.innerHTML;
 					wordSwitched.innerHTML = wordFound;
-					colsThatNeedSwitching.splice(1, colsThatNeedSwitching.length);
+					colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
 				}
 			}
 		}

@@ -324,7 +324,7 @@ function submitWords(){
 	//we can now go through the boolean matrix looking for num true / false
 	let isCorrect = countSuccesses();
 	console.log("isCorrect:" + isCorrect)
-	if(countSuccesses == false){
+	if(isCorrect == false){
 		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";

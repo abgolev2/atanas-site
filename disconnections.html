@@ -389,15 +389,15 @@ function clickShuffle(){
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
-			document.getElementById("word"+i+j).innerHTML = varArray[varArray.length-1];
-			let selectedWord = "";
+			let selectedWord = document.getElementById("word"+i+j);
+			selectedWord.innerHTML = varArray[varArray.length-1];
 			if(selectedArray[i][j]){
-				selectedWord = document.getElementById("word"+i+j);
 				selectedWord.style.backgroundColor = "#606060";
 				selectedWord.style.color = "#FFFFFF";
 				selectionMatrix[i][j]=true;
 			}
 			else{
+				selectedWord = document.getElementById("word"+i+j);
 				selectedWord.style.backgroundColor = "#E9E9E4";
 				selectedWord.style.color = "#000000";
 			}

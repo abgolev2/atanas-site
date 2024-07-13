@@ -236,7 +236,7 @@ function countSuccesses() {
 	for(i = 0; i < 3; i++){
 		for(j = 0; j < 3; j++){
 			if(selectionMatrix[i][j]){
-				myWord = document.getElementById("words"+i+j).value
+				myWord = document.getElementById("word"+i+j).value
 				console.log("myWord" + myWord);
 				for(k = 0; k < 3; k++){
 					for(m = 0; m < 3; m++){
@@ -262,7 +262,8 @@ function countSuccesses() {
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(countSuccesses==4){
-		changeColor(colorCorrect);
+		//vibrate
+		changeColor(colorCorrect); //make this an animation
 		//find which color had been found
 		//change color to that
 		//animate away and switch with top row
@@ -284,11 +285,14 @@ function countSuccesses() {
 	return false;
 }
 
-function changeColor(){
+function changeColor(colorRow){
 	for(i = 0; i < 3; i++){
 		for(j = 0; j < 3; j++){
 			if(selectionMatrix[i][j]){
 				console.log("made it woots");
+				whichWord = document.getElementById("word"+i+j);
+				whichWord.style.backgroundColor = wordMatrix[colorRow][4];
+				whichWord.style.color = "#000000";
 			}
 		}
 	}
@@ -297,6 +301,7 @@ function changeColor(){
 function submitWords(){
 	console.log("we submitted woots");
 	document.getElementById('Shuffle').classList.toggle("shake");
+	document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
 	var isCorrect = countSuccesses();
 	if(!countSuccesses){
@@ -323,7 +328,7 @@ function clickShuffle(){
 	document.getElementById('word11').classList.toggle("shake");
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
-			var val = document.getElementById("words"+i+j).value;
+			var val = document.getElementById("word"+i+j).value;
 			console.log("val: " + val);
 			varArray.push(val);
 		}
@@ -335,7 +340,7 @@ function clickShuffle(){
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
-			document.getElementById("words"+i+j).value = varArray(length-1);
+			document.getElementById("word"+i+j).value = varArray(length-1);
 			varArray.splice(0, varArray.length-1);
 			console.log("varArray size: " + varArray.length);
 		}

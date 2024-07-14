@@ -496,8 +496,8 @@ function switchWords(correctColorRow){
 				if(colsThatNeedSwitching.length>0){
 					console.log("wordFound" + correctWord);
 					randomWord = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
-					console.log("wordSwitched" + wordSwitched.innerHTML)
-					boxFound.innerHTML = wordSwitched.innerHTML;
+					console.log("randomWord" + randomWord.innerHTML)
+					boxFound.innerHTML = randomWord.innerHTML;
 					randomWord.innerHTML = correctWord;
 					randomWord.style.backgroundColor = "#E9E9E4";
 					randomWord.style.color = "#000000";

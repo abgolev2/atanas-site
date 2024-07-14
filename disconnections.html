@@ -332,7 +332,7 @@ function submitWords(){
 		//confetti animation
 		endGame();
 	}
-	if(correctGuess){
+	if(!correctGuess){
 		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";

@@ -507,7 +507,7 @@ function switchWords(correctColorRow){
 						topRowBox.style.color = "#000000";
 						topRowBox.backgroundColor = wordMatrix[correctColorRow][4];
 					}
-					colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
+					colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
 					console.log("colsThatNeedSwitching" + colsThatNeedSwitching);
 				}
 			}

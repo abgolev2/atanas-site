@@ -328,26 +328,34 @@ function submitWords(){
 	//we can now go through the boolean matrix looking for num true / false
 	let isCorrect = countSuccesses();
 	console.log("isCorrect:" + isCorrect)
+	if(isCorrect == true && rowsCleared == 4){
+		//confetti animation
+		endGame();
+	}
 	if(isCorrect == false){
 		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
 			alert('Ya no better luck next time champ');
-			document.getElementById("Submit").disabled = true;
-			document.getElementById("ClearAll").disabled = true;
-			document.getElementById("Shuffle").disabled = true;
-			document.getElementById("ClearAll").addEventListener("click", clearAll);
-			document.getElementById("Shuffle").addEventListener("click", clickShuffle);
-			document.getElementById("Submit").removeEventListener("click", submitWords);
-			let submitWord = "";
-			for(i = 0 ; i < 4; i++){	
-				for(j = 0; j < 4; j++){
-					submitWord = document.getElementById("word"+i+j);
-					submitWord.innerHTML = wordMatrix[i][j];
-					submitWord.removeEventListener("click", wordClick);
-				}
-			}
+			endGame();
+		}
+	}
+}
+
+function endGame(){
+	document.getElementById("Submit").disabled = true;
+	document.getElementById("ClearAll").disabled = true;
+	document.getElementById("Shuffle").disabled = true;
+	document.getElementById("ClearAll").addEventListener("click", clearAll);
+	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	let submitWord = "";
+	for(i = 0 ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			submitWord = document.getElementById("word"+i+j);
+			submitWord.innerHTML = wordMatrix[i][j];
+			submitWord.removeEventListener("click", wordClick);
 		}
 	}
 }
@@ -367,9 +375,9 @@ async function shakeWord(softShake, id){
 	else
 		document.getElementById(id).classList.add("shake");
 	await sleep(2000);
-	if(softShake)
-		document.getElementById(id).classList.remove("softshake");
-	else
+	//if(softShake)
+	//	document.getElementById(id).classList.remove("softshake");
+	//else
 		document.getElementById(id).classList.remove("shake");
 }
 	
@@ -476,6 +484,7 @@ function switchWords(correctColorRow){
 			if(topRowWord != wordMatrix[correctColorRow][j]){
 				colsThatNeedSwitching.push(i);
 				console.log("cols to switch: " + colsThatNeedSwitching);
+				break;
 			}
 		}
 	}
@@ -484,12 +493,17 @@ function switchWords(correctColorRow){
 	for(i = rowsCleared+1; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
-				boxFound = document.getElementById("word"+i+j);
-				wordFound = boxFound.innerHTML
+				let boxFound = document.getElementById("word"+i+j);
+				let wordFound = boxFound.innerHTML;
+				let wordSwitched = "";
 				if(colsThatNeedSwitching.length>0){
+					console.log("wordFound" + wordFound);
 					wordSwitched = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
+					console.log("wordSwitched" + wordSwitched)
 					boxFound.innerHTML = wordSwitched.innerHTML;
 					wordSwitched.innerHTML = wordFound;
+					wordSwitched.style.backgroundColor = "#E9E9E4";
+					wordSwitched.style.color = "#000000";
 					colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
 				}
 			}

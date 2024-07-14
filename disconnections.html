@@ -487,15 +487,15 @@ function switchWords(correctColorRow){
 			if(selectionMatrix[i][j]){
 				let correctElement = document.getElementById("word"+i+j);
 				let correctWord = correctElement.innerHTML;
-				let randomWord = "";
+				let randomElement = "";
 				if(colsThatNeedSwitching.length>0){
 					console.log("wordFound" + correctWord);
-					randomWord = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
+					randomElement = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
 					console.log("randomWord" + randomWord.innerHTML)
-					boxFound.innerHTML = randomWord.innerHTML;
-					randomWord.innerHTML = correctWord;
-					randomWord.style.backgroundColor = "#E9E9E4";
-					randomWord.style.color = "#000000";
+					correctElement.innerHTML = randomWord.innerHTML;
+					randomElement.innerHTML = correctWord;
+					randomElement.style.backgroundColor = "#E9E9E4";
+					randomElement.style.color = "#000000";
 					let topRowBox = "";
 					for(k = 0; k < 4; k++){
 						topRowBox = document.getElementById("word"+rowsCleared+k);

@@ -233,13 +233,6 @@ function wordClick(){
 		
 }
 
-function rowCleared(){
-	console.log("row cleared woots");
-	alert("Correct");
-	//shuffle row up
-	//change color appropriately
-}
-
 function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 	let myWord = "";
@@ -272,20 +265,15 @@ function countSuccesses() {
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(maxSuccesses==4){
-		//NEED TO SET THE selectedWords BACK TO 0
-		//vibrate
 		changeColor(colorCorrect); //make this an animation
-		shakeSelectedWords(true)
-		disableClicksTopRow();
-		//find which color had been found
-		//change color to that
+		shakeSelectedWords(true);
+		//sleep right here
 		switchWords(colorCorrect);
 		resetSelectionMatrix();
-		
+		sleepHelper(500);
 		//animate away and switch with top row
-		//disable clicks on the top row
-		//rowsCleared shows how many rows have been cleared for the switch
-		//alert with message for correct thing (in wordMatrix[i][5])
+		disableClicksTopRow();
+		//remove all elements from top row and change them with a big element (?)
 		rowsCleared++;
 		wordsSelected=0;
 		return true;
@@ -522,6 +510,10 @@ function switchWords(correctColorRow){
 
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function sleepHelper(ms){
+	sleep(ms)
 }
 
 Element.prototype.remove = function() {

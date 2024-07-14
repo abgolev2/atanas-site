@@ -228,7 +228,7 @@ function wordClick(){
 		
 }
 
-function countSuccesses() {
+async function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 	let myWord = "";
 	for(i = 0; i < 4; i++){
@@ -262,10 +262,11 @@ function countSuccesses() {
 	if(maxSuccesses==4){
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
+		await sleep(500);
 		//sleep right here
 		switchWords(colorCorrect);
 		resetSelectionMatrix();
-		sleepHelper(500);
+		
 		//animate away and switch with top row
 		disableClicksTopRow();
 		//remove all elements from top row and change them with a big element (?)
@@ -494,14 +495,15 @@ function switchWords(correctColorRow){
 					console.log("randomElement" + randomElement.innerHTML)
 					correctElement.innerHTML = randomElement.innerHTML;
 					randomElement.innerHTML = correctWord;
-					randomElement.style.backgroundColor = "#E9E9E4";
-					randomElement.style.color = "#000000";
+					correctElement.style.backgroundColor = "#E9E9E4";
+					correctElement.style.color = "#000000";
 				}
 				let topRowBox = "";
 				for(k = 0; k < 4; k++){
 					console.log("meow");
 					topRowBox = document.getElementById("word"+rowsCleared+k);
 					topRowBox.style.color = "#000000";
+					console.log(wordMatrix[correctColorRow][4]);
 					topRowBox.backgroundColor = wordMatrix[correctColorRow][4];
 				}
 				colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
@@ -513,10 +515,6 @@ function switchWords(correctColorRow){
 
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function sleepHelper(ms){
-	await sleep(ms)
 }
 
 Element.prototype.remove = function() {

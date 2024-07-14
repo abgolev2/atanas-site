@@ -275,16 +275,19 @@ function countSuccesses() {
 		//NEED TO SET THE selectedWords BACK TO 0
 		//vibrate
 		changeColor(colorCorrect); //make this an animation
+		shakeSelectedWords(true)
+		disableClicksTopRow();
 		//find which color had been found
 		//change color to that
 		switchWords(colorCorrect);
 		resetSelectionMatrix();
+		
 		//animate away and switch with top row
+		//disable clicks on the top row
 		//rowsCleared shows how many rows have been cleared for the switch
 		//alert with message for correct thing (in wordMatrix[i][5])
 		rowsCleared++;
 		wordsSelected=0;
-		shakeSelectedWords(true)
 		return true;
 	}	
 	else if(maxSuccesses==3){
@@ -304,6 +307,12 @@ function countSuccesses() {
 	}
 	console.log("we return false now");
 	return false;
+}
+
+function disableClicksTopRow(){
+	for(i = 0; i < 4; i++){
+		document.getElementById("word"+rowsCleared+j).removeEventListener("click", wordClick);
+	}
 }
 
 function changeColor(colorRow){

@@ -473,7 +473,7 @@ function switchWords(correctColorRow){
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){
-			if(topRowWord == wordMatrix[correctColorRow][j]){
+			if(topRowWord != wordMatrix[correctColorRow][j]){
 				colsThatNeedSwitching.push(i);
 				console.log("cols to switch: " + colsThatNeedSwitching);
 			}

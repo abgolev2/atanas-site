@@ -503,8 +503,7 @@ function switchWords(correctColorRow){
 					console.log("meow");
 					topRowBox = document.getElementById("word"+rowsCleared+k);
 					topRowBox.style.color = "#000000";
-					console.log(wordMatrix[correctColorRow][4]);
-					topRowBox.backgroundColor = wordMatrix[correctColorRow][4];
+					topRowBox.style.backgroundColor = wordMatrix[correctColorRow][4];
 				}
 				colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
 				console.log("colsThatNeedSwitching" + colsThatNeedSwitching);

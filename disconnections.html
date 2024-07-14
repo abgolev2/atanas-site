@@ -122,17 +122,17 @@ h1 {
   animation-iteration-count: 2;
 }
 @keyframes softshake {
-  0% { transform: translate(0px, 1px); }
-  10% { transform: translate(0px, -1px); }
-  20% { transform: translate(0px, 0px); }
-  30% { transform: translate(0px, 2px); }
-  40% { transform: translate(0px, -1px); }
-  50% { transform: translate(0px, 2px); }
-  60% { transform: translate(0px, 1px); }
-  70% { transform: translate(0px, 1px); }
-  80% { transform: translate(0px, -1px); }
-  90% { transform: translate(0px, 2px); }
-  100% { transform: translate(0px, -2px); }
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 </STYLE>
 
@@ -471,7 +471,7 @@ function switchWords(correctColorRow){
 	let colsThatNeedSwitching = [];
 	let topRowWord = "";
 	for(i = 0; i < 4; i++){
-		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML
+		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){
 			if(topRowWord == wordMatrix[correctColorRow][j]){
 				colsThatNeedSwitching.push(i);
@@ -499,6 +499,17 @@ function switchWords(correctColorRow){
 
 function sleep(ms){
 	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
 }
 
 </SCRIPT>

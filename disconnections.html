@@ -299,7 +299,7 @@ function countSuccesses() {
 
 function disableClicksTopRow(){
 	for(i = 0; i < 4; i++){
-		document.getElementById("word"+rowsCleared+j).removeEventListener("click", wordClick);
+		document.getElementById("word"+rowsCleared+i).removeEventListener("click", wordClick);
 	}
 }
 

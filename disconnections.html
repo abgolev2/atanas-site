@@ -491,11 +491,11 @@ function switchWords(correctColorRow){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				let correctElement = document.getElementById("word"+i+j);
-				let correctWord = boxFound.innerHTML;
+				let correctWord = correctElement.innerHTML;
 				let randomWord = "";
 				if(colsThatNeedSwitching.length>0){
 					console.log("wordFound" + correctWord);
-					wordSwitched = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
+					randomWord = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
 					console.log("wordSwitched" + wordSwitched.innerHTML)
 					boxFound.innerHTML = wordSwitched.innerHTML;
 					randomWord.innerHTML = correctWord;

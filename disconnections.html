@@ -499,9 +499,9 @@ function switchWords(correctColorRow){
 				let correctWord = correctElement.innerHTML;
 				let randomElement = "";
 				if(colsThatNeedSwitching.length>0){
-					console.log("wordFound" + correctWord);
+					console.log("correct word: " + correctWord);
 					randomElement = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
-					console.log("randomElement" + randomElement.innerHTML)
+					console.log("random word: " + randomElement.innerHTML)
 					correctElement.innerHTML = randomElement.innerHTML;
 					randomElement.innerHTML = correctWord;
 					correctElement.style.backgroundColor = unselectedSpaceColor;
@@ -515,7 +515,7 @@ function switchWords(correctColorRow){
 					topRowBox.style.backgroundColor = wordMatrix[correctColorRow][4];
 				}
 				colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
-				console.log("colsThatNeedSwitching" + colsThatNeedSwitching);
+				console.log("colsThatNeedSwitching: " + colsThatNeedSwitching);
 			}
 		}
 	}

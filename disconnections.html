@@ -480,15 +480,20 @@ function switchWords(correctColorRow){
 	console.log("correct color row: " + correctColorRow) 
 	let colsThatNeedSwitching = [];
 	let topRowWord = "";
+	let matchFound = false;
+	let colToSet = 0;
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){
-			if(topRowWord != wordMatrix[correctColorRow][j]){
-				colsThatNeedSwitching.push(i);
-				console.log("cols to switch: " + colsThatNeedSwitching);
+			if(topRowWord == wordMatrix[correctColorRow][j]){
+				matchFound = true;
 				break;
 			}
 		}
+		if(!matchFound){
+			colsThatNeedSwitching.push(colToSet);
+		}
+		colToSet++;
 	}
 	let wordFound = "";
 	let boxFound = "";

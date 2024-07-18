@@ -2,7 +2,6 @@
 <!--
 	Created by Atanas Golev.
 -->
-
 <HTML>
 <TITLE>Disconnections</TITLE>
 <HEAD>
@@ -402,7 +401,7 @@ function endGame(){
 	document.getElementById("Shuffle").remove();
 	document.getElementById("Submit").remove();
 	document.getElementById("ClearAll").innerHTML = "View Results"
-	document.getElementByID.addEventListerner("click", viewResults);
+	document.getElementByID("ClearAll").addEventListerner("click", viewResults);
 	//make the three buttons on the bottom disappear
 	//exchange them with a share results button
 }

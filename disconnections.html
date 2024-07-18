@@ -1,6 +1,8 @@
 <!DOCTYPE>
 <!--
 	Created by Atanas Golev.
+Code for modal snagged from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+Code for share button snagged from: https://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website
 -->
 <HTML>
 <TITLE>Disconnections</TITLE>
@@ -203,6 +205,21 @@ var associations = [
 	"Mother",
 	"Cheetah"
 ]
+
+const shareButton = document.getElementById("shareButton"); 
+shareButton.addEventListener("click", (e) => { 
+  if (navigator.share) {
+    navigator.share({
+        title: 'Web Share API Draft',
+        text: 'Take a look at this spec!',
+        url: 'https://wicg.github.io/web-share/#share-method',
+      })
+      .then(() => console.log('Successful share'))
+      .catch((error) => console.log('Error sharing', error));
+  } else {
+    console.log('Share not supported on this browser, do it the old way.');
+  }
+});
 	
 function load() {
 	//alert("Welcome to Disconnections");
@@ -363,6 +380,7 @@ function changeColor(colorRow){
 }
 
 function submitWords(){
+	document.getElementById("Submit").removeEventListener("click", submitWords);
 	console.log("we submitted woots");
 	//document.getElementById('Shuffle').classList.toggle("shake");
 	//document.getElementById('Shuffle').classList.removeAttribute("shake");
@@ -380,6 +398,8 @@ function submitWords(){
 			alert('Ya no better luck next time champ');
 			endGame();
 		}
+		else
+			document.getElementById("Submit").addEventListener("click", submitWords);
 	}
 }
 
@@ -400,8 +420,8 @@ function endGame(){
 	}
 	document.getElementById("Shuffle").remove();
 	document.getElementById("Submit").remove();
-	document.getElementById("ClearAll").innerHTML = "View Results"
-	document.getElementByID("ClearAll").addEventListerner("click", viewResults);
+	document.getElementById("ClearAll").innerHTML = "View Results";
+	document.getElementById("ClearAll").addEventListerner("click", viewResults);
 	//make the three buttons on the bottom disappear
 	//exchange them with a share results button
 }

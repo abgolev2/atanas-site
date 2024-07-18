@@ -389,12 +389,12 @@ function submitWords(){
 }
 
 function endGame(){
-	document.getElementById("Submit").disabled = true;
-	document.getElementById("ClearAll").disabled = true;
-	document.getElementById("Shuffle").disabled = true;
+	//document.getElementById("Submit").disabled = true;
+	//document.getElementById("ClearAll").disabled = true;
+	//document.getElementById("Shuffle").disabled = true;
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	document.getElementById("Submit").removeEventListener("click", submitWords);
+	//document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
+	//document.getElementById("Submit").removeEventListener("click", submitWords);
 	let submitWord = "";
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
@@ -407,6 +407,7 @@ function endGame(){
 	document.getElementById("Submit").remove();
 	document.getElementById("ClearAll").innerHTML = "View Results";
 	document.getElementById("ClearAll").addEventListener("click", viewResults);
+	document.getElementById("ClearAll").enabled = true;
 	//make the three buttons on the bottom disappear
 	//exchange them with a share results button
 }

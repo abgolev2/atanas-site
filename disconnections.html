@@ -198,6 +198,8 @@ var selectionMatrix = [
 	[false, false, false, false],
 	[false, false, false, false]
 ]
+
+var guessList = [];
 	
 var associations = [
 	"Drugs",
@@ -274,10 +276,13 @@ function wordClick(){
 async function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 	let myWord = "";
+	let colorList = [];
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("word"+i+j).innerHTML
+				myColor = wordMatrix[i][4]
+				colorList.push(myColor);
 				console.log("myWord" + myWord);
 				for(k = 0; k < 4; k++){
 					for(m = 0; m < 4; m++){
@@ -289,6 +294,8 @@ async function countSuccesses() {
 			}
 		}
 	}
+	console.log("colorList: " + colorList)
+	guessList.push(colorList);
 	console.log("successes: " + successCountPerAssociation);
 
 	let maxSuccesses = 0;
@@ -370,6 +377,7 @@ function submitWords(){
 	//document.getElementById('Shuffle').classList.toggle("shake");
 	//document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
+	addToGuessList();
 	countSuccesses();
 	if(correctGuess && rowsCleared == 4){
 		//confetti animation
@@ -386,38 +394,6 @@ function submitWords(){
 		else
 			document.getElementById("Submit").addEventListener("click", submitWords);
 	}
-}
-
-function endGame(){
-	//document.getElementById("Submit").disabled = true;
-	//document.getElementById("ClearAll").disabled = true;
-	//document.getElementById("Shuffle").disabled = true;
-	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	//document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	//document.getElementById("Submit").removeEventListener("click", submitWords);
-	let submitWord = "";
-	for(i = 0 ; i < 4; i++){	
-		for(j = 0; j < 4; j++){
-			submitWord = document.getElementById("word"+i+j);
-			submitWord.innerHTML = wordMatrix[i][j];
-			submitWord.removeEventListener("click", wordClick);
-		}
-	}
-	document.getElementById("Shuffle").remove();
-	document.getElementById("Submit").remove();
-	document.getElementById("ClearAll").innerHTML = "View Results";
-	document.getElementById("ClearAll").addEventListener("click", viewResults);
-	document.getElementById("ClearAll").enabled = true;
-	//make the three buttons on the bottom disappear
-	//exchange them with a share results button
-}
-
-function viewResults(){
-	console.log("meowwww");
-	//A. we need to be keeping a List<String[4]> that holds the guessed color values and how many
-	//B. For (c : color) 
-		//for (i < 4)
-			//square[color]x4 newline
 }
 
 function shakeSelectedWords(softShake){
@@ -460,9 +436,6 @@ function clickShuffle(){
 	console.log("shuffled varArray:" + varArray)
 	console.log("shuffled selectedArray:" + selectedArray)
 	resetSelectionMatrixAndAllColor(rowsCleared);
-	
-	//for(i=varArray.length;) 
-	//varArray.slice(0, varArray.length-1)
 	
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
@@ -585,19 +558,37 @@ function switchWords(correctColorRow){
 	}
 }
 
-function sleep(ms){
-	return new Promise(resolve => setTimeout(resolve, ms));
+function endGame(){
+	console.log(guessList);
+	//document.getElementById("Submit").disabled = true;
+	//document.getElementById("ClearAll").disabled = true;
+	//document.getElementById("Shuffle").disabled = true;
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	//document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
+	//document.getElementById("Submit").removeEventListener("click", submitWords);
+	let submitWord = "";
+	for(i = 0 ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			submitWord = document.getElementById("word"+i+j);
+			submitWord.innerHTML = wordMatrix[i][j];
+			submitWord.removeEventListener("click", wordClick);
+		}
+	}
+	document.getElementById("Shuffle").remove();
+	document.getElementById("Submit").remove();
+	document.getElementById("ClearAll").innerHTML = "View Results";
+	document.getElementById("ClearAll").addEventListener("click", viewResults);
+	document.getElementById("ClearAll").enabled = true;
+	//make the three buttons on the bottom disappear
+	//exchange them with a share results button
 }
 
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-    }
+function viewResults(){
+	console.log("meowwww");
+	//A. we need to be keeping a List<String[4]> that holds the guessed color values and how many
+	//B. For (c : color) 
+		//for (i < 4)
+			//square[color]x4 newline
 }
 
 function enableShareButton(){
@@ -615,6 +606,21 @@ function enableShareButton(){
     		console.log('Share not supported on this browser, do it the old way.');
   		}
 	});
+}
+
+function sleep(ms){
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+	
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
 }
 
 </SCRIPT>

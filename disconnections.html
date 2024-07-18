@@ -584,8 +584,16 @@ function endGame(){
 }
 
 function viewResults(){
+	console.log("meoww");
+	documents.getElementById("results").style.display = "block";
+}
+
+function getColorTable(){
+	var colorTable = "";
+	while(guessList.length != 0){
+		colorTable += 
+	}
 	console.log("meowwww");
-	//A. we need to be keeping a List<String[4]> that holds the guessed color values and how many
 	//B. For (c : color) 
 		//for (i < 4)
 			//square[color]x4 newline
@@ -593,6 +601,7 @@ function viewResults(){
 
 function enableShareButton(){
 	const shareButton = document.getElementById("shareResults"); 
+	var colors = getColorTable();
 	shareButton.addEventListener("click", (e) => { 
   		if (navigator.share) {
     			navigator.share({

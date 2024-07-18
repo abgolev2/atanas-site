@@ -585,6 +585,7 @@ function endGame(){
 function viewResults(){
 	console.log("meoww");
 	document.getElementById("results").style.display = "block";
+	enableShareButton();
 }
 
 function getColorTable(){
@@ -603,6 +604,7 @@ function enableShareButton(){
 	const shareButton = document.getElementById("shareButton"); 
 	var colors = getColorTable();
 	shareButton.addEventListener("click", (e) => { 
+		console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
         		title: 'Web Share API Draft',

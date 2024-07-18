@@ -179,7 +179,7 @@ function load() {
 	}
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
-	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
+	document.getElementById("Shuffle").addEventListener("click", endGame); //clickShuffle
 	
 }
 
@@ -360,11 +360,16 @@ function endGame(){
 			submitWord.removeEventListener("click", wordClick);
 		}
 	}
+	document.getElementById("Shuffle").remove();
+	document.getElementById("Submit").remove();
+	document.getElementById("ClearAll").innerHTML = "View Results"
+	document.getElementByID.addEventListerner("click", viewResults);
 	//make the three buttons on the bottom disappear
 	//exchange them with a share results button
 }
 
-function shareResultsMessage(){
+function viewResults(){
+	console.log("meowwww");
 	//A. we need to be keeping a List<String[4]> that holds the guessed color values and how many
 	//B. For (c : color) 
 		//for (i < 4)

@@ -590,12 +590,13 @@ function viewResults(){
 function getColorTable(){
 	var colorTable = "";
 	while(guessList.length != 0){
-		//color emojis are in wordMatrix[5];
+		for(i=0; i<4; i++)
+			colorTable+=guessList[0];
+		colorTable+="\n";
+		guessList = varArray.slice(1, varArray.length);
 	}
 	console.log("meowwww");
-	//B. For (c : color) 
-		//for (i < 4)
-			//square[color]x4 newline
+	console.log("colorTable" + colorTable);
 }
 
 function enableShareButton(){
@@ -605,7 +606,7 @@ function enableShareButton(){
   		if (navigator.share) {
     			navigator.share({
         		title: 'Web Share API Draft',
-        		text: 'Take a look at this spec!',
+        		text: colors,
        			url: 'https://wicg.github.io/web-share/#share-method',
      		})
       		.then(() => console.log('Successful share'))

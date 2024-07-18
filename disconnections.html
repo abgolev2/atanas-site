@@ -406,7 +406,7 @@ function endGame(){
 	document.getElementById("Shuffle").remove();
 	document.getElementById("Submit").remove();
 	document.getElementById("ClearAll").innerHTML = "View Results";
-	document.getElementById("ClearAll").addEventListerner("click", viewResults);
+	document.getElementById("ClearAll").addEventListener("click", viewResults);
 	//make the three buttons on the bottom disappear
 	//exchange them with a share results button
 }

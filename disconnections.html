@@ -281,7 +281,7 @@ async function countSuccesses() {
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("word"+i+j).innerHTML
-				myColor = wordMatrix[i][4]
+				myColor = wordMatrix[i][5]
 				colorList.push(myColor);
 				console.log("myWord" + myWord);
 				for(k = 0; k < 4; k++){
@@ -590,7 +590,7 @@ function viewResults(){
 function getColorTable(){
 	var colorTable = "";
 	while(guessList.length != 0){
-		colorTable += 
+		//color emojis are in wordMatrix[5];
 	}
 	console.log("meowwww");
 	//B. For (c : color) 

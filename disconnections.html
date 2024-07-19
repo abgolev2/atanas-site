@@ -617,9 +617,9 @@ function enableShareButton(){
 		console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
-        		title: 'Web Share API Draft',
-        		text: colors,
-       			url: 'Disconnections\nPuzzle #' + puzzleNumber,
+        		title: "Disconnections\nPuzzle #" + puzzleNumber,
+        		text: "",
+       			url: colors,
      		})
       		.then(() => console.log('Successful share'))
       		.catch((error) => console.log('Error sharing', error));

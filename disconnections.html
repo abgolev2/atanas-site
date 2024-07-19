@@ -192,10 +192,10 @@ var selectedSpaceColor = "#";
 var puzzleNumber = 1;
 	
 var wordMatrix = [
-	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E1}", ""],
-	["FIVE", "SIX", "SEVEN", "EIGHT", "#A4DC78", "\u{1F7E2}", ""],
-	["NINE", "TEN", "ELEVEN", "TWELVE", "#B8CFFD", "\u{1F535}", ""],
-	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "#B487CE", "\u{1F7E3}", ""]
+	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E8}", ""],
+	["FIVE", "SIX", "SEVEN", "EIGHT", "#A4DC78", "\u{1F7E9}", ""],
+	["NINE", "TEN", "ELEVEN", "TWELVE", "#B8CFFD", "\u{1F7E6}", ""],
+	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "#B487CE", "\u{1F7EA}", ""]
 ]
 	
 var selectionMatrix = [
@@ -635,8 +635,7 @@ function enableShareButton(){
 		console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
-        		title: "Disconnections\nPuzzle #" + puzzleNumber,
-        		text: colors
+        		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors;
      		})
       		.then(() => console.log('Successful share'))
       		.catch((error) => console.log('Error sharing', error));

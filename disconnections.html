@@ -385,6 +385,7 @@ function submitWords(){
 	//we can now go through the boolean matrix looking for num true / false
 	countSuccesses();
 	if(correctGuess && rowsCleared == 4){
+		console.log("meow");
 		//confetti animation
 		endGame();
 	}
@@ -564,6 +565,7 @@ function switchWords(correctColorRow){
 }
 
 function endGame(){
+	enableShareButton();
 	console.log(guessList);
 	//document.getElementById("Submit").disabled = true;
 	//document.getElementById("ClearAll").disabled = true;
@@ -726,22 +728,22 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 					<TD id="resultSquares0" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares1" style="font-size:50px;"></TD>
+					<TD id="resultSquares1" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares2" style="font-size:50px;"></TD>
+					<TD id="resultSquares2" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares3" style="font-size:50px;"></TD>
+					<TD id="resultSquares3" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares4" style="font-size:50px;"></TD>
+					<TD id="resultSquares4" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares5" style="font-size:50px;"></TD>
+					<TD id="resultSquares5" div class="resultTable"> </div></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares6" style="font-size:50px;"></TD>
+					<TD id="resultSquares6" div class="resultTable"> </div></TD>
 				</TR>
 			</TABLE>
 		</div>

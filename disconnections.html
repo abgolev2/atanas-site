@@ -184,6 +184,7 @@ var shuffleCount = 0;
 var correctGuess = false;
 var unselectedSpaceColor = "#F0F0E4";
 var selectedSpaceColor = "#";
+var puzzleNumber = 1;
 	
 var wordMatrix = [
 	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E1}", ""],
@@ -609,7 +610,7 @@ function enableShareButton(){
     			navigator.share({
         		title: 'Web Share API Draft',
         		text: colors,
-       			url: 'https://wicg.github.io/web-share/#share-method',
+       			url: 'Disconnections\nPuzzle #' + puzzleNumber,
      		})
       		.then(() => console.log('Successful share'))
       		.catch((error) => console.log('Error sharing', error));

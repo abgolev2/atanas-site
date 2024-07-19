@@ -591,10 +591,11 @@ function endGame(){
 function viewResults(){
 	console.log("meoww");
 	document.getElementById("results").style.display = "block";
-	let myColorTable = getColorTable();
-	console.log("MyColorTable:\n" + myColorTable);
-	for(i = 0; i < guessList.length; i++)
+	//let myColorTable = getColorTable();
+	//console.log("MyColorTable:\n" + myColorTable);
+	for(i = 0; i < guessList.length; i++){
 		document.getElementById("resultSquares"+i).innerHTML = getColorLine(i);
+	}
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
 }

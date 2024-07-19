@@ -594,7 +594,7 @@ function getColorTable(){
 		for(i=0; i<4; i++)
 			colorTable+=guessList[0];
 		colorTable+="\n";
-		guessList = varArray.slice(1, varArray.length);
+		guessList = guessList.slice(1, varArray.length);
 	}
 	console.log("meowwww");
 	console.log("colorTable" + colorTable);
@@ -643,28 +643,28 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <div>
 <TABLE ID="Words">
 <TR>
-	<TD ID="word00" div class="content"> </div></TD>
-	<TD ID="word01" div class="content"> </div></TD>
-	<TD ID="word02" div class="content"> </div></TD>
-	<TD ID="word03" div class="content"> </div></TD>
+	<TD id="word00" div class="content"> </div></TD>
+	<TD id="word01" div class="content"> </div></TD>
+	<TD id="word02" div class="content"> </div></TD>
+	<TD id="word03" div class="content"> </div></TD>
 </TR>
 <TR>
-	<TD ID="word10" div class="content"> </div></TD>
-	<TD ID="word11" div class="content"> </div></TD>
-	<TD ID="word12" div class="content"> </div></TD>
-	<TD ID="word13" div class="content"> </div></TD>
+	<TD id="word10" div class="content"> </div></TD>
+	<TD id="word11" div class="content"> </div></TD>
+	<TD id="word12" div class="content"> </div></TD>
+	<TD id="word13" div class="content"> </div></TD>
 </TR>
 <TR>
-	<TD ID="word20" div class="content"> </div></TD>
-	<TD ID="word21" div class="content"> </div></TD>
-	<TD ID="word22" div class="content"> </div></TD>
-	<TD ID="word23" div class="content"> </div></TD>
+	<TD id="word20" div class="content"> </div></TD>
+	<TD id="word21" div class="content"> </div></TD>
+	<TD id="word22" div class="content"> </div></TD>
+	<TD id="word23" div class="content"> </div></TD>
 </TR>
 <TR>
-	<TD ID="word30" div class="content"> </div></TD>
-	<TD ID="word31" div class="content"> </div></TD>
-	<TD ID="word32" div class="content"> </div></TD>
-	<TD ID="word33" div class="content"> </div></TD>
+	<TD id="word30" div class="content"> </div></TD>
+	<TD id="word31" div class="content"> </div></TD>
+	<TD id="word32" div class="content"> </div></TD>
+	<TD id="word33" div class="content"> </div></TD>
 </TR>
 </TABLE>
 </div>
@@ -695,7 +695,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <div id="results" class="modal">
 	<div class="modal-content">
 		<span class="close">&times;</span>
-		<p>Here is some text!</p>
+		<TD id="resultSquares"></TD>
 		<div class="button"><button class="button button" id="shareButton">Share Results</button></div>
  	</div>
 </div>

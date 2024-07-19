@@ -319,8 +319,7 @@ async function countSuccesses() {
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		//sleep right here
-		if(rowsCleared<4)
-			switchWords(colorCorrect);
+		switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
 		shakeSelectedWords(true);
@@ -615,7 +614,7 @@ function close(){
 function getColorLine(row){
 	let myColorLine = "";
 	for(i=0; i<4; i++)
-		myCcolorLine+=guessList[row][i];
+		myColorLine+=guessList[row][i];
 	console.log("myColorLine"+myColorLine);
 	return myColorLine;
 }

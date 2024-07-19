@@ -282,13 +282,13 @@ async function countSuccesses() {
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("word"+i+j).innerHTML
-				myColor = wordMatrix[i][5]
-				colorList.push(myColor);
 				console.log("myWord" + myWord);
 				for(k = 0; k < 4; k++){
 					for(m = 0; m < 4; m++){
 						if(wordMatrix[k][m] == myWord){
 							successCountPerAssociation[k]++;
+							myColor = wordMatrix[k][5]
+							colorList.push(myColor);
 						}
 					}
 				}

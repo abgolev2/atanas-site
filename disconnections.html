@@ -324,9 +324,8 @@ async function countSuccesses() {
 		//sleep right here
 		if(rowsCleared<4)
 			switchWords(colorCorrect);
-		disableClicksTopRow();
 		resetSelectionMatrix();
-		
+		disableClicksTopRow();
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);

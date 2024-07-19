@@ -316,6 +316,7 @@ async function countSuccesses() {
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(maxSuccesses==4){
+		rowsCleared++;
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
@@ -331,7 +332,6 @@ async function countSuccesses() {
 		document.getElementById("ClearAll").disabled = true;
 		document.getElementById("ClearAll").removeEventListener("click", clearAll);
 		//remove all elements from top row and change them with a big element (?)
-		rowsCleared++;
 		wordsSelected=0;
 		return true;
 	}	

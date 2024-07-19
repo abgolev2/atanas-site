@@ -384,7 +384,9 @@ function submitWords(){
 	//document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
 	countSuccesses();
-	if(correctGuess && rowsCleared == 4){
+	console.log(correctGuess);
+	console.log(rowsCleared);
+	if(correctGuess == true && rowsCleared == 4){
 		console.log("meow");
 		//confetti animation
 		endGame();

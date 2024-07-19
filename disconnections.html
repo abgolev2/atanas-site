@@ -587,7 +587,12 @@ function viewResults(){
 	console.log("meoww");
 	document.getElementById("results").style.display = "block";
 	document.getElementById("resultSquares").innerHTML = getColorTable();
+	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
+}
+
+function close(){
+	document.getElementById("results").close();
 }
 
 function getColorTable(){
@@ -697,7 +702,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 
 <div id="results" class="modal">
 	<div class="modal-content">
-		<span class="close">&times;</span>
+		<span id="closeButton" class="close">&times;</span>
 		<TD id="resultSquares"></TD>
 		<div id="wrapper">
 			<div class="button"><button class="button button" id="shareButton">Share Results</button></div>

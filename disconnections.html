@@ -633,8 +633,7 @@ function enableShareButton(){
   		if (navigator.share) {
     			navigator.share({
         		title: "Disconnections\nPuzzle #" + puzzleNumber,
-        		text: "here is some text",
-       			url: "here is some more text",
+        		text: colors
      		})
       		.then(() => console.log('Successful share'))
       		.catch((error) => console.log('Error sharing', error));

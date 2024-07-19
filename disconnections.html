@@ -599,7 +599,7 @@ function getColorTable(){
 	var colorTable = "";
 	while(guessList.length != 0){
 		for(i=0; i<4; i++)
-			colorTable+=guessList[0];
+			colorTable+=guessList[i];
 		colorTable+="\n";
 		guessList = guessList.slice(1, guessList.length);
 	}

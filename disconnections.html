@@ -586,7 +586,9 @@ function endGame(){
 function viewResults(){
 	console.log("meoww");
 	document.getElementById("results").style.display = "block";
-	document.getElementById("resultSquares").innerHTML = getColorTable();
+	let myColorTable = getColorTable();
+	console.log("MyColorTable:\n" + myColorTable);
+	document.getElementById("resultSquares").innerHTML = myColorTable;
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
 }

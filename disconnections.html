@@ -594,7 +594,7 @@ function viewResults(){
 }
 
 function close(){
-	document.getElementById("results").close();
+	document.getElementById("results").style.display = "none";
 }
 
 function getColorTable(){
@@ -705,7 +705,9 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <div id="results" class="modal">
 	<div class="modal-content">
 		<span id="closeButton" class="close">&times;</span>
-		<TD id="resultSquares"></TD>
+		<TABLE>
+			<TD id="resultSquares" div class="content"></TD>
+		</TABLE>
 		<div id="wrapper">
 			<div class="button"><button class="button button" id="shareButton">Share Results</button></div>
 		</div>

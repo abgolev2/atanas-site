@@ -597,6 +597,7 @@ function viewResults(){
 	//console.log("MyColorTable:\n" + myColorTable);
 	for(i = 0; i < guessList.length; i++){
 		document.getElementById("resultSquares"+i).innerHTML = getColorLine(i);
+		console.log("hey got in");
 	}
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
@@ -724,22 +725,22 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 		<div>
 			<TABLE>
 				<TR>
-					<TD id="resultSquares0" div class="resultTable"> </div></TD>
+					<TD id="resultSquares0" class="resultTable"></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares1" div class="resultTable"> </div></TD>
+					<TD id="resultSquares1" class="resultTable"></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares2" div class="resultTable"> </div></TD>
+					<TD id="resultSquares2" class="resultTable"></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares3" div class="resultTable"> </div></TD>
+					<TD id="resultSquares3" class="resultTable"></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares4" div class="resultTable"> </div></TD>
+					<TD id="resultSquares4" class="resultTable"></TD>
 				</TR>
 				<TR>
-					<TD id="resultSquares5" div class="resultTable"> </div></TD>
+					<TD id="resultSquares5" class="resultTable"></TD>
 				</TR>
 				<TR>
 					<TD id="resultSquares6" div class="resultTable"> </div></TD>

@@ -316,16 +316,16 @@ async function countSuccesses() {
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(maxSuccesses==4){
-		rowsCleared++;
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
-		shakeSelectedWords(true);
-		await sleep(1200);
 		//sleep right here
 		if(rowsCleared<4)
 			switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
+		shakeSelectedWords(true);
+		rowsCleared++;
+		await sleep(1200);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);

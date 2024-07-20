@@ -614,6 +614,8 @@ function endGame(){
 	let submitWord = "";
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
+			console.log("i:"+ i);
+			console.log("j:"+ j);
 			submitWord = document.getElementById("word"+i+j);
 			submitWord.innerHTML = wordMatrix[i][j];
 			submitWord.removeEventListener("click", wordClick);

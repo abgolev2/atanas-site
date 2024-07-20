@@ -342,14 +342,15 @@ async function countSuccesses() {
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
+		await sleep(1200);
 		//sleep right here
 		if(rowsCleared<4)
 			switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
 		rowsCleared++;
-		await sleep(1200);
 		makeBigRow(rowsCleared-1);
+		await sleep(200);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);

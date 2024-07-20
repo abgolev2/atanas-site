@@ -45,12 +45,23 @@ tableWords center {
 
 td:after {
 	content:'';
+	contentRow:'';
+	aspect-ratio: 1/1;
+	vertical-align:middle;
+	position:absolute;
+}
 	display:block;
 	margin-top:2%;
 }
 
 .content {
 	aspect-ratio: 1/1;
+	vertical-align:middle;
+	position:absolute;
+}
+
+.contentRow {
+	aspect-ratio: 1/4;
 	vertical-align:middle;
 	position:absolute;
 }
@@ -690,6 +701,23 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <BODY ONLOAD="load()">
 
 <div>
+<TABLE>
+<TR>
+	<TD id="wordrow0" div class="rowcontent"> </div></TD>
+</TR>
+<TR>
+	<TD id="wordrow1" div class="rowcontent"> </div></TD>
+</TR>
+<TR>
+	<TD id="wordrow2" div class="rowcontent"> </div></TD>=
+</TR>
+<TR>
+	<TD id="wordrow3" div class="rowcontent"> </div></TD>
+</TR>
+<TABLE>
+</div>
+
+<div>
 <TABLE ID="Words">
 <TR>
 	<TD id="word00" div class="content"> </div></TD>
@@ -701,7 +729,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <TR>
 	<TD id="word10" div class="content"> </div></TD>
 	<TD id="word11" div class="content"> </div></TD>
-	<TD id="word12" div class="co ntent"> </div></TD>
+	<TD id="word12" div class="content"> </div></TD>
 	<TD id="word13" div class="content"> </div></TD>
 </TR>
 <TR>

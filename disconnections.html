@@ -364,9 +364,12 @@ function makeBigRow(row){
 	for(i = 0; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 	}
-	document.getElementById("word" + row + "4").style.display = "block";
-	document.getElementById("word" + row + "4").innerHTML = "Hello this is some text<br> hello this is the second row";
-	document.getElementById("word" + row + "4").style.wordWrap = "break-word";
+	let bigRow = document.getElementById("word" + row + "4");
+	bigRow.style.display = "block";
+	bigRow.innerHTML = "Hello this is some text<br> hello this is the second row";
+	bigRow.style.wordWrap = "break-word";
+	bigRow.width = "100%"
+	bigRow.line-height = "50px";
 }
 
 function disableClicksTopRow(){

@@ -462,7 +462,7 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.add("softshake");
 	else
 		document.getElementById(id).classList.add("shake");
-	await sleep(2000);
+	await sleep(500);
 	if(softShake)
 		document.getElementById(id).classList.remove("softshake");
 	else

@@ -360,9 +360,9 @@ async function countSuccesses() {
 
 function makeBigRow(){
 	for(i = 0; i < 4; i++){
-		document.getElementById("word" + guessesCorrect + i).remove();
+		document.getElementById("word" + rowsCleared + i).remove();
 	}
-	document.getElementById("word" + guessesCorrect + "4").style.display = "block";
+	document.getElementById("word" + rowsCleared + "4").style.display = "block";
 }
 
 function disableClicksTopRow(){

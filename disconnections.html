@@ -376,7 +376,7 @@ function makeBigRow(row){
 	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 	}
-	let bigRow = document.getElementById("word" + row + "0");
+	let bigRow = document.getElementById("wordrow"+row);
 	//bigRow.style.display = "block";
 	bigRow.innerHTML = "Hello this is some text<br> hello this is the second row";
 	bigRow.style.wordWrap = "break-word";

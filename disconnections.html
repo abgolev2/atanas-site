@@ -373,7 +373,7 @@ async function countSuccesses() {
 
 function makeBigRow(row){
 	console.log("rowsCleared" + row);
-	for(i = 1; i < 4; i++){
+	for(i = 0; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 	}
 	let bigRow = document.getElementById("wordrow"+row);

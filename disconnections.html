@@ -377,7 +377,7 @@ function makeBigRow(row){
 		document.getElementById("word" + row + i).remove();
 	}
 	let bigRow = document.getElementById("wordrow"+row);
-	//bigRow.style.display = "block";
+	bigRow.style.display = "block";
 	bigRow.innerHTML = "Hello this is some text<br> hello this is the second row";
 	bigRow.style.wordWrap = "break-word";
 	bigRow.style.width = "100%"
@@ -710,7 +710,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 	<TD id="wordrow1" div class="rowcontent"> </div></TD>
 </TR>
 <TR>
-	<TD id="wordrow2" div class="rowcontent"> </div></TD>=
+	<TD id="wordrow2" div class="rowcontent"> </div></TD>
 </TR>
 <TR>
 	<TD id="wordrow3" div class="rowcontent"> </div></TD>

@@ -347,7 +347,7 @@ async function countSuccesses() {
 		resetSelectionMatrix();
 		disableClicksTopRow();
 		rowsCleared++;
-		makeBigRow(rowsCleared-1);
+		makeBigRow(rowsCleared-1, colorCorrect);
 		await sleep(200);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
@@ -386,7 +386,7 @@ function makeBigRow(row){
 	}
 	let bigRow = document.getElementById("word"+row+"0");
 	bigRow.style.display = "block";
-	let bigRowText  = "<br><b>" + wordMatrix[row][6] + "</b><br>";
+	let bigRowText  = "<br><b>" + wordMatrix[colorCorrect][6] + "</b><br>";
 	for(i = 0; i < 4; i++){
 		bigRowText+=wordMatrix[row][i];
 		if(i!=3)

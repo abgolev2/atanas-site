@@ -225,7 +225,7 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
-	document.getElementById("word04").display = "none";
+	document.getElementById("word04").style.display = "none";
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", endGame); //clickShuffle
@@ -359,10 +359,11 @@ async function countSuccesses() {
 }
 
 function makeBigRow(){
+	console.log("rowsCleared" + rowsCleared);
 	for(i = 0; i < 4; i++){
 		document.getElementById("word" + rowsCleared + i).remove();
 	}
-	document.getElementById("word" + rowsCleared + "4").display = "block";
+	document.getElementById("word" + rowsCleared + "4").display = "";
 }
 
 function disableClicksTopRow(){

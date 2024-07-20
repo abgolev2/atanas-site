@@ -389,7 +389,7 @@ function makeBigRow(row){
 	bigRow.style.display = "block";
 	let bigRowText  = "<br>" + wordMatrix[row][6] + "<br>";
 	for(i = 0; i < 4; i++){
-		bigRowText+=wordMatrix[row][1];
+		bigRowText+=wordMatrix[row][i];
 		if(i!=4)
 			bigRowText+=",";
 	}

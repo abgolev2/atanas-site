@@ -386,11 +386,11 @@ function makeBigRow(row){
 	}
 	let bigRow = document.getElementById("word"+row+"0");
 	bigRow.style.display = "block";
-	let bigRowText  = "<br>" + wordMatrix[row][6] + "<br>";
+	let bigRowText  = "<br><b>" + wordMatrix[row][6] + "</b><br>";
 	for(i = 0; i < 4; i++){
 		bigRowText+=wordMatrix[row][i];
-		if(i!=4)
-			bigRowText+=",";
+		if(i!=3)
+			bigRowText+=", ";
 	}
 	bigRow.innerHTML = bigRowText;
 	bigRow.style.wordWrap = "break-word";

@@ -15,6 +15,7 @@ table#Words {
 	width: 100%;
 	cursor: default;
 	border-spacing: 20px 20px;
+	table-layout:fixed;
 }
 
 table#Words th, td {
@@ -379,10 +380,10 @@ async function countSuccesses() {
 
 function makeBigRow(row){
 	console.log("rowsCleared" + row);
-	for(i = 0; i < 4; i++){
+	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 	}
-	let bigRow = document.getElementById("wordrow"+row);
+	let bigRow = document.getElementById("word"+rowsCleared+"0");
 	bigRow.style.display = "block";
 	bigRow.innerHTML = "Hello this is some text<br> hello this is the second row";
 	bigRow.style.wordWrap = "break-word";
@@ -706,23 +707,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 </HEAD>
 <h1>DISCONNECTIONS</h1>
 <BODY ONLOAD="load()">
-
-<div>
-<TABLE>
-<TR>
-	<TD id="wordrow0" div class="rowcontent"> </div></TD>
-</TR>
-<TR>
-	<TD id="wordrow1" div class="rowcontent"> </div></TD>
-</TR>
-<TR>
-	<TD id="wordrow2" div class="rowcontent"> </div></TD>
-</TR>
-<TR>
-	<TD id="wordrow3" div class="rowcontent"> </div></TD>
-</TR>
-<TABLE>
-</div>
 
 <div>
 <TABLE ID="Words">

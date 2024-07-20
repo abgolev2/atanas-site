@@ -623,7 +623,6 @@ function endGame(){
 			console.log("i:"+ i);
 			console.log("j:"+ j);
 			submitWord = document.getElementById("word"+i+j);
-			submitWord.innerHTML = wordMatrix[i][j];
 			submitWord.removeEventListener("click", wordClick);
 		}
 	}

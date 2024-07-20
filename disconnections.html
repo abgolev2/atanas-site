@@ -301,7 +301,7 @@ function wordClick(){
 		
 }
 
-async function countSuccesses() {
+function countSuccesses() {
 	let successCountPerAssociation = [0, 0, 0, 0];
 	let myWord = "";
 	let colorList = [];
@@ -341,15 +341,14 @@ async function countSuccesses() {
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
-		await sleep(1200);
-		//sleep right here
+		//await sleep(1200);
 		if(rowsCleared<4)
 			switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
 		rowsCleared++;
 		makeBigRow(rowsCleared-1);
-		await sleep(200);
+		//await sleep(200);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);
@@ -461,11 +460,11 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.add("softshake");
 	else
 		document.getElementById(id).classList.add("shake");
-	//await sleep(500);
-	//if(softShake)
-	//	document.getElementById(id).classList.remove("softshake");
-	//else
-	//	document.getElementById(id).classList.remove("shake");
+	await sleep(1200);
+	if(softShake && document.getElementById(id).classList.contains("softshake"))
+		document.getElementById(id).classList.remove("softshake");
+	else if (!softShake && document.getElementById(id).classList.contains("softshake"))
+		document.getElementById(id).classList.remove("shake");
 }
 	
 function clickShuffle(){

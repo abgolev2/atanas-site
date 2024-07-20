@@ -327,6 +327,7 @@ async function countSuccesses() {
 		shakeSelectedWords(true);
 		rowsCleared++;
 		await sleep(1200);
+		makeBigRow(rowsCleared-1);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);
@@ -355,6 +356,13 @@ async function countSuccesses() {
 	}
 	console.log("we return false now");
 	return false;
+}
+
+function makeBigRow(){
+	for(int i = 0; i < 4; i++){
+		document.getElementById("word" + guessesCorrect + i).remove();
+	}
+	document.getElementById("word" + guessesCorrect + "4").style.display = ;
 }
 
 function disableClicksTopRow(){

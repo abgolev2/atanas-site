@@ -14,7 +14,7 @@ body { font-family: helvetica, sans-serif; }
 table#Words {
 	cursor: default;
 	border-spacing: 20px 20px;
-	/*table-layout:fixed;*/
+	table-layout:fixed;
 	width:100%;
 }
 
@@ -461,6 +461,8 @@ async function shakeWord(softShake, id){
 	else
 		document.getElementById(id).classList.add("shake");
 	await sleep(1200);
+	if(document.getElementById(id) == null)
+		return;
 	if(softShake && document.getElementById(id).classList.contains("softshake"))
 		document.getElementById(id).classList.remove("softshake");
 	else if (!softShake && document.getElementById(id).classList.contains("softshake"))

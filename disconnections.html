@@ -225,6 +225,7 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
+	document.getElementById("word04").style.display = "block";
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", endGame); //clickShuffle
@@ -679,6 +680,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 	<TD id="word01" div class="content"> </div></TD>
 	<TD id="word02" div class="content"> </div></TD>
 	<TD id="word03" div class="content"> </div></TD>
+	<TD id="word04" div class="content"> </div></TD>
 </TR>
 <TR>
 	<TD id="word10" div class="content"> </div></TD>

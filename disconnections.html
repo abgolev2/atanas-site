@@ -35,6 +35,7 @@ table#Words td {
 	display: table-cell;
 	background-color: F0F0E4;
 	line-height: 222px;
+	word-wrap: break-word;
 }
 
 tableWords center {
@@ -364,6 +365,8 @@ function makeBigRow(row){
 		document.getElementById("word" + row + i).remove();
 	}
 	document.getElementById("word" + row + "4").style.display = "block";
+	document.getElenemtById("word" + row + "4").innerHTML = "Hello this is some text<br> hello this is the second row";
+	document.getElenemtById("word" + row + "4").styleword-wrap: break-word;
 }
 
 function disableClicksTopRow(){

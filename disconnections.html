@@ -358,12 +358,12 @@ async function countSuccesses() {
 	return false;
 }
 
-function makeBigRow(){
-	console.log("rowsCleared" + rowsCleared);
+function makeBigRow(row){
+	console.log("rowsCleared" + row);
 	for(i = 0; i < 4; i++){
-		document.getElementById("word" + rowsCleared + i).remove();
+		document.getElementById("word" + row + i).remove();
 	}
-	document.getElementById("word" + rowsCleared + "4").display = "";
+	document.getElementById("word" + row + "4").display = "";
 }
 
 function disableClicksTopRow(){

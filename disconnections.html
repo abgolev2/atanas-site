@@ -213,10 +213,10 @@ var selectedSpaceColor = "#";
 var puzzleNumber = 1;
 	
 var wordMatrix = [
-	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E8}", ""],
-	["FIVE", "SIX", "SEVEN", "EIGHT", "#A4DC78", "\u{1F7E9}", ""],
-	["NINE", "TEN", "ELEVEN", "TWELVE", "#B8CFFD", "\u{1F7E6}", ""],
-	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "#B487CE", "\u{1F7EA}", ""]
+	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E8}", "ONE THROUGH FOUR"],
+	["FIVE", "SIX", "SEVEN", "EIGHT", "#A4DC78", "\u{1F7E9}", "FIVE THROUGH EIGHT"],
+	["NINE", "TEN", "ELEVEN", "TWELVE", "#B8CFFD", "\u{1F7E6}", "NINE THROUGH TWELVE"],
+	["THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "#B487CE", "\u{1F7EA}", "THIRTEEN THROUGH SIXTEEN"]
 ]
 	
 var selectionMatrix = [
@@ -340,12 +340,12 @@ async function countSuccesses() {
 	if(maxSuccesses==4){
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
+		shakeSelectedWords(true);
 		//sleep right here
 		if(rowsCleared<4)
 			switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
-		shakeSelectedWords(true);
 		rowsCleared++;
 		await sleep(1200);
 		makeBigRow(rowsCleared-1);
@@ -386,7 +386,13 @@ function makeBigRow(row){
 	}
 	let bigRow = document.getElementById("word"+row+"0");
 	bigRow.style.display = "block";
-	bigRow.innerHTML = "<br>Hello this is some text<br> hello this is the second row";
+	let bigRowText  = "<br>" + wordMatrix[row][6] + "<br>";
+	for(i = 0; i < 4; i++){
+		bigRowText+=wordMatrix[row][1];
+		if(i!=4)
+			bigRowText+=",";
+	}
+	bigRow.innerHTML = "<br>" + wor<br> hello this is the second row";
 	bigRow.style.wordWrap = "break-word";
 	bigRow.style.width = "427.5%"
 	bigRow.style.lineHeight = "50px";

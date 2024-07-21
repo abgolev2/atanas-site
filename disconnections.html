@@ -682,7 +682,7 @@ function getColorTable(forSending){
 	console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){
 		for(j=0; j<4; i++)
-			colorTable+=guessList[0][i];
+			colorTable+=guessList[i][j];
 		if(i!=guessList.length){
 			if(forSending)
 				colorTable+="\n";

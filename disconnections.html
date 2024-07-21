@@ -401,6 +401,8 @@ function makeBigRow(row, colorRow){
 	bigRow.style.width = "427.5%"
 	bigRow.style.lineHeight = "50px";
 	bigRow.style.fontWeight = "400";
+	if(rowsCleared==4)
+		bigRow.style.width = "427.5%";
 }
 
 function disableClicksTopRow(){
@@ -617,9 +619,11 @@ function switchWords(correctColorRow){
 }
 
 async function endGame(){
-	await sleep (2000);
 	enableShareButton();
 	console.log(guessList);
+	for(i=0; i<4; i++){
+		document.getElementById("word"+i+"0").style.width = "100%"
+	}
 	//document.getElementById("Submit").disabled = true;
 	//document.getElementById("ClearAll").disabled = true;
 	//document.getElementById("Shuffle").disabled = true;

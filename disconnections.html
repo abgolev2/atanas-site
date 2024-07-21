@@ -352,10 +352,12 @@ async function countSuccesses() {
 		makeBigRow(rowsCleared-1, colorCorrect);
 		await sleep(1000);
 		//animate away and switch with top row
-		//document.getElementById("Submit").disabled = true;
-		//document.getElementById("Submit").removeEventListener("click", submitWords);
-		//document.getElementById("ClearAll").disabled = true;
-		//document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		if(rowsCleared<4){
+			document.getElementById("Submit").disabled = true;
+			document.getElementById("Submit").removeEventListener("click", submitWords);
+			document.getElementById("ClearAll").disabled = true;
+			document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		}
 		//remove all elements from top row and change them with a big element (?)
 		wordsSelected=0;
 		return true;
@@ -614,7 +616,8 @@ function switchWords(correctColorRow){
 	}
 }
 
-function endGame(){
+async function endGame(){
+	await sleep (2000);
 	enableShareButton();
 	console.log(guessList);
 	//document.getElementById("Submit").disabled = true;

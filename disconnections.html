@@ -338,15 +338,16 @@ async function countSuccesses() {
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(maxSuccesses==4){
+		rowsCleared++;
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
-		//await sleep(1200);
-		if(rowsCleared<3)
+		await sleep(1200);
+		if(rowsCleared<4)
 			switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
-		rowsCleared++;
+		//rowsCleared++;
 		makeBigRow(rowsCleared-1, colorCorrect);
 		await sleep(1000);
 		//animate away and switch with top row
@@ -559,6 +560,7 @@ function resetSelectionMatrix(){
 }
 
 function switchWords(correctColorRow){
+	let myRowsCleared = rowsCleared-1;
 	//let's build an array of all entries on the top row that should be switched with correct answers
 	console.log("correct color row: " + correctColorRow) 
 	let colsThatNeedSwitching = [];
@@ -566,7 +568,7 @@ function switchWords(correctColorRow){
 	let matchFound = false;
 	let colToSet = 0;
 	for(i = 0; i < 4; i++){
-		topRowWord = document.getElementById("word"+rowsCleared+i).innerHTML;
+		topRowWord = document.getElementById("word"+myRowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){
 			if(topRowWord == wordMatrix[correctColorRow][j]){
 				matchFound = true;
@@ -581,7 +583,7 @@ function switchWords(correctColorRow){
 	}
 	let wordFound = "";
 	let boxFound = "";
-	for(i = rowsCleared+1; i < 4; i++){
+	for(i = myRowsCleared+1; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				let correctElement = document.getElementById("word"+i+j);
@@ -589,7 +591,7 @@ function switchWords(correctColorRow){
 				let randomElement = "";
 				if(colsThatNeedSwitching.length>0){
 					console.log("correct word: " + correctWord);
-					randomElement = document.getElementById("word"+rowsCleared+colsThatNeedSwitching[0]);
+					randomElement = document.getElementById("word"+myRowsCleared+colsThatNeedSwitching[0]);
 					console.log("random word: " + randomElement.innerHTML)
 					correctElement.innerHTML = randomElement.innerHTML;
 					randomElement.innerHTML = correctWord;
@@ -599,7 +601,7 @@ function switchWords(correctColorRow){
 				let topRowBox = "";
 				for(k = 0; k < 4; k++){
 					console.log("meow");
-					topRowBox = document.getElementById("word"+rowsCleared+k);
+					topRowBox = document.getElementById("word"+myRowsCleared+k);
 					topRowBox.style.color = "#000000";
 					topRowBox.style.backgroundColor = wordMatrix[correctColorRow][4];
 				}

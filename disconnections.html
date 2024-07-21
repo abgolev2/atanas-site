@@ -648,8 +648,8 @@ function viewResults(){
 	console.log("guess length" + guessList.length);
 	//for(i = 0; i < guessList.length; i++){
 	let colorTable = getColorTable(false);
-	let resultsBox = document.getElementById("resultSquares")
-	resultsBox.innerHTML = colorLine;
+	let resultsBox = document.getElementById("resultSquares");
+	resultsBox.innerHTML = colorTable;
 	resultsBox.style.fontSize = "36px";
 	//	console.log("hey got in" + i);
 	//	console.log("guess length" + guessList.length);
@@ -679,8 +679,9 @@ function getColorTable(forSending){
 	//	colorTable+="\n";
 	//	guessList = guessList.slice(1, guessList.length);
 	//}
+	console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){
-		for(i=0; i<4; i++)
+		for(j=0; j<4; i++)
 			colorTable+=guessList[0][i];
 		if(i!=guessList.length){
 			if(forSending)

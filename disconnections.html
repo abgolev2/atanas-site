@@ -401,8 +401,9 @@ function makeBigRow(row, colorRow){
 }
 
 function disableClicksTopRow(){
+	let myRowsCleared = rowsCleared-1;
 	for(i = 0; i < 4; i++){
-		document.getElementById("word"+rowsCleared+i).removeEventListener("click", wordClick);
+		document.getElementById("word"+myRowsCleared+i).removeEventListener("click", wordClick);
 	}
 }
 

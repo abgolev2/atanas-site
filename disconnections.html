@@ -364,7 +364,7 @@ async function countSuccesses() {
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
-		alert("One away boss")
+		//alert("One away boss")
 		//lose guess
 	}
 	else{
@@ -646,12 +646,14 @@ function viewResults(){
 	//let myColorTable = getColorTable();
 	//console.log("MyColorTable:\n" + myColorTable);
 	console.log("guess length" + guessList.length);
-	for(i = 0; i < guessList.length; i++){
-		let colorLine = getColorLine(i)
-		document.getElementById("resultSquares"+i).innerHTML = colorLine;
-		console.log("hey got in" + i);
-		console.log("guess length" + guessList.length);
-	}
+	//for(i = 0; i < guessList.length; i++){
+	let colorTable = getColorTable(false);
+	let resultsBox = document.getElementById("resultSquares")
+	resultsBox.innerHTML = colorLine;
+	resultsBox.style.fontSize = "36px";
+	//	console.log("hey got in" + i);
+	//	console.log("guess length" + guessList.length);
+	//}
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
 }
@@ -668,16 +670,26 @@ function getColorLine(row){
 	return myColorLine;
 }
 	
-function getColorTable(){
-	var oldGuessList = guessList;
+function getColorTable(forSending){
+	//var oldGuessList = guessList;
 	var colorTable = "";
-	while(guessList.length != 0){
+	//while(guessList.length != 0){
+	//	for(i=0; i<4; i++)
+	//		colorTable+=guessList[0][i];
+	//	colorTable+="\n";
+	//	guessList = guessList.slice(1, guessList.length);
+	//}
+	for(i=0; i<guessList.length; i++){
 		for(i=0; i<4; i++)
 			colorTable+=guessList[0][i];
-		colorTable+="\n";
-		guessList = guessList.slice(1, guessList.length);
+		if(i!=guessList.length){
+			if(forSending)
+				colorTable+="\n";
+			else
+				colorTable+="<br>";
+		}
 	}
-	guessList = oldGuessList;
+	//guessList = oldGuessList;
 	console.log("meowwww");
 	console.log("colorTable" + colorTable);
 	return colorTable;
@@ -685,7 +697,7 @@ function getColorTable(){
 
 function enableShareButton(){
 	const shareButton = document.getElementById("shareButton"); 
-	var colors = getColorTable();
+	var colors = getColorTable(true);
 	shareButton.addEventListener("click", (e) => { 
 		console.log("hellooooo");
   		if (navigator.share) {
@@ -808,31 +820,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 				<TR>
 					<TD id="resultSquares0"</TD>
 				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares1"</TD>
-				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares2"</TD>
-				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares3"</TD>
-				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares4"</TD>
-				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares5"</TD>
-				</TR>
-				<br>
-				<TR>
-					<TD id="resultSquares6"</TD>
-				</TR>
-				<br>	
 			</TABLE>
 		</div>
 		<div id="wrapper">

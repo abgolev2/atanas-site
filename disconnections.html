@@ -331,8 +331,8 @@ async function countSuccesses() {
 	for(i = 0; i < 4; i++){
 		if(successCountPerAssociation[i]>maxSuccesses){
 			maxSuccesses = successCountPerAssociation[i]
-			//if(maxSuccesses == 4)
-			//	colorCorrect = i;
+			if(maxSuccesses == 4)
+				colorCorrect = i;
 		}
 	}
 	console.log("maxSuccesses: " + maxSuccesses);

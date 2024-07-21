@@ -348,7 +348,7 @@ async function countSuccesses() {
 		disableClicksTopRow();
 		rowsCleared++;
 		makeBigRow(rowsCleared-1, colorCorrect);
-		await sleep(200);
+		await sleep(1000);
 		//animate away and switch with top row
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").removeEventListener("click", submitWords);

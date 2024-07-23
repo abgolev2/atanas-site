@@ -390,7 +390,7 @@ async function countSuccesses() {
 	else if(maxSuccesses==3){
 		correctGuess = false;
 		shakeSelectedWords(false);
-		displayPopup("");
+		displayPopup("One away...");
 		//vibrating signal
 		//short sleep
 		//throw message that user is one away
@@ -411,7 +411,7 @@ async function countSuccesses() {
 
 function displayPopup(text){
 	document.getElementById("popup").style.display = "block";
-	document.getElementById("popupText").innerHTML = "One away...";
+	document.getElementById("popupText").innerHTML = text;
 }
 
 function makeBigRow(row, colorRow){

@@ -159,8 +159,7 @@ h1 {
   width: 50%; /* Full width */
   height: 50%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: transparent; /* Fallback color */
 }
 
 /* Modal Content */
@@ -700,7 +699,7 @@ function viewResults(){
 	//for(i = 0; i < guessList.length; i++){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
-	let resultsText = "<br><br>" + "Perf" + <br> + "Disconnections #1" + <br> + colorTable + <br>;
+	let resultsText = "<br><br>" + "Perf" + "<br>" + "Disconnections #1" + "<br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "36px";

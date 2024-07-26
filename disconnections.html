@@ -380,8 +380,8 @@ async function countSuccesses() {
 		rowsCleared++;
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
+		shakeSelectedWords(true);
 		if(rowsCleared<4){
-			shakeSelectedWords(true);
 			await sleep(1200);
 			switchWords(colorCorrect);
 			resetSelectionMatrix();
@@ -688,6 +688,7 @@ function switchWords(correctColorRow){
 
 async function endGame(){
 	enableShareButton();
+	displayPopup(congratsWords[guessesMade])
 	console.log(guessList);
 	if(guessesLeft!=0){
 		for(i=0; i<4; i++){
@@ -729,6 +730,9 @@ function viewResults(){
 	//for(i = 0; i < guessList.length; i++){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
+	let congratsWord = "Shite";
+	if(rowsCleared == 4)
+		congratsWord = congratsWords[guessesMade]
 	let resultsText = "<br><font size=\"40px\"><b>Perf</b></font>" + "<br><br>" + "Disconnections #1" + "<br><br>" + colorTable + "<br>";
 		//change perf with congratsWords[]... 
 		//check if rowsCleared == 4;

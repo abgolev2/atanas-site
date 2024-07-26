@@ -235,6 +235,7 @@ var correctGuess = false;
 var unselectedSpaceColor = "#F0F0E4";
 var selectedSpaceColor = "#";
 var puzzleNumber = 1;
+var guessesMade = 0;
 	
 var wordMatrix = [
 	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E8}", "ONE THROUGH FOUR"],
@@ -253,6 +254,10 @@ var selectionMatrix = [
 var guessList = [];
 	
 var congratsWords = [
+	"Shite",
+	"",
+	"",
+	"",
 	"Perf",
 	"Noice",
 	"Aight",
@@ -466,6 +471,7 @@ function changeColor(colorRow){
 }
 
 function submitWords(){
+	guessesMade++;
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	console.log("we submitted woots");
 	//document.getElementById('Shuffle').classList.toggle("shake");
@@ -700,6 +706,8 @@ function viewResults(){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
 	let resultsText = "<br><br>" + "Perf" + "<br>" + "Disconnections #1" + "<br>" + colorTable + "<br>";
+		//change perf with congratsWords[]... 
+		//check if rowsCleared == 4;
 	console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "36px";

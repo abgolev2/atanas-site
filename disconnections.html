@@ -312,12 +312,9 @@ function wordClick(){
 		canSubmit = false;
 	}
 	else{
-		if(wordsSelected==4){
-			document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
-			//document.getElementById("Submit").style.color = "#000000";
-			document.getElementById("Submit").disabled = true;
-			document.getElementById("Submit").style.opacity = "0.95";
-		}
+		document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+		document.getElementById("Submit").disabled = true;
+		document.getElementById("Submit").style.opacity = "0.95";
 		document.getElementById(cellId).style.backgroundColor = unselectedSpaceColor;
 		document.getElementById(cellId).style.color = "#000000";
 		selectionMatrix[cellRow][cellCol] = false;

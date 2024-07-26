@@ -3,6 +3,7 @@
 	Created by Atanas Golev.
 Code for modal snagged from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 Code for share button snagged from: https://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website
+Code for fadeout effect snagged from: https://stackoverflow.com/questions/29017379/how-to-make-fadeout-effect-with-pure-javascript
 -->
 <HTML>
 <TITLE>Disconnections</TITLE>
@@ -428,8 +429,23 @@ async function displayPopup(text){
 	document.getElementById("popupText").style.color = "ffffff";
 	document.getElementById("popupText").style.fontSize = "30px";
 	document.getElementById("popupText").style.fontWeight = "bold";
-	await sleep(1000);
+	//await sleep(1000);
+	fadeOutEffect();
 	document.getElementById("popup").style.display = "none";
+}
+
+function fadeOutEffect() {
+    var fadeTarget = document.getElementById("popup");
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 2000);
 }
 
 function makeBigRow(row, colorRow){

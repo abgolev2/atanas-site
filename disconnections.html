@@ -290,8 +290,8 @@ function wordClick(){
 		if(wordsSelected == 4)
 			return;
 		else if(wordsSelected == 3){
-			document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
-			document.getElementById("Submit").style.color = "#000000";
+			document.getElementById("Submit").style.backgroundColor = "#000000";
+			document.getElementById("Submit").style.color = "#FFFFFF";
 		}
 		document.getElementById(cellId).style.backgroundColor = "#606060";
 		document.getElementById(cellId).style.color = "#FFFFFF";
@@ -306,6 +306,7 @@ function wordClick(){
 		if(wordsSelected==4){
 			document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 			document.getElementById("Submit").style.color = "#000000";
+			document.getElemenyById("Submit").disabled = true;
 		}
 		document.getElementById(cellId).style.backgroundColor = unselectedSpaceColor;
 		document.getElementById(cellId).style.color = "#000000";

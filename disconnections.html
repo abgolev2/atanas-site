@@ -98,7 +98,7 @@ table#Mistakes td{
 }
 
 h1 {
-	padding-top: 42px;
+	padding-top: 27px;
 	font-size: 80px;
 	width: 100%;
 	text-align: center;
@@ -746,7 +746,7 @@ function viewResults(){
 	let congratsWord = "Shite";
 	if(rowsCleared == 4)
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br>" + "Disconnections #0" + "<br>" + colorTable + "<br>";
+	let resultsText = "<font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #0" + "<br><br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "36px";

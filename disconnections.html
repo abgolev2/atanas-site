@@ -387,8 +387,8 @@ async function countSuccesses() {
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
+		await sleep(1200);
 		if(rowsCleared<4){
-			await sleep(1200);
 			switchWords(colorCorrect);
 			resetSelectionMatrix();
 			disableClicksTopRow();

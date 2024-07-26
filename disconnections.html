@@ -394,6 +394,8 @@ async function countSuccesses() {
 			disableClicksTopRow();
 		}
 		//rowsCleared++;
+		if(rowsCleared==4)
+			await sleep(1200);
 		makeBigRow(rowsCleared-1, colorCorrect);
 		await sleep(1000);
 		//animate away and switch with top row

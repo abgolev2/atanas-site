@@ -743,7 +743,7 @@ function viewResults(){
 	let congratsWord = "Shite";
 	if(rowsCleared == 4)
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<br><font size=\"40px\"><b>Perf</b></font>" + "<br><br>" + "Disconnections #1" + "<br><br>" + colorTable + "<br>";
+	let resultsText = "<br><font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #1" + "<br><br>" + colorTable + "<br>";
 		//change perf with congratsWords[]... 
 		//check if rowsCleared == 4;
 	console.log("resultsText" + resultsText); 
@@ -916,7 +916,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <div id="results" class="modal">
 	<div class="modal-content">
 		<div>
-			<div class="button"><button class="button close" id="closeButton">Return to puzzle</button></div>
+			<div class="button close"><button class="button close" id="closeButton">Return to puzzle</button></div>
 		</div> 
 		<div>
 			<TABLE align = "center">

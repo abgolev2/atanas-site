@@ -190,6 +190,14 @@ h1 {
 	pointer-events: none;
 	cursor: default;
 }
+.button:close {
+	pointer-events: none;
+	cursor: default
+	border-radius: 0px;
+	padding: 0px 0px;
+	position: absolute;
+	right: 0px;
+}
 .softshake {
   animation: softshake 0.5s;
   animation-iteration-count: 2;
@@ -496,7 +504,7 @@ function submitWords(){
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#000000";
-	document.getElementById("Submit").text.opacity = "0.95";
+	document.getElementById("Submit").style.opacity = "0.95";
 	document.getElementById("Submit").disabled = true;
 	console.log("we submitted woots");
 	//document.getElementById('Shuffle').classList.toggle("shake");
@@ -907,7 +915,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 <div id="results" class="modal">
 	<div class="modal-content">
 		<div>
-			<div class="button"><button class="button button" id="closeButton">Return to puzzle</button></div>
+			<div class="button"><button class="button close" id="closeButton">Return to puzzle</button></div>
 		</div> 
 		<div>
 			<TABLE align = "center">

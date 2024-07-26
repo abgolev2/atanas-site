@@ -154,10 +154,10 @@ h1 {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 50%; /* Full width */
-  height: 50%; /* Full height */
+  left: 255px;
+  top: 17px;
+  width: 70%; /* Full width */
+  height: 30%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: transparent; /* Fallback color */
 }
@@ -424,6 +424,7 @@ async function countSuccesses() {
 function displayPopup(text){
 	document.getElementById("popup").style.display = "block";
 	document.getElementById("popupText").innerHTML = text;
+	document.getElementById("popupText").style.color = "ffffff";
 }
 
 function makeBigRow(row, colorRow){

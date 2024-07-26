@@ -307,7 +307,7 @@ function wordClick(){
 		if(wordsSelected==4){
 			document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 			document.getElementById("Submit").style.color = "#000000";
-			document.getElemenyById("Submit").disabled = true;
+			document.getElementById("Submit").disabled = true;
 		}
 		document.getElementById(cellId).style.backgroundColor = unselectedSpaceColor;
 		document.getElementById(cellId).style.color = "#000000";
@@ -429,7 +429,7 @@ async function displayPopup(text){
 	document.getElementById("popupText").style.color = "ffffff";
 	document.getElementById("popupText").style.fontSize = "30px";
 	document.getElementById("popupText").style.fontWeight = "bold";
-	await sleep(2000);
+	await sleep(1500);
 	document.getElementById("popup").style.display = "none";
 }
 

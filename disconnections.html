@@ -101,7 +101,7 @@ h1 {
 	width: 100%;
 	text-align: center;
 	font-weight: bold;
-	height: 60px;
+	height: 42px;
 }
 
 #wrapper {
@@ -700,7 +700,9 @@ function viewResults(){
 	//for(i = 0; i < guessList.length; i++){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
-	resultsBox.innerHTML = colorTable;
+	let resultsText = "<br><br>" + "Perf" + <br> + "Disconnections #1" + <br> + colorTable + <br>;
+	console.log("resultsText" + resultsText); 
+	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "36px";
 	//	console.log("hey got in" + i);
 	//	console.log("guess length" + guessList.length);

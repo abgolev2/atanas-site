@@ -315,6 +315,7 @@ function wordClick(){
 		document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 		document.getElementById("Submit").disabled = true;
 		document.getElementById("Submit").style.opacity = "0.95";
+		document.getElementById("Submit").style.color = "#C0C0C0";
 		document.getElementById(cellId).style.backgroundColor = unselectedSpaceColor;
 		document.getElementById(cellId).style.color = "#000000";
 		selectionMatrix[cellRow][cellCol] = false;
@@ -501,8 +502,7 @@ function submitWords(){
 	guessesMade++;
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
-	document.getElementById("Submit").style.color = "#000000";
-	//document.getElementById("Submit").style.color = "rgba(0, 0, 0, 0.95)";
+	document.getElementById("Submit").style.color = "#C0C0C0";
 	document.getElementById("Submit").style.opacity = "0.95";
 	document.getElementById("Submit").disabled = true;
 	console.log("we submitted woots");

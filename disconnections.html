@@ -696,7 +696,10 @@ function switchWords(correctColorRow){
 
 async function endGame(){
 	enableShareButton();
-	displayPopup(congratsWords[guessesMade])
+	let congrats = congratsWords[guessesMade]
+	if(rowsCleared != 4)
+		congrats = congratsWords[0];
+	displayPopup(congrats)
 	console.log(guessList);
 	if(guessesLeft!=0){
 		for(i=0; i<4; i++){

@@ -784,7 +784,7 @@ function switchWords(correctColorRow){
 	}
 }
 
-function endGame(){
+async function endGame(){
 	console.log("time to await sleep: " + (2200 * (4-rowsCleared)))
 	await sleep (2200 * (4-rowsCleared));
 	enableShareButton();

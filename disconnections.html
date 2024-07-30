@@ -567,10 +567,33 @@ function submitWords(){
 	}
 }
 
+function autoSubmitWords(){
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+	document.getElementById("Submit").style.color = "#C0C0C0";
+	document.getElementById("Submit").style.opacity = "0.95";
+	document.getElementById("Submit").disabled = true;
+	console.log("we submitted woots");
+	rowsCleared++;
+	correctGuess = true;
+	changeColor(colorCorrect); //make this an animation
+	shakeSelectedWords(true);
+	if(rowsCleared<4){
+		await sleep(1200);
+		switchWords(colorCorrect);
+		resetSelectionMatrix();
+		disableClicksTopRow();
+	}
+	
+	makeBigRow(rowsCleared-1, colorCorrect);
+	await sleep(1000);
+	wordsSelected=0;
+}
+
 function solveRestOfPuzzle(){
 	for(a = rowsCleared; a < 4; a++){
 		resetSelectionMatrixAndAllColor(rowsCleared);
-		console.log("meowwwww");
+		console.log("meowwwww for round a: " + a);
 		for(i = rowsCleared; i < 4; i++){
 			for(j = 0; j < 4; j++){
 				let thisWord = document.getElementById("word"+i+j).innerHTML;

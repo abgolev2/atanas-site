@@ -575,8 +575,10 @@ async function autoSubmitWords(){
 	console.log("rowsCleared: " + rowsCleared);
 	let myColorCorrect = rowsCleared;
 	for(i = 0; i < 3; i++){
-		if(myColorCorrect == guessedColorList[i]){
-			myColorCorrect++;
+		if(guessedColorList.length > i){
+			if(myColorCorrect == guessedColorList[i]){
+				myColorCorrect++;
+			}
 		}
 		else{
 			return;

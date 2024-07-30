@@ -246,6 +246,7 @@ var selectedSpaceColor = "#";
 var puzzleNumber = 1;
 var guessesMade = 0;
 var guessedWordList = [];
+var failed = false;
 	
 var wordMatrix = [
 	["\u{004f}\u{004e}\u{0045}", "TWO", "THREE", "FOUR", "#F9F17B", "\u{1F7E8}", "ONE THROUGH FOUR"],
@@ -612,6 +613,7 @@ async function solveRestOfPuzzle(){
 			}
 		}
 		console.log("We gonna submit some words");
+		failed = true;
 		autoSubmitWords();
 	}
 }
@@ -792,7 +794,7 @@ async function endGame(){
 	}
 	enableShareButton();
 	let congrats = congratsWords[guessesMade]
-	if(rowsCleared != 4)
+	if(rowsCleared != 4 && failed == false)
 		congrats = congratsWords[0];
 	displayPopup(congrats);
 	console.log(guessList);

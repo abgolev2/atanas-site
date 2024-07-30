@@ -570,6 +570,7 @@ async function autoSubmitWords(){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
 	let myColorCorrect = rowsCleared;
+	rowsCleared++;
 	for(i = 0; i < 3; i++){
 		if(guessedColorList.length > i){
 			if(myColorCorrect == guessedColorList[i]){
@@ -581,7 +582,6 @@ async function autoSubmitWords(){
 		}
 	}
 	console.log("we submitted woots");
-	rowsCleared++;
 	correctGuess = true;
 	changeColor(myColorCorrect); //make this an animation
 	shakeSelectedWords(true);

@@ -583,11 +583,11 @@ async function autoSubmitWords(){
 	console.log("we submitted woots");
 	rowsCleared++;
 	correctGuess = true;
-	changeColor(colorCorrect); //make this an animation
+	changeColor(myColorCorrect); //make this an animation
 	shakeSelectedWords(true);
 	await sleep(1200);
-	switchWords(colorCorrect);
-	makeBigRow(rowsCleared-1, colorCorrect);
+	switchWords(myColorCorrect);
+	makeBigRow(rowsCleared-1, myColorCorrect);
 	await sleep(1000);
 	wordsSelected=0;
 }

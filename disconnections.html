@@ -747,6 +747,7 @@ function switchWords(correctColorRow){
 	let topRowWord = "";
 	let matchFound = false;
 	let colToSet = 0;
+	console.log("switchWords rowsCleared: " + myRowsCleared);
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+myRowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){

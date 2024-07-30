@@ -573,8 +573,9 @@ function solveRestOfPuzzle(){
 		console.log("meowwwww");
 		for(i = rowsCleared; i < 4; i++){
 			for(j = 0; j < 4; j++){
-				let thisWord = document.getElementById("word"+i+j);
+				let thisWord = document.getElementById("word"+i+j).innerHTML;
 				for(m = 0; m < 4; m++){
+					console.log("thisWord: " + thisWord);
 					console.log("correctWord: " + wordMatrix[rowsCleared][m]);
 					if(thisWord == wordMatrix[rowsCleared][m]){
 						console.log("this true and then ij: "+i+j)

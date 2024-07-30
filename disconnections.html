@@ -786,17 +786,18 @@ function switchWords(correctColorRow){
 
 async function endGame(){
 	console.log("time to await sleep: " + (2200 * (4-rowsCleared)))
-	await sleep (2200 * (4-rowsCleared));
+	await sleep (2300 * (4-rowsCleared));
+	for(i=0; i<4; i++){
+		document.getElementById("word"+i+"0").style.width = "100%"
+	}
 	enableShareButton();
 	let congrats = congratsWords[guessesMade]
 	if(rowsCleared != 4)
 		congrats = congratsWords[0];
-	displayPopup(congrats)
+	displayPopup(congrats);
 	console.log(guessList);
 	//if(guessesLeft!=0){
-		for(i=0; i<4; i++){
-			document.getElementById("word"+i+"0").style.width = "100%"
-		}
+		
 	//}
 	//document.getElementById("Submit").disabled = true;
 	//document.getElementById("ClearAll").disabled = true;

@@ -796,6 +796,7 @@ async function endGame(){
 	let congrats = congratsWords[guessesMade]
 	if(rowsCleared != 4 || failed == true)
 		congrats = congratsWords[0];
+	await sleep(500);
 	displayPopup(congrats);
 	console.log(guessList);
 	//if(guessesLeft!=0){

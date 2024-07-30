@@ -505,6 +505,7 @@ function changeColor(colorRow){
 }
 
 function alreadyGuessed(){
+	console.log("made itttt");
 	let matches = 0;
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
@@ -530,7 +531,8 @@ function alreadyGuessed(){
 }
 
 function submitWords(){
-	if(alreadyGuessed == true){
+	let oldGuess = alreadyGuessed();
+	if(oldGuess == true){
 		displayPopup("Already guessed");
 		return;
 	}
@@ -557,10 +559,28 @@ function submitWords(){
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
+			solveRestOfPuzzle();
 			endGame();
 		}
 		else
 			document.getElementById("Submit").addEventListener("click", submitWords);
+	}
+}
+
+function solveRestOfPuzzle(){
+	for(a = rowsCleared; a < 4; a++){
+		resetSelectionMatrix();
+		for(i = 0; i < 4; i++){
+			for(j = 0; j < 4; j++){
+				let thisWord = document.getElementById("word"+i+j);
+				for(int m = 0; m < 4; m++){
+					if(thisWord == wordMatrix[rowsCleared][m]){
+						selectionMatrix[i][j] = true;
+					}
+				}
+			}
+		}
+		submitWords();
 	}
 }
 

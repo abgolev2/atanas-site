@@ -246,6 +246,7 @@ var selectedSpaceColor = "#";
 var puzzleNumber = 1;
 var guessesMade = 0;
 var guessedWordList = [];
+var guessedColorList = [];
 var failed = false;
 	
 var wordMatrix = [
@@ -386,6 +387,7 @@ async function countSuccesses() {
 				colorCorrect = i;
 		}
 	}
+	guessedColorList.push(colorCorrect);
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	if(maxSuccesses==4){
@@ -568,19 +570,25 @@ function submitWords(){
 	}
 }
 
-async function autoSubmitWords(){
+async function autoSubmitWords(myColorCorrect){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
-	colorCorrect = rowsCleared;
+	let myColorCorrect = rowsCleared;
+	for(i = 0; i < 3; i++){
+		if(myColorCorrect == guessedColorList[i]){
+			myColorCorrect++;
+		}
+		else{
+			return;
+		}
+	}
 	console.log("we submitted woots");
 	rowsCleared++;
 	correctGuess = true;
 	changeColor(colorCorrect); //make this an animation
 	shakeSelectedWords(true);
-	if(rowsCleared<4){
-		await sleep(1200);
-		switchWords(colorCorrect);
-	}
+	await sleep(1200);
+	switchWords(colorCorrect);
 	makeBigRow(rowsCleared-1, colorCorrect);
 	await sleep(1000);
 	wordsSelected=0;

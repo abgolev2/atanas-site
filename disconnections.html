@@ -570,11 +570,13 @@ async function autoSubmitWords(){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
 	let myColorCorrect = rowsCleared;
-	rowsCleared++;
 	for(i = 0; i < 3; i++){
+		console.log("made it in weird loop");
+		console.log("old color correct: " + myColorCorrect);
 		if(guessedColorList.length > i){
 			if(myColorCorrect == guessedColorList[i]){
 				myColorCorrect++;
+				console.log("new color correct: " + myColorCorrect);
 			}
 		}
 		else{
@@ -584,6 +586,7 @@ async function autoSubmitWords(){
 	console.log("we submitted woots");
 	correctGuess = true;
 	changeColor(myColorCorrect); //make this an animation
+	rowsCleared++;
 	shakeSelectedWords(true);
 	await sleep(1200);
 	switchWords(myColorCorrect);
@@ -605,8 +608,8 @@ async function solveRestOfPuzzle(){
 			for(j = 0; j < 4; j++){
 				let thisWord = document.getElementById("word"+i+j).innerHTML;
 				for(m = 0; m < 4; m++){
-					console.log("thisWord: " + thisWord);
-					console.log("correctWord: " + wordMatrix[rowsCleared][m]);
+					//console.log("thisWord: " + thisWord);
+					//console.log("correctWord: " + wordMatrix[rowsCleared][m]);
 					if(thisWord == wordMatrix[rowsCleared][m]){
 						console.log("this true and then ij: "+i+j)
 						selectionMatrix[i][j] = true;

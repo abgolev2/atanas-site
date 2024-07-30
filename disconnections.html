@@ -568,6 +568,7 @@ function submitWords(){
 }
 
 async function autoSubmitWords(){
+	colorCorrect = rowsCleared;
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";

@@ -567,7 +567,7 @@ function submitWords(){
 	}
 }
 
-function autoSubmitWords(){
+async function autoSubmitWords(){
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";

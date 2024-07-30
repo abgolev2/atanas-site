@@ -420,12 +420,8 @@ async function countSuccesses() {
 	else if(maxSuccesses==3){
 		correctGuess = false;
 		shakeSelectedWords(false);
-		displayPopup("One away...");
-		//vibrating signal
-		//short sleep
-		//throw message that user is one away
-		//alert("One away boss")
-		//lose guess
+		if(rowsCleared < 3)
+			displayPopup("One away...");
 	}
 	else{
 		correctGuess = false;
@@ -804,7 +800,8 @@ async function endGame(){
 	if(rowsCleared != 4 || failed == true)
 		congrats = congratsWords[0];
 	await sleep(500);
-	displayPopup(congrats);
+	if(failed == false)
+		displayPopup(congrats);
 	console.log(guessList);
 	//if(guessesLeft!=0){
 		
@@ -845,7 +842,7 @@ function viewResults(){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
 	let congratsWord = "Shite";
-	if(rowsCleared == 4)
+	if(rowsCleared == 4 && failed == false)
 		congratsWord = congratsWords[guessesMade]
 	let resultsText = "<font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #0" + "<br><br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 

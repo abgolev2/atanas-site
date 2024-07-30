@@ -571,11 +571,6 @@ async function autoSubmitWords(){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
 	colorCorrect = rowsCleared;
-	document.getElementById("Submit").removeEventListener("click", submitWords);
-	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
-	document.getElementById("Submit").style.color = "#C0C0C0";
-	document.getElementById("Submit").style.opacity = "0.95";
-	document.getElementById("Submit").disabled = true;
 	console.log("we submitted woots");
 	rowsCleared++;
 	correctGuess = true;
@@ -594,6 +589,11 @@ async function autoSubmitWords(){
 }
 
 async function solveRestOfPuzzle(){
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+	document.getElementById("Submit").style.color = "#C0C0C0";
+	document.getElementById("Submit").style.opacity = "0.95";
+	document.getElementById("Submit").disabled = true;
 	for(a = rowsCleared; a < 4; a++){
 		await sleep(2200);
 		resetSelectionMatrixAndAllColor(rowsCleared);

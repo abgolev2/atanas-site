@@ -585,8 +585,8 @@ async function autoSubmitWords(){
 	}
 	console.log("we submitted woots");
 	correctGuess = true;
-	changeColor(myColorCorrect); //make this an animation
 	rowsCleared++;
+	changeColor(myColorCorrect); //make this an animation
 	shakeSelectedWords(true);
 	await sleep(1200);
 	switchWords(myColorCorrect);

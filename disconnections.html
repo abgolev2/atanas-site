@@ -784,7 +784,8 @@ function switchWords(correctColorRow){
 	}
 }
 
-async function endGame(){
+function endGame(){
+	await sleep (2200 * (4-rowsCleared));
 	enableShareButton();
 	let congrats = congratsWords[guessesMade]
 	if(rowsCleared != 4)

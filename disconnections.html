@@ -595,6 +595,7 @@ async function solveRestOfPuzzle(){
 				guessedColor = true;
 		}
 		if(guessedColor == false){
+			console.log("rowsCleared in solveRest: " + rowsCleared);
 			resetSelectionMatrixAndAllColor(rowsCleared);
 			console.log("meowwwww for round a: " + a);
 			for(i = rowsCleared; i < 4; i++){
@@ -616,6 +617,7 @@ async function solveRestOfPuzzle(){
 			//await sleep(2200);
 			rowsCleared++;
 			console.log("BEFORE AWAIT");
+			console.log("selectionMatrix: " + selectionMatrix);
 			await autoSubmitWords(a);
 			console.log("AFTER AWAIT");
 		}

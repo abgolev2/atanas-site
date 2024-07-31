@@ -574,6 +574,7 @@ async function autoSubmitWords(autoColor){
 	shakeSelectedWords(true);
 	await sleep(1200);
 	switchWords(autoColor);
+	await sleep(1000);
 	makeBigRow(rowsCleared-1, autoColor);
 	wordsSelected=0;
 	for(i = 0; i < 4; i++)

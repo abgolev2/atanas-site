@@ -819,8 +819,9 @@ async function switchWords(correctColorRow){
 async function endGame(winning){
 	if(winning == false)
 		await solveRestOfPuzzle();
-	for(i=0; i<4; i++){
-		document.getElementById("word"+i+"0").style.width = "100%"
+		for(i=0; i<4; i++){
+			document.getElementById("word"+i+"0").style.width = "100%"
+		}
 	}
 	enableShareButton();
 	document.getElementById("shareButton").innerHTML="&nbsp&nbspShare Your Results&nbsp&nbsp";

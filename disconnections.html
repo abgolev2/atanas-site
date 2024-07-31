@@ -407,7 +407,7 @@ async function countSuccesses() {
 		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
 			//await sleep(1200);
-			await sleep(1500);
+			await sleep(1300);
 			await switchWords(colorCorrect);
 			resetSelectionMatrix();
 			disableClicksTopRow();
@@ -461,6 +461,14 @@ async function makeBigRow(row, colorRow){
 	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 	}
+	if(rowsCleared==4){
+		console.log("made it woottt");
+		document.getElementById("word00").style.width = "100%";
+		document.getElementById("word10").style.width = "100%";
+		document.getElementById("word20").style.width = "100%";
+		document.getElementById("word30").style.width = "100%";
+		//bigRow.style.width = "100%";
+	}
 	let bigRow = document.getElementById("word"+row+"0");
 	bigRow.style.display = "block";
 	let bigRowText  = "<br><b>" + wordMatrix[colorRow][6] + "</b><br>";
@@ -471,10 +479,10 @@ async function makeBigRow(row, colorRow){
 	}
 	bigRow.innerHTML = bigRowText;
 	if(rowsCleared==4){
-		document.getElementById("word00").style.width = "100%";
-		document.getElementById("word10").style.width = "100%";
-		document.getElementById("word20").style.width = "100%";
-		document.getElementById("word30").style.width = "100%";
+		//document.getElementById("word00").style.width = "100%";
+		//document.getElementById("word10").style.width = "100%";
+		//document.getElementById("word20").style.width = "100%";
+		//document.getElementById("word30").style.width = "100%";
 		//bigRow.style.width = "100%";
 	}
 	else
@@ -631,7 +639,7 @@ async function solveRestOfPuzzle(){
 }
 
 async function shakeSelectedWords(softShake){
-	await sleep(500);
+	await sleep(100);
 	for(i=0; i<4; i++){
 		for(j=0; j<4; j++){
 			if(selectionMatrix[i][j]==true)
@@ -809,7 +817,7 @@ async function endGame(winning){
 		document.getElementById("word"+i+"0").style.width = "100%"
 	}
 	enableShareButton();
-	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp";
+	document.getElementById("shareButton").innerHTML="&nbsp&nbspShare Your Results&nbsp&nbsp";
 	document.getElementById("shareButton").style.backgroundColor = "#000000";
 	document.getElementById("shareButton").style.color = "#ffffff";
 
@@ -824,7 +832,7 @@ async function endGame(winning){
 	let submitWord = "";
 	document.getElementById("Shuffle").remove();
 	document.getElementById("Submit").remove();
-	document.getElementById("ClearAll").innerHTML = "&nbsp&nbspView Results&nbsp&nbsp";
+	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspView Results&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("ClearAll").addEventListener("click", viewResults);
 	document.getElementById("ClearAll").disabled = false;
 }
@@ -838,10 +846,10 @@ function viewResults(){
 	let congratsWord = "Shite";
 	if(rowsCleared == 4 && failed == false)
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<font size=\"48px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
+	let resultsText = "<font size=\"56px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
-	resultsBox.style.fontSize = "36px";
+	resultsBox.style.fontSize = "56px";
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
 }

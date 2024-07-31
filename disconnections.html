@@ -402,12 +402,12 @@ async function countSuccesses() {
 		}
 		rowsCleared++;
 		correctGuess = true;
-		await changeColor(colorCorrect); //make this an animation
+		changeColor(colorCorrect); //make this an animation
 		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
 			//await sleep(1200);
+			await sleep(2000)
 			await switchWords(colorCorrect);
-			await sleep(2000);
 			resetSelectionMatrix();
 			disableClicksTopRow();
 		//}
@@ -490,7 +490,7 @@ function disableClicksTopRow(){
 	}
 }
 
-async function changeColor(colorRow){
+function changeColor(colorRow){
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			console.log("made it woots");

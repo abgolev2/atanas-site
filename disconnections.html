@@ -602,8 +602,8 @@ async function solveRestOfPuzzle(){
 					let thisWord = document.getElementById("word"+i+j).innerHTML;
 					for(m = 0; m < 4; m++){
 						//console.log("thisWord: " + thisWord);
-						//console.log("correctWord: " + wordMatrix[rowsCleared][m]);
-						if(thisWord == wordMatrix[rowsCleared][m]){
+						//console.log("correctWord: " + wordMatrix[a][m]);
+						if(thisWord == wordMatrix[a][m]){
 							console.log("this true and then ij: "+i+j)
 							selectionMatrix[i][j] = true;
 						}

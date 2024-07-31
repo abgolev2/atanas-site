@@ -575,7 +575,6 @@ async function autoSubmitWords(autoColor){
 	shakeSelectedWords(true);
 	await sleep(1200);
 	switchWords(autoColor);
-	await sleep(500);
 	makeBigRow(rowsCleared-1, autoColor);
 	await sleep(1000);
 	wordsSelected=0;
@@ -798,8 +797,8 @@ function switchWords(correctColorRow){
 }
 
 async function endGame(){
-	console.log("time to await sleep: " + (2200 * (4-rowsCleared)))
-	await sleep (2222 * (4-rowsCleared));
+	console.log("time to await sleep: " + (2200 + 2200 * (4-rowsCleared)))
+	await sleep (2200 + 2200 * (4-rowsCleared)));
 	for(i=0; i<4; i++){
 		document.getElementById("word"+i+"0").style.width = "100%"
 	}

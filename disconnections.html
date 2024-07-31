@@ -401,19 +401,14 @@ async function countSuccesses() {
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
-		if(rowsCleared<4){
+		//if(rowsCleared<4){
 			await sleep(1200);
 			switchWords(colorCorrect);
 			resetSelectionMatrix();
 			disableClicksTopRow();
-		}
-		//rowsCleared++;
-		//if(rowsCleared==4)
-		//	await sleep(1200);
+		//}
 		makeBigRow(rowsCleared-1, colorCorrect);
 		await sleep(1000);
-		//animate away and switch with top row
-		//remove all elements from top row and change them with a big element (?)
 		wordsSelected=0;
 		return true;
 	}	
@@ -571,6 +566,7 @@ async function autoSubmitWords(autoColor){
 	console.log("rowsCleared: " + rowsCleared);
 	console.log("we submitted woots");
 	correctGuess = true;
+	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
 	shakeSelectedWords(true);
 	await sleep(1200);

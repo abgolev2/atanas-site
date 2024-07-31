@@ -413,7 +413,7 @@ async function countSuccesses() {
 			disableClicksTopRow();
 		//}
 		console.log("WE MADEEEE A BIGGGG ROWWWW!");
-		makeBigRow(rowsCleared-1, colorCorrect);
+		await makeBigRow(rowsCleared-1, colorCorrect);
 		wordsSelected=0;
 		return true;
 	}	
@@ -456,7 +456,7 @@ function fadeOutEffect() {
     }, 2000);
 }
 
-function makeBigRow(row, colorRow){
+async function makeBigRow(row, colorRow){
 	console.log("rowsCleared" + row);
 	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();

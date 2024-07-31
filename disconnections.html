@@ -8,7 +8,7 @@ Code for fadeout effect snagged from: https://stackoverflow.com/questions/290173
 <HTML>
 <TITLE>Disconnections</TITLE>
 <HEAD>
-<STYLE>
+<STYLE> 
 
 body { font-family: helvetica, sans-serif; }
 	
@@ -505,6 +505,7 @@ function alreadyGuessed(){
 			if(selectionMatrix[i][j]){
 				let guessedWord = document.getElementById("word"+i+j).innerHTML;
 				console.log("guessedWord" + guessedWord);
+				console.log(guessedWordList);
 				for(k = 0; k < guessedWordList.length; k++){
 					for(m = 0; m < 4; m++){
 						if(guessedWord == guessedWordList[k][m]){

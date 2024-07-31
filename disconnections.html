@@ -645,7 +645,7 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.add("softshake");
 	else
 		document.getElementById(id).classList.add("shake");
-	await sleep(1200);
+	await sleep(2000);
 	if(document.getElementById(id) == null)
 		return;
 	if(softShake && document.getElementById(id).classList.contains("softshake"))

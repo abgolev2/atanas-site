@@ -652,6 +652,7 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.remove("softshake");
 	else if (!softShake && document.getElementById(id).classList.contains("shake"))
 		document.getElementById(id).classList.remove("shake");
+	return;
 }
 	
 function clickShuffle(){

@@ -817,7 +817,7 @@ async function switchWords(correctColorRow){
 }
 
 async function endGame(winning){
-	if(winning == false)
+	if(winning == false){
 		await solveRestOfPuzzle();
 		for(i=0; i<4; i++){
 			document.getElementById("word"+i+"0").style.width = "100%"

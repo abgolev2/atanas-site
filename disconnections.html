@@ -551,14 +551,15 @@ function submitWords(){
 	if(correctGuess == true && rowsCleared == 4){
 		console.log("meow we end game");
 		//confetti animation
-		endGame();
+		endGame(true);
 	}
 	if(!correctGuess){
 		console.log("hello");
 		guessesLeft--;
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
-			solveRestOfPuzzle();
+			endGame(false);
+			//solveRestOfPuzzle();
 		}
 		else
 			document.getElementById("Submit").addEventListener("click", submitWords);
@@ -623,7 +624,6 @@ async function solveRestOfPuzzle(){
 			await autoSubmitWords(a);
 			console.log("AFTER AWAIT");
 		}
-		endGame();
 	}
 }
 
@@ -796,9 +796,11 @@ function switchWords(correctColorRow){
 	}
 }
 
-async function endGame(){
+async function endGame(winning){
 	//console.log("time to await sleep: " + (1800 + 2200 * (4-rowsCleared)))
 	//await sleep (1800 + 2200 * (4-rowsCleared));
+	if(winning == false)
+		await solveRestOfPuzzle();
 	for(i=0; i<4; i++){
 		document.getElementById("word"+i+"0").style.width = "100%"
 	}

@@ -531,9 +531,11 @@ function alreadyGuessed(){
 				for(k = 0; k < guessedWordList.length; k++){
 					for(m = 0; m < 4; m++){
 						if(guessedWord == guessedWordList[k][m]){
+							console.log("myword:" + guessedWordList[k][m])
 							matches++;
 						}
 					}
+					console.log("MATCHES: "+matches);
 					if(matches == 4){
 						return true;
 					}

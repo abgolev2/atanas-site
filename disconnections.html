@@ -559,7 +559,6 @@ function submitWords(){
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
 			solveRestOfPuzzle();
-			endGame();
 		}
 		else
 			document.getElementById("Submit").addEventListener("click", submitWords);
@@ -624,6 +623,7 @@ async function solveRestOfPuzzle(){
 			await autoSubmitWords(a);
 			console.log("AFTER AWAIT");
 		}
+		endGame();
 	}
 }
 
@@ -797,8 +797,8 @@ function switchWords(correctColorRow){
 }
 
 async function endGame(){
-	console.log("time to await sleep: " + (1800 + 2200 * (4-rowsCleared)))
-	await sleep (1800 + 2200 * (4-rowsCleared));
+	//console.log("time to await sleep: " + (1800 + 2200 * (4-rowsCleared)))
+	//await sleep (1800 + 2200 * (4-rowsCleared));
 	for(i=0; i<4; i++){
 		document.getElementById("word"+i+"0").style.width = "100%"
 	}

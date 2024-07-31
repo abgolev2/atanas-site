@@ -578,6 +578,8 @@ async function autoSubmitWords(autoColor){
 	makeBigRow(rowsCleared-1, autoColor);
 	await sleep(1000);
 	wordsSelected=0;
+	for(i = 0; i < 4; i++)
+		selectionMatrix[rowsCleared-1][i] = false;
 	return;
 }
 

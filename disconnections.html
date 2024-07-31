@@ -288,9 +288,9 @@ function load() {
 			whichWord.addEventListener("click", wordClick);
 		}
 	}
-	document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp";
-	document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp";
-	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp";
+	document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
@@ -585,7 +585,7 @@ async function autoSubmitWords(autoColor){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
 	console.log("we submitted woots");
-	await sleep(500);
+	await sleep(750);
 	correctGuess = true;
 	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
@@ -824,7 +824,7 @@ async function endGame(winning){
 		}
 	}
 	enableShareButton();
-	document.getElementById("shareButton").innerHTML="&nbsp&nbspShare Your Results&nbsp&nbsp";
+	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("shareButton").style.backgroundColor = "#000000";
 	document.getElementById("shareButton").style.color = "#ffffff";
 

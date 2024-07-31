@@ -460,6 +460,9 @@ async function makeBigRow(row, colorRow){
 	console.log("rowsCleared" + row);
 	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
+		if(rowsCleared==4){
+			document.getElementById("word30").style.width = "100%";
+		}
 	}
 	if(rowsCleared==4){
 		console.log("made it woottt");

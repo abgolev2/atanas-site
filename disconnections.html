@@ -534,14 +534,18 @@ function alreadyGuessed(){
 							matches++;
 						}
 					}
+					if(matches == 4){
+						return true;
+					}
+					matches = 0;
 				}
 			}
 		}
 	}
-	if(matches == 4){
-		console.log("trueeee");
-		return true;
-	}
+	//if(matches == 4){
+	//	console.log("trueeee");
+	//	return true;
+	//}
 	console.log("falseeee");
 	return false;
 }

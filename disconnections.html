@@ -569,26 +569,8 @@ function submitWords(){
 async function autoSubmitWords(autoColor){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
-	let myColorCorrect = rowsCleared;
-	/*
-	for(i = 0; i < 3; i++){
-		console.log("made it in weird loop");
-		console.log("old color correct: " + myColorCorrect);
-		if(guessedColorList.length > i){
-			if(myColorCorrect == guessedColorList[i]){
-				myColorCorrect++;
-				console.log("new color correct: " + myColorCorrect);
-			}
-		}
-		else{
-			return;
-		}
-	}
-	*/
 	console.log("we submitted woots");
 	correctGuess = true;
-	rowsCleared++;
-	myColorCorrect++;
 	changeColor(autoColor); //make this an animation
 	shakeSelectedWords(true);
 	await sleep(1200);
@@ -632,7 +614,10 @@ async function solveRestOfPuzzle(){
 			console.log("We gonna submit some words");
 			failed = true;
 			//await sleep(2200);
+			rowsCleared++;
+			console.log("BEFORE AWAIT");
 			await autoSubmitWords(a);
+			console.log("AFTER AWAIT");
 		}
 	}
 }

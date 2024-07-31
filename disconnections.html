@@ -798,7 +798,7 @@ function switchWords(correctColorRow){
 
 async function endGame(){
 	console.log("time to await sleep: " + (2200 + 2200 * (4-rowsCleared)))
-	await sleep (2200 + 2200 * (4-rowsCleared)));
+	await sleep (2200 + 2200 * (4-rowsCleared));
 	for(i=0; i<4; i++){
 		document.getElementById("word"+i+"0").style.width = "100%"
 	}

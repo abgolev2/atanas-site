@@ -399,13 +399,13 @@ async function countSuccesses() {
 			document.getElementById("ClearAll").removeEventListener("click", clearAll);
 		}
 		rowsCleared++;
-		resetSelectionMatrix();
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		shakeSelectedWords(true);
 		//if(rowsCleared<4){
 			await sleep(1200);
 			switchWords(colorCorrect);
+			resetSelectionMatrix();
 			disableClicksTopRow();
 		//}
 		makeBigRow(rowsCleared-1, colorCorrect);

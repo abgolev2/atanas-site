@@ -468,8 +468,13 @@ function makeBigRow(row, colorRow){
 			bigRowText+=", ";
 	}
 	bigRow.innerHTML = bigRowText;
-	if(rowsCleared==4)
-		bigRow.style.width = "100%";
+	if(rowsCleared==4){
+		document.getElementById("word00").style.width = "100%";
+		document.getElementById("word10").style.width = "100%";
+		document.getElementById("word20").style.width = "100%";
+		document.getElementById("word30").style.width = "100%";
+		//bigRow.style.width = "100%";
+	}
 	else
 		bigRow.style.width = "427.5%"
 	bigRow.style.wordWrap = "break-word";

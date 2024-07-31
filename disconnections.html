@@ -406,7 +406,7 @@ async function countSuccesses() {
 		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
 			//await sleep(1200);
-			await sleep(2000)
+			await sleep(1500);
 			await switchWords(colorCorrect);
 			resetSelectionMatrix();
 			disableClicksTopRow();
@@ -631,7 +631,7 @@ async function solveRestOfPuzzle(){
 }
 
 async function shakeSelectedWords(softShake){
-	await sleep(1000);
+	await sleep(500);
 	for(i=0; i<4; i++){
 		for(j=0; j<4; j++){
 			if(selectionMatrix[i][j]==true)

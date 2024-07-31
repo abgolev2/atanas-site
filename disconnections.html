@@ -243,7 +243,7 @@ var shuffleCount = 0;
 var correctGuess = false;
 var unselectedSpaceColor = "#F0F0E4";
 var selectedSpaceColor = "#";
-var puzzleNumber = 1;
+var puzzleNumber = 0;
 var guessesMade = 0;
 var guessedWordList = [];
 var guessedColorList = [];
@@ -288,7 +288,6 @@ function load() {
 		}
 	}
 	document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp";
-	//document.getElementById("word04").style.display = "none";
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
@@ -424,9 +423,6 @@ async function countSuccesses() {
 		correctGuess = false;
 		shakeSelectedWords(false);
 		console.log("meow4");
-		//vibrating signal
-		//sleep
-		//lose guess
 	}
 	console.log("we return false now");
 	return false;
@@ -547,15 +543,12 @@ function submitWords(){
 	document.getElementById("Submit").style.opacity = "0.95";
 	document.getElementById("Submit").disabled = true;
 	console.log("we submitted woots");
-	//document.getElementById('Shuffle').classList.toggle("shake");
-	//document.getElementById('Shuffle').classList.removeAttribute("shake");
 	//we can now go through the boolean matrix looking for num true / false
 	countSuccesses();
 	console.log(correctGuess);
 	console.log(rowsCleared);
 	if(correctGuess == true && rowsCleared == 4){
 		console.log("meow we end game");
-		//confetti animation
 		endGame(true);
 	}
 	if(!correctGuess){
@@ -804,8 +797,6 @@ function switchWords(correctColorRow){
 }
 
 async function endGame(winning){
-	//console.log("time to await sleep: " + (1800 + 2200 * (4-rowsCleared)))
-	//await sleep (1800 + 2200 * (4-rowsCleared));
 	if(winning == false)
 		await solveRestOfPuzzle();
 	for(i=0; i<4; i++){
@@ -816,57 +807,30 @@ async function endGame(winning){
 	if(rowsCleared != 4 || failed == true)
 		congrats = congratsWords[0];
 	await sleep(500);
-	//if(failed == false)
 	displayPopup(congrats);
 	console.log(guessList);
-	//if(guessesLeft!=0){
-		
-	//}
-	//document.getElementById("Submit").disabled = true;
-	//document.getElementById("ClearAll").disabled = true;
-	//document.getElementById("Shuffle").disabled = true;
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	//document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	//document.getElementById("Submit").removeEventListener("click", submitWords);
 	let submitWord = "";
-	/*
-	for(i = 0 ; i < 4; i++){	
-		for(j = 0; j < 4; j++){
-			console.log("i:"+ i);
-			console.log("j:"+ j);
-			submitWord = document.getElementById("word"+i+j);
-			submitWord.removeEventListener("click", wordClick);
-		}
-	}
-	*/
 	document.getElementById("Shuffle").remove();
 	document.getElementById("Submit").remove();
 	document.getElementById("ClearAll").innerHTML = "View Results";
 	document.getElementById("ClearAll").addEventListener("click", viewResults);
 	document.getElementById("ClearAll").disabled = false;
-	//make the three buttons on the bottom disappear
-	//exchange them with a share results button
 }
 
 function viewResults(){
 	console.log("meoww");
 	document.getElementById("results").style.display = "block";
-	//let myColorTable = getColorTable();
-	//console.log("MyColorTable:\n" + myColorTable);
 	console.log("guess length" + guessList.length);
-	//for(i = 0; i < guessList.length; i++){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
 	let congratsWord = "Shite";
 	if(rowsCleared == 4 && failed == false)
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #0" + "<br><br>" + colorTable + "<br>";
+	let resultsText = "<font size=\"40px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "36px";
-	//	console.log("hey got in" + i);
-	//	console.log("guess length" + guessList.length);
-	//}
 	document.getElementById("closeButton").addEventListener("click", close);
 	enableShareButton();
 }
@@ -886,12 +850,6 @@ function getColorLine(row){
 function getColorTable(forSending){
 	//var oldGuessList = guessList;
 	var colorTable = "";
-	//while(guessList.length != 0){
-	//	for(i=0; i<4; i++)
-	//		colorTable+=guessList[0][i];
-	//	colorTable+="\n";
-	//	guessList = guessList.slice(1, guessList.length);
-	//}
 	console.log("guessList" + guessList);
 	console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){
@@ -951,7 +909,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 
 <div>
 <TABLE ID="Words">
-
 <TR>
 	<TD id="word00"></TD>
 	<TD id="word01"></TD>
@@ -976,32 +933,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 	<TD id="word32"></TD>
 	<TD id="word33"></TD>
 </TR>
-<!--
-<TR>
-	<TD id="word00" div class="content"> </div></TD>
-	<TD id="word01" div class="content"> </div></TD>
-	<TD id="word02" div class="content"> </div></TD>
-	<TD id="word03" div class="content"> </div></TD>
-</TR>
-<TR>
-	<TD id="word10" div class="content"> </div></TD>
-	<TD id="word11" div class="content"> </div></TD>
-	<TD id="word12" div class="content"> </div></TD>
-	<TD id="word13" div class="content"> </div></TD>
-</TR>
-<TR>
-	<TD id="word20" div class="content"> </div></TD>
-	<TD id="word21" div class="content"> </div></TD>
-	<TD id="word22" div class="content"> </div></TD>
-	<TD id="word23" div class="content"> </div></TD>
-</TR>
-<TR>
-	<TD id="word30" div class="content2"> </div></TD>
-	<TD id="word31" div class="content2"> </div></TD>
-	<TD id="word32" div class="content2"> </div></TD>
-	<TD id="word33" div class="content2"> </div></TD>
-</TR>
--->
 </TABLE>
 </div>
 

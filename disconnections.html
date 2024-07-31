@@ -584,6 +584,7 @@ async function autoSubmitWords(autoColor){
 }
 
 async function solveRestOfPuzzle(){
+	await sleep (2000);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";
@@ -598,7 +599,7 @@ async function solveRestOfPuzzle(){
 		}
 		if(guessedColor == false){
 			console.log("rowsCleared in solveRest: " + rowsCleared);
-			resetSelectionMatrixAndAllColor(0);
+			resetSelectionMatrixAndAllColor(rowsCleared);
 			console.log("meowwwww for round a: " + a);
 			for(i = rowsCleared; i < 4; i++){
 				for(j = 0; j < 4; j++){

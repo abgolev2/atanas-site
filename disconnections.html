@@ -402,11 +402,11 @@ async function countSuccesses() {
 		}
 		rowsCleared++;
 		correctGuess = true;
-		changeColor(colorCorrect); //make this an animation
+		await changeColor(colorCorrect); //make this an animation
 		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
 			//await sleep(1200);
-			switchWords(colorCorrect);
+			await switchWords(colorCorrect);
 			await sleep(1000);
 			resetSelectionMatrix();
 			disableClicksTopRow();
@@ -489,7 +489,7 @@ function disableClicksTopRow(){
 	}
 }
 
-function changeColor(colorRow){
+async function changeColor(colorRow){
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			console.log("made it woots");
@@ -744,7 +744,7 @@ function resetSelectionMatrix(){
 			selectionMatrix[i][j] = false;
 }
 
-function switchWords(correctColorRow){
+async function switchWords(correctColorRow){
 	let myRowsCleared = rowsCleared-1;
 	//let's build an array of all entries on the top row that should be switched with correct answers
 	console.log("correct color row: " + correctColorRow) 

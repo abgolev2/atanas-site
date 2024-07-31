@@ -807,8 +807,8 @@ async function endGame(){
 	if(rowsCleared != 4 || failed == true)
 		congrats = congratsWords[0];
 	await sleep(500);
-	if(failed == false)
-		displayPopup(congrats);
+	//if(failed == false)
+	displayPopup(congrats);
 	console.log(guessList);
 	//if(guessesLeft!=0){
 		

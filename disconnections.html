@@ -522,34 +522,28 @@ function changeColor(colorRow){
 function alreadyGuessed(){
 	console.log("made itttt");
 	let matches = 0;
+	let selectedGuesses = [];
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				let guessedWord = document.getElementById("word"+i+j).innerHTML;
 				console.log("guessedWord" + guessedWord);
+				selectedGuesses.push(guessedWord);
 				console.log(guessedWordList);
-				for(k = 0; k < guessedWordList.length; k++){
-					for(m = 0; m < 4; m++){
-						if(guessedWord == guessedWordList[k][m]){
-							console.log("myword:" + guessedWordList[k][m])
-							matches++;
-						}
-					}
-					console.log("MATCHES: "+matches);
-					if(matches == 4){
-						return true;
-					}
-					matches = 0;
-				}
 			}
 		}
 	}
+	for(i = 0; i < guessedWordList.length; i++){
+		if(guessedWordList[i].sort() == selectedGuesses.sort())
+			return true;
+	}
+	return false;
 	//if(matches == 4){
 	//	console.log("trueeee");
 	//	return true;
 	//}
-	console.log("falseeee");
-	return false;
+	//console.log("falseeee");
+	//return false;
 }
 
 function submitWords(){

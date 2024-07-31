@@ -401,10 +401,11 @@ async function countSuccesses() {
 		rowsCleared++;
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
-		shakeSelectedWords(true);
+		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
-			await sleep(1200);
+			//await sleep(1200);
 			switchWords(colorCorrect);
+			await sleep(1000);
 			resetSelectionMatrix();
 			disableClicksTopRow();
 		//}
@@ -576,8 +577,8 @@ async function autoSubmitWords(autoColor){
 	correctGuess = true;
 	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
-	shakeSelectedWords(true);
-	await sleep(1200);
+	await shakeSelectedWords(true);
+	//await sleep(1200);
 	switchWords(autoColor);
 	await sleep(1000);
 	makeBigRow(rowsCleared-1, autoColor);

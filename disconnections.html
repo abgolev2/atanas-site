@@ -533,11 +533,13 @@ function alreadyGuessed(){
 			}
 		}
 	}
+	selectedGuesses = selectedGuesses.sort();
 	for(i = 0; i < guessedWordList.length; i++){
+		let newList = guessedWordList[i].sort();
 		console.log("mylength"+guessedWordList.length);
-		console.log("global list sorted: " + guessedWordList[i].sort());
-		console.log("myListSorted: " + selectedGuesses.sort())
-		if(guessedWordList[i].sort() == selectedGuesses.sort())
+		console.log("global list sorted: " + newList);
+		console.log("myListSorted: " + selectedGuesses)
+		if(newList == selectedGuesses)
 			return true;
 	}
 	console.log("FALSEEEE");

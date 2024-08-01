@@ -304,7 +304,7 @@ function setCookie(name,value) {
 	console.log("UTC: " + expires.toUTCString())
         expires = "; expires=" + expires.toUTCString();
 	document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-	//document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+	document.cookie = "favorite_food=tripe; SameSite=None; Secure";
 }
 
 function getCookie(name) {
@@ -342,6 +342,14 @@ function load() {
 
 	setCookie("atonCookie", "atonVal");
 	console.log(getCookie("atonCookie"));
+
+	var myobj = ["one", "two, "three"];
+	console.log("1: " + JSON.stringify(myobj));
+	var str = JSON.stringify(myobj);
+	console.log("2: " + str.parse(myobj))
+
+	var strarray = str.parse(myobj);
+	console.log("3: " + strarray);
 }
 
 function wordClick(){

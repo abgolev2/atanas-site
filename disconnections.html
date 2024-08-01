@@ -633,16 +633,18 @@ async function autoSubmitWords(autoColor){
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	
-	await sleep(1400);
-	resetSelectionMatrixAndAllColor(rowsCleared);
-	for(i = 0 ; i < 4; i++){	
+
+	for(i = rowsCleared ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			let removeWord = document.getElementById("word"+i+j);
 			if(removeWord != null)
 				removeWord.remove("click", wordClick);
 		}
 	}
+	
+	await sleep(1400);
+	resetSelectionMatrixAndAllColor(rowsCleared);
+	
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";

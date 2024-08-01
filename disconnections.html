@@ -650,7 +650,7 @@ async function solveRestOfPuzzle(){
 			rowsCleared++;
 			console.log("BEFORE AWAIT");
 			console.log("selectionMatrix: " + selectionMatrix);
-			await sleep(500);
+			await sleep(250);
 			await autoSubmitWords(a);
 			console.log("AFTER AWAIT");
 		}
@@ -1012,8 +1012,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 				</TR>
 			</TABLE>
 		</div>
-		<br> 
-		<br>
 		<div id="wrapper">
 			<div class="button"><button class="button button" id="shareButton">Share Your Results</button></div>
 		</div>

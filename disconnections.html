@@ -427,11 +427,11 @@ async function countSuccesses() {
 		changeColor(colorCorrect); //make this an animation
 		await shakeSelectedWords(true);
 		//if(rowsCleared<4){
-			//await sleep(1200);
-			await sleep(1300);
-			await switchWords(colorCorrect);
-			resetSelectionMatrix();
-			disableClicksTopRow();
+		//await sleep(1200);
+		await sleep(1300);
+		await switchWords(colorCorrect);
+		resetSelectionMatrix();
+		disableClicksTopRow();
 		//}
 		console.log("WE MADEEEE A BIGGGG ROWWWW!");
 		await makeBigRow(rowsCleared-1, colorCorrect);
@@ -617,7 +617,7 @@ async function autoSubmitWords(autoColor){
 	console.log("we submitted woots");
 	//await sleep(750);
 	correctGuess = true;
-	disableClicksTopRow();
+	//disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
 	await shakeSelectedWords(true);
 	await sleep(1500);

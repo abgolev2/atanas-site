@@ -891,6 +891,7 @@ function viewResults(){
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "39px";
 	document.getElementById("closeButton").addEventListener("click", close);
+	document.getElementById("closeButton").innerHTML = "Back to puzzle   X";
 	enableShareButton();
 }
 
@@ -1019,7 +1020,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 
 <div id="results" class="modal">
 	<div class="modal-content">
-		<p id="closeButton" class="close" align = "right">Back to puzzle     X</p>
+		<p id="closeButton" class="close" align = "right"></p>
 		<br>
 		<br>
 		<br>

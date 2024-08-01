@@ -611,7 +611,7 @@ async function autoSubmitWords(autoColor){
 
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	document.getElementById(“Shuffle”).removeEventListener("click", clickShuffle);
+	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
 	await sleep(1400);
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	document.getElementById("Submit").removeEventListener("click", submitWords);

@@ -415,7 +415,6 @@ async function countSuccesses() {
 		console.log("WE MADEEEE A BIGGGG ROWWWW!");
 		await makeBigRow(rowsCleared-1, colorCorrect);
 		wordsSelected=0;
-		return true;
 	}	
 	else if(maxSuccesses==3){
 		correctGuess = false;
@@ -428,8 +427,9 @@ async function countSuccesses() {
 		shakeSelectedWords(false);
 		console.log("meow4");
 	}
+	document.getElementById("ClearAll").addEventListener("click", clearAll);
+	document.getElementById(“Shuffle”).addEventListener("click", clickShuffle);
 	console.log("we return false now");
-	return false;
 }
 
 async function displayPopup(text){
@@ -553,6 +553,8 @@ function alreadyGuessed(){
 }
 
 function submitWords(){
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById(“Shuffle”).removeEventListener("click", clickShuffle);
 	let oldGuess = alreadyGuessed();
 	if(oldGuess == true){
 		displayPopup("Already guessed");
@@ -607,6 +609,8 @@ async function autoSubmitWords(autoColor){
 }
 
 async function solveRestOfPuzzle(){
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById(“Shuffle”).removeEventListener("click", clickShuffle);
 	await sleep (1400);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";

@@ -305,7 +305,14 @@ function setCookie(name,value) {
 	console.log("UTC: " + expires.toUTCString())
         expires = "; expires=" + expires.toUTCString();
 	document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-	document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+	document.cookie = "favorite_food=tripe; SameSite=None;";
+	document.cookie = "favorite_food=tripe; SameSite=None;";
+}
+
+function setCookie(key, val){
+	let myString = key + "; " + val;
+	console.log("mystring: " + mystring);
+	document.cookie = myString;
 }
 
 function getCookie(name) {

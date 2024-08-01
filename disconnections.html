@@ -439,13 +439,13 @@ async function countSuccesses() {
 	}	
 	else if(maxSuccesses==3){
 		correctGuess = false;
-		shakeSelectedWords(false);
+		await shakeSelectedWords(false);
 		if(guessesLeft > 1)
 			displayPopup("One away...");
 	}
 	else{
 		correctGuess = false;
-		shakeSelectedWords(false);
+		await shakeSelectedWords(false);
 		console.log("meow4");
 	}
 	document.getElementById("ClearAll").addEventListener("click", clearAll);

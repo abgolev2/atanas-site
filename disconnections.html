@@ -539,7 +539,7 @@ function alreadyGuessed(){
 		console.log("mylength"+guessedWordList.length);
 		console.log("global list sorted: " + newList);
 		console.log("myListSorted: " + selectedGuesses)
-		if(newList == selectedGuesses)
+		if(newList.join() == selectedGuesses.join())
 			return true;
 	}
 	console.log("FALSEEEE");

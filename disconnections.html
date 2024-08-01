@@ -617,7 +617,7 @@ async function autoSubmitWords(autoColor){
 	console.log("we submitted woots");
 	//await sleep(750);
 	correctGuess = true;
-	//disableClicksTopRow();
+	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
 	await shakeSelectedWords(true);
 	await sleep(1500);
@@ -633,7 +633,7 @@ async function autoSubmitWords(autoColor){
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-
+	/*
 	for(i = rowsCleared ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			let removeWord = document.getElementById("word"+i+j);
@@ -641,7 +641,7 @@ async function solveRestOfPuzzle(){
 				removeWord.remove("click", wordClick);
 		}
 	}
-	
+	*/
 	await sleep(1400);
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	

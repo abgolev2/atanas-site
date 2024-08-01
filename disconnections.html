@@ -574,7 +574,7 @@ function alreadyGuessed(){
 	//return false;
 }
 
-function submitWords(){
+async function submitWords(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
 	let oldGuess = alreadyGuessed();
@@ -591,7 +591,7 @@ function submitWords(){
 	document.getElementById("Submit").disabled = true;
 	console.log("we submitted woots");
 	//we can now go through the boolean matrix looking for num true / false
-	countSuccesses();
+	await countSuccesses();
 	console.log(correctGuess);
 	console.log(rowsCleared);
 	if(correctGuess == true && rowsCleared == 4){

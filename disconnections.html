@@ -534,9 +534,13 @@ function alreadyGuessed(){
 		}
 	}
 	for(i = 0; i < guessedWordList.length; i++){
+		console.log("mylength"+guessedWordList.length);
+		console.log("global list sorted: " + guessedWordList[i].sort());
+		console.log("myListSorted: " + selectedGuesses.sort())
 		if(guessedWordList[i].sort() == selectedGuesses.sort())
 			return true;
 	}
+	console.log("FALSEEEE");
 	return false;
 	//if(matches == 4){
 	//	console.log("trueeee");

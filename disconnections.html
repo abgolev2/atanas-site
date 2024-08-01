@@ -591,7 +591,7 @@ async function autoSubmitWords(autoColor){
 	console.log("autoSubmit leggooooo");
 	console.log("rowsCleared: " + rowsCleared);
 	console.log("we submitted woots");
-	await sleep(750);
+	//await sleep(750);
 	correctGuess = true;
 	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
@@ -607,7 +607,7 @@ async function autoSubmitWords(autoColor){
 }
 
 async function solveRestOfPuzzle(){
-	//await sleep (2000);
+	await sleep (1400);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";

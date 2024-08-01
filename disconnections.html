@@ -251,6 +251,7 @@ var guessedColorList = [];
 var failed = false;
 var gameOver = false;
 var gameProgress = false;
+var shakeyWords = [];
 
 var startMatrix = [
 	["\u{004f}\u{004e}\u{0045}", 
@@ -737,6 +738,7 @@ async function shakeSelectedWords(softShake){
 				shakeWord(softShake, "word"+i+j);
 		}
 	}
+	await sleep(2200);
 	return;
 }
 	
@@ -752,8 +754,6 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.remove("softshake");
 	else if (!softShake && document.getElementById(id).classList.contains("shake")){
 		document.getElementById(id).classList.remove("shake");
-		await sleep(500);
-		}
 	return;
 }
 	

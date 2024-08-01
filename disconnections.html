@@ -555,7 +555,7 @@ function alreadyGuessed(){
 
 function submitWords(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
-	document.getElementById(“Shuffle”).removeEventListener("click", clickShuffle);
+	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
 	let oldGuess = alreadyGuessed();
 	if(oldGuess == true){
 		displayPopup("Already guessed");

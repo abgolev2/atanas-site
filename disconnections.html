@@ -440,7 +440,7 @@ async function countSuccesses() {
 	else if(maxSuccesses==3){
 		correctGuess = false;
 		shakeSelectedWords(false);
-		if(rowsCleared < 3)
+		if(guessesLeft > 1)
 			displayPopup("One away...");
 	}
 	else{

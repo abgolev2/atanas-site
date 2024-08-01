@@ -633,7 +633,6 @@ async function autoSubmitWords(autoColor){
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	resetSelectionMatrixAndAllColor(rowsCleared);
 	/*
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
@@ -643,6 +642,7 @@ async function solveRestOfPuzzle(){
 		}
 	}
 	*/
+	resetSelectionMatrixAndAllColor(rowsCleared);
 	await sleep(1400);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";

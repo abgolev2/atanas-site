@@ -309,9 +309,23 @@ function setCookie(name,value) {
 }
 
 function setCookie2(key, val){
-	let myString = key + "=" + val+"; SameSite=None;";
+	let myString = key + "=" + val + "; SameSite=None;";
 	console.log("mystring: " + myString);
 	document.cookie = myString;
+}
+
+
+
+function showCookieValue() {
+	const cookieValue = document.cookie.split("; ").find((row) => row.startsWith("favorite_food="))?.split("=")[1];
+	console.log("cookieValue: " + cookieValue);
+	const cookieValue2 = document.cookie.split("; ").find((row) => row.startsWith("favorite_salad="))?.split("=")[1];
+	console.log("cookieValue2: " + cookieValue2);
+}
+
+function clearOutputCookieValue() {
+  const output = document.getElementById("cookie-value");
+  output.textContent = "";
 }
 
 function getCookie(name) {
@@ -353,6 +367,7 @@ function load() {
 	setCookie("atonCookie", "atonVal");
 	setCookie2("favorite_salad", "shopska");
 	console.log(getCookie("atonCookie"));
+	showCookieValue();
 
 	var myobj = ["one", "two", "three"];
 	var newobj = JSON.stringify(myobj);

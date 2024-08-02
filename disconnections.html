@@ -250,8 +250,7 @@ var guessedWordList = [];
 var guessedColorList = [];
 var failed = false;
 var gameOver = false;
-var gameProgress = false;
-var shakeyWords = [];
+var myTestVar = "meow";
 
 var startMatrix = [
 	["\u{004f}\u{004e}\u{0045}", 
@@ -340,7 +339,7 @@ function getCookie(name) {
 
 function getCookieName() {
 	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("name="))?.split("=")[1];
-	console.log("cookieValue: " + cookieName);
+	console.log("cookieValueName: " + cookieName);
 	return cookieName;
 }
 		
@@ -695,6 +694,12 @@ async function autoSubmitWords(autoColor){
 	return;
 }
 
+function loadSubmitWords(autoColor){
+	for(i = 0; i < guessedColorList.length; i++){
+		makeBigRow(i, guessedColorList[i]);
+	}
+}
+
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
@@ -928,6 +933,7 @@ async function switchWords(correctColorRow){
 }
 
 async function endGame(winning){
+	gameOver = true;
 	if(winning == false){
 		await solveRestOfPuzzle();
 		for(i=0; i<4; i++){

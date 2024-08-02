@@ -299,7 +299,7 @@ var congratsWords = [
 	"Clutch"
 ]
 
-function setCookie(name,value) {
+function setInitCookie(name, value) {
 	var expires = new Date("August 1, 2024 22:00:00");
 	console.log("expires: " + expires);
 	console.log("UTC: " + expires.toUTCString());
@@ -308,11 +308,11 @@ function setCookie(name,value) {
 	//document.cookie = "favorite_food=tripe; SameSite=None;";
 }
 
-function setCookie2(key, val){
-	let myString = key + "=" + val + "; SameSite=None;";
+function setCookie(key, val){
+	let myString = key + "=" + val;
 	console.log("mystring: " + myString);
-	//document.cookie = myString;
-	document.cookie="favorite_word=finagle";
+	document.cookie = myString;
+	//document.cookie="favorite_word=finagle";
 }
 
 
@@ -365,8 +365,8 @@ function load() {
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
 
-	setCookie("atonCookie", "atonVal");
-	setCookie2("favorite_salad", "shopska");
+	setInitCookie("atonCookie", "atonVal");
+	setCookie("favorite_salad", "shopska");
 	console.log(getCookie("atonCookie"));
 	showCookieValue();
 

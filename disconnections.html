@@ -362,7 +362,7 @@ function load() {
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
 
-	let oldCookieNamme = getCookieName();
+	let oldCookieName = getCookieName();
 	if(oldCookieName != currCookieName){
 		console.log("setting new cookie");
 		setInitCookie(currCookieName, "atonVal", 7);

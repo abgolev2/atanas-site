@@ -304,14 +304,15 @@ function setCookie(name,value) {
 	console.log("expires: " + expires);
 	console.log("UTC: " + expires.toUTCString());
         expires = "; expires=" + expires.toUTCString();
-	document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-	document.cookie = "favorite_food=tripe; SameSite=None;";
+	document.cookie = name + "=" + (value || "")  + expires + "; SameSite=None; path=/";
+	//document.cookie = "favorite_food=tripe; SameSite=None;";
 }
 
 function setCookie2(key, val){
 	let myString = key + "=" + val + "; SameSite=None;";
 	console.log("mystring: " + myString);
-	document.cookie = myString;
+	//document.cookie = myString;
+	document.cookie="favorite_word=finagle";
 }
 
 

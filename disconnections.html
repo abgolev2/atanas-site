@@ -340,8 +340,8 @@ function getCookie(name) {
 
 function getCookieName() {
 	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("name="))?.split("=")[1];
-	console.log("cookieValue: " + cookieValue);
-	return cookieValue;
+	console.log("cookieValue: " + cookieName);
+	return cookieName;
 }
 		
 function load() {
@@ -364,6 +364,7 @@ function load() {
 
 	let oldCookieNamme = getCookieName();
 	if(oldCookieName != currCookieName){
+		console.log("setting new cookie");
 		setInitCookie(currCookieName, "atonVal", 7);
 	}
 	setCookie("favorite_salad", "shopska");

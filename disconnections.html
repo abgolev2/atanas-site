@@ -232,19 +232,17 @@ h1 {
 </STYLE>
 
 <SCRIPT>
-var day = 0;
+var puzzleNumber = 0;
 var guessesLeft = 4;
 var wordsSelected = 0;
 var isSelected = false;
 var defaultImagePath = "images/";
-var totalGames = 0; 
 var canSubmit = false;
 var rowsCleared = 0;
 var shuffleCount = 0;
 var correctGuess = false;
 var unselectedSpaceColor = "#efefe6";
 var selectedSpaceColor = "#";
-var puzzleNumber = 0;
 var guessesMade = 0;
 var guessedWordList = [];
 var guessedColorList = [];
@@ -344,9 +342,29 @@ function getCookieName() {
 }
 		
 function load() {
-	let currCookieName = "disCookie" + puzzleNumber;
-	let whichWord = "";
+	let currCookieName = "disTestCookie" + puzzleNumber;
+	let oldCookieName = getCookieName();
+
+	//set new cookie for each new puzzle
+	if(oldCookieName != currCookieName){
+		console.log("setting new cookie");
+		setInitCookie("name", currCookieName, 7);
+		setCookie("guessesLeft", "4");
+		setCookie("rowsCleared", "0");
+		setCookie("guessesMade", "0");
+		setCookie("gameOver", "false");
+		setCookie("failed", "false");
+		//setCookie("guessedColorList", "[]");
+		//setCookie("guessedWordList", "[]")
+	}
+	else{
+	}
+	setCookie("favorite_salad", "shopska");
+	console.log(getCookie(currCookieName));
+	showCookieValue();
+
 	//enables clicks and sets words
+	let whichWord = "";
 	for(i = 0 ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
@@ -360,15 +378,6 @@ function load() {
 	document.getElementById("Submit").disabled = true;
 	document.getElementById("ClearAll").disabled = true;
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
-
-	let oldCookieName = getCookieName();
-	if(oldCookieName != currCookieName){
-		console.log("setting new cookie");
-		setInitCookie("name", currCookieName, 7);
-	}
-	setCookie("favorite_salad", "shopska");
-	console.log(getCookie("atonCookie"));
-	showCookieValue();
 
 	var myobj = ["one", "two", "three"];
 	var newobj = JSON.stringify(myobj);

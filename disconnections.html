@@ -668,8 +668,10 @@ async function submitWords(){
 			endGame(false);
 			//solveRestOfPuzzle();
 		}
-		else
+		else {
+			sleep(250);
 			document.getElementById("Submit").addEventListener("click", submitWords);
+		}
 	}
 }
 
@@ -758,7 +760,6 @@ async function shakeSelectedWords(softShake){
 				shakeWord(softShake, "word"+i+j);
 		}
 	}
-	await sleep(2200);
 	return;
 }
 	

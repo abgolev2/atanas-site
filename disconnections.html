@@ -340,6 +340,12 @@ function getCookieName() {
 	console.log("cookieValueName: " + cookieName);
 	return cookieName;
 }
+
+function getCookieVal(key) {
+	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("key="))?.split("=")[1];
+	console.log("cookieValueName: " + cookieName);
+	return cookieName;
+}
 		
 function load() {
 	let currCookieName = "disTestCookie" + puzzleNumber;
@@ -354,10 +360,22 @@ function load() {
 		setCookie("guessesMade", "0");
 		setCookie("gameOver", "false");
 		setCookie("failed", "false");
+		setCookie("myTestVar", "bigmeow");
 		//setCookie("guessedColorList", "[]");
 		//setCookie("guessedWordList", "[]")
 	}
 	else{
+		console.log("myTestVar: " + myTestVar);
+		myTestVar = getCookieVal("myTestVar")
+		console.log("myTestVar: " + myTestVar)
+		//getCookie("guessesLeft");
+		//getCookie("rowsCleared");
+		//getCookie("guessesMade");
+		//getCookie("gameOver");
+		//getCookie("failed");
+		//getCookie("myTestVar);
+		//getCookie("guessedColorList");
+		//getCookie("guessedWordList")
 	}
 	setCookie("favorite_salad", "shopska");
 	console.log(getCookie(currCookieName));

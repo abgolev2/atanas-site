@@ -461,12 +461,12 @@ async function countSuccesses() {
 	guessedColorList.push(colorCorrect);
 	console.log("maxSuccesses: " + maxSuccesses);
 
+	document.getElementById("Submit").removeEventListener("click", submitWords);
 	if(maxSuccesses==4){
 		if(rowsCleared<4){
 			document.getElementById("Submit").disabled = true;
 			document.getElementById("ClearAll").disabled = true;
 			document.getElementById("ClearAll").removeEventListener("click", clearAll);
-			document.getElementById("Submit").removeEventListener("click", submitWords);
 		}
 		rowsCleared++;
 		correctGuess = true;
@@ -484,19 +484,15 @@ async function countSuccesses() {
 		wordsSelected=0;
 	}	
 	else if(maxSuccesses==3){
-		document.getElementById("Submit").removeEventListener("click", submitWords);
 		correctGuess = false;
 		await shakeSelectedWords(false);
 		if(guessesLeft > 1)
 			displayPopup("One away...");
-		document.getElementById("Submit").addEventListener("click", submitWords);
 	}
 	else{
-		document.getElementById("Submit").removeEventListener("click", submitWords);
 		correctGuess = false;
 		await shakeSelectedWords(false);
 		console.log("meow4");
-		document.getElementById("Submit").addEventListener("click", submitWords);
 	}
 	document.getElementById("ClearAll").addEventListener("click", clearAll);
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle);

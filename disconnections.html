@@ -309,7 +309,7 @@ function setCookie(name,value) {
 }
 
 function setCookie2(key, val){
-	let myString = key + "; " + val;
+	let myString = key + "=" + val+"; SameSite=None;";
 	console.log("mystring: " + myString);
 	document.cookie = myString;
 }

@@ -302,10 +302,9 @@ var congratsWords = [
 function setCookie(name,value) {
 	var expires = new Date("August 1, 2024 22:00:00");
 	console.log("expires: " + expires);
-	console.log("UTC: " + expires.toUTCString())
+	console.log("UTC: " + expires.toUTCString());
         expires = "; expires=" + expires.toUTCString();
 	document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-	document.cookie = "favorite_food=tripe; SameSite=None;";
 	document.cookie = "favorite_food=tripe; SameSite=None;";
 }
 
@@ -357,7 +356,7 @@ function load() {
 	var myobj = ["one", "two", "three"];
 	var newobj = JSON.stringify(myobj);
 	console.log("1: " + newobj);
-	var str = JSON.stringify(myobj);
+	var str = JSON.parse(myobj);
 	console.log("2: " + JSON.parse(myobj))
 
 	var strarray = JSON.parse(myobj);

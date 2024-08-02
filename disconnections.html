@@ -351,15 +351,16 @@ function load() {
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
 
 	setCookie("atonCookie", "atonVal");
+	setCookie2("favorite_salad", "shopska");
 	console.log(getCookie("atonCookie"));
 
 	var myobj = ["one", "two", "three"];
 	var newobj = JSON.stringify(myobj);
 	console.log("1: " + newobj);
-	var str = JSON.parse(myobj);
-	console.log("2: " + JSON.parse(myobj))
+	var str = JSON.parse(newobj);
+	console.log("2: " + JSON.parse(newobj))
 
-	var strarray = JSON.parse(myobj);
+	var strarray = JSON.parse(newobj);
 	console.log("3: " + strarray);
 }
 

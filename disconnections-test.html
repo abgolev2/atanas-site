@@ -385,14 +385,14 @@ function load() {
 		myTestVar = getCookieVal("myTestVar")
 		console.log("myTestVar: " + myTestVar)
 		console.log("guessesLeft cookie: " + getCookieVal("guessesLeft"));
+		console.log(getCookieVal("rowsCleared");
+		console.log(getCookieVal("guessesMade");
+		console.log(getCookieVal("gameOver");
+		console.log(getCookieVal("failed");
+		console.log(getCookieVal("myTestVar);
+		console.log(getCookieVal("guessedColorList");
+		console.log(getCookieVal("guessedWordList"));
 		guessesLeft = getCookieVal("guessesLeft");
-		//getCookieVal("rowsCleared");
-		//getCookieVal("guessesMade");
-		//getCookieVal("gameOver");
-		//getCookieVal("failed");
-		//getCookieVal("myTestVar);
-		//getCookieVal("guessedColorList");
-		//getCookieVal("guessedWordList")
 		if(guessesLeft!=4){
 			console.log("guessesLeftNow: " + guessesLeft);
 			for(i = 3; i >= guessesLeft; i--){
@@ -400,17 +400,14 @@ function load() {
 			}
 		}
 	}
-	setCookie("favorite_salad", "shopska");
+	//setCookie("favorite_salad", "shopska");
 	console.log(getCookie(initCookieName));
 	showCookieValue();
 
-	//start cookie update code
-	
-
 	//enables clicks and sets words
 	let whichWord = "";
-	for(i = 0 ; i < 4; i++){	
-		for(j = 0; j < 4; j++){
+	for(i = 0 ; i < rowsCleared; i++){	
+		for(j = 0; j < rowsCleared; j++){
 			whichWord = document.getElementById("word"+i+j);
 			whichWord.innerHTML = startMatrix[i][j];
 			whichWord.addEventListener("click", wordClick);

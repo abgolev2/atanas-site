@@ -356,24 +356,26 @@ function getCookieVal(key) {
 }
 		
 function load() {
-	let currCookieName = "disTestCookie1" + puzzleNumber;
-	let oldCookieName = getCookieName();
-	//let oldCookieName = getCookie("name");
-
+	let initCookieName = "disCookie";
+	let currIdName = "disconnections" + puzzleNumber;
+	let oldIdName = getCookie("id");
+	
 	console.log("currCookie: " + currCookieName);
 	console.log("oldcookie: " + oldCookieName)
 
 	//set new cookie for each new puzzle
-	if(oldCookieName != currCookieName){
+	if(oldIdName != currIdName){
 		console.log("setting new cookie");
-		setInitCookie("cookieName", currCookieName, 7);
-		console.log("getting new cookie name: " + getCookieName());
+		setInitCookie("cookieName", initCookieName, 7);
+		//console.log("getting new cookie name: " + getCookieName());
 		setCookie("guessesLeft", "4");
 		setCookie("rowsCleared", "0");
 		setCookie("guessesMade", "0");
 		setCookie("gameOver", "false");
 		setCookie("failed", "false");
 		setCookie("myTestVar", "bigmeow");
+		//let idName = "disconnections" + puzzleNumber;
+		setCookie("id", currIdName);
 		//setCookie("guessedColorList", "[]");
 		//setCookie("guessedWordList", "[]")
 	}

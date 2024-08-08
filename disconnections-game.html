@@ -1,0 +1,1171 @@
+<!DOCTYPE>
+<!--
+	Created by Atanas Golev.
+Code for modal snagged from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+Code for share button snagged from: https://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website
+Code for fadeout effect snagged from: https://stackoverflow.com/questions/29017379/how-to-make-fadeout-effect-with-pure-javascript
+-->
+<HTML>
+<TITLE>Disconnections</TITLE>
+<HEAD>
+<STYLE> 
+
+body { font-family: helvetica, sans-serif; }
+	
+table#Words {
+	cursor: default;
+	border-spacing: 20px 20px;
+	table-layout:fixed;
+	width:100%;
+}
+
+table#Words th, td {
+	border-radius: 15px;
+}
+
+table#Words tr {
+	vertical-align: middle;
+}
+
+table#Words td {
+	position: relative;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 36px;
+	width: 24.5%;
+	display: table-cell;
+	background-color: efefe6;
+	/*line-height: 222px;*/
+	height: 205px;
+	word-wrap: break-word;
+	font-weight: 725;
+}
+
+tableWords center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td:after {
+	content:'';
+	contentRow:'';
+	aspect-ratio: 1/1;
+	vertical-align:middle;
+	position:absolute;
+	display:block;
+	margin-top:2%;
+}
+
+.content {
+	aspect-ratio: 1/1;
+	vertical-align:middle;
+	position:absolute;
+}
+
+.content2 {
+	height: 450px;
+	vertical-align:middle;
+	position:absolute;
+	line-height: 0px;
+}
+
+.rowcontent {
+	height:450px;
+	vertical-align:middle;
+	position:absolute;
+	display: none; /* Hidden by default */
+}
+
+.resultTable {
+	text-align: center;
+	text-size: 50px;
+}
+
+table#Mistakes{
+	width: 70%;
+	cursor: default;
+	font-size: 33px;
+	text-align: center;
+}
+
+table#Mistakes center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table#Mistakes td{
+	border: none;
+}
+
+h1 {
+	padding-top: 30px;
+	font-size: 80px;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	height: 60px;
+}
+
+#wrapper {
+	width:100%;
+	text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 0px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  /*width: 90%;*/
+}
+
+/* The Close Button */
+.close {
+  color: #000000;
+  font-size: 36px;
+  font-weight: 450;
+  cursor: pointer;
+}
+
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 30px; /* Location of the box */
+  left: 25%;
+  top: 539px;
+  width: 50%; /* Full width */
+  height: 30%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: transparent; /* Fallback color */
+}
+
+/* Modal Content */
+.modal2-content {
+	background-color: #000000;
+	border-radius: 10px;
+	color: #ffffff;
+	margin: auto;
+	padding: 20px;
+	width: 50%;
+}
+	
+.button {
+	font-weight: 450;
+	border-radius: 70px;
+	padding: 33px 10px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 38px;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	display: inline-block;
+	background-color: #FFFFFF;
+}
+.button:disabled {
+	/*opacity: 0.95;*/
+	pointer-events: none;
+	cursor: default;
+}
+.button:close {
+	pointer-events: none;
+	cursor: default
+	border-radius: 0px;
+	padding: 0px 0px;
+	position: absolute;
+	right: 0px;
+}
+.softshake {
+  animation: softshake 0.5s;
+  animation-iteration-count: 2;
+}
+@keyframes softshake {
+  0% { transform: translate(0px, 1px) rotate(0deg); }
+  20% { transform: translate(0px, 0px) rotate(0deg); }
+  40% { transform: translate(0px, -2px) rotate(0deg); }
+  60% { transform: translate(0px, 1px) rotate(0deg); }
+  80% { transform: translate(0px, -1px) rotate(0deg); }
+  100% { transform: translate(0px, 2px) rotate(0deg); }
+}
+
+.shake {
+  animation: shake 0.5s;
+  animation-iteration-count: 2;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+</STYLE>
+
+<SCRIPT>
+var puzzleNumber = 0;
+var guessesLeft = 4;
+var wordsSelected = 0;
+var isSelected = false;
+var defaultImagePath = "images/";
+var canSubmit = false;
+var rowsCleared = 0;
+var shuffleCount = 0;
+var correctGuess = false;
+var unselectedSpaceColor = "#efefe6";
+var selectedSpaceColor = "#";
+var guessesMade = 0;
+var guessedWordList = [];
+var guessedColorList = [];
+var failed = false;
+var gameOver = false;
+var myTestVar = "meow";
+
+var startMatrix = [
+	["\u{004A}\u{004F}\u{0052}\u{0044}\u{0041}\u{004E}", 
+	"\u{0046}\u{0055}\u{0043}\u{004B}\u{0045}\u{0052}", 
+	"\u{0042}\u{004F}\u{004F}\u{0042}", 
+	"\u{0054}\u{0049}\u{0054}"],
+	["\u{0044}\u{004F}\u{0050}\u{0045}", 
+	"\u{0041}\u{004D}\u{0041}\u{005A}\u{004F}\u{004E}", 
+	"\u{0053}\u{0050}\u{0049}\u{0043}\u{0045}", 
+	"\u{0042}\u{004F}\u{0041}\u{0052}\u{0044}"],
+	["\u{004B}\u{0041}\u{0059}\u{0041}\u{004B}", 
+	"\u{0052}\u{0041}\u{0043}\u{0045}\u{0043}\u{0041}\u{0052}", 
+	"\u{004C}\u{0041}\u{004E}\u{0044}", 
+	"\u{0053}\u{0050}\u{0045}\u{0045}\u{0044}"],
+	["\u{004B}\u{0045}\u{004E}\u{0054}\u{0055}\u{0043}\u{004B}\u{0059}", 
+	"\u{004D}\u{0049}\u{0053}\u{0053}\u{004F}\u{0055}\u{0052}\u{0049}", 
+	"\u{0043}\u{0052}\u{0041}\u{0043}\u{004B}", 
+	"\u{004E}\u{0041}\u{0054}\u{0055}\u{0052}\u{0045}"]
+]
+	
+var wordMatrix = [
+	[startMatrix[3][2], startMatrix[1][0], startMatrix[2][3], startMatrix[1][2], "#f9e06e", "\u{1F7E8}", 
+	"\u{0044}\u{0052}\u{0055}\u{0047}\u{0053}"],
+	[startMatrix[1][1], startMatrix[0][0], startMatrix[3][0], startMatrix[3][1], "#a1c25a", "\u{1F7E9}", 
+	"\u{0052}\u{0049}\u{0056}\u{0045}\u{0052}\u{0053}"],
+	[startMatrix[0][2], startMatrix[2][0], startMatrix[2][1], startMatrix[0][3], "#b2c3f0", "\u{1F7E6}", 
+	"\u{0050}\u{0041}\u{004C}\u{0049}\u{004E}\u{0044}\u{0052}\u{004F}\u{004D}\u{0045}\u{0053}"],
+	[startMatrix[1][3], startMatrix[0][1], startMatrix[2][2], startMatrix[3][3], "#bb80c4", "\u{1F7EA}", 
+	"\u{004D}\u{004F}\u{0054}\u{0048}\u{0045}\u{0052}"]
+]
+	
+var selectionMatrix = [
+	[false, false, false, false],
+	[false, false, false, false],
+	[false, false, false, false],
+	[false, false, false, false]
+]
+
+var guessList = [];
+	
+var congratsWords = [
+	"Shite",
+	"",
+	"",
+	"",
+	"Perf",
+	"Noice",
+	"Aight",
+	"Clutch"
+]
+
+function setInitCookie(name, value, days) {
+	//var expires = new Date("August 8, 2024 20:35:00");
+	//console.log("expires: " + expires);
+	var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        var expires = "; expires=" + date.toUTCString();
+	document.cookie = name + "=" + (value || "")  + expires + "; SameSite=None; path=/";
+	//document.cookie = "favorite_food=tripe; SameSite=None;";
+}
+
+function setCookie(key, val){
+	let myString = key + "=" + val;
+	console.log("mystring: " + myString);
+	document.cookie = myString;
+	//document.cookie="favorite_word=finagle";
+}
+
+
+function showCookieValue() {
+	const cookieValue = document.cookie.split("; ").find((row) => row.startsWith("favorite_food="))?.split("=")[1];
+	console.log("cookieValue: " + cookieValue);
+	const cookieValue2 = document.cookie.split("; ").find((row) => row.startsWith("favorite_salad="))?.split("=")[1];
+	console.log("cookieValue2: " + cookieValue2);
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') 
+		c = c.substring(1,c.length);
+        //if (c.indexOf(nameEQ) == 0) 
+	 //   	console.log("incookie" + c.substring(nameEQ.length,c.length));
+	console.log("c: " + c)
+    }
+    return null;
+}
+
+function getCookieName() {
+	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("name="))?.split("=")[1];
+	console.log("cookieValueName: " + cookieName);
+	return cookieName;
+}
+
+function getCookieVal(key) {
+	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("key="))?.split("=")[1];
+	console.log("cookieValueName: " + cookieName);
+	return cookieName;
+}
+		
+function load() {
+	let currCookieName = "disTestCookie" + puzzleNumber;
+	let oldCookieName = getCookieName();
+
+	//set new cookie for each new puzzle
+	if(oldCookieName != currCookieName){
+		console.log("setting new cookie");
+		setInitCookie("name", currCookieName, 7);
+		setCookie("guessesLeft", "4");
+		setCookie("rowsCleared", "0");
+		setCookie("guessesMade", "0");
+		setCookie("gameOver", "false");
+		setCookie("failed", "false");
+		setCookie("myTestVar", "bigmeow");
+		//setCookie("guessedColorList", "[]");
+		//setCookie("guessedWordList", "[]")
+	}
+	else{
+		console.log("myTestVar: " + myTestVar);
+		myTestVar = getCookieVal("myTestVar")
+		console.log("myTestVar: " + myTestVar)
+		//getCookie("guessesLeft");
+		//getCookie("rowsCleared");
+		//getCookie("guessesMade");
+		//getCookie("gameOver");
+		//getCookie("failed");
+		//getCookie("myTestVar);
+		//getCookie("guessedColorList");
+		//getCookie("guessedWordList")
+	}
+	setCookie("favorite_salad", "shopska");
+	console.log(getCookie(currCookieName));
+	showCookieValue();
+
+	//enables clicks and sets words
+	let whichWord = "";
+	for(i = 0 ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			whichWord = document.getElementById("word"+i+j);
+			whichWord.innerHTML = startMatrix[i][j];
+			whichWord.addEventListener("click", wordClick);
+		}
+	}
+	document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("Submit").disabled = true;
+	document.getElementById("ClearAll").disabled = true;
+	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
+
+	var myobj = ["one", "two", "three"];
+	var newobj = JSON.stringify(myobj);
+	console.log("1: " + newobj);
+	var str = JSON.parse(newobj);
+	console.log("2: " + JSON.parse(newobj))
+
+	var strarray = JSON.parse(newobj);
+	console.log("3: " + strarray);
+}
+
+function wordClick(){
+	var cellRow = this.id.substring(4,5);
+	var cellCol = this.id.substring(5,6);
+	var cellId = "word" + cellRow + cellCol;
+	if(selectionMatrix[cellRow][cellCol]==false){
+		if(wordsSelected == 4)
+			return;
+		else if(wordsSelected == 3){
+			document.getElementById("Submit").style.backgroundColor = "#000000";
+			document.getElementById("Submit").style.color = "#FFFFFF";
+		}
+		document.getElementById(cellId).style.backgroundColor = "#606060";
+		document.getElementById(cellId).style.color = "#FFFFFF";
+		selectionMatrix[cellRow][cellCol] = true;
+		wordsSelected++;
+		console.log("Words selected: " + wordsSelected);
+		if(wordsSelected == 4)
+			canSubmit = true;
+		canSubmit = false;
+	}
+	else{
+		document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+		document.getElementById("Submit").disabled = true;
+		document.getElementById("Submit").style.opacity = "0.95";
+		document.getElementById("Submit").style.color = "#C0C0C0";
+		document.getElementById(cellId).style.backgroundColor = unselectedSpaceColor;
+		document.getElementById(cellId).style.color = "#000000";
+		selectionMatrix[cellRow][cellCol] = false;
+		if(wordsSelected != 0)
+			wordsSelected--;
+		console.log("Words selected: " + wordsSelected);
+		canSubmit = false;
+	}
+	console.log("selection Matrix: " + selectionMatrix);
+
+	//set buttons to enabled/disabled
+	if(wordsSelected > 0){
+		document.getElementById("ClearAll").disabled = false;
+		document.getElementById("ClearAll").addEventListener("click", clearAll);
+	}
+	else{
+		document.getElementById("ClearAll").disabled = true;
+		document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	}
+	
+	if(wordsSelected == 4){
+		document.getElementById("Submit").disabled = false;
+		document.getElementById("Submit").addEventListener("click", submitWords);
+	}
+	else{
+		document.getElementById("Submit").disabled = true;
+		document.getElementById("Submit").removeEventListener("click", submitWords);
+	}
+		
+}
+
+async function countSuccesses() {
+	let successCountPerAssociation = [0, 0, 0, 0];
+	let myWord = "";
+	let colorList = [];
+	let guessedFour = [];
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
+			if(selectionMatrix[i][j]){
+				myWord = document.getElementById("word"+i+j).innerHTML
+				console.log("myWord" + myWord);
+				for(k = 0; k < 4; k++){
+					for(m = 0; m < 4; m++){
+						if(wordMatrix[k][m] == myWord){
+							successCountPerAssociation[k]++;
+							myColor = wordMatrix[k][5]
+							colorList.push(myColor);
+							guessedFour.push(myWord);
+						}
+					}
+				}
+			}
+		}
+	}
+	console.log("colorList: " + colorList)
+	guessList.push(colorList);
+	guessedWordList.push(guessedFour);
+	console.log("guessed word list: " + guessedWordList);
+	console.log("successes: " + successCountPerAssociation);
+
+	let maxSuccesses = 0;
+	let colorCorrect = -1;
+	for(i = 0; i < 4; i++){
+		if(successCountPerAssociation[i]>maxSuccesses){
+			maxSuccesses = successCountPerAssociation[i]
+			if(maxSuccesses == 4)
+				colorCorrect = i;
+		}
+	}
+	guessedColorList.push(colorCorrect);
+	console.log("maxSuccesses: " + maxSuccesses);
+
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	if(maxSuccesses==4){
+		if(rowsCleared<4){
+			document.getElementById("Submit").disabled = true;
+			document.getElementById("ClearAll").disabled = true;
+			document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		}
+		rowsCleared++;
+		correctGuess = true;
+		changeColor(colorCorrect); //make this an animation
+		await shakeSelectedWords(true);
+		//if(rowsCleared<4){
+		//await sleep(1200);
+		await sleep(1300);
+		await switchWords(colorCorrect);
+		resetSelectionMatrix();
+		disableClicksTopRow();
+		//}
+		console.log("WE MADEEEE A BIGGGG ROWWWW!");
+		await makeBigRow(rowsCleared-1, colorCorrect);
+		wordsSelected=0;
+	}	
+	else if(maxSuccesses==3){
+		correctGuess = false;
+		await shakeSelectedWords(false);
+		if(guessesLeft > 1)
+			displayPopup("One away...");
+	}
+	else{
+		correctGuess = false;
+		await shakeSelectedWords(false);
+		console.log("meow4");
+	}
+	document.getElementById("ClearAll").addEventListener("click", clearAll);
+	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
+	console.log("we return false now");
+	return;
+}
+
+async function displayPopup(text){
+	document.getElementById("popup").style.display = "block";
+	document.getElementById("popupText").innerHTML = text;
+	document.getElementById("popupText").style.color = "ffffff";
+	document.getElementById("popupText").style.fontSize = "30px";
+	document.getElementById("popupText").style.fontWeight = "bold";
+	await sleep(2000);
+	document.getElementById("popup").style.display = "none";
+}
+
+function fadeOutEffect() {
+    var fadeTarget = document.getElementById("popup");
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 2000);
+}
+
+async function makeBigRow(row, colorRow){
+	console.log("rowsCleared" + row);
+	for(i = 1; i < 4; i++){
+		document.getElementById("word" + row + i).remove();
+		if(rowsCleared==4){
+			document.getElementById("word00").style.width = "100%";
+			document.getElementById("word30").style.width = "100%";
+		}
+	}
+	if(rowsCleared==4){
+		console.log("made it woottt");
+		document.getElementById("word00").style.width = "100%";
+		document.getElementById("word10").style.width = "100%";
+		document.getElementById("word20").style.width = "100%";
+		document.getElementById("word30").style.width = "100%";
+		//bigRow.style.width = "100%";
+	}
+	let bigRow = document.getElementById("word"+row+"0");
+	bigRow.style.display = "block";
+	let bigRowText  = "<br><b>" + wordMatrix[colorRow][6] + "</b><br>";
+	for(i = 0; i < 4; i++){
+		bigRowText+=wordMatrix[colorRow][i];
+		if(i!=3)
+			bigRowText+=", ";
+	}
+	bigRow.innerHTML = bigRowText;
+	if(rowsCleared==4){
+		//document.getElementById("word00").style.width = "100%";
+		//document.getElementById("word10").style.width = "100%";
+		//document.getElementById("word20").style.width = "100%";
+		//document.getElementById("word30").style.width = "100%";
+		//bigRow.style.width = "100%";
+	}
+	else
+		bigRow.style.width = "427.5%"
+	bigRow.style.wordWrap = "break-word";
+	bigRow.style.lineHeight = "50px";
+	bigRow.style.fontWeight = "400";
+}
+
+function disableClicksTopRow(){
+	let myRowsCleared = rowsCleared-1;
+	for(i = 0; i < 4; i++){
+		document.getElementById("word"+myRowsCleared+i).removeEventListener("click", wordClick);
+	}
+}
+
+function changeColor(colorRow){
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
+			console.log("made it woots");
+			let myWord = "";
+			if(selectionMatrix[i][j]){
+				console.log("made it woots");
+				myWord = document.getElementById("word"+i+j);
+				myWord.style.backgroundColor = wordMatrix[colorRow][4];
+				myWord.style.color = "#000000";
+			}
+		}
+	}
+	return;
+}
+
+function alreadyGuessed(){
+	console.log("made itttt");
+	let matches = 0;
+	let selectedGuesses = [];
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
+			if(selectionMatrix[i][j]){
+				let guessedWord = document.getElementById("word"+i+j).innerHTML;
+				console.log("guessedWord" + guessedWord);
+				selectedGuesses.push(guessedWord);
+				console.log(guessedWordList);
+			}
+		}
+	}
+	selectedGuesses = selectedGuesses.sort();
+	for(i = 0; i < guessedWordList.length; i++){
+		let newList = guessedWordList[i].sort();
+		console.log("mylength"+guessedWordList.length);
+		console.log("global list sorted: " + newList);
+		console.log("myListSorted: " + selectedGuesses)
+		if(newList.join() == selectedGuesses.join())
+			return true;
+	}
+	console.log("FALSEEEE");
+	return false;
+	//if(matches == 4){
+	//	console.log("trueeee");
+	//	return true;
+	//}
+	//console.log("falseeee");
+	//return false;
+}
+
+async function submitWords(){
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
+	let oldGuess = alreadyGuessed();
+	if(oldGuess == true){
+		displayPopup("Already guessed");
+		console.log("selectionMatrix: " + selectionMatrix);
+		return;
+	}
+	guessesMade++;
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+	document.getElementById("Submit").style.color = "#C0C0C0";
+	document.getElementById("Submit").style.opacity = "0.95";
+	document.getElementById("Submit").disabled = true;
+	console.log("we submitted woots");
+	//we can now go through the boolean matrix looking for num true / false
+	await countSuccesses();
+	console.log(correctGuess);
+	console.log(rowsCleared);
+	if(correctGuess == true && rowsCleared == 4){
+		console.log("meow we end game");
+		endGame(true);
+	}
+	if(!correctGuess){
+		console.log("hello");
+		guessesLeft--;
+		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
+		if(guessesLeft==0){
+			endGame(false);
+			//solveRestOfPuzzle();
+		}
+		else {
+			document.getElementById("Submit").addEventListener("click", submitWords);
+		}
+	}
+}
+
+async function autoSubmitWords(autoColor){
+	console.log("autoSubmit leggooooo");
+	console.log("rowsCleared: " + rowsCleared);
+	console.log("we submitted woots");
+	//await sleep(750);
+	correctGuess = true;
+	disableClicksTopRow();
+	changeColor(autoColor); //make this an animation
+	await shakeSelectedWords(true);
+	await sleep(1500);
+	await switchWords(autoColor);
+	makeBigRow(rowsCleared-1, autoColor);
+	await sleep(500);
+	wordsSelected=0;
+	for(i = 0; i < 4; i++)
+		selectionMatrix[rowsCleared-1][i] = false;
+	return;
+}
+
+function loadSubmitWords(autoColor){
+	for(i = 0; i < guessedColorList.length; i++){
+		makeBigRow(i, guessedColorList[i]);
+	}
+}
+
+async function solveRestOfPuzzle(){
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
+	/*
+	for(i = rowsCleared ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			let removeWord = document.getElementById("word"+i+j);
+			if(removeWord != null)
+				removeWord.remove("click", wordClick);
+		}
+	}
+	*/
+	await sleep(1400);
+	resetSelectionMatrixAndAllColor(rowsCleared);
+	
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+	document.getElementById("Submit").style.color = "#C0C0C0";
+	document.getElementById("Submit").style.opacity = "0.95";
+	document.getElementById("Submit").disabled = true;
+	for(a = 0; a < 4; a++){
+		let guessedColor = false;
+		console.log("guessedColorList length: " + guessedColorList.length)
+		for(b = 0; b < guessedColorList.length; b++){
+			if(a == guessedColorList [b])
+				guessedColor = true;
+		}
+		if(guessedColor == false){
+			console.log("rowsCleared in solveRest: " + rowsCleared);
+			resetSelectionMatrixAndAllColor(rowsCleared);
+			console.log("meowwwww for round a: " + a);
+			for(i = rowsCleared; i < 4; i++){
+				for(j = 0; j < 4; j++){
+					let thisWord = document.getElementById("word"+i+j).innerHTML;
+					for(m = 0; m < 4; m++){
+						//console.log("thisWord: " + thisWord);
+						//console.log("correctWord: " + wordMatrix[a][m]);
+						if(thisWord == wordMatrix[a][m]){
+							console.log("this true and then ij: "+i+j)
+							selectionMatrix[i][j] = true;
+						}
+					}
+				}
+			}
+		
+			console.log("We gonna submit some words");
+			failed = true;
+			//await sleep(2200);
+			rowsCleared++;
+			console.log("BEFORE AWAIT");
+			console.log("selectionMatrix: " + selectionMatrix);
+			await sleep(250);
+			await autoSubmitWords(a);
+			console.log("AFTER AWAIT");
+		}
+	}
+}
+
+async function shakeSelectedWords(softShake){
+	await sleep(100);
+	for(i=0; i<4; i++){
+		for(j=0; j<4; j++){
+			if(selectionMatrix[i][j]==true)
+				shakeWord(softShake, "word"+i+j);
+		}
+	}
+	return;
+}
+	
+async function shakeWord(softShake, id){
+	document.getElementById(id).removeEventListener("click", wordClick);
+	if(softShake)
+		document.getElementById(id).classList.add("softshake");
+	else
+		document.getElementById(id).classList.add("shake");
+	await sleep(2000);
+	if(document.getElementById(id) == null)
+		return;
+	if(softShake && document.getElementById(id).classList.contains("softshake"))
+		document.getElementById(id).classList.remove("softshake");
+	else if (!softShake && document.getElementById(id).classList.contains("shake"))
+		document.getElementById(id).classList.remove("shake");
+	document.getElementById(id).addEventListener("click", wordClick);
+	return;
+}
+	
+function clickShuffle(){
+	console.log("we shuffled woots");
+	shuffleCount++;
+	let varArray = [];
+	let selectedArray = [];
+	for(i=rowsCleared; i<4; i++){
+		for(j=0; j<4; j++){
+			var val = document.getElementById("word"+i+j).innerHTML;
+			console.log("val: " + val);
+			varArray.push(val);
+			selectedArray.push(selectionMatrix[i][j]);
+		}
+	}
+	console.log("varArray:" + varArray)
+	console.log("selectedArray:" + selectedArray)
+	shuffle(varArray, selectedArray)
+	console.log("shuffled varArray:" + varArray)
+	console.log("shuffled selectedArray:" + selectedArray)
+	resetSelectionMatrixAndAllColor(rowsCleared);
+	
+	for(i=rowsCleared; i<4; i++){
+		for(j=0; j<4; j++){
+			let selectedWord = document.getElementById("word"+i+j);
+			selectedWord.innerHTML = varArray[varArray.length-1];
+			if(selectedArray[varArray.length-1]){
+				selectedWord.style.backgroundColor = "#606060";
+				selectedWord.style.color = "#FFFFFF";
+				selectionMatrix[i][j]=true;
+			}
+			else{
+				selectedWord = document.getElementById("word"+i+j);
+				selectedWord.style.backgroundColor = unselectedSpaceColor;
+				selectedWord.style.color = "#000000";
+			}
+			varArray = varArray.slice(0, varArray.length-1);
+			selectedArray = selectedArray.slice(0, selectedArray.length-1);
+			console.log("varArray size: " + varArray.length);
+		}
+	}
+
+	//if(shuffleCount==20){
+	//	alert("Aight slow down with the shuffling captain I'm getting tired");
+	//}
+}
+
+function shuffle(array, array2) {
+	let currentIndex = array.length;
+
+  	// While there remain elements to shuffle...
+  	while (currentIndex != 0) {
+
+		// Pick a remaining element...
+		let randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+
+	    	// And swap it with the current element.
+	    	[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+	    	[array2[currentIndex], array2[randomIndex]] = [array2[randomIndex], array2[currentIndex]];
+	}
+}
+
+function clearAll(){
+	console.log("we clear now");
+	resetSelectionMatrixAndAllColor(rowsCleared);
+	wordsSelected=0;
+	document.getElementById("ClearAll").disabled = true;
+	document.getElementById("Submit").disabled = true;
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	document.getElementById("Submit").removeEventListener("click", submitWords);
+	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
+	document.getElementById("Submit").style.opacity = "0.95";
+	document.getElementById("Submit").style.color = "#C0C0C0";
+}
+
+function resetSelectionMatrixAndAllColor(startingRow){
+	let thisWord = "";
+	for(i = startingRow; i < 4; i++){	
+		for(j = 0; j < 4; j++){
+			thisWord = document.getElementById("word"+i+j);
+			thisWord.style.backgroundColor = unselectedSpaceColor;
+			thisWord.style.color = "#000000";
+			selectionMatrix[i][j] = false;
+		}
+	}
+}
+
+function resetSelectionMatrix(){
+	for(i = 0 ; i < 4; i++)	
+		for(j = 0; j < 4; j++)
+			selectionMatrix[i][j] = false;
+}
+
+async function switchWords(correctColorRow){
+	let myRowsCleared = rowsCleared-1;
+	//let's build an array of all entries on the top row that should be switched with correct answers
+	console.log("correct color row: " + correctColorRow) 
+	let colsThatNeedSwitching = [];
+	let topRowWord = "";
+	let matchFound = false;
+	let colToSet = 0;
+	console.log("switchWords rowsCleared: " + myRowsCleared);
+	for(i = 0; i < 4; i++){
+		topRowWord = document.getElementById("word"+myRowsCleared+i).innerHTML;
+		for(j = 0; j < 4; j++){
+			if(topRowWord == wordMatrix[correctColorRow][j]){
+				matchFound = true;
+				break;
+			}
+		}
+		if(!matchFound){
+			colsThatNeedSwitching.push(colToSet);
+		}
+		colToSet++;
+		matchFound = false;
+	}
+	let wordFound = "";
+	let boxFound = "";
+	for(i = myRowsCleared+1; i < 4; i++){
+		for(j = 0; j < 4; j++){
+			if(selectionMatrix[i][j]){
+				let correctElement = document.getElementById("word"+i+j);
+				let correctWord = correctElement.innerHTML;
+				let randomElement = "";
+				if(colsThatNeedSwitching.length>0){
+					console.log("correct word: " + correctWord);
+					randomElement = document.getElementById("word"+myRowsCleared+colsThatNeedSwitching[0]);
+					console.log("random word: " + randomElement.innerHTML)
+					correctElement.innerHTML = randomElement.innerHTML;
+					randomElement.innerHTML = correctWord;
+					correctElement.style.backgroundColor = unselectedSpaceColor;
+					correctElement.style.color = "#000000";
+				}
+				let topRowBox = "";
+				for(k = 0; k < 4; k++){
+					console.log("meow");
+					topRowBox = document.getElementById("word"+myRowsCleared+k);
+					topRowBox.style.color = "#000000";
+					topRowBox.style.backgroundColor = wordMatrix[correctColorRow][4];
+				}
+				colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
+				console.log("colsThatNeedSwitching: " + colsThatNeedSwitching);
+			}
+		}
+	}
+}
+
+async function endGame(winning){
+	gameOver = true;
+	if(winning == false){
+		await solveRestOfPuzzle();
+		for(i=0; i<4; i++){
+			document.getElementById("word"+i+"0").style.width = "100%"
+		}
+	}
+	enableShareButton();
+	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("shareButton").style.backgroundColor = "#000000";
+	document.getElementById("shareButton").style.color = "#ffffff";
+
+	let congrats = congratsWords[guessesMade];
+	if(rowsCleared != 4 || failed == true)
+		congrats = congratsWords[0];
+	await sleep(500);
+	displayPopup(congrats);
+	console.log(guessList);
+	document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	let submitWord = "";
+	document.getElementById("Shuffle").remove();
+	document.getElementById("Submit").remove();
+	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspView Results&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("ClearAll").addEventListener("click", viewResults);
+	document.getElementById("ClearAll").disabled = false;
+}
+
+function viewResults(){
+	console.log("meoww");
+	document.getElementById("results").style.display = "block";
+	console.log("guess length" + guessList.length);
+	let colorTable = getColorTable(false);
+	let resultsBox = document.getElementById("resultSquares");
+	let congratsWord = "Shite";
+	if(rowsCleared == 4 && failed == false)
+		congratsWord = congratsWords[guessesMade]
+	let resultsText = "<font size=\"56px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
+	console.log("resultsText" + resultsText); 
+	resultsBox.innerHTML = resultsText;
+	resultsBox.style.fontSize = "39px";
+	document.getElementById("closeButton").addEventListener("click", close);
+	document.getElementById("closeButton").innerHTML = "Back to puzzle &nbsp X";
+	enableShareButton();
+}
+
+function close(){
+	document.getElementById("results").style.display = "none";
+}
+
+function getColorLine(row){
+	let myColorLine = "";
+	for(i=0; i<4; i++)
+		myColorLine+=guessList[row][i];
+	console.log("myColorLine"+myColorLine);
+	return myColorLine;
+}
+	
+function getColorTable(forSending){
+	//var oldGuessList = guessList;
+	var colorTable = "";
+	console.log("guessList" + guessList);
+	console.log("length: " + guessList.length)
+	for(i=0; i<guessList.length; i++){
+		for(j=0; j<4; j++){
+			colorTable+=guessList[i][j];
+		}
+		if(i!=(guessList.length - 1)){
+			if(forSending)
+				colorTable+="\n";
+			else
+				colorTable+="<br>";
+		}
+	}
+	//guessList = oldGuessList;
+	console.log("meowwww");
+	console.log("colorTable" + colorTable);
+	return colorTable;
+}
+
+function enableShareButton(){
+	const shareButton = document.getElementById("shareButton"); 
+	var colors = getColorTable(true);
+	shareButton.addEventListener("click", (e) => { 
+		console.log("hellooooo");
+  		if (navigator.share) {
+    			navigator.share({
+        		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors
+     		})
+      		.then(() => console.log('Successful share'))
+      		.catch((error) => console.log('Error sharing', error));
+  		} else {
+    		console.log('Share not supported on this browser, do it the old way.');
+  		}
+	});
+}
+
+function sleep(ms){
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+	
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
+
+</SCRIPT>
+	
+</HEAD>
+<h1>DISCONNECTIONS</h1>
+<BODY ONLOAD="load()">
+
+<div>
+<TABLE ID="Words">
+<TR>
+	<TD id="word00"></TD>
+	<TD id="word01"></TD>
+	<TD id="word02"></TD>
+	<TD id="word03"></TD>
+</TR>
+<TR>
+	<TD id="word10"></TD>
+	<TD id="word11"></TD>
+	<TD id="word12"></TD>
+	<TD id="word13"></TD>
+</TR>
+<TR>
+	<TD id="word20"></TD>
+	<TD id="word21"></TD>
+	<TD id="word22"></TD>
+	<TD id="word23"></TD>
+</TR>
+<TR>
+	<TD id="word30"></TD>
+	<TD id="word31"></TD>
+	<TD id="word32"></TD>
+	<TD id="word33"></TD>
+</TR>
+</TABLE>
+</div>
+
+<br>
+
+<div>
+<TABLE ID="Mistakes" align="center">
+<TR>
+	<TH>Guesses left: </TH>
+	<TH><img id="mistake0" SRC="images/jp2.jpg"></TH>
+	<TH><img id="mistake1" SRC="images/jp2.jpg"></TH>
+	<TH><img id="mistake2" SRC="images/jp2.jpg"></TH>
+	<TH><img id="mistake3" SRC="images/jp2.jpg"></TH>
+</TR>
+</TABLE>
+</div>
+
+<br>
+	
+<div id="wrapper">
+	<div class="button"><button class="button button" id="Shuffle">Shuffle</button></div>
+	<div class="button"><button class="button button" id="ClearAll">Clear all</button></div>
+	<div class="button"><button class="button button" id="Submit">Submit</button></div>
+</div>
+
+<div id="results" class="modal">
+	<div class="modal-content">
+		<p id="closeButton" class="close" align = "right"></p>
+		<br>
+		<br>
+		<br>
+		<div>
+			<TABLE align = "center">
+				<TR>
+					<TD id="resultSquares" align = "center"</TD>
+				</TR>
+			</TABLE>
+		</div>
+		<br>
+		<div id="wrapper">
+			<div class="button"><button class="button button" id="shareButton">Share Your Results</button></div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+ 	</div>
+</div>
+
+<div id="popup" class="modal2">
+	<div class="modal2-content">
+		<div>
+			<TABLE align = "center">
+				<TR>
+					<TD id="popupText"</TD>
+				</TR>
+			</TABLE>
+		</div>
+ 	</div>
+</div>
+	
+</BODY>
+</HTML>

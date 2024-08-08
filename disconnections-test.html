@@ -386,13 +386,13 @@ function load() {
 		console.log("myTestVar: " + myTestVar)
 		console.log("guessesLeft cookie: " + getCookie("guessesLeft"));
 		guessesLeft = getCookie("guessesLeft");
-		//getCookie("rowsCleared");
-		//getCookie("guessesMade");
-		//getCookie("gameOver");
-		//getCookie("failed");
-		//getCookie("myTestVar);
-		//getCookie("guessedColorList");
-		//getCookie("guessedWordList")
+		//getCookieVal("rowsCleared");
+		//getCookieVal("guessesMade");
+		//getCookieVal("gameOver");
+		//getCookieVal("failed");
+		//getCookieVal("myTestVar);
+		//getCookieVal("guessedColorList");
+		//getCookieVal("guessedWordList")
 		if(guessesLeft!=4){
 			for(i = guessesLeft; i >= 0; i--){
 				document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";

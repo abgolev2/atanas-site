@@ -309,7 +309,7 @@ function setInitCookie(name, value, days) {
         //var expires = "; expires=" + date.toUTCString();
 	console.log("expires: " + expires);
 	expires = "; expires=" + expires.toUTCString();
-	console.log("Expires after conversion: " + expires.toUTCString());
+	console.log("Expires after conversion: " + expires);
 	document.cookie = name + "=" + (value || "")  + expires + "; SameSite=None; path=/";
 	//document.cookie = "favorite_food=tripe; SameSite=None;";
 }

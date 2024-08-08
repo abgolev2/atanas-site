@@ -716,7 +716,7 @@ async function submitWords(){
 	if(!correctGuess){
 		console.log("hello");
 		guessesLeft--;
-		setCookie("guessesLeft", guessesLeft);
+		setCookie("guessesLeft", "" + guessesLeft);
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
 			endGame(false);

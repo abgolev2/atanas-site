@@ -352,7 +352,7 @@ function getCookieVal(key) {
 }
 		
 function load() {
-	let currCookieName = "disTestCookie" + puzzleNumber;
+	let currCookieName = "disTestCookie1" + puzzleNumber;
 	let oldCookieName = getCookieName();
 
 	//set new cookie for each new puzzle
@@ -373,6 +373,7 @@ function load() {
 		myTestVar = getCookieVal("myTestVar")
 		console.log("myTestVar: " + myTestVar)
 		console.log("guessesLeft cookie: " + getCookie("guessesLeft"));
+		guessesLeft = getCookie("guessesLeft");
 		//getCookie("rowsCleared");
 		//getCookie("guessesMade");
 		//getCookie("gameOver");
@@ -380,10 +381,18 @@ function load() {
 		//getCookie("myTestVar);
 		//getCookie("guessedColorList");
 		//getCookie("guessedWordList")
+		if(guessesLeft!=4){
+			for(i = guessesLeft; i >= 0; i--){
+				document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
+			}
+		}
 	}
 	setCookie("favorite_salad", "shopska");
 	console.log(getCookie(currCookieName));
 	showCookieValue();
+
+	//start cookie update code
+	
 
 	//enables clicks and sets words
 	let whichWord = "";

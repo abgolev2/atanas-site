@@ -367,6 +367,7 @@ function load() {
 	if(oldCookieName != currCookieName){
 		console.log("setting new cookie");
 		setInitCookie("name", currCookieName, 7);
+		console.log("getting new cookie name: " + getCookieName());
 		setCookie("guessesLeft", "4");
 		setCookie("rowsCleared", "0");
 		setCookie("guessesMade", "0");

@@ -307,9 +307,9 @@ function setInitCookie(name, value, days) {
 	//var date = new Date();
         //date.setTime(date.getTime() + (days*24*60*60*1000));
         //var expires = "; expires=" + date.toUTCString();
-	expires = "; expires=" + expires.toUTCString();
 	console.log("expires: " + expires);
-	console.log("UTC: " + expires.toUTCString());
+	expires = "; expires=" + expires.toUTCString();
+	console.log("Expires after conversion: " + expires.toUTCString());
 	document.cookie = name + "=" + (value || "")  + expires + "; SameSite=None; path=/";
 	//document.cookie = "favorite_food=tripe; SameSite=None;";
 }

@@ -344,7 +344,7 @@ function getCookie(name) {
 }
 
 function getCookieName() {
-	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("name="))?.split("=")[1];
+	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("cookieName="))?.split("=")[1];
 	console.log("cookieValueName: " + cookieName);
 	return cookieName;
 }
@@ -366,7 +366,7 @@ function load() {
 	//set new cookie for each new puzzle
 	if(oldCookieName != currCookieName){
 		console.log("setting new cookie");
-		setInitCookie("name", currCookieName, 7);
+		setInitCookie("cookieName", currCookieName, 7);
 		console.log("getting new cookie name: " + getCookieName());
 		setCookie("guessesLeft", "4");
 		setCookie("rowsCleared", "0");

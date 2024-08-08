@@ -354,10 +354,11 @@ function getCookieVal(key) {
 		
 function load() {
 	let currCookieName = "disTestCookie1" + puzzleNumber;
-	let oldCookieName = getCookieName();
+	//let oldCookieName = getCookieName();
+	let oldCookieName = getCookie("name");
 
 	console.log("currCookie: " + currCookieName);
-	console.log("oldCookie: " + oldCookieName)
+	console.log("oldcookie: " + oldCookieName)
 
 	//set new cookie for each new puzzle
 	if(oldCookieName != currCookieName){

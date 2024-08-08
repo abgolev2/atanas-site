@@ -395,8 +395,8 @@ function load() {
 		//getCookieVal("guessedWordList")
 		if(guessesLeft!=4){
 			console.log("guessesLeftNow: " + guessesLeft);
-			for(i = guessesLeft; i >= 0; i--){
-				document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
+			for(i = 3; i > guessesLeft; i--){
+				document.getElementById("mistake"+i).src = "images/empty.jpg";
 			}
 		}
 	}

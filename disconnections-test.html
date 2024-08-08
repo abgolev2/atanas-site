@@ -759,10 +759,10 @@ async function autoSubmitWords(autoColor){
 	return;
 }
 
-function loadSubmitWords(
+function loadSubmitWords(){
 	for(i = 0; i < guessedColorList.length; i++){
 		//makeBigRow(i, guessedColorList[i]);
-		makeBigRowForRowAndColor(i, guessedColorList[i])
+		makeBigRowForRowAndColor(i, guessedColorList[i]);
 	}
 }
 

@@ -395,7 +395,7 @@ function load() {
 		//getCookieVal("guessedWordList")
 		if(guessesLeft!=4){
 			console.log("guessesLeftNow: " + guessesLeft);
-			for(i = 3; i > guessesLeft; i--){
+			for(i = 3; i >= guessesLeft; i--){
 				document.getElementById("mistake"+i).src = "images/empty.jpg";
 			}
 		}
@@ -633,6 +633,18 @@ async function makeBigRow(row, colorRow){
 	bigRow.style.fontWeight = "400";
 }
 
+function makeBigRowForRowAndColor(myRow, myColor){
+	let bigRow = document.getElementById("word"+myRow+"0");
+	bigRow.style.display = "block";
+	let bigRowText  = "<br><b>" + wordMatrix[myColor][6] + "</b><br>";
+	for(i = 0; i < 4; i++){
+		bigRowText+=wordMatrix[myColor][i];
+		if(i!=3)
+			bigRowText+=", ";
+	}
+	bigRow.innerHTML = bigRowText;
+}
+
 function disableClicksTopRow(){
 	let myRowsCleared = rowsCleared-1;
 	for(i = 0; i < 4; i++){
@@ -747,9 +759,10 @@ async function autoSubmitWords(autoColor){
 	return;
 }
 
-function loadSubmitWords(autoColor){
+function loadSubmitWords(
 	for(i = 0; i < guessedColorList.length; i++){
-		makeBigRow(i, guessedColorList[i]);
+		//makeBigRow(i, guessedColorList[i]);
+		makeBigRowForRowAndColor(i, guessedColorList[i])
 	}
 }
 

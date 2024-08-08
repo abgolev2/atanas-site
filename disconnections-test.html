@@ -358,7 +358,7 @@ function getCookieVal(key) {
 function load() {
 	let initCookieName = "disCookie";
 	let currIdName = "disconnections" + puzzleNumber;
-	let oldIdName = getCookie("id");
+	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
 	console.log("oldcookie: " + oldIdName)
@@ -376,7 +376,7 @@ function load() {
 		setCookie("myTestVar", "bigmeow");
 		//let idName = "disconnections" + puzzleNumber;
 		setCookie("id", currIdName);
-		getCookie("rowsCleared");
+		getCookieVal("rowsCleared");
 		//setCookie("guessedColorList", "[]");
 		//setCookie("guessedWordList", "[]")
 	}

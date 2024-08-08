@@ -350,7 +350,7 @@ function getCookieName() {
 }
 
 function getCookieVal(key) {
-	let cookieName = document.cookie.split("; ").find((row) => row.startsWith("key="))?.split("=")[1];
+	let cookieName = document.cookie.split("; ").find((row) => row.startsWith(key + "="))?.split("=")[1];
 	console.log("cookieValueName: " + cookieName);
 	return cookieName;
 }
@@ -376,7 +376,7 @@ function load() {
 		setCookie("myTestVar", "bigmeow");
 		//let idName = "disconnections" + puzzleNumber;
 		setCookie("id", currIdName);
-		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared");
+		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
 		//setCookie("guessedColorList", "[]");
 		//setCookie("guessedWordList", "[]")
 	}

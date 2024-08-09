@@ -351,7 +351,7 @@ function getCookieName() {
 
 function getCookieVal(key) {
 	let cookieName = document.cookie.split("; ").find((row) => row.startsWith(key + "="))?.split("=")[1];
-	console.log("cookieValueName: " + cookieName);
+	console.log(key + " cookieValueName: " + cookieName);
 	return cookieName;
 }
 		
@@ -537,7 +537,8 @@ async function countSuccesses() {
 				colorCorrect = i;
 		}
 	}
-	guessedColorList.push(colorCorrect);
+	if(colorCorrect != -1)
+		guessedColorList.push(colorCorrect);
 	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	console.log("maxSuccesses: " + maxSuccesses);
 
@@ -1014,7 +1015,7 @@ async function switchWords(correctColorRow){
 
 async function endGame(winning){
 	console.log("guessesMade: " + guessesMade);
-	console.log("cookieValue: "+ showCookieValue();
+	console.log("cookieValue: " + showCookieValue());
 	gameOver = true;
 	setCookie("gameOver", "" + gameOver);
 	if(winning == false){

@@ -441,7 +441,7 @@ function load() {
 
 	//setting button enablement in unsolved vs solved state
 	console.log("gameOverState: " + gameOver);
-	if(gameOver==false){
+	if(gameOver==false || gameOver == "false"){
 		console.log("game over is false");
 		document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
 		document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";

@@ -390,6 +390,7 @@ function load() {
 		console.log("myTestVar: " + myTestVar);
 		myTestVar = getCookieVal("myTestVar")
 		console.log("myTestVar: " + myTestVar)
+		guessesMade = getCookieVal("guessesMade");
 		guessesLeft = getCookieVal("guessesLeft");
 		rowsCleared = getCookieVal("rowsCleared");
 		gameOver = getCookieVal("gameOver");
@@ -405,6 +406,12 @@ function load() {
 		//console.log(getCookieVal("guessedColorList"));
 		//console.log(getCookieVal("guessedWordList"));
 		guessesLeft = getCookieVal("guessesLeft");
+		let newColorList = getCookieVal("guessedColorList");
+		let newWordList = getCookieVal("guessedWordList");
+		console.log("colorList" + newColorList);
+		console.log("wordList" + newWordList);
+		console.log("colorList parsed: " + JSON.parse(newColorList));
+		console.log("wordList parsed: " + JSON.parse(newWordList));
 		if(guessesLeft!=4){
 			console.log("guessesLeftNow: " + guessesLeft);
 			for(i = 3; i >= guessesLeft; i--){

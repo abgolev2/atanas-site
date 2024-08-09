@@ -246,6 +246,7 @@ var selectedSpaceColor = "#";
 var guessesMade = 0;
 var guessedWordList = [];
 var guessedColorList = [];
+var guessList = [];
 var failed = false;
 var gameOver = false;
 var myTestVar = "meow";
@@ -286,8 +287,6 @@ var selectionMatrix = [
 	[false, false, false, false],
 	[false, false, false, false]
 ]
-
-var guessList = [];
 	
 var congratsWords = [
 	"Shite",
@@ -357,7 +356,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "meow3" + puzzleNumber;
+	let currIdName = "finalmeow" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
@@ -379,12 +378,9 @@ function load() {
 		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
 		setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 		setCookie("guessedWordList", "" + JSON.stringify(guessedWordList))
+		setCookie("guessList", "" + JSON.stringify(guessList))
 		let newColorList = getCookieVal("guessedColorList");
 		let newWordList = getCookieVal("guessedWordList");
-		console.log("guessedColorList" + newColorList);
-		console.log("guessedColorList" + newWordList);
-		console.log("guessedColorList" + newColorList);
-		console.log("guessedColorList" + newWordList);
 	}
 	else{
 		console.log("myTestVar: " + myTestVar);
@@ -397,6 +393,7 @@ function load() {
 		failed = getCookieVal("failed")
 		guessedColorList = JSON.parse(getCookieVal("guessedColorList"));
 		guessedWordList = JSON.parse(getCookieVal("guessedWordList"));
+		guessList = JSON.parse(getCookieVal("guessList"));
 		//console.log("guessesLeft cookie: " + getCookieVal("guessesLeft"));
 		//console.log("rowscleared: " + getCookieVal("rowsCleared"));
 		//console.log("guesssesMade: " + getCookieVal("guessesMade"));
@@ -423,28 +420,51 @@ function load() {
 	//console.log(getCookie(initCookieName));
 	showCookieValue();
 
-	//enables clicks and sets words
-	let whichWord = "";
-	for(i = 0 ; i < 4; i++){	
-		for(j = 0; j < 4; j++){
-			whichWord = document.getElementById("word"+i+j);
-			whichWord.innerHTML = startMatrix[i][j];
-			whichWord.addEventListener("click", wordClick);
+	//enables clicks and sets words; if is clear slate while else is in a cookie state with a row solved
+	if(rowsCleared == 0){
+		let whichWord = "";
+		for(i = 0 ; i < 4; i++){	
+			for(j = 0; j < 4; j++){
+				whichWord = document.getElementById("word"+i+j);
+				whichWord.innerHTML = startMatrix[i][j];
+				whichWord.addEventListener("click", wordClick);
+			}
 		}
 	}
-	document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
-	document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";
-	document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp&nbsp";
-	document.getElementById("Submit").disabled = true;
-	document.getElementById("ClearAll").disabled = true;
-	document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
+	else{
+		for(i = 0; i < colorsGuessed.length; i++){
+			makeBigRowForRowAndColor(i, colorsGuessed[i])
+		}
+		if(rowsCleared < 4)
+			loadShuffle();
+	}
+
+	//setting button enablement in unsolved vs solved state
+	if(gameOver==false){
+		document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("Submit").disabled = true;
+		document.getElementById("ClearAll").disabled = true;
+		document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
+	}
+	else{
+		enableShareButton();
+		document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("shareButton").style.backgroundColor = "#000000";
+		document.getElementById("shareButton").style.color = "#ffffff";
+		document.getElementById("Shuffle").remove();
+		document.getElementById("Submit").remove();
+		document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspView Results&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("ClearAll").addEventListener("click", viewResults);
+		document.getElementById("ClearAll").disabled = false;
+	}
 
 	var myobj = ["one", "two", "three"];
 	var newobj = JSON.stringify(myobj);
 	console.log("1: " + newobj);
 	var str = JSON.parse(newobj);
 	console.log("2: " + JSON.parse(newobj))
-
 	var strarray = JSON.parse(newobj);
 	console.log("3: " + strarray);
 }
@@ -872,6 +892,29 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.remove("shake");
 	document.getElementById(id).addEventListener("click", wordClick);
 	return;
+}
+
+function loadShuffle() {
+	console.log("we load shuffled woots");
+	let varArray = [];
+	let selectedArray = [];
+	for(i=0; i<4; i++){
+		for(k = 0; k < colorsGuessed.length; k++){
+			if(colorsGuessed[k] != i){
+				for(j=0; j<4; j++){
+					varArray.push(wordMatrix[i][j]);
+				}
+			}
+		}
+	}
+	shuffle(varArray)	
+	for(i=rowsCleared; i<4; i++){
+		for(j=0; j<4; j++){
+			let selectedWord = document.getElementById("word"+i+j);
+			selectedWord.innerHTML = varArray[varArray.length-1];
+			varArray = varArray.slice(0, varArray.length-1);
+		}
+	}
 }
 	
 function clickShuffle(){

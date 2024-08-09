@@ -390,6 +390,12 @@ function load() {
 		console.log("myTestVar: " + myTestVar);
 		myTestVar = getCookieVal("myTestVar")
 		console.log("myTestVar: " + myTestVar)
+		guessesLeft = getCookieVal("guessesLeft");
+		rowsCleared = getCookieVal("rowsCleared");
+		gameOver = getCookieVal("gameOver");
+		failed = getCookieVal("failed")
+		guessedColorList = JSON.parse(getCookieVal("guessedColorList"));
+		guessedWordList = JSON.parse(getCookieVal("guessedWordList"));
 		//console.log("guessesLeft cookie: " + getCookieVal("guessesLeft"));
 		//console.log("rowscleared: " + getCookieVal("rowsCleared"));
 		//console.log("guesssesMade: " + getCookieVal("guessesMade"));
@@ -518,6 +524,7 @@ async function countSuccesses() {
 	console.log("colorList: " + colorList)
 	guessList.push(colorList);
 	guessedWordList.push(guessedFour);
+	setCookie("guessedWordList", "" + JSON.stringify(guessedWordList));
 	console.log("guessed word list: " + guessedWordList);
 	console.log("successes: " + successCountPerAssociation);
 
@@ -531,6 +538,7 @@ async function countSuccesses() {
 		}
 	}
 	guessedColorList.push(colorCorrect);
+	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	console.log("maxSuccesses: " + maxSuccesses);
 
 	document.getElementById("Submit").removeEventListener("click", submitWords);
@@ -541,6 +549,7 @@ async function countSuccesses() {
 			document.getElementById("ClearAll").removeEventListener("click", clearAll);
 		}
 		rowsCleared++;
+		setCookie("rowsCleared", "" + rowsCleared);
 		correctGuess = true;
 		changeColor(colorCorrect); //make this an animation
 		await shakeSelectedWords(true);
@@ -714,6 +723,7 @@ async function submitWords(){
 		return;
 	}
 	guessesMade++;
+	setCookie("guessesMade", "" + guessesMade);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";
@@ -816,6 +826,7 @@ async function solveRestOfPuzzle(){
 		
 			console.log("We gonna submit some words");
 			failed = true;
+			setCookie("failed", "true");
 			//await sleep(2200);
 			rowsCleared++;
 			console.log("BEFORE AWAIT");
@@ -1003,6 +1014,7 @@ async function switchWords(correctColorRow){
 
 async function endGame(winning){
 	gameOver = true;
+	setCookie("gameOver", "" + gameOver);
 	if(winning == false){
 		await solveRestOfPuzzle();
 		for(i=0; i<4; i++){

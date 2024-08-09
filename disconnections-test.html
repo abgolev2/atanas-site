@@ -357,7 +357,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "meow" + puzzleNumber;
+	let currIdName = "meow2" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
@@ -1013,6 +1013,8 @@ async function switchWords(correctColorRow){
 }
 
 async function endGame(winning){
+	console.log("guessesMade: " + guessesMade);
+	console.log("cookieValue: "+ showCookieValue();
 	gameOver = true;
 	setCookie("gameOver", "" + gameOver);
 	if(winning == false){

@@ -1,4 +1,4 @@
-f<!DOCTYPE>
+<!DOCTYPE>
 <!--
 	Created by Atanas Golev.
 Code for modal snagged from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
@@ -377,8 +377,14 @@ function load() {
 		//let idName = "disconnections" + puzzleNumber;
 		setCookie("id", currIdName);
 		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
-		//setCookie("guessedColorList", "[]");
-		//setCookie("guessedWordList", "[]")
+		setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+		setCookie("guessedWordList", "" + JSON.stringify(guessedWordList))
+		let newColorList = getCookieVal("guessedColorList");
+		let newWordList = getCookieVal("guessedWordList");
+		console.log("guessedColorList" + newColorList);
+		console.log("guessedColorList" + newWordList);
+		console.log("guessedColorList" + newColorList);
+		console.log("guessedColorList" + newWordList);
 	}
 	else{
 		console.log("myTestVar: " + myTestVar);

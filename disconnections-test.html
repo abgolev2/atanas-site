@@ -406,8 +406,8 @@ function load() {
 
 	//enables clicks and sets words
 	let whichWord = "";
-	for(i = 0 ; i < rowsCleared; i++){	
-		for(j = 0; j < rowsCleared; j++){
+	for(i = 0 ; i < 4; i++){	
+		for(j = 0; j < 4; j++){
 			whichWord = document.getElementById("word"+i+j);
 			whichWord.innerHTML = startMatrix[i][j];
 			whichWord.addEventListener("click", wordClick);

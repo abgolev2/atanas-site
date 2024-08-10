@@ -232,7 +232,7 @@ h1 {
 </STYLE>
 
 <SCRIPT>
-var puzzleNumber = 0;
+var puzzleNumber = 1;
 var guessesLeft = 4;
 var wordsSelected = 0;
 var isSelected = false;
@@ -356,7 +356,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "atonCook" + puzzleNumber;
+	let currIdName = "disconnectionsCookie" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);

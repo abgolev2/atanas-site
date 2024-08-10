@@ -356,7 +356,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "myMeow" + puzzleNumber;
+	let currIdName = "atonCook" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
@@ -421,7 +421,7 @@ function load() {
 	showCookieValue();
 
 	//enables clicks and sets words; if is clear slate while else is in a cookie state with a row solved
-	if(rowsCleared == 0){
+	if(rowsCleared == 0 && gameOver != "true"){
 		let whichWord = "";
 		for(i = 0 ; i < 4; i++){	
 			for(j = 0; j < 4; j++){

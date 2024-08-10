@@ -846,6 +846,7 @@ async function autoSubmitWords(autoColor){
 	makeBigRow(rowsCleared-1, autoColor);
 	await sleep(500);
 	wordsSelected=0;
+	guessedColorList.push(autoColor);
 	for(i = 0; i < 4; i++)
 		selectionMatrix[rowsCleared-1][i] = false;
 	return;
@@ -1140,7 +1141,7 @@ async function endGame(winning){
 			document.getElementById("word"+i+"0").style.width = "100%"
 		}
 	}
-	guessedColorList = [0, 1, 2, 3];
+	//guessedColorList = [0, 1, 2, 3];
 	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	rowsCleared = 4;
 	setCookie("rowsCleared", ""+rowsCleared);

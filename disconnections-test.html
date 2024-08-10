@@ -912,10 +912,6 @@ async function solveRestOfPuzzle(){
 			console.log("selectionMatrix: " + selectionMatrix);
 			await sleep(250);
 			await autoSubmitWords(a);
-			guessedColorList = [0, 1, 2, 3];
-			setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
-			rowsCleared = 4;
-			setCookie("rowsCleared", ""+rowsCleared);
 			console.log("AFTER AWAIT");
 		}
 	}
@@ -1144,6 +1140,10 @@ async function endGame(winning){
 			document.getElementById("word"+i+"0").style.width = "100%"
 		}
 	}
+	guessedColorList = [0, 1, 2, 3];
+	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+	rowsCleared = 4;
+	setCookie("rowsCleared", ""+rowsCleared);
 	enableShareButton();
 	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("shareButton").style.backgroundColor = "#000000";

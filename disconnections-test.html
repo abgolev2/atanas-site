@@ -961,7 +961,7 @@ function loadShuffle() {
 	console.log("rowToChangeArray: " + rowToChangeArray);
 	for(i = 0; i < rowToChangeArray.length; i++){
 		for(j = 0; j < 4; j++){
-			varArray.push(wordMatrix[i][j]);
+			varArray.push(wordMatrix[rowToChangeArray[i]][j]);
 		}
 	}
 	

@@ -1137,7 +1137,7 @@ function viewResults(){
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
 	let congratsWord = "Shite";
-	if(rowsCleared == 4 && failed == false)
+	if(rowsCleared == 4 && (failed == false || failed == "false"))
 		congratsWord = congratsWords[guessesMade]
 	let resultsText = "<font size=\"56px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
 	console.log("resultsText" + resultsText); 

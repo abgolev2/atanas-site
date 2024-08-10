@@ -863,13 +863,6 @@ async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
 	
-	for(i = rowsCleared ; i < 4; i++){	
-		for(j = 0; j < 4; j++){
-			let removeWord = document.getElementById("word"+i+j);
-			removeWord.removeEventListener("click", wordClick);
-		}
-	}
-	
 	await sleep(1400);
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	
@@ -1135,6 +1128,12 @@ async function endGame(winning){
 	gameOver = true;
 	setCookie("gameOver", "" + gameOver);
 	if(winning == false){
+		for(i = rowsCleared ; i < 4; i++){	
+			for(j = 0; j < 4; j++){
+				let removeWord = document.getElementById("word"+i+j);
+				removeWord.removeEventListener("click", wordClick);
+			}
+		}
 		await solveRestOfPuzzle();
 		for(i=0; i<4; i++){
 			document.getElementById("word"+i+"0").style.width = "100%"

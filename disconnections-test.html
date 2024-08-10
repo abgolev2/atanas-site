@@ -821,6 +821,10 @@ async function submitWords(){
 			document.getElementById("Submit").addEventListener("click", submitWords);
 		}
 	}
+	if(guessesLeft!=0){
+		document.getElementById("Shuffle").addEventListener("click", clickShuffle);
+		document.getElementById("ClearAll").removeEventListener("click", clearAll);
+	}
 }
 
 async function autoSubmitWords(autoColor){

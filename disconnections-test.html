@@ -436,7 +436,8 @@ function load() {
 		let size = guessedColorList.length;
 		for(i = 0; i < size; i++){
 			console.log("makeBigRowTime");
-			makeBigRowForRowAndColor(i, guessedColorList[i])
+			//makeBigRowForRowAndColor(i, guessedColorList[i])
+			makeBigRow(i, guessedColorList[i]);
 			console.log("size: " + size);
 			console.log("i: " + i);
 		}

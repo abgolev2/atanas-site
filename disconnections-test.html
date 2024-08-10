@@ -356,7 +356,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "atonCook5" + puzzleNumber;
+	let currIdName = "atonCook6" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
@@ -846,8 +846,6 @@ async function autoSubmitWords(autoColor){
 	wordsSelected=0;
 	for(i = 0; i < 4; i++)
 		selectionMatrix[rowsCleared-1][i] = false;
-	guessedColorList = [0, 1, 2, 3];
-	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	return;
 }
 
@@ -912,6 +910,8 @@ async function solveRestOfPuzzle(){
 			console.log("selectionMatrix: " + selectionMatrix);
 			await sleep(250);
 			await autoSubmitWords(a);
+			guessedColorList = [0, 1, 2, 3];
+			setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 			console.log("AFTER AWAIT");
 		}
 	}

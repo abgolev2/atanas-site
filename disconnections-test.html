@@ -553,6 +553,7 @@ async function countSuccesses() {
 	}
 	console.log("colorList: " + colorList)
 	guessList.push(colorList);
+	setCookie("guessList", "" + JSON.stringify(guessList));
 	guessedWordList.push(guessedFour);
 	setCookie("guessedWordList", "" + JSON.stringify(guessedWordList));
 	console.log("guessed word list: " + guessedWordList);

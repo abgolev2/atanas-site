@@ -446,9 +446,11 @@ function load() {
 			loadShuffle();
 		}
 		//enable word clicks
-		for(i = rowsCleared; i < 4; i++){	
-			for(j = 0; j < 4; j++){
-				document.getElementById("word"+i+j).addEventListener("click", wordClick);
+		if(gameOver != "true"){
+			for(i = rowsCleared; i < 4; i++){	
+				for(j = 0; j < 4; j++){
+					document.getElementById("word"+i+j).addEventListener("click", wordClick);
+				}
 			}
 		}
 	}
@@ -912,6 +914,8 @@ async function solveRestOfPuzzle(){
 			await autoSubmitWords(a);
 			guessedColorList = [0, 1, 2, 3];
 			setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+			rowsCleared = 4;
+			setCookie("rowsCleared", ""+rowsCleared);
 			console.log("AFTER AWAIT");
 		}
 	}

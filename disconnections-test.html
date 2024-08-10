@@ -862,15 +862,14 @@ function loadSubmitWords(){
 async function solveRestOfPuzzle(){
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
-	/*
+	
 	for(i = rowsCleared ; i < 4; i++){	
 		for(j = 0; j < 4; j++){
 			let removeWord = document.getElementById("word"+i+j);
-			if(removeWord != null)
-				removeWord.remove("click", wordClick);
+			removeWord.removeEventListener("click", wordClick);
 		}
 	}
-	*/
+	
 	await sleep(1400);
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	

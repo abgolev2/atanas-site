@@ -860,6 +860,7 @@ function loadSubmitWords(){
 }
 
 async function solveRestOfPuzzle(){
+	gameOver = true;
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	document.getElementById("Shuffle").removeEventListener("click", clickShuffle);
 	
@@ -922,7 +923,9 @@ async function shakeSelectedWords(softShake){
 }
 	
 async function shakeWord(softShake, id){
-	document.getElementById(id).removeEventListener("click", wordClick);
+	if(gameOver==false)
+		document.getElementById(id).removeEventListener("click", wordClick);
+	
 	if(softShake)
 		document.getElementById(id).classList.add("softshake");
 	else
@@ -934,7 +937,9 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.remove("softshake");
 	else if (!softShake && document.getElementById(id).classList.contains("shake"))
 		document.getElementById(id).classList.remove("shake");
-	document.getElementById(id).addEventListener("click", wordClick);
+
+	if(gameOver==false)
+		document.getElementById(id).addEventListener("click", wordClick);
 	return;
 }
 

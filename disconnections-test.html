@@ -940,17 +940,31 @@ async function shakeWord(softShake, id){
 	return;
 }
 
+function colorListContains(c){
+	for(y = 0; y < guessedColorList.length; y++){
+		if(c == guessedColorList[y])
+			return true;
+	}
+	console.log("color list false woot")
+	return false;
+}
+
 function loadShuffle() {
 	console.log("we load shuffled woots");
 	let varArray = [];
 	let selectedArray = [];
+	let rowToChangeArray = [];
 	for(x=0; x<4; x++){
-		for(y = 0; y < guessedColorList.length; y++){
-			if(guessedColorList[y] != x){
-				varArray.push(wordMatrix[x][y]);
-			}
+		if(colorListContains(x) == false)
+			rowToChangeArray.push(x);
+	}
+	console.log("rowToChangeArray: " + rowToChangeArray);
+	for(i = 0; i < rowToChangeArray.length; i++){
+		for(j = 0; j < 4; j++){
+			varArray.push(wordMatrix[i][j]);
 		}
 	}
+	
 	console.log("varArray1: " + varArray); 
 	shuffle(varArray);
 	console.log("varArray2: " + varArray);

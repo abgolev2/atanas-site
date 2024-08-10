@@ -433,9 +433,12 @@ function load() {
 	}
 	else{
 		console.log("guessedColorList length:" + guessedColorList.length)
-		for(i = 0; i < guessedColorList.length; i++){
+		let size = guessedColorList.length;
+		for(i = 0; i < size; i++){
 			console.log("makeBigRowTime");
 			makeBigRowForRowAndColor(i, guessedColorList[i])
+			console.log("size: " + size);
+			console.log("i: " + i);
 		}
 		if(rowsCleared < 4 && gameOver != "true"){
 			console.log("got in loadshuffle");

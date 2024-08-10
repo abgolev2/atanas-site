@@ -433,11 +433,11 @@ function load() {
 	}
 	else{
 		for(i = 0; i < guessedColorList.length; i++){
+			console.log("makeBigRowTime");
 			makeBigRowForRowAndColor(i, guessedColorList[i])
 		}
-		console.log()
-		if(rowsCleared < 4){
-			console.log("got in loadshuffle")
+		if(rowsCleared < 4 && gameOver != "true"){
+			console.log("got in loadshuffle");
 			loadShuffle();
 		}
 	}

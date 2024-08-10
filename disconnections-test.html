@@ -823,7 +823,7 @@ async function submitWords(){
 	}
 	if(guessesLeft!=0){
 		document.getElementById("Shuffle").addEventListener("click", clickShuffle);
-		document.getElementById("ClearAll").removeEventListener("click", clearAll);
+		document.getElementById("ClearAll").addEventListener("click", clearAll);
 	}
 }
 

@@ -790,6 +790,8 @@ async function submitWords(){
 	if(oldGuess == true){
 		displayPopup("Already guessed");
 		console.log("selectionMatrix: " + selectionMatrix);
+		document.getElementById("ClearAll").addEventListener("click", clearAll);
+		document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 		return;
 	}
 	guessesMade++;

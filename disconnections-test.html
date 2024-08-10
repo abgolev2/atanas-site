@@ -685,9 +685,10 @@ async function makeBigRow(row, colorRow){
 }
 
 function makeBigRowForRowAndColor(myRow, myColor){
+	console.log("made it in");
 	let bigRow = document.getElementById("word"+myRow+"0");
-	for(i = 1; i < 4; i++){
-		document.getElementById("word" + myRow + i).remove();
+	for(j = 1; j < 4; j++){
+		document.getElementById("word" + myRow + j).remove();
 		if(rowsCleared==4){
 			document.getElementById("word00").style.width = "100%";
 			document.getElementById("word30").style.width = "100%";
@@ -707,9 +708,9 @@ function makeBigRowForRowAndColor(myRow, myColor){
 		bigRow.style.width = "427.5%"
 	}
 	let bigRowText  = "<br><b>" + wordMatrix[myColor][6] + "</b><br>";
-	for(i = 0; i < 4; i++){
-		bigRowText+=wordMatrix[myColor][i];
-		if(i!=3)
+	for(j = 0; j < 4; j++){
+		bigRowText+=wordMatrix[myColor][j];
+		if(j!=3)
 			bigRowText+=", ";
 	}
 	bigRow.innerHTML = bigRowText;

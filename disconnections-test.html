@@ -432,6 +432,7 @@ function load() {
 		}
 	}
 	else{
+		console.log("guessedColorList length:" + guessedColorList.length)
 		for(i = 0; i < guessedColorList.length; i++){
 			console.log("makeBigRowTime");
 			makeBigRowForRowAndColor(i, guessedColorList[i])

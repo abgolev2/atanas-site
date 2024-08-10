@@ -903,8 +903,8 @@ function loadShuffle() {
 	let varArray = [];
 	let selectedArray = [];
 	for(i=0; i<4; i++){
-		for(k = 0; k < colorsGuessed.length; k++){
-			if(colorsGuessed[k] != i){
+		for(k = 0; k < guessedColorList.length; k++){
+			if(guessedColorList[k] != i){
 				for(j=0; j<4; j++){
 					varArray.push(wordMatrix[i][j]);
 				}

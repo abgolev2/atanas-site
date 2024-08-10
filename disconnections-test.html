@@ -446,7 +446,7 @@ function load() {
 			loadShuffle();
 		}
 		//enable word clicks
-		for(rowsCleared = 0; i < 4; i++){	
+		for(i = rowsCleared; i < 4; i++){	
 			for(j = 0; j < 4; j++){
 				document.getElementById("word"+i+j).addEventListener("click", wordClick);
 			}

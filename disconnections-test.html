@@ -947,9 +947,7 @@ function loadShuffle() {
 	for(x=0; x<4; x++){
 		for(y = 0; y < guessedColorList.length; y++){
 			if(guessedColorList[y] != x){
-				for(z=0; z<4; z++){
-					varArray.push(wordMatrix[x][y]);
-				}
+				varArray.push(wordMatrix[x][y]);
 			}
 		}
 	}

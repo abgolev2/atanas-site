@@ -432,8 +432,8 @@ function load() {
 		}
 	}
 	else{
-		for(i = 0; i < colorsGuessed.length; i++){
-			makeBigRowForRowAndColor(i, colorsGuessed[i])
+		for(i = 0; i < guessedColorList.length; i++){
+			makeBigRowForRowAndColor(i, guessedColorList[i])
 		}
 		if(rowsCleared < 4)
 			loadShuffle();

@@ -432,11 +432,15 @@ function load() {
 		}
 	}
 	else{
+		console.log("got in load makebigrow");
 		for(i = 0; i < guessedColorList.length; i++){
 			makeBigRowForRowAndColor(i, guessedColorList[i])
 		}
-		if(rowsCleared < 4)
+		console.log()
+		if(rowsCleared < 4){
+			console.log("got in loadshuffle")
 			loadShuffle();
+		}
 	}
 
 	//setting button enablement in unsolved vs solved state
@@ -680,6 +684,18 @@ async function makeBigRow(row, colorRow){
 function makeBigRowForRowAndColor(myRow, myColor){
 	let bigRow = document.getElementById("word"+myRow+"0");
 	bigRow.style.display = "block";
+	bigRow.style.backgroundColor = wordMatrix[myColor][4]
+	if(rowsCleared==4){
+		console.log("made it woottt");
+		document.getElementById("word00").style.width = "100%";
+		document.getElementById("word10").style.width = "100%";
+		document.getElementById("word20").style.width = "100%";
+		document.getElementById("word30").style.width = "100%";
+		//bigRow.style.width = "100%";
+	}
+	else{
+		bigRow.style.width = "427.5%"
+	}
 	let bigRowText  = "<br><b>" + wordMatrix[myColor][6] + "</b><br>";
 	for(i = 0; i < 4; i++){
 		bigRowText+=wordMatrix[myColor][i];

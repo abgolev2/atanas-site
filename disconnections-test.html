@@ -884,15 +884,15 @@ async function solveRestOfPuzzle(){
 			console.log("rowsCleared in solveRest: " + rowsCleared);
 			resetSelectionMatrixAndAllColor(rowsCleared);
 			console.log("meowwwww for round a: " + a);
-			for(i = rowsCleared; i < 4; i++){
-				for(j = 0; j < 4; j++){
-					let thisWord = document.getElementById("word"+i+j).innerHTML;
-					for(m = 0; m < 4; m++){
+			for(x = rowsCleared; x < 4; x++){
+				for(y = 0; y < 4; y++){
+					let thisWord = document.getElementById("word"+x+y).innerHTML;
+					for(z = 0; z < 4; z++){
 						//console.log("thisWord: " + thisWord);
-						//console.log("correctWord: " + wordMatrix[a][m]);
-						if(thisWord == wordMatrix[a][m]){
-							console.log("this true and then ij: "+i+j)
-							selectionMatrix[i][j] = true;
+						//console.log("correctWord: " + wordMatrix[a][z]);
+						if(thisWord == wordMatrix[a][z]){
+							console.log("this true and then xy: "+x+y)
+							selectionMatrix[x][y] = true;
 						}
 					}
 				}

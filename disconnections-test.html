@@ -847,6 +847,7 @@ async function autoSubmitWords(autoColor){
 	for(i = 0; i < 4; i++)
 		selectionMatrix[rowsCleared-1][i] = false;
 	guessedColorList = [0, 1, 2, 3];
+	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	return;
 }
 

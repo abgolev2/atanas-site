@@ -356,7 +356,7 @@ function getCookieVal(key) {
 		
 function load() {
 	let initCookieName = "disCookie";
-	let currIdName = "atonCookie6" + puzzleNumber;
+	let currIdName = "atonCookie7" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	
 	console.log("currCookie: " + currIdName);
@@ -1191,7 +1191,7 @@ function close(){
 }
 
 function getColorLine(row){
-	let myColorLine = "\";
+	let myColorLine = "\\";
 	for(i=0; i<4; i++)
 		myColorLine+=guessList[row][i];
 	console.log("myColorLine"+myColorLine);
@@ -1200,7 +1200,7 @@ function getColorLine(row){
 	
 function getColorTable(forSending){
 	//var oldGuessList = guessList;
-	var colorTable = "\";
+	var colorTable = "\\";
 	console.log("guessList" + guessList);
 	console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){

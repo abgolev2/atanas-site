@@ -376,9 +376,9 @@ function load() {
 		//let idName = "disconnections" + puzzleNumber;
 		setCookie("id", currIdName);
 		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
-		setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
-		setCookie("guessedWordList", "" + JSON.stringify(guessedWordList))
-		setCookie("guessList", "" + JSON.stringify(guessList))
+		setCookie("guessedColorList", JSON.stringify(guessedColorList));
+		setCookie("guessedWordList", JSON.stringify(guessedWordList))
+		setCookie("guessList", JSON.stringify(guessList))
 		let newColorList = getCookieVal("guessedColorList");
 		let newWordList = getCookieVal("guessedWordList");
 	}
@@ -569,9 +569,9 @@ async function countSuccesses() {
 	}
 	console.log("colorList: " + colorList)
 	guessList.push(colorList);
-	setCookie("guessList", "" + JSON.stringify(guessList));
+	setCookie("guessList", JSON.stringify(guessList));
 	guessedWordList.push(guessedFour);
-	setCookie("guessedWordList", "" + JSON.stringify(guessedWordList));
+	setCookie("guessedWordList", JSON.stringify(guessedWordList));
 	console.log("guessed word list: " + guessedWordList);
 	console.log("successes: " + successCountPerAssociation);
 

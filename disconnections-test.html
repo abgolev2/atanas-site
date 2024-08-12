@@ -564,7 +564,7 @@ async function countSuccesses() {
 					for(m = 0; m < 4; m++){
 						if(wordMatrix[k][m] == myWord){
 							successCountPerAssociation[k]++;
-							myColor = wordMatrix[k][5]
+							myColor = k;
 							colorList.push(myColor);
 							guessedFour.push(myWord);
 						}
@@ -1199,7 +1199,7 @@ function close(){
 function getColorLine(row){
 	let myColorLine = "";
 	for(i=0; i<4; i++){
-		myColorLine+=guessList[row][i];
+		myColorLine+=wordMatrix[guessList[row][i]][5];
 	}
 	console.log("myColorLine"+myColorLine);
 	return myColorLine;
@@ -1212,7 +1212,7 @@ function getColorTable(forSending){
 	console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){
 		for(j=0; j<4; j++){
-			colorTable+=guessList[i][j];
+			colorTable+=wordMatrix[guessList[i][j]][5];
 		}
 		if(i!=(guessList.length - 1)){
 			if(forSending)

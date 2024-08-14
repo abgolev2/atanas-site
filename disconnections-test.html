@@ -255,7 +255,7 @@ var greenEmoji = String.fromCharCode(0xD83D, 0xDFE8);
 var yellowEmoji = String.fromCharCode(0xD83D, 0xDFE9);
 var blueEmoji = String.fromCharCode(0xD83D, 0xDFE6);
 var purpleEmoji = String.fromCharCode(0xD83D, 0xDFEA);
-console.log(greenEmoji);
+//console.log(greenEmoji);
 
 var startMatrix = [
 	["BOXWRENCH", 
@@ -308,7 +308,6 @@ var congratsWords = [
 function setInitCookie(name, value, days) {
 	//have to figure out how to set date in here
 	var expires = new Date("August 17, 2024 20:35:00");
-	//console.log("expires: " + expires);
 	//var date = new Date();
         //date.setTime(date.getTime() + (days*24*60*60*1000));
         //var expires = "; expires=" + date.toUTCString();
@@ -341,8 +340,6 @@ function getCookie(name) {
         var c = ca[i];
         while (c.charAt(0)==' ') 
 		c = c.substring(1,c.length);
-        //if (c.indexOf(nameEQ) == 0) 
-	 //   	console.log("incookie" + c.substring(nameEQ.length,c.length));
 	console.log("c: " + c)
     }
     return null;
@@ -381,7 +378,7 @@ function load() {
 		setCookie("myTestVar", "bigmeow");
 		//let idName = "disconnections" + puzzleNumber;
 		setCookie("id", currIdName);
-		console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
+		//console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
 		setCookie("guessedColorList", JSON.stringify(guessedColorList));
 		setCookie("guessedWordList", JSON.stringify(guessedWordList))
 		setCookie("guessList", JSON.stringify(guessList))
@@ -389,9 +386,9 @@ function load() {
 		let newWordList = getCookieVal("guessedWordList");
 	}
 	else{
-		console.log("myTestVar: " + myTestVar);
+		//console.log("myTestVar: " + myTestVar);
 		myTestVar = getCookieVal("myTestVar")
-		console.log("myTestVar: " + myTestVar)
+		//console.log("myTestVar: " + myTestVar)
 		guessesMade = getCookieVal("guessesMade");
 		guessesLeft = getCookieVal("guessesLeft");
 		rowsCleared = getCookieVal("rowsCleared");
@@ -411,12 +408,12 @@ function load() {
 		guessesLeft = getCookieVal("guessesLeft");
 		let newColorList = getCookieVal("guessedColorList");
 		let newWordList = getCookieVal("guessedWordList");
-		console.log("colorList" + newColorList);
-		console.log("wordList" + newWordList);
-		console.log("colorList parsed: " + JSON.parse(newColorList));
-		console.log("wordList parsed: " + JSON.parse(newWordList));
+		//console.log("colorList" + newColorList);
+		//console.log("wordList" + newWordList);
+		//console.log("colorList parsed: " + JSON.parse(newColorList));
+		//console.log("wordList parsed: " + JSON.parse(newWordList));
 		if(guessesLeft!=4){
-			console.log("guessesLeftNow: " + guessesLeft);
+			//console.log("guessesLeftNow: " + guessesLeft);
 			for(i = 3; i >= guessesLeft; i--){
 				document.getElementById("mistake"+i).src = "images/empty.jpg";
 			}
@@ -438,17 +435,17 @@ function load() {
 		}
 	}
 	else{
-		console.log("guessedColorList length:" + guessedColorList.length)
+		//console.log("guessedColorList length:" + guessedColorList.length)
 		let size = guessedColorList.length;
 		for(i = 0; i < size; i++){
-			console.log("makeBigRowTime");
+			//console.log("makeBigRowTime");
 			makeBigRowForRowAndColor(i, guessedColorList[i])
 			//makeBigRow(i, guessedColorList[i]);
-			console.log("size: " + size);
-			console.log("i: " + i);
+			//console.log("size: " + size);
+			//console.log("i: " + i);
 		}
 		if(rowsCleared < 4 && gameOver != "true"){
-			console.log("got in loadshuffle");
+			//console.log("got in loadshuffle");
 			loadShuffle();
 		}
 		//enable word clicks
@@ -462,9 +459,9 @@ function load() {
 	}
 
 	//setting button enablement in unsolved vs solved state
-	console.log("gameOverState: " + gameOver);
+	//console.log("gameOverState: " + gameOver);
 	if(gameOver==false || gameOver == "false"){
-		console.log("game over is false");
+		//console.log("game over is false");
 		document.getElementById("Shuffle").innerHTML = "&nbsp&nbsp&nbsp&nbspShuffle&nbsp&nbsp&nbsp&nbsp";
 		document.getElementById("Submit").innerHTML = "&nbsp&nbsp&nbsp&nbspSubmit&nbsp&nbsp&nbsp&nbsp";
 		document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspDeselect all&nbsp&nbsp&nbsp&nbsp";
@@ -473,7 +470,7 @@ function load() {
 		document.getElementById("Shuffle").addEventListener("click", clickShuffle); //clickShuffle
 	}
 	else{
-		console.log("game over is true");
+		//console.log("game over is true");
 		enableShareButton();
 		document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 		document.getElementById("shareButton").style.backgroundColor = "#000000";
@@ -484,14 +481,6 @@ function load() {
 		document.getElementById("ClearAll").addEventListener("click", viewResults);
 		document.getElementById("ClearAll").disabled = false;
 	}
-
-	var myobj = ["one", "two", "three"];
-	var newobj = JSON.stringify(myobj);
-	console.log("1: " + newobj);
-	var str = JSON.parse(newobj);
-	console.log("2: " + JSON.parse(newobj))
-	var strarray = JSON.parse(newobj);
-	console.log("3: " + strarray);
 }
 
 function wordClick(){
@@ -509,7 +498,7 @@ function wordClick(){
 		document.getElementById(cellId).style.color = "#FFFFFF";
 		selectionMatrix[cellRow][cellCol] = true;
 		wordsSelected++;
-		console.log("Words selected: " + wordsSelected);
+		//console.log("Words selected: " + wordsSelected);
 		if(wordsSelected == 4)
 			canSubmit = true;
 		canSubmit = false;
@@ -524,10 +513,10 @@ function wordClick(){
 		selectionMatrix[cellRow][cellCol] = false;
 		if(wordsSelected != 0)
 			wordsSelected--;
-		console.log("Words selected: " + wordsSelected);
+		//console.log("Words selected: " + wordsSelected);
 		canSubmit = false;
 	}
-	console.log("selection Matrix: " + selectionMatrix);
+	//console.log("selection Matrix: " + selectionMatrix);
 
 	//set buttons to enabled/disabled
 	if(wordsSelected > 0){
@@ -559,7 +548,7 @@ async function countSuccesses() {
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				myWord = document.getElementById("word"+i+j).innerHTML
-				console.log("myWord" + myWord);
+				//console.log("myWord" + myWord);
 				for(k = 0; k < 4; k++){
 					for(m = 0; m < 4; m++){
 						if(wordMatrix[k][m] == myWord){
@@ -573,13 +562,13 @@ async function countSuccesses() {
 			}
 		}
 	}
-	console.log("colorList: " + colorList)
+	//console.log("colorList: " + colorList)
 	guessList.push(colorList);
 	setCookie("guessList", JSON.stringify(guessList));
 	guessedWordList.push(guessedFour);
 	setCookie("guessedWordList", JSON.stringify(guessedWordList));
-	console.log("guessed word list: " + guessedWordList);
-	console.log("successes: " + successCountPerAssociation);
+	//console.log("guessed word list: " + guessedWordList);
+	//console.log("successes: " + successCountPerAssociation);
 
 	let maxSuccesses = 0;
 	let colorCorrect = -1;
@@ -593,7 +582,7 @@ async function countSuccesses() {
 	if(colorCorrect != -1)
 		guessedColorList.push(colorCorrect);
 	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
-	console.log("maxSuccesses: " + maxSuccesses);
+	//console.log("maxSuccesses: " + maxSuccesses);
 
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	if(maxSuccesses==4){
@@ -605,16 +594,13 @@ async function countSuccesses() {
 		rowsCleared++;
 		setCookie("rowsCleared", "" + rowsCleared);
 		correctGuess = true;
-		changeColor(colorCorrect); //make this an animation
+		changeColor(colorCorrect);
 		await shakeSelectedWords(true);
-		//if(rowsCleared<4){
-		//await sleep(1200);
 		await sleep(1300);
 		await switchWords(colorCorrect);
 		resetSelectionMatrix();
 		disableClicksTopRow();
-		//}
-		console.log("WE MADEEEE A BIGGGG ROWWWW!");
+		//console.log("WE MADEEEE A BIGGGG ROWWWW!");
 		await makeBigRow(rowsCleared-1, colorCorrect);
 		wordsSelected=0;
 	}	
@@ -627,11 +613,11 @@ async function countSuccesses() {
 	else{
 		correctGuess = false;
 		await shakeSelectedWords(false);
-		console.log("meow4");
+		//console.log("meow4");
 	}
 	document.getElementById("ClearAll").addEventListener("click", clearAll);
 	document.getElementById("Shuffle").addEventListener("click", clickShuffle);
-	console.log("we return false now");
+	//console.log("we return false now");
 	return;
 }
 
@@ -660,7 +646,7 @@ function fadeOutEffect() {
 }
 
 async function makeBigRow(row, colorRow){
-	console.log("rowsCleared" + row);
+	//console.log("rowsCleared" + row);
 	for(i = 1; i < 4; i++){
 		document.getElementById("word" + row + i).remove();
 		if(rowsCleared==4){
@@ -669,7 +655,7 @@ async function makeBigRow(row, colorRow){
 		}
 	}
 	if(rowsCleared==4){
-		console.log("made it woottt");
+		//console.log("made it woottt");
 		document.getElementById("word00").style.width = "100%";
 		document.getElementById("word10").style.width = "100%";
 		document.getElementById("word20").style.width = "100%";
@@ -713,12 +699,11 @@ function makeBigRowForRowAndColor(myRow, myColor){
 	bigRow.style.display = "block";
 	bigRow.style.backgroundColor = wordMatrix[myColor][4]
 	if(myRow==3){
-		console.log("made it woottt");
+		//console.log("made it woottt");
 		document.getElementById("word00").style.width = "100%";
 		document.getElementById("word10").style.width = "100%";
 		document.getElementById("word20").style.width = "100%";
 		document.getElementById("word30").style.width = "100%";
-		//bigRow.style.width = "100%";
 	}
 	else{
 		bigRow.style.width = "427.5%"
@@ -748,7 +733,7 @@ function changeColor(colorRow){
 			console.log("made it woots");
 			let myWord = "";
 			if(selectionMatrix[i][j]){
-				console.log("made it woots");
+				//console.log("made it woots");
 				myWord = document.getElementById("word"+i+j);
 				myWord.style.backgroundColor = wordMatrix[colorRow][4];
 				myWord.style.color = "#000000";
@@ -759,36 +744,30 @@ function changeColor(colorRow){
 }
 
 function alreadyGuessed(){
-	console.log("made itttt");
+	//console.log("made itttt");
 	let matches = 0;
 	let selectedGuesses = [];
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(selectionMatrix[i][j]){
 				let guessedWord = document.getElementById("word"+i+j).innerHTML;
-				console.log("guessedWord" + guessedWord);
+				//console.log("guessedWord" + guessedWord);
 				selectedGuesses.push(guessedWord);
-				console.log(guessedWordList);
+				//console.log(guessedWordList);
 			}
 		}
 	}
 	selectedGuesses = selectedGuesses.sort();
 	for(i = 0; i < guessedWordList.length; i++){
 		let newList = guessedWordList[i].sort();
-		console.log("mylength"+guessedWordList.length);
-		console.log("global list sorted: " + newList);
-		console.log("myListSorted: " + selectedGuesses)
+		//console.log("mylength"+guessedWordList.length);
+		//console.log("global list sorted: " + newList);
+		//console.log("myListSorted: " + selectedGuesses)
 		if(newList.join() == selectedGuesses.join())
 			return true;
 	}
-	console.log("FALSEEEE");
+	//console.log("FALSEEEE");
 	return false;
-	//if(matches == 4){
-	//	console.log("trueeee");
-	//	return true;
-	//}
-	//console.log("falseeee");
-	//return false;
 }
 
 async function submitWords(){
@@ -797,7 +776,7 @@ async function submitWords(){
 	let oldGuess = alreadyGuessed();
 	if(oldGuess == true){
 		displayPopup("Already guessed");
-		console.log("selectionMatrix: " + selectionMatrix);
+		//console.log("selectionMatrix: " + selectionMatrix);
 		document.getElementById("ClearAll").addEventListener("click", clearAll);
 		document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 		return;
@@ -809,40 +788,38 @@ async function submitWords(){
 	document.getElementById("Submit").style.color = "#C0C0C0";
 	document.getElementById("Submit").style.opacity = "0.95";
 	document.getElementById("Submit").disabled = true;
-	console.log("we submitted woots");
+	//console.log("we submitted woots");
 	//we can now go through the boolean matrix looking for num true / false
 	await countSuccesses();
-	console.log(correctGuess);
-	console.log(rowsCleared);
+	//console.log(correctGuess);
+	//console.log(rowsCleared);
 	if(correctGuess == true && rowsCleared == 4){
-		console.log("meow we end game");
+		//console.log("meow we end game");
 		endGame(true);
 	}
 	if(!correctGuess){
-		console.log("hello");
+		//console.log("hello");
 		guessesLeft--;
 		setCookie("guessesLeft", "" + guessesLeft);
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
 			endGame(false);
-			//solveRestOfPuzzle();
 		}
 		else {
 			document.getElementById("Submit").addEventListener("click", submitWords);
 		}
 	}
 	if(guessesLeft!=0){
-		console.log("readded shuffle");
+		//console.log("readded shuffle");
 		document.getElementById("Shuffle").addEventListener("click", clickShuffle);
 		document.getElementById("ClearAll").addEventListener("click", clearAll);
 	}
 }
 
 async function autoSubmitWords(autoColor){
-	console.log("autoSubmit leggooooo");
-	console.log("rowsCleared: " + rowsCleared);
-	console.log("we submitted woots");
-	//await sleep(750);
+	//console.log("autoSubmit leggooooo");
+	//console.log("rowsCleared: " + rowsCleared);
+	//console.log("we submitted woots");
 	correctGuess = true;
 	disableClicksTopRow();
 	changeColor(autoColor); //make this an animation
@@ -860,7 +837,6 @@ async function autoSubmitWords(autoColor){
 
 function loadSubmitWords(){
 	for(i = 0; i < guessedColorList.length; i++){
-		//makeBigRow(i, guessedColorList[i]);
 		makeBigRowForRowAndColor(i, guessedColorList[i]);
 	}
 }
@@ -880,39 +856,36 @@ async function solveRestOfPuzzle(){
 	document.getElementById("Submit").disabled = true;
 	for(a = 0; a < 4; a++){
 		let guessedColor = false;
-		console.log("guessedColorList length: " + guessedColorList.length)
+		//console.log("guessedColorList length: " + guessedColorList.length)
 		for(b = 0; b < guessedColorList.length; b++){
 			if(a == guessedColorList [b])
 				guessedColor = true;
 		}
 		if(guessedColor == false){
-			console.log("rowsCleared in solveRest: " + rowsCleared);
+			//console.log("rowsCleared in solveRest: " + rowsCleared);
 			resetSelectionMatrixAndAllColor(rowsCleared);
-			console.log("meowwwww for round a: " + a);
+			//console.log("meowwwww for round a: " + a);
 			for(x = rowsCleared; x < 4; x++){
 				for(y = 0; y < 4; y++){
 					let thisWord = document.getElementById("word"+x+y).innerHTML;
 					for(z = 0; z < 4; z++){
-						//console.log("thisWord: " + thisWord);
-						//console.log("correctWord: " + wordMatrix[a][z]);
 						if(thisWord == wordMatrix[a][z]){
-							console.log("this true and then xy: "+x+y)
+							//console.log("this true and then xy: "+x+y)
 							selectionMatrix[x][y] = true;
 						}
 					}
 				}
 			}
 		
-			console.log("We gonna submit some words");
+			//console.log("We gonna submit some words");
 			failed = true;
 			setCookie("failed", "true");
-			//await sleep(2200);
 			rowsCleared++;
-			console.log("BEFORE AWAIT");
-			console.log("selectionMatrix: " + selectionMatrix);
+			//console.log("BEFORE AWAIT");
+			//console.log("selectionMatrix: " + selectionMatrix);
 			await sleep(250);
 			await autoSubmitWords(a);
-			console.log("AFTER AWAIT");
+			//console.log("AFTER AWAIT");
 		}
 	}
 }
@@ -936,9 +909,11 @@ async function shakeWord(softShake, id){
 		document.getElementById(id).classList.add("softshake");
 	else
 		document.getElementById(id).classList.add("shake");
+	
 	await sleep(2000);
 	if(document.getElementById(id) == null)
 		return;
+	
 	if(softShake && document.getElementById(id).classList.contains("softshake"))
 		document.getElementById(id).classList.remove("softshake");
 	else if (!softShake && document.getElementById(id).classList.contains("shake"))
@@ -946,6 +921,7 @@ async function shakeWord(softShake, id){
 
 	if(gameOver==false)
 		document.getElementById(id).addEventListener("click", wordClick);
+	
 	return;
 }
 
@@ -954,12 +930,12 @@ function colorListContains(c){
 		if(c == guessedColorList[y])
 			return true;
 	}
-	console.log("color list false woot")
+	//console.log("color list false woot")
 	return false;
 }
 
 function loadShuffle() {
-	console.log("we load shuffled woots");
+	//console.log("we load shuffled woots");
 	let varArray = [];
 	let selectedArray = [];
 	let rowToChangeArray = [];
@@ -967,16 +943,16 @@ function loadShuffle() {
 		if(colorListContains(x) == false)
 			rowToChangeArray.push(x);
 	}
-	console.log("rowToChangeArray: " + rowToChangeArray);
+	//console.log("rowToChangeArray: " + rowToChangeArray);
 	for(i = 0; i < rowToChangeArray.length; i++){
 		for(j = 0; j < 4; j++){
 			varArray.push(wordMatrix[rowToChangeArray[i]][j]);
 		}
 	}
 	
-	console.log("varArray1: " + varArray); 
+	//console.log("varArray1: " + varArray); 
 	shuffle(varArray);
-	console.log("varArray2: " + varArray);
+	//console.log("varArray2: " + varArray);
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
@@ -987,23 +963,23 @@ function loadShuffle() {
 }
 	
 function clickShuffle(){
-	console.log("we shuffled woots");
+	//console.log("we shuffled woots");
 	shuffleCount++;
 	let varArray = [];
 	let selectedArray = [];
 	for(i=rowsCleared; i<4; i++){
 		for(j=0; j<4; j++){
 			var val = document.getElementById("word"+i+j).innerHTML;
-			console.log("val: " + val);
+			//console.log("val: " + val);
 			varArray.push(val);
 			selectedArray.push(selectionMatrix[i][j]);
 		}
 	}
-	console.log("varArray:" + varArray)
-	console.log("selectedArray:" + selectedArray)
+	//console.log("varArray:" + varArray)
+	//console.log("selectedArray:" + selectedArray)
 	shuffle(varArray, selectedArray)
-	console.log("shuffled varArray:" + varArray)
-	console.log("shuffled selectedArray:" + selectedArray)
+	//console.log("shuffled varArray:" + varArray)
+	//console.log("shuffled selectedArray:" + selectedArray)
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	
 	for(i=rowsCleared; i<4; i++){
@@ -1022,7 +998,7 @@ function clickShuffle(){
 			}
 			varArray = varArray.slice(0, varArray.length-1);
 			selectedArray = selectedArray.slice(0, selectedArray.length-1);
-			console.log("varArray size: " + varArray.length);
+			//console.log("varArray size: " + varArray.length);
 		}
 	}
 
@@ -1049,7 +1025,7 @@ function shuffle(array, array2) {
 }
 
 function clearAll(){
-	console.log("we clear now");
+	//console.log("we clear now");
 	resetSelectionMatrixAndAllColor(rowsCleared);
 	wordsSelected=0;
 	document.getElementById("ClearAll").disabled = true;
@@ -1082,12 +1058,12 @@ function resetSelectionMatrix(){
 async function switchWords(correctColorRow){
 	let myRowsCleared = rowsCleared-1;
 	//let's build an array of all entries on the top row that should be switched with correct answers
-	console.log("correct color row: " + correctColorRow) 
+	//console.log("correct color row: " + correctColorRow) 
 	let colsThatNeedSwitching = [];
 	let topRowWord = "";
 	let matchFound = false;
 	let colToSet = 0;
-	console.log("switchWords rowsCleared: " + myRowsCleared);
+	//console.log("switchWords rowsCleared: " + myRowsCleared);
 	for(i = 0; i < 4; i++){
 		topRowWord = document.getElementById("word"+myRowsCleared+i).innerHTML;
 		for(j = 0; j < 4; j++){
@@ -1111,9 +1087,9 @@ async function switchWords(correctColorRow){
 				let correctWord = correctElement.innerHTML;
 				let randomElement = "";
 				if(colsThatNeedSwitching.length>0){
-					console.log("correct word: " + correctWord);
+					//console.log("correct word: " + correctWord);
 					randomElement = document.getElementById("word"+myRowsCleared+colsThatNeedSwitching[0]);
-					console.log("random word: " + randomElement.innerHTML)
+					//console.log("random word: " + randomElement.innerHTML)
 					correctElement.innerHTML = randomElement.innerHTML;
 					randomElement.innerHTML = correctWord;
 					correctElement.style.backgroundColor = unselectedSpaceColor;
@@ -1121,20 +1097,20 @@ async function switchWords(correctColorRow){
 				}
 				let topRowBox = "";
 				for(k = 0; k < 4; k++){
-					console.log("meow");
+					//console.log("meow");
 					topRowBox = document.getElementById("word"+myRowsCleared+k);
 					topRowBox.style.color = "#000000";
 					topRowBox.style.backgroundColor = wordMatrix[correctColorRow][4];
 				}
 				colsThatNeedSwitching = colsThatNeedSwitching.slice(1, colsThatNeedSwitching.length);
-				console.log("colsThatNeedSwitching: " + colsThatNeedSwitching);
+				//console.log("colsThatNeedSwitching: " + colsThatNeedSwitching);
 			}
 		}
 	}
 }
 
 async function endGame(winning){
-	console.log("guessesMade: " + guessesMade);
+	//console.log("guessesMade: " + guessesMade);
 	console.log("cookieValue: " + showCookieValue());
 	gameOver = true;
 	setCookie("gameOver", "" + gameOver);
@@ -1150,7 +1126,6 @@ async function endGame(winning){
 			document.getElementById("word"+i+"0").style.width = "100%"
 		}
 	}
-	//guessedColorList = [0, 1, 2, 3];
 	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
 	rowsCleared = 4;
 	setCookie("rowsCleared", ""+rowsCleared);
@@ -1164,7 +1139,7 @@ async function endGame(winning){
 		congrats = congratsWords[0];
 	await sleep(500);
 	displayPopup(congrats);
-	console.log(guessList);
+	//console.log(guessList);
 	document.getElementById("ClearAll").removeEventListener("click", clearAll);
 	let submitWord = "";
 	document.getElementById("Shuffle").remove();
@@ -1175,16 +1150,16 @@ async function endGame(winning){
 }
 
 function viewResults(){
-	console.log("meoww");
+	//console.log("meoww");
 	document.getElementById("results").style.display = "block";
-	console.log("guess length" + guessList.length);
+	//console.log("guess length" + guessList.length);
 	let colorTable = getColorTable(false);
 	let resultsBox = document.getElementById("resultSquares");
 	let congratsWord = "Shite";
 	if(rowsCleared == 4 && (failed == false || failed == "false"))
 		congratsWord = congratsWords[guessesMade]
 	let resultsText = "<font size=\"56px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
-	console.log("resultsText" + resultsText); 
+	//console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "39px";
 	document.getElementById("closeButton").addEventListener("click", close);
@@ -1201,15 +1176,14 @@ function getColorLine(row){
 	for(i=0; i<4; i++){
 		myColorLine+=wordMatrix[guessList[row][i]][5];
 	}
-	console.log("myColorLine"+myColorLine);
+	//console.log("myColorLine"+myColorLine);
 	return myColorLine;
 }
 	
 function getColorTable(forSending){
-	//var oldGuessList = guessList;
 	var colorTable = "";
-	console.log("guessList" + guessList);
-	console.log("length: " + guessList.length)
+	//console.log("guessList" + guessList);
+	//console.log("length: " + guessList.length)
 	for(i=0; i<guessList.length; i++){
 		for(j=0; j<4; j++){
 			colorTable+=wordMatrix[guessList[i][j]][5];
@@ -1221,9 +1195,8 @@ function getColorTable(forSending){
 				colorTable+="<br>";
 		}
 	}
-	//guessList = oldGuessList;
-	console.log("meowwww");
-	console.log("colorTable" + colorTable);
+	//console.log("meowwww");
+	//console.log("colorTable" + colorTable);
 	return colorTable;
 }
 
@@ -1231,7 +1204,7 @@ function enableShareButton(){
 	const shareButton = document.getElementById("shareButton"); 
 	var colors = getColorTable(true);
 	shareButton.addEventListener("click", (e) => { 
-		console.log("hellooooo");
+		//console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
         		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors

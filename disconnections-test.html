@@ -1194,7 +1194,7 @@ function viewResults(){
 	let congratsWord = "Shite";
 	if(rowsCleared == 4 && (failed == false || failed == "false"))
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<font size=\"100px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
+	let resultsText = "<font size=\"100px\"><b>" + congratsWord + "</b></font>" + "<br><br><font size=\"50px\">" + "Disconnections #" + puzzleNumber + "</font><br><br>" + colorTable + "<br>";
 	//console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "39px";

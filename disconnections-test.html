@@ -311,9 +311,9 @@ function setInitCookie(name, value, days) {
 	//var date = new Date();
         //date.setTime(date.getTime() + (days*24*60*60*1000));
         //var expires = "; expires=" + date.toUTCString();
-	console.log("expires: " + expires);
+	//console.log("expires: " + expires);
 	expires = "; expires=" + expires.toUTCString();
-	console.log("Expires after conversion: " + expires);
+	//console.log("Expires after conversion: " + expires);
 	document.cookie = name + "=" + (value || "")  + expires + "; SameSite=None; path=/";
 	//document.cookie = "favorite_food=tripe; SameSite=None;";
 }
@@ -364,12 +364,12 @@ function load() {
 	let oldLocalName = localStorage.getItem("name")
 	let newLocalName = "disStorageAton2" + puzzleNumber;
 	
-	console.log("currCookie: " + currIdName);
-	console.log("oldcookie: " + oldIdName)
+	//console.log("currCookie: " + currIdName);
+	//console.log("oldcookie: " + oldIdName)
 
 	//set new cookie for each new puzzle
 	if(oldLocalName != newLocalName){
-		console.log("setting new cookie");
+		//console.log("setting new cookie");
 		//setInitCookie("cookieName", initCookieName, 7);
 		//console.log("getting new cookie name: " + getCookieName());
 		//setCookie("guessesLeft", "4");

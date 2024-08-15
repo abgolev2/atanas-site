@@ -1194,7 +1194,7 @@ function viewResults(){
 	let congratsWord = "Shite";
 	if(rowsCleared == 4 && (failed == false || failed == "false"))
 		congratsWord = congratsWords[guessesMade]
-	let resultsText = "<font size=\"100px\"><b>" + congratsWord + "</b></font>" + "<br><br><font size=\"50px\">" + "Disconnections #" + puzzleNumber + "</font><br><br>" + colorTable + "<br>";
+	let resultsText = "<font size=\"100px\"><b>" + congratsWord + "</b></font>" + "<br><br>" + "Disconnections #" + puzzleNumber + "<br><br>" + colorTable + "<br>";
 	//console.log("resultsText" + resultsText); 
 	resultsBox.innerHTML = resultsText;
 	resultsBox.style.fontSize = "39px";
@@ -1357,8 +1357,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 		<br>
 		<br>
 		<br>
-		<br>
-		<br>
 		<div>
 			<TABLE align = "center">
 				<TR>
@@ -1374,6 +1372,8 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 		<div id="wrapper">
 			<div class="button"><button class="button button" id="shareButton2">Share Link</button></div>
 		</div>
+		<br>
+		<br>
 		<br>
 		<br>
 		<br>

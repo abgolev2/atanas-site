@@ -370,38 +370,53 @@ function load() {
 	//set new cookie for each new puzzle
 	if(oldLocalName != newLocalName){
 		console.log("setting new cookie");
-		setInitCookie("cookieName", initCookieName, 7);
+		//setInitCookie("cookieName", initCookieName, 7);
 		//console.log("getting new cookie name: " + getCookieName());
-		setCookie("guessesLeft", "4");
+		//setCookie("guessesLeft", "4");
 		localStorage.setItem("name", newLocalName);
 		localStorage.setItem("guessesLeft", "4");
-		setCookie("rowsCleared", "0");
-		setCookie("guessesMade", "0");
-		setCookie("gameOver", "false");
-		setCookie("failed", "false");
-		setCookie("myTestVar", "bigmeow");
+		//setCookie("rowsCleared", "0");
+		localStorage.setItem("rowsCleared", "0");
+		//setCookie("guessesMade", "0");
+		localStorage.setItem("guessesMade", "0");
+		//setCookie("gameOver", "false");
+		localStorage.setItem("gameOver", "false");
+		//setCookie("failed", "false");
+		localStorage.setItem("failed", "false");
+		//setCookie("myTestVar", "bigmeow");
 		//let idName = "disconnections" + puzzleNumber;
-		setCookie("id", currIdName);
+		//setCookie("id", currIdName);
+		//setCookie("name", currIdName);
 		//console.log("rowsCleared cookieVal:" + getCookieVal("rowsCleared"));
-		setCookie("guessedColorList", JSON.stringify(guessedColorList));
-		setCookie("guessedWordList", JSON.stringify(guessedWordList))
-		setCookie("guessList", JSON.stringify(guessList))
-		let newColorList = getCookieVal("guessedColorList");
-		let newWordList = getCookieVal("guessedWordList");
+		//setCookie("guessedColorList", JSON.stringify(guessedColorList));
+		localStorage.setItem("guessedColorList", JSON.stringify(guessedColorList));
+		//setCookie("guessedWordList", JSON.stringify(guessedWordList));
+		localStorage.setItem("guessedWordList", JSON.stringify(guessedWordList));
+		//setCookie("guessList", JSON.stringify(guessList));
+		localStorage.setItem("guessList", JSON.stringify(guessList));
+		//let newColorList = getCookieVal("guessedColorList");
+		//let newWordList = getCookieVal("guessedWordList");
 	}
 	else{
 		//console.log("myTestVar: " + myTestVar);
-		myTestVar = getCookieVal("myTestVar")
+		//myTestVar = getCookieVal("myTestVar")
 		//console.log("myTestVar: " + myTestVar)
+		guessesMade = getCookieVal("guessesMade");
 		guessesMade = getCookieVal("guessesMade");
 		//guessesLeft = getCookieVal("guessesLeft");
 		guessesLeft = localStorage.getItem("guessesLeft");
-		rowsCleared = getCookieVal("rowsCleared");
-		gameOver = getCookieVal("gameOver");
-		failed = getCookieVal("failed")
-		guessedColorList = JSON.parse(getCookieVal("guessedColorList"));
-		guessedWordList = JSON.parse(getCookieVal("guessedWordList"));
-		guessList = JSON.parse(getCookieVal("guessList"));
+		//rowsCleared = getCookieVal("rowsCleared");
+		rowsCleared = localStorage.getItem("rowsCleared");
+		//gameOver = getCookieVal("gameOver");
+		gameOver = localStorage.getItem("gameOver");
+		//failed = getCookieVal("failed");
+		failed = localStorage.getItem("failed");
+		//guessedColorList = JSON.parse(getCookieVal("guessedColorList"));
+		guessedColorList = JSON.parse(localStorage.getItem("guessedColorList"));
+		//guessedWordList = JSON.parse(getCookieVal("guessedWordList"));
+		guessedWordList = JSON.parse(localStorage.getItem("guessedWordList"));
+		//guessList = JSON.parse(getCookieVal("guessList"));
+		guessList = JSON.parse(localStorage.getItem("guessList"));
 		//console.log("guessesLeft cookie: " + getCookieVal("guessesLeft"));
 		//console.log("rowscleared: " + getCookieVal("rowsCleared"));
 		//console.log("guesssesMade: " + getCookieVal("guessesMade"));
@@ -411,8 +426,8 @@ function load() {
 		//console.log(getCookieVal("guessedColorList"));
 		//console.log(getCookieVal("guessedWordList"));
 		//guessesLeft = getCookieVal("guessesLeft");
-		let newColorList = getCookieVal("guessedColorList");
-		let newWordList = getCookieVal("guessedWordList");
+		//let newColorList = getCookieVal("guessedColorList");
+		//let newWordList = getCookieVal("guessedWordList");
 		//console.log("colorList" + newColorList);
 		//console.log("wordList" + newWordList);
 		//console.log("colorList parsed: " + JSON.parse(newColorList));
@@ -572,9 +587,11 @@ async function countSuccesses() {
 	}
 	//console.log("colorList: " + colorList)
 	guessList.push(colorList);
-	setCookie("guessList", JSON.stringify(guessList));
+	//setCookie("guessList", JSON.stringify(guessList));
+	localStorage.setItem("guessList", JSON.stringify(guessList));
 	guessedWordList.push(guessedFour);
-	setCookie("guessedWordList", JSON.stringify(guessedWordList));
+	//setCookie("guessedWordList", JSON.stringify(guessedWordList));
+	localStorage.setItem("guessedWordList", JSON.stringify(guessedWordList));
 	//console.log("guessed word list: " + guessedWordList);
 	//console.log("successes: " + successCountPerAssociation);
 
@@ -589,7 +606,8 @@ async function countSuccesses() {
 	}
 	if(colorCorrect != -1)
 		guessedColorList.push(colorCorrect);
-	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+	//setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+	localStorage.setItem("guessedColorList", "" + JSON.stringify(guessedColorList));
 	//console.log("maxSuccesses: " + maxSuccesses);
 
 	document.getElementById("Submit").removeEventListener("click", submitWords);
@@ -600,7 +618,8 @@ async function countSuccesses() {
 			document.getElementById("ClearAll").removeEventListener("click", clearAll);
 		}
 		rowsCleared++;
-		setCookie("rowsCleared", "" + rowsCleared);
+		//setCookie("rowsCleared", "" + rowsCleared);
+		localStorage.setItem("rowsCleared", "" + rowsCleared);
 		correctGuess = true;
 		changeColor(colorCorrect);
 		await shakeSelectedWords(true);
@@ -790,7 +809,8 @@ async function submitWords(){
 		return;
 	}
 	guessesMade++;
-	setCookie("guessesMade", "" + guessesMade);
+	//setCookie("guessesMade", "" + guessesMade);
+	localStorage.setItem("guessesMade", "" + guessesMade);
 	document.getElementById("Submit").removeEventListener("click", submitWords);
 	document.getElementById("Submit").style.backgroundColor = "#FFFFFF";
 	document.getElementById("Submit").style.color = "#C0C0C0";
@@ -888,7 +908,8 @@ async function solveRestOfPuzzle(){
 		
 			//console.log("We gonna submit some words");
 			failed = true;
-			setCookie("failed", "true");
+			//setCookie("failed", "true");
+			localStorage.setItem("failed", "true");
 			rowsCleared++;
 			//console.log("BEFORE AWAIT");
 			//console.log("selectionMatrix: " + selectionMatrix);
@@ -1122,7 +1143,8 @@ async function endGame(winning){
 	//console.log("guessesMade: " + guessesMade);
 	console.log("cookieValue: " + showCookieValue());
 	gameOver = true;
-	setCookie("gameOver", "" + gameOver);
+	//setCookie("gameOver", "" + gameOver);
+	localStorage.setItem("gameOver", "" + gameOver);
 	if(winning == false){
 		for(i = rowsCleared ; i < 4; i++){	
 			for(j = 0; j < 4; j++){
@@ -1135,9 +1157,11 @@ async function endGame(winning){
 			document.getElementById("word"+i+"0").style.width = "100%"
 		}
 	}
-	setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+	//setCookie("guessedColorList", "" + JSON.stringify(guessedColorList));
+	localStorage.setItem("guessedColorList", "" + JSON.stringify(guessedColorList));
 	rowsCleared = 4;
-	setCookie("rowsCleared", ""+rowsCleared);
+	//setCookie("rowsCleared", ""+rowsCleared);
+	localStorage.setItem("rowsCleared", ""+rowsCleared);
 	enableShareButton();
 	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("shareButton").style.backgroundColor = "#000000";

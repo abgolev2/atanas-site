@@ -371,6 +371,7 @@ function load() {
 		setInitCookie("cookieName", initCookieName, 7);
 		//console.log("getting new cookie name: " + getCookieName());
 		setCookie("guessesLeft", "4");
+		localStorage.setItem("guessesLeft", "4");
 		setCookie("rowsCleared", "0");
 		setCookie("guessesMade", "0");
 		setCookie("gameOver", "false");
@@ -390,7 +391,8 @@ function load() {
 		myTestVar = getCookieVal("myTestVar")
 		//console.log("myTestVar: " + myTestVar)
 		guessesMade = getCookieVal("guessesMade");
-		guessesLeft = getCookieVal("guessesLeft");
+		//guessesLeft = getCookieVal("guessesLeft");
+		guessesLeft = localStorage.getItem("guessesLeft");
 		rowsCleared = getCookieVal("rowsCleared");
 		gameOver = getCookieVal("gameOver");
 		failed = getCookieVal("failed")
@@ -405,7 +407,7 @@ function load() {
 		//console.log("myTestVar: " + getCookieVal("myTestVar"));
 		//console.log(getCookieVal("guessedColorList"));
 		//console.log(getCookieVal("guessedWordList"));
-		guessesLeft = getCookieVal("guessesLeft");
+		//guessesLeft = getCookieVal("guessesLeft");
 		let newColorList = getCookieVal("guessedColorList");
 		let newWordList = getCookieVal("guessedWordList");
 		//console.log("colorList" + newColorList);
@@ -801,6 +803,7 @@ async function submitWords(){
 		//console.log("hello");
 		guessesLeft--;
 		setCookie("guessesLeft", "" + guessesLeft);
+		localStorage.setItem("guessesLeft", "" + guessesLeft);
 		document.getElementById("mistake"+guessesLeft).src = "images/empty.jpg";
 		if(guessesLeft==0){
 			endGame(false);

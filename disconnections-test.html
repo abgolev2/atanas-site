@@ -477,6 +477,9 @@ function load() {
 		document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 		document.getElementById("shareButton").style.backgroundColor = "#000000";
 		document.getElementById("shareButton").style.color = "#ffffff";
+		document.getElementById("shareButton2").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
+		document.getElementById("shareButton2").style.backgroundColor = "#000000";
+		document.getElementById("shareButton2").style.color = "#ffffff";
 		document.getElementById("Shuffle").remove();
 		document.getElementById("Submit").remove();
 		document.getElementById("ClearAll").innerHTML = "&nbsp&nbsp&nbsp&nbspView Results&nbsp&nbsp&nbsp&nbsp";
@@ -1136,6 +1139,9 @@ async function endGame(winning){
 	document.getElementById("shareButton").innerHTML="&nbsp&nbsp&nbsp&nbspShare Your Results&nbsp&nbsp&nbsp&nbsp";
 	document.getElementById("shareButton").style.backgroundColor = "#000000";
 	document.getElementById("shareButton").style.color = "#ffffff";
+	document.getElementById("shareButton2").innerHTML="&nbsp&nbsp&nbsp&nbspShare Link&nbsp&nbsp&nbsp&nbsp";
+	document.getElementById("shareButton2").style.backgroundColor = "#000000";
+	document.getElementById("shareButton2").style.color = "#ffffff";
 
 	let congrats = congratsWords[guessesMade];
 	if(rowsCleared != 4 || failed == true)
@@ -1205,12 +1211,26 @@ function getColorTable(forSending){
 
 function enableShareButton(){
 	const shareButton = document.getElementById("shareButton"); 
+	const shareButton2 = document.getElementById("shareButton2"); 
 	var colors = getColorTable(true);
 	shareButton.addEventListener("click", (e) => { 
 		//console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
         		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors
+     		})
+      		.then(() => console.log('Successful share'))
+      		.catch((error) => console.log('Error sharing', error));
+  		} else {
+    		console.log('Share not supported on this browser, do it the old way.');
+  		}
+	});
+	shareButton2.addEventListener("click", (e) => { 
+		//console.log("hellooooo");
+  		if (navigator.share) {
+    			navigator.share({
+        		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors,
+			url: "https://abgolev.github.io/atanas-site/disconnections.html",
      		})
       		.then(() => console.log('Successful share'))
       		.catch((error) => console.log('Error sharing', error));
@@ -1308,6 +1328,9 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 		<br>
 		<div id="wrapper">
 			<div class="button"><button class="button button" id="shareButton">Share Your Results</button></div>
+		</div>
+		<div id="wrapper">
+			<div class="button"><button class="button button" id="shareButton2">Share Link</button></div>
 		</div>
 		<br>
 		<br>

@@ -361,16 +361,19 @@ function load() {
 	let initCookieName = "disCookie";
 	let currIdName = "atonCookie" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
+	let oldLocalName = localStorage.getItem("name")
+	let newLocalName = "disStorage" + puzzleNumber;
 	
 	console.log("currCookie: " + currIdName);
 	console.log("oldcookie: " + oldIdName)
 
 	//set new cookie for each new puzzle
-	if(oldIdName != currIdName){
+	if(oldLocalName != newLocalName){
 		console.log("setting new cookie");
 		setInitCookie("cookieName", initCookieName, 7);
 		//console.log("getting new cookie name: " + getCookieName());
 		setCookie("guessesLeft", "4");
+		localStorage.setItem("name", newLocalName);
 		localStorage.setItem("guessesLeft", "4");
 		setCookie("rowsCleared", "0");
 		setCookie("guessesMade", "0");

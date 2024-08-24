@@ -286,6 +286,11 @@ var wordMatrix = [
 	[startMatrix[2][0], startMatrix[1][3], startMatrix[0][3], startMatrix[1][0], "#bb80c4", purpleEmoji, 
 	"\u{0053}\u{004D}\u{0041}\u{004C}\u{004C}\u{0020}\u{0043}\u{004F}\u{0043}\u{004B}\u{0053}"]
 ]
+
+var smallWordMatrix = [
+	"\u{0049}\u{004E}\u{0053}\u{0054}\u{0041}\u{0047}\u{0052}\u{0041}\u{004D}", 
+	"\u{0053}\u{0048}\u{0052}\u{0049}\u{004E}\u{004B}\u{0041}\u{0047}\u{0045}"
+]
 	
 var selectionMatrix = [
 	[false, false, false, false],
@@ -451,6 +456,15 @@ function load() {
 				whichWord = document.getElementById("word"+i+j);
 				whichWord.innerHTML = startMatrix[i][j];
 				whichWord.addEventListener("click", wordClick);
+				for(k = 0; k < smallWordMatrix.length; k++){
+					if(startMatrix[i][j] == smallWordMatrix[k]){
+						whichWord.style.fontSize = "30px";
+						break;
+					}
+					whichWord.style.fontSize = "36px";
+				}
+				//if(smallWordMatrix[i][j])
+				//	whichWord.style.fontSize = "30px";
 			}
 		}
 	}
@@ -987,6 +1001,15 @@ function loadShuffle() {
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
 			selectedWord.innerHTML = varArray[varArray.length-1];
+			for(k = 0; k < smallWordMatrix.length; k++){
+				if(varArray[varArray.length-1] == smallWordMatrix[k]){
+					selectedWord.style.fontSize = "30px";
+					break;
+				}
+				selectedWord.style.fontSize = "36px";
+			}
+			//if(smallWordMatrix[i][j])
+			//	selectedWord.style.fontSize = "30px";
 			varArray = varArray.slice(0, varArray.length-1);
 		}
 	}
@@ -1016,6 +1039,15 @@ function clickShuffle(){
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
 			selectedWord.innerHTML = varArray[varArray.length-1];
+			//if(smallWordMatrix[i][j])
+			//selectedWord.style.fontSize = "30px";
+			for(k = 0; k < smallWordMatrix.length; k++){
+				if(varArray[varArray.length-1] == smallWordMatrix[k]){
+					selectedWord.style.fontSize = "30px";
+					break;
+				}
+				selectedWord.style.fontSize = "36px";
+			}
 			if(selectedArray[varArray.length-1]){
 				selectedWord.style.backgroundColor = "#606060";
 				selectedWord.style.color = "#FFFFFF";

@@ -232,7 +232,7 @@ h1 {
 </STYLE>
 
 <SCRIPT>
-var puzzleNumber = 2;
+var puzzleNumber = 3;
 var guessesLeft = 4;
 var wordsSelected = 0;
 var isSelected = false;
@@ -251,40 +251,40 @@ var failed = false;
 var gameOver = false;
 var myTestVar = "meow";
 
-var greenEmoji = String.fromCharCode(0xD83D, 0xDFE8);
-var yellowEmoji = String.fromCharCode(0xD83D, 0xDFE9);
+var yellowEmoji = String.fromCharCode(0xD83D, 0xDFE8);
+var greenEmoji = String.fromCharCode(0xD83D, 0xDFE9);
 var blueEmoji = String.fromCharCode(0xD83D, 0xDFE6);
 var purpleEmoji = String.fromCharCode(0xD83D, 0xDFEA);
 //console.log(greenEmoji);
 
 var startMatrix = [
 	["\u{004A}\u{004F}\u{0052}\u{0044}\u{0041}\u{004E}", 
-	"\u{004E}\u{0049}\u{0043}\u{004B}", 
-	"\u{0054}\u{0059}\u{004C}\u{0045}\u{0052}", 
-	"\u{0043}\u{0048}\u{0041}\u{0044}"],
-	["\u{0044}\u{0049}\u{0043}\u{004B}", 
-	"\u{0043}\u{0041}\u{004B}\u{0045}", 
-	"\u{0054}\u{0055}\u{0052}\u{004B}\u{0045}\u{0059}", 
-	"\u{0042}\u{0055}\u{0052}\u{0047}\u{0045}\u{0052}"],
-	["\u{004A}\u{0041}\u{0043}\u{004B}", 
-	"\u{0057}\u{0059}\u{0044}\u{0045}\u{004E}", 
-	"\u{0047}\u{0045}\u{004F}\u{0052}\u{0047}\u{0049}\u{0041}", 
-	"\u{0050}\u{004F}\u{0043}\u{004B}\u{0045}\u{0054}"],
-	["\u{004C}\u{004F}\u{004C}\u{004C}\u{0059}\u{0047}\u{0041}\u{0047}", 
-	"\u{0046}\u{0052}\u{0049}\u{0043}\u{004B}", 
-	"\u{004C}\u{0049}\u{0046}\u{0054}", 
-	"\u{0053}\u{0054}\u{0049}\u{0043}\u{004B}"]
+	"\u{0053}\u{004F}\u{0020}\u{0043}\u{0052}\u{0049}\u{004E}\u{0047}\u{0045}", 
+	"\u{0049}\u{004E}\u{0053}\u{0054}\u{0041}\u{0047}\u{0052}\u{0041}\u{004D}", 
+	"\u{0053}\u{0048}\u{0052}\u{0049}\u{004E}\u{004B}\u{0041}\u{0047}\u{0045}"],
+	["\u{0054}\u{0052}\u{0055}\u{004D}\u{0050}", 
+	"\u{0042}\u{004F}\u{0055}\u{004E}\u{0043}\u{0045}", 
+	"\u{0034}\u{0020}\u{0049}\u{004E}\u{0043}\u{0048}", 
+	"\u{0050}\u{004F}\u{0043}\u{004B}\u{0045}\u{0054}\u{0020}\u{0050}\u{0049}\u{0053}\u{0054}\u{004F}\u{004C}"],
+	["\u{0048}\u{0045}\u{0049}\u{0020}\u{0048}\u{0045}\u{0049}", 
+	"\u{0042}\u{0041}\u{0042}\u{0045}\u{0020}\u{0052}\u{0055}\u{0054}\u{0048}", 
+	"\u{0042}\u{004F}\u{0053}\u{0054}\u{004F}\u{004E}", 
+	"\u{0054}\u{0049}\u{0047}\u{0045}\u{0052}"],
+	["\u{0042}\u{0052}\u{0041}\u{0044}\u{0059}", 
+	"\u{0042}\u{004F}\u{0058}\u{0020}\u{0057}\u{0052}\u{0045}\u{004E}\u{0043}\u{0048}", 
+	"\u{0043}\u{004F}\u{004D}\u{0050}\u{004F}\u{0055}\u{004E}\u{0044}", 
+	"\u{004C}\u{004F}\u{005A}\u{0045}\u{004E}\u{0047}\u{0045}"]
 ]
 	
 var wordMatrix = [
-	[startMatrix[2][0], startMatrix[3][2], startMatrix[0][1], startMatrix[2][3], "#f9e06e", yellowEmoji, 
-	"\u{0053}\u{0057}\u{0049}\u{0050}\u{0045}"],
-	[startMatrix[0][3], startMatrix[2][2], startMatrix[0][0], startMatrix[1][2], "#a1c25a", greenEmoji, 
-	"\u{0043}\u{004F}\u{0055}\u{004E}\u{0054}\u{0052}\u{0049}\u{0045}\u{0053}"],
-	[startMatrix[1][3], startMatrix[1][1], startMatrix[1][0], startMatrix[3][3], "#b2c3f0", blueEmoji, 
-	"\u{0043}\u{0048}\u{0045}\u{0045}\u{0053}\u{0045}\u{005F}\u{005F}\u{005F}"],
-	[startMatrix[3][1], startMatrix[3][0], startMatrix[2][1], startMatrix[0][2], "#bb80c4", purpleEmoji, 
-	"\u{0053}\u{004D}\u{0048}\u{002C}\u{0020}\u{0053}\u{0054}\u{0041}\u{0052}\u{0054}\u{0053}\u{0020}\u{0057}\u{0049}\u{0054}\u{0048}\u{0020}\u{0054}\u{0045}\u{0058}\u{0054}\u{0020}\u{0041}\u{0043}\u{0052}\u{004F}\u{004E}\u{0059}\u{004D}"]
+	[startMatrix[1][2], startMatrix[3][1], startMatrix[3][3], startMatrix[0][1], "#f9e06e", yellowEmoji, 
+	"\u{0052}\u{0048}\u{0059}\u{004D}\u{0045}\u{0053}\u{0020}\u{0057}\u{0049}\u{0054}\u{0048}\u{0020}\u{004F}\u{0052}\u{0041}\u{004E}\u{0047}\u{0045}"],
+	[startMatrix[2][1], startMatrix[3][0], startMatrix[0][0], startMatrix[2][3], "#a1c25a", greenEmoji, 
+	"\u{0047}\u{004F}\u{0041}\u{0054}\u{0053}"],
+	[startMatrix[2][2], startMatrix[1][1], startMatrix[0][2], startMatrix[3][2], "#b2c3f0", blueEmoji, 
+	"\u{0045}\u{004E}\u{0044}\u{0053}\u{0020}\u{0049}\u{004E}\u{0020}\u{0055}\u{004E}\u{0049}\u{0054}\u{0020}\u{004F}\u{0046}\u{0020}\u{004D}\u{0045}\u{0041}\u{0053}\u{0055}\u{0052}\u{0049}\u{004E}\u{0047}\u{0020}\u{0057}\u{0045}\u{0049}\u{0047}\u{0048}\u{0054}"],
+	[startMatrix[2][0], startMatrix[1][3], startMatrix[0][3], startMatrix[1][0], "#bb80c4", purpleEmoji, 
+	"\u{0053}\u{004D}\u{0041}\u{004C}\u{004C}\u{0020}\u{0043}\u{004F}\u{0043}\u{004B}\u{0053}"]
 ]
 	
 var selectionMatrix = [
@@ -362,7 +362,7 @@ function load() {
 	let currIdName = "atonCookie" + puzzleNumber;
 	let oldIdName = getCookieVal("id");
 	let oldLocalName = localStorage.getItem("name")
-	let newLocalName = "disStorageAton2" + puzzleNumber;
+	let newLocalName = "disStorageAton" + puzzleNumber;
 	
 	//console.log("currCookie: " + currIdName);
 	//console.log("oldcookie: " + oldIdName)

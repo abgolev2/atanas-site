@@ -459,6 +459,8 @@ function load() {
 				for(k = 0; k < smallWordMatrix.length; k++){
 					if(startMatrix[i][j] == smallWordMatrix[k])
 						whichWord.style.fontSize = "30px";
+					else
+						whichWord.style.fontSize = "36px";
 				}
 				//if(smallWordMatrix[i][j])
 				//	whichWord.style.fontSize = "30px";
@@ -1001,6 +1003,8 @@ function loadShuffle() {
 			for(k = 0; k < selectedWord.length; k++){
 				if(varArray[varArray.length-1] == smallWordMatrix[k])
 					selectedWord.style.fontSize = "30px";
+				else
+					selectedWord.style.fontSize = "36px";
 			}
 			//if(smallWordMatrix[i][j])
 			//	selectedWord.style.fontSize = "30px";
@@ -1038,6 +1042,8 @@ function clickShuffle(){
 			for(k = 0; k < smallWordMatrix.length; k++){
 				if(varArray[varArray.length-1] == smallWordMatrix[k])
 					selectedWord.style.fontSize = "30px";
+				else
+					selectedWord.style.fontSize = "36px";
 			}
 			if(selectedArray[varArray.length-1]){
 				selectedWord.style.backgroundColor = "#606060";

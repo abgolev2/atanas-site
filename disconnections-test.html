@@ -288,10 +288,8 @@ var wordMatrix = [
 ]
 
 var smallWordMatrix = [
-	[false, false, true, true],
-	[false, false, false, false],
-	[false, false, false, false],
-	[false, false, false, false]
+	"\u{0049}\u{004E}\u{0053}\u{0054}\u{0041}\u{0047}\u{0052}\u{0041}\u{004D}", 
+	"\u{0053}\u{0048}\u{0052}\u{0049}\u{004E}\u{004B}\u{0041}\u{0047}\u{0045}"
 ]
 	
 var selectionMatrix = [
@@ -458,8 +456,12 @@ function load() {
 				whichWord = document.getElementById("word"+i+j);
 				whichWord.innerHTML = startMatrix[i][j];
 				whichWord.addEventListener("click", wordClick);
-				if(smallWordMatrix[i][j])
-					whichWord.style.fontSize = "30px";
+				for(k = 0; k < smallWordMatrix.length; k++){
+					if(startMatrix[i][j] == smallWordMatrix[k])
+						whichWord.style.fontSize = "30px";
+				}
+				//if(smallWordMatrix[i][j])
+				//	whichWord.style.fontSize = "30px";
 			}
 		}
 	}
@@ -996,8 +998,12 @@ function loadShuffle() {
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
 			selectedWord.innerHTML = varArray[varArray.length-1];
-			if(smallWordMatrix[i][j])
-				selectedWord.style.fontSize = "30px";
+			for(k = 0; k < selectedWord.length; k++){
+				if(varArray[varArray.length-1] == smallWordMatrix[k])
+					selectedWord.style.fontSize = "30px";
+			}
+			//if(smallWordMatrix[i][j])
+			//	selectedWord.style.fontSize = "30px";
 			varArray = varArray.slice(0, varArray.length-1);
 		}
 	}
@@ -1027,8 +1033,12 @@ function clickShuffle(){
 		for(j=0; j<4; j++){
 			let selectedWord = document.getElementById("word"+i+j);
 			selectedWord.innerHTML = varArray[varArray.length-1];
-			if(smallWordMatrix[i][j])
-				selectedWord.style.fontSize = "30px";
+			//if(smallWordMatrix[i][j])
+			//selectedWord.style.fontSize = "30px";
+			for(k = 0; k < smallWordMatrix.length; k++){
+				if(varArray[varArray.length-1] == smallWordMatrix[k])
+					selectedWord.style.fontSize = "30px";
+			}
 			if(selectedArray[varArray.length-1]){
 				selectedWord.style.backgroundColor = "#606060";
 				selectedWord.style.color = "#FFFFFF";

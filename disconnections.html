@@ -277,7 +277,7 @@ var startMatrix = [
 ]
 	
 var wordMatrix = [
-	[startMatrix[2][0], startMatrix[1][2], startMatrix[3][1], startMatrix[0][2], "#f9e06e", yellowEmoji, 
+	[startMatrix[2][0], startMatrix[3][1], startMatrix[1][2], startMatrix[0][2], "#f9e06e", yellowEmoji, 
 	"\u{0052}\u{0045}\u{0044}\u{0020}\u{0048}\u{0045}\u{0052}\u{0052}\u{0049}\u{004E}\u{0047}\u{0053}\u{002C}\u{0020}\u{0050}\u{0055}\u{0052}\u{0050}\u{004F}\u{0052}\u{0054}\u{0045}\u{0044}\u{004C}\u{0059}"],
 	[startMatrix[3][0], startMatrix[3][3], startMatrix[2][1], startMatrix[0][3], "#a1c25a", greenEmoji, 
 	"\u{0047}\u{0045}\u{0054}\u{0020}\u{0041}\u{004C}\u{004F}\u{004E}\u{0047}"],
@@ -706,6 +706,7 @@ async function makeBigRow(row, colorRow){
 	}
 	let bigRow = document.getElementById("word"+row+"0");
 	bigRow.style.display = "block";
+	bigRow.style.fontSize = "36px";
 	let bigRowText  = "<br><b>" + wordMatrix[colorRow][6] + "</b><br>";
 	for(i = 0; i < 4; i++){
 		bigRowText+=wordMatrix[colorRow][i];
@@ -738,6 +739,7 @@ function makeBigRowForRowAndColor(myRow, myColor){
 		}
 	}
 	bigRow.style.fontWeight = "0.4";
+	bigRow.style.fontSize = "36px";
 	bigRow.style.display = "block";
 	bigRow.style.backgroundColor = wordMatrix[myColor][4]
 	if(myRow==3){

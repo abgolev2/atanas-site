@@ -1157,6 +1157,20 @@ async function switchWords(correctColorRow){
 					randomElement.innerHTML = correctWord;
 					correctElement.style.backgroundColor = unselectedSpaceColor;
 					correctElement.style.color = "#000000";
+					for(k = 0; k < smallWordMatrix.length; k++){
+						if(correctElement.innerHTML == smallWordMatrix[k]){
+							correctElement.style.fontSize = "30px";
+							break;
+						}
+						correctElement.style.fontSize = "36px";
+					}
+					for(k = 0; k < smallWordMatrix.length; k++){
+						if(randomElement.innerHTML == smallWordMatrix[k]){
+							randomElement.style.fontSize = "30px";
+							break;
+						}
+						randomElement.style.fontSize = "36px";
+					}
 				}
 				let topRowBox = "";
 				for(k = 0; k < 4; k++){

@@ -1303,7 +1303,7 @@ function enableShareButton(){
 		//console.log("hellooooo");
   		if (navigator.share) {
     			navigator.share({
-        		text: "Disconnections\nPuzzle #" + puzzleNumber +"\n"+colors,
+        		text: "Disconnections\nPuzzle #" + puzzleNumber,
 			url: "https://abgolev.github.io/atanas-site/disconnections.html",
      		})
       		.then(() => console.log('Successful share'))
